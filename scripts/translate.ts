@@ -153,6 +153,57 @@ function splitSections(markdown: string): string[] {
   return sections;
 }
 
+async function readSSEStream(body: ReadableStream<Uint8Array>): Promise<string> {
+  const decoder = new TextDecoder();
+  const reader = body.getReader();
+  let buffer = "";
+  let result = "";
+  let lastReportedChars = 0;
+
+  function writeProgress(final: boolean) {
+    const line = `  ${result.length} chars received${final ? "" : "..."}`;
+    if (process.stderr.isTTY) {
+      process.stderr.write(`\r\x1b[K${line}${final ? "\n" : ""}`);
+    } else if (final || result.length - lastReportedChars >= 500) {
+      process.stderr.write(`${line}\n`);
+      lastReportedChars = result.length;
+    }
+  }
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+
+    const lines = buffer.split("\n");
+    buffer = lines.pop()!;
+
+    for (const line of lines) {
+      if (!line.startsWith("data: ")) continue;
+      const data = line.slice(6);
+      if (data === "[DONE]") continue;
+
+      let event: {
+        type: string;
+        delta?: { type: string; text?: string };
+      };
+      try {
+        event = JSON.parse(data);
+      } catch {
+        continue;
+      }
+
+      if (event.type === "content_block_delta" && event.delta?.type === "text_delta") {
+        result += event.delta.text ?? "";
+        writeProgress(false);
+      }
+    }
+  }
+
+  writeProgress(true);
+  return result;
+}
+
 async function callClaudeAPI(content: string): Promise<string> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
@@ -173,6 +224,7 @@ async function callClaudeAPI(content: string): Promise<string> {
         body: JSON.stringify({
           model,
           max_tokens: 8192,
+          stream: true,
           system: SYSTEM_PROMPT,
           messages: [{ role: "user", content }],
         }),
@@ -191,14 +243,7 @@ async function callClaudeAPI(content: string): Promise<string> {
         throw new Error(`API error ${response.status}: ${body}`);
       }
 
-      const data = (await response.json()) as {
-        content: Array<{ type: string; text: string }>;
-      };
-      const textBlock = data.content.find((b) => b.type === "text");
-      if (!textBlock) {
-        throw new Error("No text block in API response");
-      }
-      return textBlock.text;
+      return await readSSEStream(response.body!);
     } catch (err) {
       lastError = err as Error;
       if (attempt < MAX_RETRIES - 1) {
