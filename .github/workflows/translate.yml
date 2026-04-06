@@ -8,6 +8,10 @@ on:
         description: 'Translate issues from this date onward (YYYY.MM.DD)'
         required: false
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   translate:
     runs-on: ubuntu-latest
