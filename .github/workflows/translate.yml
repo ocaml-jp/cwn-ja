@@ -53,8 +53,8 @@ jobs:
       - name: Create PR (if there are changes)
         uses: peter-evans/create-pull-request@v6
         with:
-          title: "translate: add Japanese CWN translations"
-          branch: auto-translate
+          title: "translate: add Japanese CWN translations (${{ github.run_id }})"
+          branch: auto-translate/${{ github.run_id }}
           commit-message: "translate: add new Japanese CWN translations"
           body: "Automated Japanese translations of new CWN issues via Claude API."
           labels: translation, automated
