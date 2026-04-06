@@ -4,4 +4,4 @@ HTML_FILES := $(ORG_FILES:.org=.html)
 all: $(HTML_FILES)
 
 ja/%.html: ja/%.org
-	emacs --batch --visit=$< --eval "(princ (org-export-as 'html))" --kill > $@
+	emacs --batch -l scripts/org-export.el --visit=$< --eval "(princ (org-export-as 'html))" --kill > $@
