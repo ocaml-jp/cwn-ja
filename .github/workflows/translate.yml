@@ -48,7 +48,7 @@ jobs:
           else
             ARGS="--from-ref ${{ steps.before.outputs.sha }} --to-ref ${{ steps.after.outputs.sha }}"
           fi
-          bash scripts/pipeline.sh $ARGS
+          node --experimental-strip-types scripts/pipeline.ts $ARGS
 
       - name: Create PR (if there are changes)
         uses: peter-evans/create-pull-request@v6

@@ -3,6 +3,6 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "translate": "bash scripts/pipeline.sh"
+    "translate": "node --experimental-strip-types scripts/pipeline.ts"
   }
 }
