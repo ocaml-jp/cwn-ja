@@ -1,0 +1,3 @@
+[submodule "cwn-data"]
+	path = cwn-data
+	url = https://github.com/ocaml/cwn-data.git

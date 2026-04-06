@@ -1,0 +1,8 @@
+{
+  "name": "cwn-ja",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "translate": "node --experimental-strip-types scripts/translate.ts"
+  }
+}
