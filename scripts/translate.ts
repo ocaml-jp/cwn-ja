@@ -1,19 +1,8 @@
 import { readFile, writeFile } from "fs/promises";
+import { join } from "path";
 
-const SYSTEM_PROMPT = `You are a professional translator specializing in technical content about OCaml
-and functional programming. Translate the following Org-mode document from English
-to Japanese.
-
-Rules:
-- Preserve ALL Org-mode formatting exactly (headings, links, code blocks, lists,
-  property drawers, export options, etc.)
-- Do NOT translate: code blocks, inline code (~...~), URLs, author names,
-  package/library names, OCaml identifiers, or technical terms commonly left
-  in English in Japanese technical writing (e.g., "OCaml", "opam", "dune", "Merlin")
-- Translate: prose text, headings, navigation labels, list descriptions
-- Maintain the same document structure and line breaks
-- Use natural, fluent Japanese suitable for a technical audience
-- Output ONLY the translated Org-mode document — no explanations or commentary`;
+const ROOT = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const PROMPT_PATH = join(ROOT, "scripts/prompt.md");
 
 const MAX_RETRIES = 3;
 
@@ -80,7 +69,7 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function callClaudeAPI(content: string): Promise<string> {
+async function callClaudeAPI(systemPrompt: string, content: string): Promise<string> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     throw new Error("ANTHROPIC_API_KEY environment variable is not set");
@@ -101,7 +90,7 @@ async function callClaudeAPI(content: string): Promise<string> {
           model,
           max_tokens: 16384,
           stream: true,
-          system: SYSTEM_PROMPT,
+          system: systemPrompt,
           messages: [{ role: "user", content }],
         }),
       });
@@ -139,9 +128,12 @@ async function main() {
     process.exit(1);
   }
 
-  const content = await readFile(inputPath, "utf-8");
+  const [systemPrompt, content] = await Promise.all([
+    readFile(PROMPT_PATH, "utf-8"),
+    readFile(inputPath, "utf-8"),
+  ]);
   console.log(`Translating ${inputPath} → ${outputPath}...`);
-  const translated = await callClaudeAPI(content);
+  const translated = await callClaudeAPI(systemPrompt, content);
   await writeFile(outputPath, translated, "utf-8");
   console.log(`Done: ${outputPath}`);
 }
