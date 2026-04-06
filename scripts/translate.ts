@@ -99,16 +99,20 @@ async function listFiles(args: Args): Promise<string[]> {
       dates = output.split("\n").map((f) => dateFromFilename(f));
     }
   } else {
-    // Default: find untranslated issues
+    // Default: list all .org files; skip already-translated unless --since is set
     const orgFiles = (await readdir(CWN_DATA))
       .filter((f) => f.endsWith(".org"))
       .map((f) => dateFromFilename(f));
-    const translated = new Set(
-      (await readdir(JA_DIR).catch(() => []))
-        .filter((f: string) => f.endsWith(".md"))
-        .map((f: string) => dateFromFilename(f))
-    );
-    dates = orgFiles.filter((d) => !translated.has(d));
+    if (args.since) {
+      dates = orgFiles;
+    } else {
+      const translated = new Set(
+        (await readdir(JA_DIR).catch(() => []))
+          .filter((f: string) => f.endsWith(".md"))
+          .map((f: string) => dateFromFilename(f))
+      );
+      dates = orgFiles.filter((d) => !translated.has(d));
+    }
   }
 
   // Apply --since filter

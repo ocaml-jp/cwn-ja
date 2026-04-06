@@ -39,9 +39,10 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          ARGS="--from-ref ${{ steps.before.outputs.sha }} --to-ref ${{ steps.after.outputs.sha }}"
           if [ -n "${{ inputs.since }}" ]; then
-            ARGS="$ARGS --since ${{ inputs.since }}"
+            ARGS="--since ${{ inputs.since }}"
+          else
+            ARGS="--from-ref ${{ steps.before.outputs.sha }} --to-ref ${{ steps.after.outputs.sha }}"
           fi
           node --experimental-strip-types scripts/translate.ts $ARGS
 
