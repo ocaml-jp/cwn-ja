@@ -159,9 +159,17 @@ async function readSSEStream(body: ReadableStream<Uint8Array>): Promise<string> 
   let buffer = "";
   let result = "";
   let lastReportedChars = 0;
+  const startTime = Date.now();
 
   function writeProgress(final: boolean) {
-    const line = `  ${result.length} chars received${final ? "" : "..."}`;
+    const elapsed = (Date.now() - startTime) / 1000;
+    const cps = elapsed > 0 ? Math.round(result.length / elapsed) : 0;
+    let line: string;
+    if (final) {
+      line = `  ${result.length} chars in ${elapsed.toFixed(1)}s (${cps} chars/sec)`;
+    } else {
+      line = `  ${result.length} chars received (${cps} chars/sec)...`;
+    }
     if (process.stderr.isTTY) {
       process.stderr.write(`\r\x1b[K${line}${final ? "\n" : ""}`);
     } else if (final || result.length - lastReportedChars >= 500) {
