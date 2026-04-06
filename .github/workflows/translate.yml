@@ -36,8 +36,8 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install pandoc
-        run: sudo apt-get install -y pandoc
+      - name: Install emacs
+        run: sudo apt-get install -y emacs-nox
 
       - name: Run translation
         env:
@@ -48,7 +48,7 @@ jobs:
           else
             ARGS="--from-ref ${{ steps.before.outputs.sha }} --to-ref ${{ steps.after.outputs.sha }}"
           fi
-          node --experimental-strip-types scripts/translate.ts $ARGS
+          node --experimental-strip-types scripts/pipeline.ts $ARGS
 
       - name: Create PR (if there are changes)
         uses: peter-evans/create-pull-request@v6
