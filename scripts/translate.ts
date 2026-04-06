@@ -85,7 +85,7 @@ async function callClaudeAPI(content: string): Promise<string> {
   if (!apiKey) {
     throw new Error("ANTHROPIC_API_KEY environment variable is not set");
   }
-  const model = process.env.CLAUDE_MODEL || "claude-sonnet-4-5-20250929";
+  const model = process.env.CLAUDE_MODEL || "claude-sonnet-4-6";
 
   let lastError: Error | null = null;
   for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
