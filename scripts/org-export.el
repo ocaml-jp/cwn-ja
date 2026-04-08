@@ -34,10 +34,12 @@ MARK is the delimiter string used.  TYPE is a symbol among
                           :post-blank post-blank)
                     (if (memq type '(code verbatim))
                         (list :value
-                              (and (memq type '(code verbatim))
-                                   (org-element-deferred-create
-                                    t #'org-element--substring
-                                    (- contents-begin origin)
-                                    (- contents-end origin))))
+                              (if (fboundp 'org-element-deferred-create)
+                                  (org-element-deferred-create
+                                   t #'org-element--substring
+                                   (- contents-begin origin)
+                                   (- contents-end origin))
+                                (buffer-substring-no-properties
+                                 contents-begin contents-end)))
                       (list :contents-begin contents-begin
                             :contents-end contents-end)))))))))))))
