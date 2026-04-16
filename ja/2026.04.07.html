@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-04-15 Wed 10:37 -->
+<!-- 2026-04-16 Thu 18:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>OCaml Weekly News</title>
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -199,7 +199,7 @@
 <div id="content" class="content">
 <h1 class="title">OCaml Weekly News</h1>
 <p>
-<a href="https://alan.petitepomme.net/cwn/2026.03.31.html">先週</a> <a href="https://alan.petitepomme.net/cwn/index.html">上へ</a> <a href="https://alan.petitepomme.net/cwn/2026.04.14.html">次週</a>
+<a href="2026.03.31.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.04.14.html">次週号</a>
 </p>
 
 <p>
@@ -207,7 +207,7 @@
 </p>
 
 <p>
-2026年3月31日から4月7日の週のOCaml週刊ニュースをお届けします。
+2026年3月31日から4月7日までの週の OCaml Weekly News をお届けします。
 </p>
 
 <div id="table-of-contents" role="doc-toc">
@@ -215,21 +215,19 @@
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#1">restricted 2.0.0 プログラムがアクセスできるシステム操作とファイルシステムの範囲を制限する</a></li>
-<li><a href="#2">求人情報：CNAF（社会給付機関）における Catala のコンパイラエンジニア</a></li>
-<li><a href="#3">ocgtk 0.1：GTK 4 向け OCaml バインディング（プレビューリリース）</a></li>
-<li><a href="#4">out-channel-redirect 0.1 — out_channel の出力のリダイレクトとキャプチャ</a></li>
+<li><a href="#2">求人情報：CNAF（社会保障機関）での Catala コンパイラエンジニア</a></li>
+<li><a href="#3">ocgtk 0.1: GTK 4 の OCaml バインディング（プレビューリリース）</a></li>
+<li><a href="#4">out-channel-redirect 0.1 — out_channel の出力をリダイレクト・キャプチャする</a></li>
 <li><a href="#5">ppxlib.0.38.0</a></li>
-<li><a href="#6">OCaml コードにおける AI 開示の自発的な取り組みに関する提案</a></li>
-<li><a href="#7">ブログ：Markdown としての OCaml ドキュメント</a></li>
+<li><a href="#6">OCaml コードにおける AI 利用の自発的開示に関するプロポーザル</a></li>
+<li><a href="#7">ブログ：マークダウンとしての OCaml ドキュメント</a></li>
 <li><a href="#8">hotseat Squava（小さな LablGtk2 デモ）</a></li>
 <li><a href="#9">opentelemetry 0.90（および関連ライブラリ）</a></li>
 <li><a href="#10">Dune 3.22</a></li>
-<li><a href="#org6310b93">過去の CWN</a></li>
+<li><a href="#org9b709d2">過去の CWN</a></li>
 </ul>
 </div>
 </div>
-
-
 <div id="outline-container-1" class="outline-2">
 <h2 id="1">restricted 2.0.0 プログラムがアクセスできるシステム操作とファイルシステムの範囲を制限する</h2>
 <div class="outline-text-2" id="text-1">
@@ -237,20 +235,19 @@
 Archive: <a href="https://discuss.ocaml.org/t/ann-restricted-2-0-0-limit-which-system-operations-and-which-parts-of-the-filesystem-your-program-can-access/17942/1">https://discuss.ocaml.org/t/ann-restricted-2-0-0-limit-which-system-operations-and-which-parts-of-the-filesystem-your-program-can-access/17942/1</a>
 </p>
 </div>
-
-<div id="outline-container-orgdfcbf52" class="outline-3">
-<h3 id="orgdfcbf52">removewingman によるアナウンス</h3>
-<div class="outline-text-3" id="text-orgdfcbf52">
+<div id="outline-container-orgea8f660" class="outline-3">
+<h3 id="orgea8f660">removewingman によるアナウンス</h3>
+<div class="outline-text-3" id="text-orgea8f660">
 <p>
 こんにちは、
 </p>
 
 <p>
-<a href="https://opam.ocaml.org/packages/restricted/">restricted</a> の新バージョンをアナウンスできることを嬉しく思います。
+<a href="https://opam.ocaml.org/packages/restricted/">restricted</a> の新バージョンを発表できることを嬉しく思います。
 </p>
 
 <p>
-このライブラリは、プログラムがアクセスできるシステム操作とファイルシステムの範囲を制限するためのものです。プログラムのできるだけ早い段階で呼び出すことで、残りのコードが権限を制限した状態で実行されるようになります。現在、実際に強制される制限が実装されているオペレーティングシステムは以下の通りです：
+このライブラリを使うと、プログラムがアクセスできるシステム操作とファイルシステムの範囲を制限できます。プログラムのできるだけ早い段階で呼び出すことで、以降のコードが権限を縮小した状態で実行されます。現在、実際に強制される制限が実装されているオペレーティングシステムは以下の通りです：
 </p>
 
 <ul class="org-ul">
@@ -259,7 +256,7 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-restricted-2-0-0-limit-which-s
 </ul>
 
 <p>
-他のオペレーティングシステムでも、<a href="https://removewingman.codeberg.page/restricted/">restricted</a> を使用してプログラムが必要とする権限を文書化することができます。ユーザーは<a href="https://justine.lol/pledge/">pledge on Linux</a> などのツールを使って、プログラムがこれらの約束を遵守しているかテストできます。どうぞお楽しみください :slight_smile:
+他のオペレーティングシステムでも、<a href="https://removewingman.codeberg.page/restricted/">restricted</a> を使ってプログラムが必要とする権限を文書化することができます。ユーザーは <a href="https://justine.lol/pledge/">pledge on Linux</a> などのツールを使って、プログラムがこれらの約束を守っているかどうかをテストできます。ぜひご活用ください :slight_smile:
 </p>
 
 <ul class="org-ul">
@@ -271,31 +268,29 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-restricted-2-0-0-limit-which-s
 </ul>
 
 <p>
-変更履歴：
+CHANGELOG:
 </p>
 
 <ul class="org-ul">
-<li>テスト済み環境：
+<li>テスト環境：
 <ul class="org-ul">
-<li>x86_64 openbsd（16/16 テスト通過）</li>
-<li>x86_64-alpine-linux（Landlock ABI version: 7）（12件中4件通過：file_read_unv、file_write_unv、file_create_unv_linux、file_cwrr_unv_linux）</li>
+<li>x86_64 openbsd（16/16 テスト合格）</li>
+<li>x86_64-alpine-linux（Landlock ABI version: 7）（12テスト中4テスト合格：file_read_unv, file_write_unv, file_create_unv_linux, file_cwrr_unv_linux）</li>
 </ul></li>
 </ul>
 </div>
-
-<div id="outline-container-orgdf56ba2" class="outline-4">
-<h4 id="orgdf56ba2">追加</h4>
-<div class="outline-text-4" id="text-orgdf56ba2">
+<div id="outline-container-org01534af" class="outline-4">
+<h4 id="org01534af">追加</h4>
+<div class="outline-text-4" id="text-org01534af">
 <ul class="org-ul">
-<li>API: exec の promises と accesses をオプション化</li>
+<li>API: exec の promises と accesses をオプションに変更</li>
 <li>OpenBSD: exec promises</li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org0075ebc" class="outline-4">
-<h4 id="org0075ebc">削除</h4>
-<div class="outline-text-4" id="text-org0075ebc">
+<div id="outline-container-org0e64f73" class="outline-4">
+<h4 id="org0e64f73">削除</h4>
+<div class="outline-text-4" id="text-org0e64f73">
 <ul class="org-ul">
 <li>SystemOperation.TmpPath（非推奨、<code>pledge (2)</code> を参照）</li>
 </ul>
@@ -303,23 +298,18 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-restricted-2-0-0-limit-which-s
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-2" class="outline-2">
-<h2 id="2">求人情報：CNAF（社会給付機関）における Catala のコンパイラエンジニア</h2>
+<h2 id="2">求人情報：CNAF（社会保障機関）での Catala コンパイラエンジニア</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Archive: <a href="https://discuss.ocaml.org/t/job-offer-compiler-engineer-for-catala-cnaf-social-benefits-agency/17943/1">https://discuss.ocaml.org/t/job-offer-compiler-engineer-for-catala-cnaf-social-benefits-agency/17943/1</a>
 </p>
 </div>
-
-<div id="outline-container-org25cbc2a" class="outline-3">
-<h3 id="org25cbc2a">Denis Merigoux によるアナウンス</h3>
-<div class="outline-text-3" id="text-org25cbc2a">
+<div id="outline-container-orgf74ebc0" class="outline-3">
+<h3 id="orgf74ebc0">Denis Merigoux によるアナウンス</h3>
+<div class="outline-text-3" id="text-orgf74ebc0">
 <p>
-[以下はフランス公共部門の求人情報のため、フランス語で記載しています]
+[以下はフランス公共部門の求人であるためフランス語で記載されています]
 </p>
 
 <p>
@@ -353,105 +343,95 @@ Le centre technique Catala a ainsi vocation à produire des contributions open-s
 </blockquote>
 
 <p>
-採用された方はInriaのCatalaチーム（Louis Gesbert、Vincent Botbol、Romain Primet、そして私）と一緒に働くことになります！職務内容についてご質問があればお気軽にご連絡ください :slight_smile:
+採用された方は Inria の Catala チーム（Louis Gesbert、Vincent Botbol、Romain Primet、そして私）と共に働くことになります！ご質問があれば、お気軽にご連絡ください :slight_smile:
 </p>
 
 <p>
-Catalaのコンパイル分野でこれまでに行われたこと、そしてこれから行うことの概要：<a href="https://blog.merigoux.ovh/en/2026/02/19/building-proper-pl.html">https://blog.merigoux.ovh/en/2026/02/19/building-proper-pl.html</a>
+Catala のコンパイルに関して行われてきたこと・これから行うことの概要はこちら：<a href="https://blog.merigoux.ovh/en/2026/02/19/building-proper-pl.html">https://blog.merigoux.ovh/en/2026/02/19/building-proper-pl.html</a>
 </p>
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-3" class="outline-2">
-<h2 id="3">ocgtk 0.1：GTK 4 向け OCaml バインディング（プレビューリリース）</h2>
+<h2 id="3">ocgtk 0.1: GTK 4 の OCaml バインディング（プレビューリリース）</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Archive: <a href="https://discuss.ocaml.org/t/ann-ocgtk-0-1-ocaml-bindings-for-gtk-4-preview-release/17944/1">https://discuss.ocaml.org/t/ann-ocgtk-0-1-ocaml-bindings-for-gtk-4-preview-release/17944/1</a>
 </p>
 </div>
-
-<div id="outline-container-orge47737b" class="outline-3">
-<h3 id="orge47737b">Chris Armstrong によるアナウンス</h3>
-<div class="outline-text-3" id="text-orge47737b">
+<div id="outline-container-org382f3c7" class="outline-3">
+<h3 id="org382f3c7">Chris Armstrong によるアナウンス</h3>
+<div class="outline-text-3" id="text-org382f3c7">
 <p>
-GTK 4 向け OCaml バインディングである ocgtk の最初のプレビューリリース（v0.1-preview0）をアナウンスできることを嬉しく思います。
+GTK 4 の OCaml バインディングである ocgtk の最初のプレビューリリース（v0.1-preview0）を発表できることを嬉しく思います。
 </p>
 </div>
-
-<div id="outline-container-orgc728aba" class="outline-4">
-<h4 id="orgc728aba">ocgtk とは？</h4>
-<div class="outline-text-4" id="text-orgc728aba">
+<div id="outline-container-org01ac7c3" class="outline-4">
+<h4 id="org01ac7c3">ocgtk とは？</h4>
+<div class="outline-text-4" id="text-org01ac7c3">
 <p>
-<a href="https://github.com/chris-armstrong/ocgtk">ocgtk</a> は GTK 4 ウィジェットツールキットおよびその関連ライブラリ（GDK、GIO、Pango、GdkPixbuf、GSK、Graphene、Cairo）向けの OCaml バインディングです。現時点では OCaml &gt;=5.3 を対象としています。
+<a href="https://github.com/chris-armstrong/ocgtk">ocgtk</a> は GTK 4 ウィジェットツールキットおよび関連ライブラリ（GDK、GIO、Pango、GdkPixbuf、GSK、Graphene、Cairo）の OCaml バインディングを提供します。現時点では OCaml &gt;=5.3 を対象としています。
 </p>
 
 <p>
-lablgtk3（長年にわたる GTK 3 バインディングライブラリ）からインスピレーションを受けており、コアとなる共通コードや多くの設計アイデアを取り入れています。ただし、APIには互換性がありません。lablgtk3 のバインディングが大部分を手書きで書かれているのに対し、ocgtk はコードジェネレーターを使用して GObject Introspection（GIR）定義ファイルを読み込み、C スタブと OCaml ラッパーの両方を生成します。これにより、バインディングのカバレッジは手書きの作業ではなく GIR 定義に追随し、生成されたコードは一貫した手続き的な構造に従います。
+長年使われてきた GTK 3 バインディングライブラリである lablgtk3 にインスパイアされ、コアとなる共通コードや多くの設計思想を取り入れています。ただし API には互換性がありません。lablgtk3 のバインディングは主に手書きであるのに対し、ocgtk はコードジェネレーターを使用して GObject Introspection（GIR）定義ファイルを読み込み、C スタブと OCaml ラッパーの両方を生成します。これにより、バインディングのカバレッジは手書きの労力ではなく GIR 定義に追従し、生成されたコードは一貫した手続き型の構造に従います。
 </p>
 
 <p>
-<b>ツールについての注記</b>：コードジェネレーター自体はLLMの多大な支援を受けて開発されました。ただし、実際のライブラリを形成するCスタブとOCamlモジュール（出力）は、LLMによって書かれたものではなく、GIR定義からプログラム的に生成されています。
+<b>ツーリングに関する注記</b>：コードジェネレーター自体は LLM の多大な支援を受けて開発されました。ただし、実際のライブラリを構成する C スタブと OCaml モジュールという出力は、LLM によって書かれたものではなく、GIR 定義からプログラム的に生成されたものです。
 </p>
 </div>
 </div>
-
-<div id="outline-container-orged2f570" class="outline-4">
-<h4 id="orged2f570">実装済みの機能</h4>
-<div class="outline-text-4" id="text-orged2f570">
+<div id="outline-container-org0bce5c5" class="outline-4">
+<h4 id="org0bce5c5">実装済みの機能</h4>
+<div class="outline-text-4" id="text-org0bce5c5">
 <ul class="org-ul">
 <li>GTK 4、GDK、GIO、Pango、GdkPixbuf、GSK、Graphene、Cairo のバインディング</li>
 <li>クラス、レコード、列挙型、ビットフィールド</li>
 <li>コンストラクタ、メソッド、プロパティ</li>
-<li>シグナル（戻り値やパラメータなし）</li>
-<li>動作するサンプル：GTK 4 計算機アプリケーション</li>
+<li>シグナル（戻り値やパラメーターなし）</li>
+<li>動作するサンプル：GTK 4 電卓アプリケーション</li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgae79e75" class="outline-4">
-<h4 id="orgae79e75">不足している機能</h4>
-<div class="outline-text-4" id="text-orgae79e75">
+<div id="outline-container-org8ef8ead" class="outline-4">
+<h4 id="org8ef8ead">未実装の機能</h4>
+<div class="outline-text-4" id="text-org8ef8ead">
 <p>
-これは最初のマイルストーンであり、本番環境向けのリリースではありません。いくつかの重要な機能はまだサポートされていません：
+これは最初のマイルストーンであり、本番対応リリースではありません。まだサポートされていない重要な機能がいくつかあります：
 </p>
 
 <ul class="org-ul">
-<li><b>インターフェース</b>：GObject インターフェースはまだサポートされていません。これは見た目よりも広範な影響があります。インターフェース型自体が存在しないだけでなく、パラメータとしてインターフェースを受け取ったりインターフェース型を返したりするクラスのメソッドも抑制されます。つまり、それ以外はサポートされているクラスの一部のメソッドがバインディングから欠落します。</li>
+<li><b>インターフェース</b>：GObject インターフェースはまだサポートされていません。これは見た目以上に広範な影響があります。インターフェース型そのものが存在しないだけでなく、インターフェースをパラメーターとして受け取ったりインターフェース型を返したりするクラスのメソッドも除外されています。このため、それ以外はサポートされているクラスでも一部のメソッドがバインディングから欠落することがあります。</li>
 <li><b>コールバック</b>：シグナル以外の OCaml コールバックを引数として受け取る関数はまだサポートされていません。これにより、多くの非同期 GIO API や一部の GTK パターンの使用が制限されます。</li>
-<li><b>フリー関数</b>：クラスに属さないトップレベル関数はまだ生成されていません。そのため、一部のユーティリティ API が利用できません。</li>
-<li><b>非オペーク型レコードフィールドへのアクセス</b>：非オペーク型の GLib/GDK レコードのフィールドを直接読み取ることはまだできません。</li>
-<li><b>複数パラメータを持つシグナル</b>：パラメータがなく戻り値もないシグナルのみサポートされています。複雑なシグネチャを持つシグナルは静かにスキップされます。</li>
+<li><b>フリー関数</b>：クラスに属さないトップレベル関数はまだ生成されていません。そのため一部のユーティリティ API が利用できません。</li>
+<li><b>不透明でないレコードフィールドへのアクセス</b>：不透明でない GLib/GDK レコードのフィールドはまだ直接読み取れません。</li>
+<li><b>複数パラメーターのシグナル</b>：パラメーターがゼロで戻り値のないシグナルのみサポートされており、複雑なシグネチャを持つシグナルは暗黙的にスキップされます。</li>
 <li><b>GLib 型</b>：ほとんどの GLib 型はバインドされていないため、リスト、バイト配列、GVariant（DBus で多用される）を使用するいくつかの有用な API が利用できません。</li>
 </ul>
 
 <p>
-これらの制限により、基本的な GTK アプリケーションは作成できますが、より高度なウィジェットの使用、非同期 I/O、またはインターフェースに大きく依存する API では行き詰まることが予想されます。
+これらの制限により、基本的な GTK アプリケーションは構築できますが、より高度なウィジェットの使用、非同期 I/O、またはインターフェースに大きく依存する API では壁にぶつかることが予想されます。
 </p>
 
 <p>
-上記の多くに対処するための大まかな計画を記載した <a href="https://github.com/chris-armstrong/ocgtk/blob/main/ROADMAP.md">ROADMAP.md</a> があります。
+上記の多くに対応するための大まかな計画を記載した <a href="https://github.com/chris-armstrong/ocgtk/blob/main/ROADMAP.md">ROADMAP.md</a> があります。
 </p>
 </div>
 </div>
-
-<div id="outline-container-orge8ee999" class="outline-4">
-<h4 id="orge8ee999">ドキュメント</h4>
-<div class="outline-text-4" id="text-orge8ee999">
+<div id="outline-container-org335ab40" class="outline-4">
+<h4 id="org335ab40">ドキュメント</h4>
+<div class="outline-text-4" id="text-org335ab40">
 <p>
-API リファレンスドキュメントは現在不十分です。GIR 定義から正確にドキュメントを生成することはこのプロジェクトにとって未解決の問題であるため、現時点では生成されたモジュールはほとんどドキュメント化されていません。それまでの間、各バインディングに対応するものを理解するための最良のリファレンスは GTK 4 ドキュメントであり、リポジトリ内のサンプル（特に、非自明な GTK 4 アプリケーションを実演する計算機のサンプル）は実際の使用方法を示しています。
+API リファレンスドキュメントは現在不十分な状態です。GIR 定義からドキュメントを正確に生成することはこのプロジェクトにおいて未解決の問題であるため、現時点では生成されたモジュールのほとんどはドキュメント化されていません。当面は GTK 4 のドキュメントが各バインディングの対応を理解するための最良のリファレンスであり、リポジトリ内のサンプル（特に非自明な GTK 4 アプリケーションを示す電卓サンプル）が実際の使用方法を示しています。
 </p>
 </div>
 </div>
-
-<div id="outline-container-org9017f8a" class="outline-4">
-<h4 id="org9017f8a">安定性</h4>
-<div class="outline-text-4" id="text-org9017f8a">
+<div id="outline-container-org05377d4" class="outline-4">
+<h4 id="org05377d4">安定性</h4>
+<div class="outline-text-4" id="text-org05377d4">
 <p>
-このコードは本番環境でテストされていません。生成されたバインディングは広い範囲をカバーしていますが、テストカバレッジはまだ十分ではありません。現時点では本番環境や安全性が重要な状況での使用はお勧めしません。コメントや MR は歓迎します。
+このコードは本番環境でテストされていません。生成されたバインディングは広い範囲をカバーしていますが、テストカバレッジはまだ包括的ではありません。現段階では本番環境や安全性が重要なコンテキストでの使用はお勧めしません。コメントやマージリクエストは歓迎します。
 </p>
 
 <p>
@@ -459,30 +439,29 @@ API リファレンスドキュメントは現在不十分です。GIR 定義か
 </p>
 </div>
 </div>
-
-<div id="outline-container-org7fa9c78" class="outline-4">
-<h4 id="org7fa9c78">インストールと使用方法</h4>
-<div class="outline-text-4" id="text-org7fa9c78">
+<div id="outline-container-org222eb16" class="outline-4">
+<h4 id="org222eb16">インストールと使用方法</h4>
+<div class="outline-text-4" id="text-org222eb16">
 <p>
-現時点ではソースコードをダウンロードして pin してください（opam リリースの準備中です。クロスプラットフォームの問題を整理するのに時間がかかっているため、準備ができ次第コメントで更新します）。
+現時点ではソースコードをダウンロードしてピンしてください（opam リリースの準備を進めていますが、クロスプラットフォームの問題の解決に時間がかかっています。利用可能になり次第、こちらのコメントで更新します）。
 </p>
 
 <p>
-バインディングは GTK 4.14.5（Ubuntu 24.04）に対して生成されています。古いバージョンをお持ちの場合、理論上はコンパイルできますが、お使いのバージョンで利用できない API についてはランタイムエラーが発生します。
+バインディングは GTK 4.14.5（Ubuntu 24.04）に対して生成されています。古いバージョンをお使いの場合、理論上はコンパイルできますが、お使いのバージョンで利用できない API を使用するとランタイムエラーが発生します。
 </p>
 
 <ol class="org-ol">
-<li>リポジトリをダウンロード：<a href="https://github.com/chris-armstrong/ocgtk%EF%BC%88%E3%81%93%E3%81%93%E3%81%A7%E8%A8%80%E5%8F%8A%E3%81%97%E3%81%9F%E5%86%85%E5%AE%B9%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E3%81%AB%E3%81%AF">https://github.com/chris-armstrong/ocgtk%EF%BC%88%E3%81%93%E3%81%93%E3%81%A7%E8%A8%80%E5%8F%8A%E3%81%97%E3%81%9F%E5%86%85%E5%AE%B9%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E3%81%AB%E3%81%AF</a> v0.1-preview0 タグを使用できます）</li>
-<li>それぞれのサブディレクトリにある conf-gtk4 と ocgtk パッケージを pin する
+<li>リポジトリをダウンロード：<a href="https://github.com/chris-armstrong/ocgtk%EF%BC%88%E3%81%93%E3%81%93%E3%81%A7%E8%A8%80%E5%8F%8A%E3%81%97%E3%81%9F%E5%86%85%E5%AE%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AF">https://github.com/chris-armstrong/ocgtk%EF%BC%88%E3%81%93%E3%81%93%E3%81%A7%E8%A8%80%E5%8F%8A%E3%81%97%E3%81%9F%E5%86%85%E5%AE%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AF</a> v0.1-preview0 タグを使用できます）</li>
+<li>各サブディレクトリ内の conf-gtk4 および ocgtk パッケージをピン
 <ol class="org-ol">
 <li><code>opam pin conf-gtk</code></li>
 <li><code>opam pin ocgtk</code></li>
 </ol></li>
-<li><code>opam install ocgtk</code> を実行する</li>
+<li><code>opam install ocgtk</code> を実行</li>
 </ol>
 
 <p>
-各ライブラリは ocamlfind レベルで <code>ocgtk.&lt;libname&gt;</code> として公開されています。例えば、dune ファイルに <code>ocgtk.gtk</code> や <code>ocgtk.gdk</code> を追加し、<code>opam</code> / <code>dune-project</code> ファイルでは <code>ocgtk</code> に依存します。
+各ライブラリは ocamlfind レベルでは <code>ocgtk.&lt;libname&gt;</code> として公開されています。例えば dune ファイルに <code>ocgtk.gtk</code> や <code>ocgtk.gdk</code> を追加し、<code>opam</code> / <code>dune-project</code> ファイルでは <code>ocgtk</code> に依存するようにしてください。
 </p>
 
 <p>
@@ -496,50 +475,42 @@ API リファレンスドキュメントは現在不十分です。GIR 定義か
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-4" class="outline-2">
-<h2 id="4">out-channel-redirect 0.1 — out_channel の出力のリダイレクトとキャプチャ</h2>
+<h2 id="4">out-channel-redirect 0.1 — out_channel の出力をリダイレクト・キャプチャする</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Archive: <a href="https://discuss.ocaml.org/t/ann-out-channel-redirect-0-1-redirect-and-capture-out-channel-output/17945/1">https://discuss.ocaml.org/t/ann-out-channel-redirect-0-1-redirect-and-capture-out-channel-output/17945/1</a>
 </p>
 </div>
-
-<div id="outline-container-org562f6ca" class="outline-3">
-<h3 id="org562f6ca">Hhugo によるアナウンス</h3>
-<div class="outline-text-3" id="text-org562f6ca">
+<div id="outline-container-org1af271a" class="outline-3">
+<h3 id="org1af271a">Hhugo によるアナウンス</h3>
+<div class="outline-text-3" id="text-org1af271a">
 <p>
-<a href="https://github.com/hhugo/out-channel-redirect">out-channel-redirect</a> の最初のリリースをアナウンスできることを嬉しく思います。これは out_channel に書き込まれた出力をリダイレクトおよびキャプチャするためのライブラリです。
+<a href="https://github.com/hhugo/out-channel-redirect">out-channel-redirect</a> の最初のリリースを発表できることを嬉しく思います。これは out_channel に書き込まれた出力をリダイレクト・キャプチャするためのライブラリです。
 </p>
 </div>
-
-<div id="outline-container-orgb1495be" class="outline-4">
-<h4 id="orgb1495be">機能：</h4>
-<div class="outline-text-4" id="text-orgb1495be">
+<div id="outline-container-org32b4132" class="outline-4">
+<h4 id="org32b4132">機能：</h4>
+<div class="outline-text-4" id="text-org32b4132">
 <ul class="org-ul">
-<li>任意の out_channel を文字列にキャプチャ（stdout と stderr 用の便利な短縮形あり）</li>
-<li>あるチャンネルを別のチャンネルにリダイレクト</li>
+<li>任意の out_channel を文字列にキャプチャ（stdout と stderr の便利なショートハンドあり）</li>
+<li>あるチャネルを別のチャネルにリダイレクト</li>
 <li>ネイティブ（dup/dup2 経由）、JavaScript（js_of_ocaml）、WebAssembly（wasm_of_ocaml）で動作</li>
-<li>手動でリダイレクトのライフタイムを制御するためのエキスパート API</li>
+<li>リダイレクトのライフタイムを手動で制御するエキスパート API</li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgf7cbaec" class="outline-4">
-<h4 id="orgf7cbaec">インストール：</h4>
-<div class="outline-text-4" id="text-orgf7cbaec">
-<pre class="example" id="org78d3586">
+<div id="outline-container-org843908a" class="outline-4">
+<h4 id="org843908a">インストール：</h4>
+<div class="outline-text-4" id="text-org843908a">
+<pre class="example" id="org5c9bd66">
 opam install out-channel-redirect
 </pre>
 </div>
 </div>
-
-<div id="outline-container-org8ec3435" class="outline-4">
-<h4 id="org8ec3435">クイックサンプル：</h4>
-<div class="outline-text-4" id="text-org8ec3435">
+<div id="outline-container-org80b4a50" class="outline-4">
+<h4 id="org80b4a50">クイックサンプル：</h4>
+<div class="outline-text-4" id="text-org80b4a50">
 <div class="org-src-container">
 <pre class="src src-ocaml">let output, result =
   Out_channel_redirect.capture_channel some_channel ~f:(fun () → 
@@ -552,10 +523,6 @@ opam install out-channel-redirect
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-5" class="outline-2">
 <h2 id="5">ppxlib.0.38.0</h2>
 <div class="outline-text-2" id="text-5">
@@ -563,93 +530,85 @@ opam install out-channel-redirect
 Archive: <a href="https://discuss.ocaml.org/t/ann-ppxlib-0-38-0/17948/1">https://discuss.ocaml.org/t/ann-ppxlib-0-38-0/17948/1</a>
 </p>
 </div>
-
-<div id="outline-container-org2cff9e7" class="outline-3">
-<h3 id="org2cff9e7">Nathan Rebours によるアナウンス</h3>
-<div class="outline-text-3" id="text-org2cff9e7">
+<div id="outline-container-org3e7d3b1" class="outline-3">
+<h3 id="org3e7d3b1">Nathan Rebours によるアナウンス</h3>
+<div class="outline-text-3" id="text-org3e7d3b1">
 <p>
-ppxlib チームは ppxlib.0.38.0 のリリースをアナウンスできることを嬉しく思います。
+ppxlib チームは ppxlib.0.38.0 のリリースを発表できることを嬉しく思います。
 </p>
 
 <p>
-このリリースの主な特徴は OCaml 5.5 のサポートと、OCaml 5.4 および 5.3 のサポート改善です。また、いくつかのバグ修正と新しい API エントリも含まれています。詳細なリリースノートは<a href="https://github.com/ocaml-ppx/ppxlib/releases/tag/0.38.0">こちら</a>でご覧いただけます。
+このリリースの主な機能は OCaml 5.5 のサポートと、OCaml 5.4 および 5.3 のサポートの改善です。また、いくつかのバグ修正と新しい API エントリも含まれています。詳細なリリースノートは<a href="https://github.com/ocaml-ppx/ppxlib/releases/tag/0.38.0">こちら</a>でご覧いただけます。
 </p>
 
 <p>
-これは<a href="https://discuss.ocaml.org/t/ann-ppxlib-support-for-future-compilers/17430">このスレッド</a>で新しいコンパイラサポートのアプローチを発表してから初めてのリリースです。<code>&gt;= 5.3</code> のコンパイラバージョンへのサポートはすべてこの技術を使用して実装されており、新しい言語機能は AST にエンコードされています。ラベル付きタプルやエフェクトパターンなど、それらの一部を操作できるように <code>Ast_builder</code> と <code>Ast_pattern</code> の関数を追加しました。これらは API ドキュメントの<a href="https://ocaml-ppx.github.io/ppxlib/ppxlib/Ppxlib/Ast_builder/Default/index.html#future-asts">こちら</a>と<a href="https://ocaml-ppx.github.io/ppxlib/ppxlib/Ppxlib/Ast_pattern/index.html#future-asts">こちら</a>でご覧いただけます。また、<a href="https://ocaml-ppx.github.io/ppxlib/ppxlib/compatibility.html#future_compilers">新しいマニュアルセクション</a>でその使用方法も説明しています。現在の内部 AST（5.2）では表現できない他の新しい言語機能の生成または消費に興味がある場合は、関連するヘルパーを追加できるよう<a href="https://github.com/ocaml-ppx/ppxlib/issues/new">イシューを開いて</a>ください。
+これは<a href="https://discuss.ocaml.org/t/ann-ppxlib-support-for-future-compilers/17430">このスレッド</a>で新しいコンパイラサポートのアプローチを発表して以来の初リリースです。<code>&gt;= 5.3</code> のコンパイラバージョンに対するすべてのサポートはこの手法を使用して実装されており、新しい言語機能は AST にエンコードされています。ラベル付きタプルやエフェクトパターンなど、それらの一部を操作できるように <code>Ast_builder</code> と <code>Ast_pattern</code> 関数を追加しました。これらは API ドキュメントの<a href="https://ocaml-ppx.github.io/ppxlib/ppxlib/Ppxlib/Ast_builder/Default/index.html#future-asts">こちら</a>と<a href="https://ocaml-ppx.github.io/ppxlib/ppxlib/Ppxlib/Ast_pattern/index.html#future-asts">こちら</a>でご確認いただけます。また、<a href="https://ocaml-ppx.github.io/ppxlib/ppxlib/compatibility.html#future_compilers">新しいマニュアルセクション</a>でそれらの使い方を例示しています。現在の内部 AST（5.2）では表現できない新しい言語機能の生成や消費に興味がある場合は、<a href="https://github.com/ocaml-ppx/ppxlib/issues/new">イシューを開いて</a>いただければ関連するヘルパーを追加します。
 </p>
 
 <p>
-エコシステムがまだ 5.2 AST の変更と <code>ppxlib.0.36.0</code> から回復しきれていない状況で、さらなる破壊的変更を導入することなく新しいコンパイラへのサポートを追加し、メンテナンスの負担を ppxlib の範囲内に保てることを嬉しく思います。
-私たちはこのアプローチを将来的にさらに実行可能にするために、コンパイラチームとの<a href="https://github.com/ocaml/ocaml/issues/14668">議論</a>を開始しました。
+エコシステムが 5.2 の AST バンプと <code>ppxlib.0.36.0</code> からまだ回復していない中で、新たな破壊的変更を導入することなく新しいコンパイラのサポートを追加し、ppxlib の範囲内でメンテナンスの負担を維持できることを嬉しく思います。
+将来的にこのアプローチをさらに実用的にするために、コンパイラチームとの<a href="https://github.com/ocaml/ocaml/issues/14668">議論</a>を開始しました。
 </p>
 
 <p>
-このリリースの唯一の外部コントリビューターである @ceastlund に感謝します。
+このリリースで唯一の外部コントリビューターである @ceastlund に感謝します。
 </p>
 
 <p>
-個人的には、リリースを実現するために助けてくださった @patricoferris、そして ppxlib での私の作業に資金を提供してくださった OCaml Software Foundation と OCamlPro にも感謝します。
+個人的には、このリリースの実現を助けてくれた @patricoferris、そして ppxlib での私の作業に資金提供してくださった OCaml Software Foundation と OCamlPro にも感謝します。
 </p>
 
 <p>
-お読みいただきありがとうございます。Happy preprocessing!
+お読みいただきありがとうございます。良い前処理ライフを！
 </p>
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-6" class="outline-2">
-<h2 id="6">OCaml コードにおける AI 開示の自発的な取り組みに関する提案</h2>
+<h2 id="6">OCaml コードにおける AI 利用の自発的開示に関するプロポーザル</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Archive: <a href="https://discuss.ocaml.org/t/a-proposal-for-voluntary-ai-disclosure-in-ocaml-code/17950/1">https://discuss.ocaml.org/t/a-proposal-for-voluntary-ai-disclosure-in-ocaml-code/17950/1</a>
 </p>
 </div>
-
-<div id="outline-container-org9f4bbd6" class="outline-3">
-<h3 id="org9f4bbd6">Anil Madhavapeddy によるアナウンス</h3>
-<div class="outline-text-3" id="text-org9f4bbd6">
+<div id="outline-container-org34aba83" class="outline-3">
+<h3 id="org34aba83">Anil Madhavapeddy によるアナウンス</h3>
+<div class="outline-text-3" id="text-org34aba83">
 <p>
 皆さん、
 </p>
 
 <p>
-opam メタデータと<a href="https://ocaml.org/manual/5.3/attributes.html">拡張属性</a>を使用して、公開された OCaml コードにおける AI 使用状況を自発的に開示できるようにする <b><a href="https://github.com/avsm/ocaml-ai-disclosure">ocaml-ai-disclosure</a></b> 提案をまとめました。
+opam メタデータとソースコード内の<a href="https://ocaml.org/manual/5.3/attributes.html">拡張属性</a>を使用して、公開された OCaml コードにおける AI 利用を自発的に開示できるようにする <b><a href="https://github.com/avsm/ocaml-ai-disclosure">ocaml-ai-disclosure</a></b> プロポーザルをまとめました。
 </p>
 
 <p>
-リポジトリと<a href="https://anil.recoil.org/notes/opam-ai-disclosure">ブログ記事</a>に詳細、属性を抽出するためのプロトタイプツール、および FAQ がありますが、要約すると、<a href="https://www.w3.org/community/ai-content-disclosure/">HTML 向けの W3C 開示提案</a>と非常に似たものを提案しています。
+リポジトリと<a href="https://anil.recoil.org/notes/opam-ai-disclosure">ブログ投稿</a>に詳細、属性を抽出するためのプロトタイプツール、および FAQ がありますが、簡単に言えば <a href="https://www.w3.org/community/ai-content-disclosure/">HTML に関する W3C 開示プロポーザル</a>と非常に似たものを提案しています。
 </p>
 </div>
-
-<div id="outline-container-org84b2de1" class="outline-4">
-<h4 id="org84b2de1">パッケージレベルの開示</h4>
-<div class="outline-text-4" id="text-org84b2de1">
+<div id="outline-container-orgc9fe59b" class="outline-4">
+<h4 id="orgc9fe59b">パッケージレベルの開示</h4>
+<div class="outline-text-4" id="text-orgc9fe59b">
 <p>
 opam パッケージは拡張フィールドを使用して開示を宣言できます：
 </p>
 
-<pre class="example" id="orgcdc52b7">
+<pre class="example" id="orgef94dab">
 x-ai-disclosure: "ai-assisted"
 x-ai-model: "claude-opus-4-6"
 x-ai-provider: "Anthropic"
 </pre>
 
 <p>
-<i>注：最終的な提案では単純な値のリストになるかもしれませんが、考え方はこのようなものです。</i>
+<i>注：最終的なプロポーザルではただの値のリストになるかもしれませんが、概念はご理解いただけると思います。</i>
 </p>
 </div>
 </div>
-
-<div id="outline-container-org195a70f" class="outline-4">
-<h4 id="org195a70f">OCaml モジュールレベル</h4>
-<div class="outline-text-4" id="text-org195a70f">
+<div id="outline-container-orga0870b3" class="outline-4">
+<h4 id="orga0870b3">OCaml モジュールレベル</h4>
+<div class="outline-text-4" id="text-orga0870b3">
 <p>
-OCaml は拡張属性をサポートしており、コンパイル単位全体に適用されるフローティング属性を介して使用します：
+OCaml は拡張属性をサポートしており、コンパイルユニット全体に適用されるフローティング属性を通じてこれを使用します：
 </p>
 
 <div class="org-src-container">
@@ -663,7 +622,7 @@ let bar = ...
 </div>
 
 <p>
-これらは、単一のバインディングに適用される宣言属性を介してより細かいスコープで指定することもできます：
+単一のバインディングに適用される宣言属性を使用して、より細かくスコープを設定することもできます：
 </p>
 
 <div class="org-src-container">
@@ -677,37 +636,32 @@ let ai_helper y = ...
 </div>
 
 <p>
-開示は W3C HTML 提案と同様の最近祖先継承モデルに従い、明示的なアノテーションが継承された値を上書きします。
+開示は W3C HTML プロポーザルと同様の最近傍の祖先継承モデルに従い、明示的なアノテーションが継承された値を上書きします。
 </p>
 
 <p>
-詳細については<a href="https://anil.recoil.org/notes/opam-ai-disclosure">ブログ記事</a>と、いくつかの意味合いについての<a href="https://github.com/avsm/ocaml-ai-disclosure">提案リポジトリ内の FAQ</a>をご覧ください。
+詳細は<a href="https://anil.recoil.org/notes/opam-ai-disclosure">ブログ投稿</a>に記載されており、また<a href="https://github.com/avsm/ocaml-ai-disclosure">プロポーザルリポジトリの FAQ</a> にも一部の影響についての説明があります。
 </p>
 
 <p>
-他の言語エコシステムが同様の取り組みをしている先行事例を見つけられなかったので、皆さんがご存知のものがあればぜひ教えてください。より広いエコシステムでこれに対する関心がなければ、自分自身で使うだけにしますが、議論を始めることに問題はないと思いました！
+他の言語エコシステムで同様のことを試みた先行事例を見つけられなかったので、皆さんがご存じのものがあればぜひ教えてください。より広いエコシステムでこれへの関心がなければ、自分だけで使いますが、議論を始めても害はないと思い、提案してみました！
 </p>
 </div>
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-7" class="outline-2">
-<h2 id="7">ブログ：Markdown としての OCaml ドキュメント</h2>
+<h2 id="7">ブログ：マークダウンとしての OCaml ドキュメント</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Archive: <a href="https://discuss.ocaml.org/t/blog-ocaml-documentation-as-markdown/17951/1">https://discuss.ocaml.org/t/blog-ocaml-documentation-as-markdown/17951/1</a>
 </p>
 </div>
-
-<div id="outline-container-orgd759cfd" class="outline-3">
-<h3 id="orgd759cfd">David Sancho によるアナウンス</h3>
-<div class="outline-text-3" id="text-orgd759cfd">
+<div id="outline-container-org8a836e2" class="outline-3">
+<h3 id="org8a836e2">David Sancho によるアナウンス</h3>
+<div class="outline-text-3" id="text-org8a836e2">
 <p>
-odoc の markdown バックエンドについて、それを使って melange.re のドキュメントを改善した方法についてのブログ記事を公開しました。お楽しみいただければ幸いです：
+odoc のマークダウンバックエンドについて、そしてそれを使って melange.re のドキュメントを改善した方法についてのブログ投稿を公開しました。ぜひご覧ください：
 </p>
 
 <p>
@@ -715,15 +669,11 @@ odoc の markdown バックエンドについて、それを使って melange.re
 </p>
 
 <p>
-このブログ記事を可能にした作業をレビューしてくださった @jonludlam、@rgrinberg、@Alizter に感謝します。
+これを可能にした作業をレビューしてくださった @jonludlam、@rgrinberg、@Alizter に感謝します。
 </p>
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-8" class="outline-2">
 <h2 id="8">hotseat Squava（小さな LablGtk2 デモ）</h2>
 <div class="outline-text-2" id="text-8">
@@ -731,40 +681,35 @@ odoc の markdown バックエンドについて、それを使って melange.re
 Archive: <a href="https://discuss.ocaml.org/t/ann-hotseat-squava-a-tiny-lablgtk2-demo/17957/1">https://discuss.ocaml.org/t/ann-hotseat-squava-a-tiny-lablgtk2-demo/17957/1</a>
 </p>
 </div>
-
-<div id="outline-container-orga865f0c" class="outline-3">
-<h3 id="orga865f0c">Damien Guichard によるアナウンス</h3>
-<div class="outline-text-3" id="text-orga865f0c">
+<div id="outline-container-org9e812d1" class="outline-3">
+<h3 id="org9e812d1">Damien Guichard によるアナウンス</h3>
+<div class="outline-text-3" id="text-org9e812d1">
 <p>
 <a href="https://pastebin.com/Nwu2aC7A">https://pastebin.com/Nwu2aC7A</a>
 </p>
 
 <p>
-<a href="https://boardgamegeek.com/boardgame/112745/squava">Squava ボードゲーム</a>。
+<a href="https://boardgamegeek.com/boardgame/112745/squava">Squava ボードゲーム</a>です。
 </p>
 
 
-<div id="orgaa97d56" class="figure">
+<div id="org599663a" class="figure">
 <p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/8/87c31d9f127f99f12e96ecff6c579b710926f945.png" alt="87c31d9f127f99f12e96ecff6c579b710926f945.png" width="80%" />
 </p>
 </div>
 
 <p>
-Squava 1.1 はベクターグラフィックを使用していませんが、<code>./squava.png</code> を編集・縮小・拡大すると、プログラムが新しいピックスマップを使用してボードを適応させます。
+Squava 1.1 はベクターグラフィックスを持ちませんが、<code>./squava.png</code> を編集・縮小・拡大すると、プログラムは新しいピックスマップを使ってボードを適応させます。
 </p>
 
 
-<div id="org052eeeb" class="figure">
+<div id="orge2dfc43" class="figure">
 <p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/6/66cc412e804f7d1e81a6d11ea5c4645f3edfc871.jpeg" alt="66cc412e804f7d1e81a6d11ea5c4645f3edfc871.jpeg" width="80%" />
 </p>
 </div>
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-9" class="outline-2">
 <h2 id="9">opentelemetry 0.90（および関連ライブラリ）</h2>
 <div class="outline-text-2" id="text-9">
@@ -772,44 +717,39 @@ Squava 1.1 はベクターグラフィックを使用していませんが、<co
 Archive: <a href="https://discuss.ocaml.org/t/ann-opentelemetry-0-90-and-associated-libraries/17958/1">https://discuss.ocaml.org/t/ann-opentelemetry-0-90-and-associated-libraries/17958/1</a>
 </p>
 </div>
-
-<div id="outline-container-org5f73d0d" class="outline-3">
-<h3 id="org5f73d0d">Simon Cruanes によるアナウンス</h3>
-<div class="outline-text-3" id="text-org5f73d0d">
+<div id="outline-container-orgc8c73d3" class="outline-3">
+<h3 id="orgc8c73d3">Simon Cruanes によるアナウンス</h3>
+<div class="outline-text-3" id="text-orgc8c73d3">
 <p>
 こんにちは、
 </p>
 
 <p>
-<a href="https://github.com/ocaml-tracing/ocaml-opentelemetry/releases/tag/v0.90">opentelemetry 0.90</a>（および <code>opentelemetry-client</code>、<code>opentelemetry-client-cohttp-lwt</code> など）をアナウンスできることを嬉しく思います。
+<a href="https://github.com/ocaml-tracing/ocaml-opentelemetry/releases/tag/v0.90">opentelemetry 0.90</a>（および <code>opentelemetry-client</code>、<code>opentelemetry-client-cohttp-lwt</code> など）を発表できることを大変嬉しく思います。
 </p>
 
 <p>
-opentelemetry は OCaml 向けの <a href="https://opentelemetry.io/">https://opentelemetry.io/</a> の実装です。ライブラリなどのインストルメンテーション用のコア <span class="underline">クライアント API</span> と、様々な <span class="underline">エクスポーター</span> を備えたフル SDK の両方をカバーしています。<a href="https://github.com/ocaml-tracing/ocaml-trace/">Trace</a> と互換性があります。
+Opentelemetry は <a href="https://opentelemetry.io/">https://opentelemetry.io/</a> の OCaml 実装で、ライブラリ等のインスツルメンテーションのためのコア <span class="underline">クライアント API</span> と、さまざまな <span class="underline">エクスポーター</span> を備えた完全な SDK の両方をカバーしています。<a href="https://github.com/ocaml-tracing/ocaml-trace/">Trace</a> と互換性があります。
 </p>
 
 <p>
-このリリースは数ヶ月の作業の成果であり、1.0 前の最後のリリースの一つになる見込みです。<a href="https://github.com/ocaml-tracing/ocaml-opentelemetry/blob/main/CHANGES.md#090">変更履歴</a>はかなり大きく、多くのことを見直しました。主な変更点は以下の通りです：
+このリリースは数ヶ月の作業の成果であり、1.0 までの最後のリリースの一つになることが期待されています。<a href="https://github.com/ocaml-tracing/ocaml-opentelemetry/blob/main/CHANGES.md#090">変更履歴</a>はかなり大きく、多くのことを見直しました。主な変更点は以下の通りです：
 </p>
 <ul class="org-ul">
-<li>ocaml-protoc/pbrt 4.0 への移行（ミュータブルフィールドと異なるコードジェン）</li>
-<li>API が <a href="https://opentelemetry.io">https://opentelemetry.io</a> のガイドラインに近くなった（完全ではないがより改善）</li>
-<li>シグナルの内部処理のモジュール性が大幅に改善され、コードの再利用性向上、すべてのものをプラグイン可能に、キューイング/バッチ処理の改善、HTTP リトライのサポート</li>
-<li>プロトコルバッファの代わりに JSON としてエクスポートするサポート</li>
-<li>trace 0.11 のサポート（<code>opentelemetry.trace</code> がグローバル OTEL エクスポーター以外のグローバル状態を持たないようにできる）</li>
+<li>ocaml-protoc/pbrt 4.0 への移行（可変フィールドと protobuf の異なるコード生成）</li>
+<li>API が <a href="https://opentelemetry.io">https://opentelemetry.io</a> のガイドラインに近づいた（まだ完全ではないが改善）</li>
+<li>シグナルの内部処理のモジュール性が大幅に向上し、コードの再利用の改善、プラグイン可能なすべての機能、より良いキューイング/バッチング、HTTP リトライ</li>
+<li>protobuf の代わりに JSON でエクスポートするサポート</li>
+<li>trace 0.11 のサポート（これにより <code>opentelemetry.trace</code> はグローバルな OTEL エクスポーター以外のすべてのグローバル状態を排除できる）</li>
 <li>ライフサイクルとクリーンアップの改善</li>
 </ul>
 
 <p>
-API ドキュメントは<a href="https://ocaml-tracing.github.io/ocaml-opentelemetry/">こちら</a>でご覧いただけます。いつものように、フィードバック、バグ報告などは大歓迎です。
+API ドキュメントは<a href="https://ocaml-tracing.github.io/ocaml-opentelemetry/">こちら</a>でご覧いただけます。いつものように、フィードバックやバグ報告などを大歓迎します。
 </p>
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-10" class="outline-2">
 <h2 id="10">Dune 3.22</h2>
 <div class="outline-text-2" id="text-10">
@@ -817,49 +757,43 @@ API ドキュメントは<a href="https://ocaml-tracing.github.io/ocaml-opentele
 Archive: <a href="https://discuss.ocaml.org/t/ann-dune-3-22/17912/2">https://discuss.ocaml.org/t/ann-dune-3-22/17912/2</a>
 </p>
 </div>
-
-<div id="outline-container-org8cd419e" class="outline-3">
-<h3 id="org8cd419e">このスレッドの続きとして、Shon によるアナウンス</h3>
-<div class="outline-text-3" id="text-org8cd419e">
+<div id="outline-container-org0859ce2" class="outline-3">
+<h3 id="org0859ce2">このスレッドの続きとして、Shon によるアナウンス</h3>
+<div class="outline-text-3" id="text-org0859ce2">
 <p>
-Dune チームは<a href="https://github.com/ocaml/dune/releases/tag/3.22.1">dune 3.22.1 のリリース</a>をアナウンスできることを嬉しく思います。
+Dune チームは <a href="https://github.com/ocaml/dune/releases/tag/3.22.1">dune 3.22.1 のリリース</a>を発表できることを嬉しく思います。
 </p>
 
 <p>
-このリリースで問題が発生した場合は、<a href="https://github.com/ocaml/dune/issues">イシュートラッカー</a>でご報告ください。
+このリリースで問題が発生した場合は、<a href="https://github.com/ocaml/dune/issues">イシュートラッカー</a>に報告してください。
 </p>
 </div>
-
-<div id="outline-container-orgd47119e" class="outline-4">
-<h4 id="orgd47119e">修正内容</h4>
-<div class="outline-text-4" id="text-orgd47119e">
+<div id="outline-container-org84b9294" class="outline-4">
+<h4 id="org84b9294">修正内容</h4>
+<div class="outline-text-4" id="text-org84b9294">
 <ul class="org-ul">
 <li>Windows 7 との互換性を復元（#13905、@nojb）</li>
 
-<li><code>dune test</code> がデフォルトコンテキストのみでテストを実行するようになりました。コンテキストが一つの場合、それがデフォルトとして扱われます。これにより、ワークスペースに "default" という名前のコンテキストがない場合のクラッシュが修正されます。（#13930、修正 #13904、@Alizter）</li>
+<li><code>dune test</code> がデフォルトコンテキストのみでテストを実行するようになりました。コンテキストが一つの場合、それがデフォルトとして扱われます。これにより、ワークスペースに "default" という名前のコンテキストがない場合のクラッシュが修正されます（#13930、#13904 を修正、@Alizter）</li>
 
-<li><code>dune trace cat --chrome-trace</code> がマイクロ秒単位のタイムスタンプと所要時間を提供することで Chrome Trace Event Format に準拠するよう修正（#13911、修正 #13906、@Alizter）</li>
+<li><code>dune trace cat --chrome-trace</code> がマイクロ秒単位のタイムスタンプと時間を提供することで Chrome Trace Event Format に準拠するように修正（#13911、#13906 を修正、@Alizter）</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-
-
-
-
-<div id="outline-container-org6310b93" class="outline-2">
-<h2 id="org6310b93">過去の CWN</h2>
-<div class="outline-text-2" id="text-org6310b93">
+<div id="outline-container-org9b709d2" class="outline-2">
+<h2 id="org9b709d2">過去の CWN</h2>
+<div class="outline-text-2" id="text-org9b709d2">
 <p>
 CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送って</a>いただければメールでお送りします。または<a href="https://alan.petitepomme.net/cwn/">アーカイブ</a>や<a href="https://alan.petitepomme.net/cwn/cwn.rss">アーカイブの RSS フィード</a>をご覧ください。
 </p>
 
 <p>
-毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> にご登録ください。
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> に登録してください。
 </p>
 
-<div class="authorname" id="org25d3e25">
+<div class="authorname" id="org3c7de08">
 <p>
 <a href="https://alan.petitepomme.net/">Alan Schmitt</a>
 </p>

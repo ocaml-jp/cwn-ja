@@ -2,6 +2,8 @@
 
 Japanese translations of [OCaml Weekly News](https://alan.petitepomme.net/cwn/) (CWN).
 
+Published at <https://ocaml.jp/cwn-ja/>.
+
 ## Structure
 
 ```

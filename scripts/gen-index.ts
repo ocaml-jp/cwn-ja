@@ -48,7 +48,8 @@ async function main() {
 </head>
 <body>
 <h1>OCaml Weekly News (日本語訳)</h1>
-<p><a href="https://alan.petitepomme.net/cwn/">原文 (English)</a></p>
+<p><a href="https://alan.petitepomme.net/cwn/">OCaml Weekly News</a> の日本語訳アーカイブです。翻訳はOCaml.jpのメンバーが LLM の支援を元に行っています。 </p>
+<p><a href="https://github.com/ocaml-jp/cwn-ja">GitHub リポジトリ</a></p>
 <h2>アーカイブ</h2>
 <pre>${calendar}</pre>
 </body>
