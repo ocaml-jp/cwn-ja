@@ -7,29 +7,25 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
+  group: gh-pages
   cancel-in-progress: false
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/configure-pages@v5
-
-      - uses: actions/upload-pages-artifact@v3
+      # keep_files: true preserves the pr-preview/ directory that
+      # rossjrw/pr-preview-action writes to this same branch. Side-effect:
+      # files deleted from ja/ on main linger on gh-pages until cleaned by
+      # hand. If that becomes a problem, replace this step with a manual
+      # checkout-of-gh-pages + rsync that explicitly preserves pr-preview/.
+      - uses: peaceiris/actions-gh-pages@v4
         with:
-          path: ja
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./ja
+          keep_files: true
