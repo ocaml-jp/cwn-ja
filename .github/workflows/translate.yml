@@ -72,3 +72,16 @@ jobs:
           umbrella-dir: pr-preview
           action: deploy
           pr-number: ${{ steps.cpr.outputs.pull-request-number }}
+
+      # rossjrw/pr-preview-action wraps marocchino/sticky-pull-request-comment,
+      # which infers the PR number from github.event.pull_request — undefined
+      # in a scheduled context — so its comment step silently no-ops. Post the
+      # link ourselves.
+      - name: Comment preview link
+        if: steps.cpr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" \
+            --body ":rocket: Preview: https://ocaml-jp.github.io/cwn-ja/pr-preview/pr-${PR_NUMBER}/"
