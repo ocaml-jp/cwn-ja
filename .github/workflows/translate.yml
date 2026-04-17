@@ -51,6 +51,7 @@ jobs:
           node --experimental-strip-types scripts/pipeline.ts $ARGS
 
       - name: Create PR (if there are changes)
+        id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
           title: "translate: add Japanese CWN translations (${{ github.run_id }})"
@@ -58,3 +59,16 @@ jobs:
           commit-message: "translate: add new Japanese CWN translations"
           body: "Automated Japanese translations of new CWN issues via Claude API."
           labels: translation, automated
+
+      # Deploys here rather than from preview.yml because PRs created by
+      # GITHUB_TOKEN don't trigger pull_request workflows. HTML is already
+      # built by the translation step above (make runs inside pipeline.ts).
+      - name: Deploy PR preview
+        if: steps.cpr.outputs.pull-request-number
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./ja/
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: deploy
+          pr-number: ${{ steps.cpr.outputs.pull-request-number }}

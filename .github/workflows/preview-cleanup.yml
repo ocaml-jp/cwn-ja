@@ -1,0 +1,28 @@
+name: Remove PR preview on close
+
+# Preview deploys happen in translate.yml; this workflow only cleans up the
+# preview directory from gh-pages when a PR is closed or merged. Close events
+# are triggered by humans (not GITHUB_TOKEN), so they reliably fire here.
+
+on:
+  pull_request:
+    types: [closed]
+    paths: [ja/**]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  remove-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: rossjrw/pr-preview-action@v1
+        with:
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: remove
