@@ -60,6 +60,14 @@ jobs:
           body: "Automated Japanese translations of new CWN issues via Claude API."
           labels: translation, automated
 
+      # peter-evans/create-pull-request restores the working tree to the base
+      # branch after pushing, so ja/ here no longer contains the translated
+      # files. Check out the PR's commit so the preview action sees the right
+      # content.
+      - name: Check out PR branch for preview
+        if: steps.cpr.outputs.pull-request-number
+        run: git checkout ${{ steps.cpr.outputs.pull-request-head-sha }}
+
       # Deploys here rather than from preview.yml because PRs created by
       # GITHUB_TOKEN don't trigger pull_request workflows. HTML is already
       # built by the translation step above (make runs inside pipeline.ts).
