@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-04-17 Fri 05:38 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.03.24.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.04.07.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年3月24日から31日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">Merlin の signature-help 機能の改善</a></li>
+<li><a href="#2">フィードバック募集: 2026年 OCaml ユーザーサーベイの設問について</a></li>
+<li><a href="#3">2023年 OCaml ユーザーサーベイの結果</a></li>
+<li><a href="#4">ortac-0.8 - Domains を用いた仕様駆動テスト</a></li>
+<li><a href="#5">OCaml 5.5.0 の第3アルファリリース</a></li>
+<li><a href="#6">ocaml-openapi-gen 0.1.0、ocaml-forgejo</a></li>
+<li><a href="#7">CS6868 並行プログラミング &#x2013; コース教材</a></li>
+<li><a href="#8">libinput - Linux 入力デバイス向け OCaml バインディング</a></li>
+<li><a href="#9">OCaml コンパイラ オフィスアワー</a></li>
+<li><a href="#org8596248">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">Merlin の signature-help 機能の改善</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-improve-signature-help-feature-in-merlin/17920/1">https://discuss.ocaml.org/t/ann-improve-signature-help-feature-in-merlin/17920/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgd65e511" class="outline-3">
+<h3 id="orgd65e511">Charlène_Gros によるアナウンス</h3>
+<div class="outline-text-3" id="text-orgd65e511">
+<p>
+Tarides の私たちは、Merlin の <code>signature-help</code> 機能に加えられた改善点を発表できることを大変嬉しく思います！
+</p>
+
+<p>
+念のため説明しますと、<code>signature-help</code> は Merlin の機能で、関数シグネチャを表示し、アクティブなパラメータをハイライトします。エディタ上では、通常ツールチップ、フローティングウィンドウ、またはミニバッファに表示されます。以下の画像は、VSCode で関数 <code>exec_prog</code> の <code>signature-help</code> を表示した例です。
+</p>
+
+
+<div id="org790b0d9" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/4/46e99c5c69bab991b8dd6a6a7494db5c2f32e07b.png" alt="46e99c5c69bab991b8dd6a6a7494db5c2f32e07b.png" width="80%" />
+</p>
+</div>
+
+<p>
+signature-help コマンドの実装にはいくつかの問題点があり、それらが修正されました。これらの修正により、機能がより快適に使えるようになりました。改善点の一部はすでに最新の Merlin および ocaml-lsp リリースに含まれており、その他は次のリリースに含まれる予定です。
+</p>
+
+<p>
+修正内容：
+</p>
+
+<ul class="org-ul">
+<li>Merlin は関数のパラメータにのみ <code>signature-help</code> 情報を表示するようになり、関数名には表示しなくなりました。</li>
+<li><code>signature-help</code> はアクティブなパラメータの情報のみを表示するようになり、最後のパラメータの後に最初のパラメータに戻るループが発生しなくなりました。</li>
+<li>関数呼び出しの後に <code>in</code> がまだ書かれていない <code>let .. in</code> バインディングの内部でも <code>signature-help</code> がトリガーされるようになりました。</li>
+<li>アクティブなパラメータとしてオプションパラメータの記述が始まったとき、そのオプションパラメータが検出されハイライトされるようになりました。</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">フィードバック募集: 2026年 OCaml ユーザーサーベイの設問について</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/feedback-wanted-upcoming-ocaml-users-survey-2026-questions/17925/1">https://discuss.ocaml.org/t/feedback-wanted-upcoming-ocaml-users-survey-2026-questions/17925/1</a>
+</p>
+</div>
+
+<div id="outline-container-org0c68dbc" class="outline-3">
+<h3 id="org0c68dbc">Sabine Schmaltz によるアナウンス</h3>
+<div class="outline-text-3" id="text-org0c68dbc">
+<p>
+皆さん、こんにちは。
+OCSF を代表して 2026年 OCaml ユーザーサーベイを準備しています。設問を確定する前に、皆さんのご意見をいただきたいと思います。
+</p>
+
+<p>
+設問案はこちらでご覧いただけます: <a href="https://hackmd.io/3i-d6wgYRy2uVhqIVbxzNg">Proposed OCaml Users Survey Questions 2026</a>
+参考として、<a href="https://hackmd.io/@sabine-s/BkVG6DWibg">2023年のサーベイからの変更点のまとめ</a>もご覧ください。
+</p>
+</div>
+
+<div id="outline-container-org2e3c4ff" class="outline-4">
+<h4 id="org2e3c4ff">2023年のサーベイからの変更点の概要</h4>
+<div class="outline-text-4" id="text-org2e3c4ff">
+<p>
+新しいセクション：
+</p>
+<ul class="org-ul">
+<li>AI/LLM の使用について（4問） - OCaml 開発に AI/LLM ツールを使っていますか？どのツールを？何のために？</li>
+<li>デバッグとプロファイリング（3問） - どのようなデバッグ手法やツールを使っていますか？最大の課題は何ですか？（2023年の自由記述回答でデバッグの難しさが頻繁に言及されたことを受けて追加されました。）</li>
+</ul>
+
+<p>
+新しい単独設問：
+</p>
+<ul class="org-ul">
+<li>コミュニティの規模に関する希望（「コミュニティが～であればよいと思う」）</li>
+<li>使用しているドキュメントツール（odoc、ocamldoc など）</li>
+<li>ツールおよびパッケージリポジトリに関するフィードバック用の専用自由記述欄</li>
+</ul>
+
+<p>
+削除された設問（合計10問） - 実用性の低いデータしか得られなかった、または重複していた設問。最大プロジェクトサイズ、リリーススケジュールへの満足度、ソースホスティングプラットフォーム、Webデプロイプラットフォーム、「OCaml のツールは快適なワークフローを提供している」、「OCaml のライブラリは十分安定している」、「OCaml で書かれたソフトウェアは保守しやすい」、および言語機能ウィッシュリスト（エフェクトハンドラーが OCaml 5 でリリース済みのため）などが含まれます。
+</p>
+
+<p>
+修正された設問 - エコシステムの進化を反映した新しい回答選択肢：OxCaml、Zig、Helix、Zed、WebAssembly ターゲット、dune パッケージ管理、Nix ベースのビルド、Bluesky、「強く望むこと」セクションへの AI/LLM 関連の選択肢の追加。古いコンパイラバージョン（4.02〜4.06）は「≤4.07」に統合されました。ベンチマークツールはカテゴリではなく具体的な名前で一覧表示されるようになりました。
+</p>
+
+<p>
+以下の点についてご意見をお聞かせください：
+</p>
+
+<ul class="org-ul">
+<li>追加または削除すべきだと思う設問はありますか？</li>
+<li>回答の選択肢に不足しているものはありますか？</li>
+<li>OCaml コミュニティにとって重要な新しいトピックで、聞くべきものはありますか？</li>
+<li>58問というサーベイの長さは、長すぎる、短すぎる、それとも適切だと思いますか？</li>
+</ul>
+
+<p>
+サーベイをできる限り有益なものにするためのご協力をよろしくお願いします！ :two_hump_camel: :orange_heart:
+</p>
+
+<p>
+Sabine
+</p>
+
+<p>
+PS: <a href="https://discuss.ocaml.org/t/ann-ocaml-users-survey-2023-results/17926">2023年 OCaml ユーザーサーベイの結果</a>もご覧ください！
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">2023年 OCaml ユーザーサーベイの結果</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ocaml-users-survey-2023-results/17926/1">https://discuss.ocaml.org/t/ann-ocaml-users-survey-2023-results/17926/1</a>
+</p>
+</div>
+
+<div id="outline-container-org4019be1" class="outline-3">
+<h3 id="org4019be1">Sabine Schmaltz によるアナウンス</h3>
+<div class="outline-text-3" id="text-org4019be1">
+<p>
+皆さん、こんにちは。
+</p>
+
+<p>
+OCSF を代表して、2023年 OCaml ユーザーサーベイの回答に関する（遅ればせながらの）レポートを発表できることを嬉しく思います。評価の遅延についてお詫び申し上げます。今後は毎年定期的に OCaml ユーザーサーベイを実施することをお約束します。
+</p>
+
+<p>
+前置きはこのくらいにして、レポートへのリンクをお伝えします：
+</p>
+
+<p>
+<a href="https://ocaml-sf.org/docs/2023/survey-results.html">https://ocaml-sf.org/docs/2023/survey-results.html</a>
+</p>
+
+<p>
+レポートに関するフィードバック、回答や数値に関する議論（解釈やご意見をぜひ共有してください）、またはその他のコメントをお待ちしています。
+</p>
+
+<p>
+OCaml とそのエコシステムの現状をより深く理解するためのサーベイにご参加いただいた皆さんに感謝します！ :orange_heart: :two_hump_camel:
+</p>
+
+<p>
+Sabine
+</p>
+
+<p>
+PS: 2026年 OCaml ユーザーサーベイが近づいています。<a href="https://discuss.ocaml.org/t/feedback-wanted-upcoming-ocaml-users-survey-2026-questions/17925/1">2026年サーベイの設問変更に関するフィードバックスレッド</a>へのご意見を大変重視しています。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">ortac-0.8 - Domains を用いた仕様駆動テスト</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ortac-0-8-specification-driven-testing-with-domains/17927/1">https://discuss.ocaml.org/t/ann-ortac-0-8-specification-driven-testing-with-domains/17927/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgc01afc8" class="outline-3">
+<h3 id="orgc01afc8">Nicolas Osborne によるアナウンス</h3>
+<div class="outline-text-3" id="text-orgc01afc8">
+<p>
+こんにちは！Tarides の私たちは、仕様駆動テストのための ortac-0.8.0 のリリースを発表できることを大変嬉しく思います！
+</p>
+
+<p>
+<code>ortac</code> は <a href="https://github.com/ocaml-gospel">Gospel</a> エコシステムのツールです。核心となるアイデアは、Gospel 仕様言語のサブセットを OCaml コードに変換し、その変換を使ってランタイムチェックを生成することです。
+</p>
+
+<p>
+<code>ortac</code> はプラグインアーキテクチャを採用しています。opam 経由でインストールできます：
+</p>
+
+<pre class="example" id="org2a85798">
+$ opam install ortac-wrapper    # install the wrapper plugin for runtime assertion checking, with all the other necessary parts (runtime and cli)
+$ opam install ortac-qcheck-stm # install the qcheck-stm plugin that generates QCheck-STM tests, with all the other necessary parts (runtime and cli)
+$ opam install ortac-dune       # install the dune plugin to generate dune boilerplate to use the two previous plugins
+</pre>
+
+<p>
+このリリースは、Ortac/QCheck-STM が QCheck-STM テストフレームワークのより多くの機能を活用できるようにすることに焦点を当てています。具体的には、並列コンテキストでのテストとコマンド生成の柔軟性です。
+</p>
+
+<p>
+動作の仕組みについては<a href="https://ocaml-gospel.github.io/ortac/ortac-qcheck-stm/index.html">ドキュメント</a>をご覧ください。
+</p>
+
+<p>
+並列コンテキストでのテストについて：バージョン 0.2 でのバグレポート機能の導入とバージョン 0.4 での SUT を返す関数のカバレッジにより、並列コンテキストでの QCheck-STM テストの生成が容易ではなくなっていました（手書きの QCheck-STM テストでは比較的簡単です）。この問題が修正されました。
+</p>
+
+<p>
+バグレポートの情報は、実際のテスト（実際の実行結果とモデルの結果を比較する）を行う関数内で部分的に収集されます。これは、並列テスト用のバグレポート機能を実装するには、QCheck-STM+Domains の核心部分でありテスト実行時に信頼している関数を書き直す必要があることを意味します。同じ動作を保持し、生成されたテストが対応する手書きの QCheck-STM テストと同じセマンティクスを持つことを確認するために、情報収集を導入する<a href="https://github.com/ocaml-gospel/ortac/commit/ef8d598ccbd6c9987648e201ebffb6abb5a3d610">コミット</a>の差分を最小化し、ロジックの保存が明確になるようにしました（最終的には、人間によるレビューが信頼の拠り所です）。
+</p>
+
+<p>
+バージョン 0.4 以降、SUT を返す関数がテストに含まれるようになっています。新しく作成された SUT は、次の呼び出しの引数として選択される SUT のストアに追加されます。ここでの問題は、並列コンテキストでそれらをどう扱うかです：並列ブランチで作成された SUT はドメイン間で共有されるべきではないため、グローバルなストアに追加することはできません。シンプルな設計として、並列コンテキストに入ったら新しく作成された SUT のストア追加を停止することにしました。ご安心ください、これらの SUT を返す関数は、テストの逐次部分（逐次モードおよび/または並列モードの逐次プレフィックス）で引き続き完全にテストされます。
+</p>
+
+<p>
+QCheck-STM テストフレームワークの強みの一つは、コマンドジェネレータの柔軟性です。この柔軟性は <code>QCheck.Gen</code> API 自体と、QCheck-STM コマンドジェネレータが現在のモデルの状態に対してパラメータ化されているという事実から来ています（キーバリューストアの <code>lookup</code> コマンドの生成を考えてみてください。実際に値と関連付けられているキーを検索するコールを生成できる確率を持たせたいでしょう）。自動生成されたコマンドジェネレータはやや単純になりがちです。この単純さを軽減するために、ユーザーが以下を提供できるようにしました：
+</p>
+
+<ul class="org-ul">
+<li>特定のコマンド生成に適用するウェイト。例えば、<a href="https://ocaml-multicore.github.io/saturn/saturn/Saturn/Work_stealing_deque/index.html#val-push">work stealing queue</a> のキューを所有すべきでないドメインでの <code>push</code> コマンドの生成を無効化するのに有用です。</li>
+<li>コマンドジェネレータが現在のモデルの状態に対してパラメータ化されることを活用したい場合の、完全なコマンドジェネレータの実装。</li>
+</ul>
+
+<p>
+テストを楽しんでください！
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="5">OCaml 5.5.0 の第3アルファリリース</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/third-alpha-release-for-ocaml-5-5-0/17928/1">https://discuss.ocaml.org/t/third-alpha-release-for-ocaml-5-5-0/17928/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgeb8fe4c" class="outline-3">
+<h3 id="orgeb8fe4c">octachron によるアナウンス</h3>
+<div class="outline-text-3" id="text-orgeb8fe4c">
+<p>
+OCaml 5.5.0 の安定化作業の進展に伴い、OCaml 5.5.0 の第3アルファリリースを発表できることを嬉しく思います。
+</p>
+
+<p>
+第2アルファは、再配置可能コンパイラとブートストラップの間に予期しない相互作用が発見されたためリリースされませんでした。この問題は第3アルファで修正されました。
+</p>
+
+<p>
+この重要な変更に加え、第1アルファと比べてこの新しいアルファリリースには以下が含まれています：
+</p>
+
+<ul class="org-ul">
+<li>コード生成の修正 2件</li>
+<li>型システムの修正 3件</li>
+<li>標準ライブラリの修正 1件</li>
+</ul>
+
+<p>
+（完全なリストは以下の変更履歴をご覧ください）
+</p>
+
+<p>
+全体的に、5.5.0 の安定化は順調に進んでいるようで、ほとんどの開発ツールのアルファ版が利用可能です。そのため、4月上旬にはベータリリースに切り替える予定です。
+</p>
+
+<p>
+具体的には、エコシステムの安定化の進行状況は <a href="https://github.com/ocaml/opam-repository/issues/29463">opam 上の 5.5.0 準備メタ Issue</a> で追跡されています。
+</p>
+
+<p>
+このアルファリリース用のコンパニオン alpha opam リポジトリも利用可能です：
+</p>
+<pre class="example" id="org41237f5">
+$ opam repo add alpha git+https://github.com/kit-ty-kate/opam-alpha-repository.git
+</pre>
+<p>
+このリポジトリには OCaml 5.5.0 向けに更新中の opam パッケージの進行中のアルファリリースが含まれています。
+</p>
+
+<p>
+最終リリースは引き続き5月から6月の間を予定しています。
+</p>
+
+<p>
+バグを発見した場合は、<a href="https://github.com/ocaml/ocaml/issues">Issue トラッカー</a>に報告してください。
+</p>
+
+<p>
+新機能とバグ修正の完全なリストに興味がある場合は、更新された <a href="https://github.com/ocaml/ocaml/blob/5.5/Changes">OCaml 5.5.0 の変更履歴</a> をご覧ください。
+</p>
+
+<p>
+Happy hacking,
+OCaml チームを代表して Florian Angeletti
+</p>
+</div>
+
+<div id="outline-container-orgc7c11dc" class="outline-4">
+<h4 id="orgc7c11dc">第1アルファからの変更点</h4>
+<div class="outline-text-4" id="text-orgc7c11dc">
+</div>
+<ul class="org-ul">
+<li><a id="org7b560cf"></a>コンパイラ成果物の修正<br />
+<div class="outline-text-5" id="text-org7b560cf">
+<ul class="org-ul">
+<li>ブートストラップに対してより友好的な再配置可能コンパイラ</li>
+<li>js_of_ocaml が報告した compiler-libs 関連の問題を修正するためのブートストラップ</li>
+</ul>
+</div>
+</li>
+
+<li><a id="orge0ab700"></a>コード生成のバグ修正<br />
+<div class="outline-text-5" id="text-orge0ab700">
+<ul class="org-ul">
+<li><a href="https://github.com/ocaml/ocaml/issues/14583">#14583</a>: 特定の状況でコンパイルの誤りを引き起こす可能性があった線形スキャンのスピルヒューリスティックのバグを修正。
+(Nicolás Ojeda Bär、Vincent Laviron によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/13693">#13693</a>、<a href="https://github.com/ocaml/ocaml/issues/14514">#14514</a>: s390x: OCaml のファイバースタックに FPR を保存する PLT 遅延バインディングトランポリンによって libasmrun_shared.so で発生するヒープ破損を修正。s390x コードエミッタで PLT 呼び出しを GOT 間接呼び出しに置き換え。
+(Zane Hambly、David Allsopp および Xavier Leroy によるレビュー)</li>
+</ul>
+</div>
+</li>
+
+<li><a id="orga15c500"></a>型システムのバグ修正<br />
+<div class="outline-text-5" id="text-orga15c500">
+<ul class="org-ul">
+<li><a href="https://github.com/ocaml/ocaml/issues/14434">#14434</a>、<a href="https://github.com/ocaml/ocaml/issues/14652">#14652</a>: check_counter_example_pat を多相型から保護し、型の健全性を回復。
+(Stephen Dolan および Jacques Garrigue、Alistair O'Brien による報告とレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/14603">#14603</a>、<a href="https://github.com/ocaml/ocaml/issues/14604">#14604</a>: 多相型とアンボックスコンストラクタを組み合わせた際の Ctype.apply の失敗を回避。
+(Gabriel Scherer および Stefan Muenzel、Brandon Stride による報告、
+ Florian Angeletti によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/14626">#14626</a>、<a href="https://github.com/ocaml/ocaml/issues/14675">#14675</a>: オプション引数が消去不可能かどうかを判断する際に、モジュール依存関数を考慮に入れるよう修正。
+(Alistair O'Brien および Florian Angeletti、Gabriel Scherer によるレビュー)</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org5356109"></a>標準ライブラリの修正<br />
+<div class="outline-text-5" id="text-org5356109">
+<ul class="org-ul">
+<li><a href="https://github.com/ocaml/ocaml/issues/14635">#14635</a>: <code>caml_floatarray_gather</code> のバグを修正。このバグにより、<code>Float.Array.sub</code>、<code>Float.Array.append</code>、<code>Float.Array.concat</code>（空の場合）の結果が <code>[||]</code> と等しくならないことがありました。
+(Marc Lasson、Gabriel Scherer によるレビュー)</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org17c6cd7"></a>ドキュメントの更新<br />
+<div class="outline-text-5" id="text-org17c6cd7">
+<ul class="org-ul">
+<li><a href="https://github.com/ocaml/ocaml/issues/13590">#13590</a>: Windows 上でのランタイムによる <code>*</code> および <code>?</code> ワイルドカードの自動コマンドライン展開を文書化。
+(Benjamin Sigonneau、Nicolás Ojeda Bär によるレビュー)</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="6">ocaml-openapi-gen 0.1.0、ocaml-forgejo</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ocaml-openapi-gen-0-1-0-ocaml-forgejo/17929/1">https://discuss.ocaml.org/t/ann-ocaml-openapi-gen-0-1-0-ocaml-forgejo/17929/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgc339708" class="outline-3">
+<h3 id="orgc339708">Zoggy によるアナウンス</h3>
+<div class="outline-text-3" id="text-orgc339708">
+<p>
+こんにちは、
+</p>
+
+<p>
+<a href="https://www.openapis.org/">openapis</a> 仕様からコードを生成するツール <a href="https://zoggy.frama.io/openapi/">ocaml-openapi-gen</a> の最初のリリースを行いました。
+</p>
+
+<p>
+<code>openapi_gen</code> パッケージは私の<a href="https://framagit.org/zoggy/opam-repository">個人 opam リポジトリ</a>から入手できます。
+</p>
+
+<p>
+このツールは <a href="https://zoggy.frama.io/ocaml-forgejo/">ocaml-forgejo</a> のコード生成に使用されています。ocaml-forgejo は、<a href="https://codeberg.org/api/swagger#/">提供されている REST API</a> を通じて Codeberg やその他の forgejo ベースのプラットフォームと連携するためのライブラリです。
+</p>
+
+<p>
+生成されたインターフェースは将来的に変更される可能性があります。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="7">CS6868 並行プログラミング &#x2013; コース教材</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-cs6868-concurrent-programming-course-materials/17932/1">https://discuss.ocaml.org/t/ann-cs6868-concurrent-programming-course-materials/17932/1</a>
+</p>
+</div>
+
+<div id="outline-container-org730820b" class="outline-3">
+<h3 id="org730820b">KC Sivaramakrishnan によるアナウンス</h3>
+<div class="outline-text-3" id="text-org730820b">
+<p>
+現在、IIT Madras で「CS6868: 並行プログラミング」というコースを教えています。このコースの目標は、OCaml 5 を使って並行・並列プログラミングを教え、その後、安全で高速な並列処理のために <a href="https://oxcaml.org/">OxCaml</a> を紹介することです。OCaml 5 の部分はすでに終わり、次は OxCaml を始める予定です。コミュニティとコース教材を共有することが良いと思いました。
+</p>
+
+<p>
+<a href="https://github.com/kayceesrk/cs6868_s26">https://github.com/kayceesrk/cs6868_s26</a>
+</p>
+
+<p>
+CS6868 は OCaml の知識を前提としており、<a href="https://github.com/kayceesrk/cs3100_m20">CS3100: プログラミングパラダイム</a>でカバーしています。このコースには、すべての講義、ノートブック、課題を含む<a href="https://www.youtube.com/watch?v=9R8Oim7YU20&amp;list=PLt0HgEXFOHdkE-NTs87s7QjwYwqeihb-D">YouTube プレイリスト</a>があります。
+</p>
+
+<p>
+CS6868 では、並列性の基礎、線形化可能性による正確性の推論、スピンロック・ミューテックス・条件変数を通じた並列プログラミング、メモリ整合性モデル、パフォーマンスの基礎とノンブロッキングデータ構造（ロックフリー連結リスト、キュー、スタック）を構築します。ここでは、<a href="https://shop.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1">The Art of Multiprocessor Programming</a> という書籍に密接に従っています。すべてのコードは OCaml 5 で書き直されています。書籍の内容に加え、コースでは OCaml の緩和メモリモデルもカバーしています。また、<a href="https://github.com/ocaml-multicore/multicoretests/">qcheck-lin と qcheck-stm</a> を使った並行プロパティベーステストや、<a href="https://ocaml.org/manual/5.3/tsan.html">TSAN を使ったデータ競合検出</a>など、OCaml 固有のツールも相当量カバーしています。
+</p>
+
+<p>
+その後、<a href="https://xavierleroy.org/control-structures/">Control structures in programming languages: from goto to algebraic effects</a> の特定の部分に従って、エフェクトハンドラーの基礎をカバーします。そして、軽量スレッド、バッファードチャネル、選択的通信（<a href="https://en.wikipedia.org/wiki/Concurrent_ML">Concurrent ML</a> 的な）、ネスト並列プログラミング（<a href="https://github.com/ocaml-multicore/domainslib">domainslib</a> のような）、基本的な非同期IO（<a href="https://github.com/ocaml-multicore/eio">Eio</a> のような）を備えた、本格的な Go 風マルチコア対応並行プログラミングライブラリを構築します。
+</p>
+
+<p>
+コース教材を通じて取り組めば達成可能な<a href="https://github.com/kayceesrk/cs6868_s26/blob/main/project_ideas.md">コースプロジェクト</a>も増えています。コースプロジェクトのアイデアがあればお知らせください。
+</p>
+
+<p>
+このコースは、過去に行った<a href="https://github.com/ocaml-multicore/ocaml-effects-tutorial">多くの</a><a href="https://github.com/ocaml-multicore/ocaml5-parallelism-tutorial">チュートリアル</a><a href="https://github.com/ocaml-multicore/parallel-programming-in-multicore-ocaml">の</a><a href="https://github.com/ocaml-multicore/effects-examples">内容</a>をまとめることを目指しています。フィードバックがあればお知らせください。小さな問題を修正する PR は受け付けますが、現在進行中のコースであるため、大きな PR はおそらく受け付けられません。皆さんが私が作るのと同じくらい楽しんで取り組んでいただけることを願っています。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="8">libinput - Linux 入力デバイス向け OCaml バインディング</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-libinput-ocaml-bindings-for-linux-input-devices/17933/1">https://discuss.ocaml.org/t/ann-libinput-ocaml-bindings-for-linux-input-devices/17933/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgadd89a8" class="outline-3">
+<h3 id="orgadd89a8">Thomas Leonard によるアナウンス</h3>
+<div class="outline-text-3" id="text-orgadd89a8">
+<p>
+<a href="https://github.com/talex5/libinput-ocaml">libinput-ocaml</a>（libinput C ライブラリの OCaml バインディング）の最初のリリースを発表できることを嬉しく思います。
+</p>
+
+<p>
+libinput は、マウス、キーボード、タッチパッドなどにアクセスするために Wayland コンポジターなどのアプリケーションで使用されています。
+</p>
+
+<p>
+<a href="https://roscidus.com/blog/blog/2026/03/28/input-devices/">Linux input devices (with libinput-ocaml)</a> では、Linux での入力デバイスの動作を説明し、このライブラリを使って小さなゲームを作成する方法を示しています：
+</p>
+
+
+<div id="org413e555" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/8/87988f00d0f601de559c15f736118a8928c54664.png" alt="87988f00d0f601de559c15f736118a8928c54664.png" width="80%" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="9">OCaml コンパイラ オフィスアワー</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ocaml-compiler-office-hours/17230/32">https://discuss.ocaml.org/t/ocaml-compiler-office-hours/17230/32</a>
+</p>
+</div>
+
+<div id="outline-container-org2f9f088" class="outline-3">
+<h3 id="org2f9f088">このスレッドの続きとして、gasche によるアナウンス</h3>
+<div class="outline-text-3" id="text-org2f9f088">
+<p>
+4月3日（金）11:00-12:00 UTC（現地時間では [date-range from=2026-04-03T11:00:00 to=2026-04-03T12:00:00 timezone=UTC]）に OCaml コンパイラ オフィスアワーを開催することを提案します。
+</p>
+
+<ul class="org-ul">
+<li><a href="https://notes.irif.fr/ncfgJV9KRRGE5HUxvaKFww#">質問/トピックを準備するための共同パッド</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org8596248" class="outline-2">
+<h2 id="org8596248">過去の CWN</h2>
+<div class="outline-text-2" id="text-org8596248">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://alan.petitepomme.net/cwn/">アーカイブ</a>や<a href="https://alan.petitepomme.net/cwn/cwn.rss">アーカイブの RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> に登録してください。
+</p>
+
+<div class="authorname" id="org81d7d77">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
