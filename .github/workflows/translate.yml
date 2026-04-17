@@ -92,4 +92,4 @@ jobs:
           PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
         run: |
           gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" \
-            --body ":rocket: Preview: https://ocaml-jp.github.io/cwn-ja/pr-preview/pr-${PR_NUMBER}/"
+            --body ":rocket: Preview: https://ocaml.jp/cwn-ja/pr-preview/pr-${PR_NUMBER}/"
