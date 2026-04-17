@@ -1,0 +1,337 @@
+#+OPTIONS: ^:nil
+#+OPTIONS: html-postamble:nil
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: author:nil
+#+HTML_HEAD: <style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+#+HTML_HEAD: <style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+#+TITLE: OCaml Weekly News
+[[file:2026.03.24.html][先週号]] [[file:index.html][上へ]] [[file:2026.04.07.html][次週号]]
+
+こんにちは
+
+2026年3月24日から31日の週のOCaml Weekly Newsをお届けします。
+
+#+TOC: headlines 1
+
+
+* MerlinのSignature-help機能の改善
+:PROPERTIES:
+:CUSTOM_ID: 1
+:END:
+Archive: https://discuss.ocaml.org/t/ann-improve-signature-help-feature-in-merlin/17920/1
+
+** Charlène_Gros が発表しました
+
+
+Taridesの私たちは、Merlinの~signature-help~機能に加えられたいくつかの改善をお知らせできることを大変嬉しく思います！
+
+念のため説明しますと、~signature-help~はMerlinの機能で、関数のシグネチャを表示してアクティブなパラメータをハイライトするものです。エディタでは通常、ツールチップ、フローティングウィンドウ、またはミニバッファに表示されます。たとえば、以下の画像はVSCodeにおける関数~exec_prog~の~signature-help~を示しています。
+
+#+attr_html: :width 80%
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/4/46e99c5c69bab991b8dd6a6a7494db5c2f32e07b.png
+
+signature-helpコマンドの実装にはいくつかの問題点があり、それらが修正されました。これらの修正により、機能がより使いやすくなります。一部の改善はすでに最新のMerlinおよびocaml-lspのリリースに含まれており、残りは次のリリースに含まれる予定です。
+
+改善内容：
+
+- Merlinは関数のパラメータ上でのみ~signature-help~情報を表示するようになり、関数名では表示されなくなりました。
+- ~signature-help~はアクティブなパラメータに対してのみ関数情報を表示するようになり、最後のパラメータの後に最初のパラメータに戻ってハイライトするループがなくなりました。
+- ~let .. in~バインディングの内部で使用された場合、関数呼び出しの後に~in~がまだ書かれていなくても~signature-help~がトリガーされるようになりました。
+- アクティブなパラメータがオプショナルパラメータの書き込みを開始すると、オプショナルパラメータが検出されてハイライトされるようになりました。
+      
+
+
+
+* フィードバック募集：OCaml Users Survey 2026の質問事項について
+:PROPERTIES:
+:CUSTOM_ID: 2
+:END:
+Archive: https://discuss.ocaml.org/t/feedback-wanted-upcoming-ocaml-users-survey-2026-questions/17925/1
+
+** Sabine Schmaltz が発表しました
+
+
+皆さん、こんにちは。
+OCSFを代表してOCaml Users Survey 2026を準備しており、最終化する前にアンケートの質問事項についてご意見をいただきたいと思います。
+
+提案された質問リストはこちらでご確認ください：[[https://hackmd.io/3i-d6wgYRy2uVhqIVbxzNg][Proposed OCaml Users Survey Questions 2026]]
+参考として、[[https://hackmd.io/@sabine-s/BkVG6DWibg][2023年のアンケートからの変更点のサマリー]]もあります。
+
+*** 2023年のアンケートからの変更点サマリー
+
+新しいセクション：
+- AI/LLM Usage（4問）- OCaml開発にAI/LLMツールを使用していますか？どれを？何のために？
+- Debugging & Profiling（3問）- どのようなデバッグアプローチとツールを使用していますか？最大の課題は何ですか？（2023年の自由記述回答でデバッグの難しさが頻繁に言及されたことが動機です。）
+
+新しい単独質問：
+- コミュニティの規模の希望（「コミュニティがこうあってほしい...」）
+- 使用しているドキュメントツール（odoc、ocamldocなど）
+- ツールとパッケージリポジトリのフィードバックのための専用の自由記述欄
+
+削除された質問（10問）- 有用性の低いデータしか得られなかった質問や冗長な質問。最大プロジェクトサイズ、リリーススケジュールの満足度、ソースホスティングプラットフォーム、Webデプロイプラットフォーム、「OCamlのツールは快適なワークフローを提供している」、「OCamlライブラリは十分に安定している」、「OCamlで書かれたソフトウェアは保守が容易だ」、言語機能のウィッシュリスト（エフェクトハンドラーはOCaml 5でリリース済み）などが含まれます。
+
+修正された質問 - エコシステムの進化を反映した新しい回答オプション：OxCaml、Zig、Helix、Zed、WebAssemblyターゲット、dune package management、Nixベースのビルド、Bluesky、「burning desires」セクションのAI/LLM関連オプション。古いコンパイラバージョン（4.02〜4.06）は「≤4.07」にまとめられました。ベンチマークツールはカテゴリではなく具体的な名前で列挙されるようになりました。
+
+以下についてのフィードバックをお待ちしています：
+
+- 追加または削除すべき質問はありますか？
+- 欠けている回答オプションはありますか？
+- OCamlコミュニティにとって重要な新しいトピックで、質問すべきものはありますか？
+- 58問というアンケートの長さは長すぎますか、短すぎますか、それともちょうど良いですか？
+
+アンケートをできるだけ有用なものにするためにご協力いただき、ありがとうございます！:two_hump_camel: :orange_heart:
+
+Sabine
+
+PS: [[https://discuss.ocaml.org/t/ann-ocaml-users-survey-2023-results/17926][OCaml Users Survey 2023の結果]]もご覧ください！
+      
+
+
+
+* OCaml Users Survey 2023 の結果
+:PROPERTIES:
+:CUSTOM_ID: 3
+:END:
+Archive: https://discuss.ocaml.org/t/ann-ocaml-users-survey-2023-results/17926/1
+
+** Sabine Schmaltz が発表しました
+
+
+皆さん、こんにちは。
+
+OCSFを代表して、OCaml Users Survey 2023の回答に関する（遅ればせながらの）レポートを発表できることを嬉しく思います。評価の遅延についてお詫び申し上げます。今後は年に一度、確実にOCaml Users Surveyを実施することをお約束します。
+
+前置きはさておき、レポートへのリンクはこちらです：
+
+https://ocaml-sf.org/docs/2023/survey-results.html
+
+レポートへのフィードバック、回答や数値に関する議論（解釈や意見の共有）、またはその他のコメントをお待ちしています。
+
+OCamlとそのエコシステムの現状をより深く理解するためにアンケートに参加していただいた皆さんに感謝します！:orange_heart: :two_hump_camel:
+
+Sabine
+
+PS: 2026年のOCaml Users Surveyが近づいています。[[https://discuss.ocaml.org/t/feedback-wanted-upcoming-ocaml-users-survey-2026-questions/17925/1][2026年のアンケート質問変更に関するフィードバックスレッド]]へのご意見を大変お待ちしています。
+      
+
+
+
+* ortac-0.8 Domainsを使った仕様駆動テスト
+:PROPERTIES:
+:CUSTOM_ID: 4
+:END:
+Archive: https://discuss.ocaml.org/t/ann-ortac-0-8-specification-driven-testing-with-domains/17927/1
+
+** Nicolas Osborne が発表しました
+
+
+こんにちは！Taridesの私たちは、仕様駆動テストのためのortac-0.8.0のリリースを発表できることをとても興奮しています！
+
+~ortac~は[[https://github.com/ocaml-gospel][Gospel]]エコシステムのツールです。核心的なアイデアは、Gospelの仕様言語のサブセットをOCamlコードに変換し、これらの変換を使ってランタイムチェックを生成することです。
+
+~ortac~はプラグインアーキテクチャを採用しています。opam経由でインストールできます：
+
+#+begin_example
+$ opam install ortac-wrapper    # install the wrapper plugin for runtime assertion checking, with all the other necessary parts (runtime and cli)
+$ opam install ortac-qcheck-stm # install the qcheck-stm plugin that generates QCheck-STM tests, with all the other necessary parts (runtime and cli)
+$ opam install ortac-dune       # install the dune plugin to generate dune boilerplate to use the two previous plugins
+#+end_example
+
+このリリースは、Ortac/QCheck-STMがQCheck-STMテストフレームワークのより多くの機能、すなわち並列コンテキストでのテストとコマンド生成の柔軟性を活用できるようにすることに焦点を当てています。
+
+動作の仕組みについては[[https://ocaml-gospel.github.io/ortac/ortac-qcheck-stm/index.html][ドキュメント]]をご覧ください。
+
+並列コンテキストでのテストについては、バージョン0.2でのバグレポート機能の導入とバージョン0.4でのSUT返却関数のカバレッジにより、並列コンテキストでのQCheck-STMテストの生成が（手書きのQCheck-STMテストでは非常に簡単であるにもかかわらず）容易ではなくなっていました。これが修正されました！
+
+バグレポートの情報は、実際のテスト（実際の実行結果とモデルからの結果を比較する）を行う関数で部分的に収集されます。つまり、並列テストにバグレポート機能を実装するには、QCheck-STM+Domainsの核心であり、テストを実行する際に信頼している関数（いわばTrusted Testing Base）を書き直す必要があります。同じ動作が維持されること、生成されたテストが対応する手書きのQCheck-STMテストと同じセマンティクスを持つことを確認するために、ロジックの保存が明らかになるよう情報収集を導入した[[https://github.com/ocaml-gospel/ortac/commit/ef8d598ccbd6c9987648e201ebffb6abb5a3d610][コミット]]のdiffを最小化しました（最終的には、人間によるレビューが信頼の根拠です）。
+
+バージョン0.4以降、SUT返却関数はテストに含まれています。新しく作成されたSUTは、次の呼び出しの引数として選択されるSUTのストアに追加されます。ここでの問題は、並列コンテキストでこれらをどう扱うかです：並列ブランチで作成されたSUTをグローバルストアに追加することはできません。ドメイン間で共有されることを想定していないからです。シンプルな設計を選択し、並列コンテキストに入ったら新しく作成されたSUTのストアへの保存を停止します。これらのSUT返却関数は、テストのシーケンシャル部分（シーケンシャルモードおよび/または並列モードのシーケンシャルプレフィックス）で引き続き完全にテストされますのでご安心ください。
+
+QCheck-STMテストフレームワークの強みの一つは、コマンドジェネレーターの柔軟性です。この柔軟性は~QCheck.Gen~APIそのものと、QCheck-STMコマンドジェネレーターが現在のモデルの状態にパラメータ化されているという事実から来ています（キーバリューストアの~lookup~コマンドの生成を考えてみてください。実際に値が関連付けられているキーを検索する呼び出しを生成するチャンスを得たいはずです）。自動生成されたコマンドジェネレーターはやや素朴になりがちです。この素朴さを緩和するために、ユーザーが以下を提供できるようにしています：
+
+- 特定のコマンド生成に適用するウェイト。例えば、[[https://ocaml-multicore.github.io/saturn/saturn/Saturn/Work_stealing_deque/index.html#val-push][work stealing queue]]でキューを所有していないドメインでの~push~コマンドの生成を無効化するのに有用です。
+- コマンドジェネレーターがモデルの現在の状態にパラメータ化されていることを活用したい場合の完全なコマンドジェネレーター実装。
+
+ハッピーテスティング！
+      
+
+
+
+* OCaml 5.5.0 の第3アルファリリース
+:PROPERTIES:
+:CUSTOM_ID: 5
+:END:
+Archive: https://discuss.ocaml.org/t/third-alpha-release-for-ocaml-5-5-0/17928/1
+
+** octachron が発表しました
+
+
+OCaml 5.5.0の安定化作業の進展に伴い、OCaml 5.5.0の第3アルファリリースを発表できることを嬉しく思います。
+
+欠番となった第2アルファは、再配置可能なコンパイラとブートストラップの間の予期せぬ相互作用により未リリースとなりました。この問題は第3アルファで修正されています。
+
+この重要な変更に加えて、第1アルファとの比較でこの新しいアルファリリースには以下が含まれています：
+
+- コード生成のバグ修正が2件
+- 型システムのバグ修正が3件
+- 標準ライブラリのバグ修正が1件
+
+（完全なリストについては以下のChangelogをご覧ください。）
+
+全体的に、5.5.0の安定化は順調に進んでいるようで、ほとんどの開発ツールのアルファバージョンが利用可能です。そのため、4月初旬にベータリリースに切り替える予定です。
+
+より詳しくは、エコシステムの安定化の進捗状況は[[https://github.com/ocaml/opam-repository/issues/29463][opamの5.5.0 readiness meta-issue]]で追跡されています。
+
+このアルファリリース用のコンパニオンアルファopamリポジトリも利用可能です：
+#+begin_example
+$ opam repo add alpha git+https://github.com/kit-ty-kate/opam-alpha-repository.git
+#+end_example
+これにはOCaml 5.5.0向けに更新中のopamパッケージの進行中のアルファリリースが含まれています。
+
+最終リリースは引き続き5月から6月の間を予定しています。
+
+バグを見つけた場合は、[[https://github.com/ocaml/ocaml/issues][issue tracker]]にご報告ください。
+
+新機能とバグ修正の完全なリストに興味がある方は、更新された[[https://github.com/ocaml/ocaml/blob/5.5/Changes][OCaml 5.5.0のchangelog]]をご覧ください。
+
+Happy hacking,
+Florian Angeletti（OCamlチームを代表して）
+
+*** 第1アルファからの変更点
+
+**** コンパイラ成果物の修正
+
+- ブートストラップとの互換性が向上した再配置可能なコンパイラ
+- js_of_ocamlが報告したcompiler-libs関連の問題を修正するためのブートストラップ
+
+**** コード生成のバグ修正
+
+- [[https://github.com/ocaml/ocaml/issues/14583][#14583]]: 特定の状況でコンパイルの誤りを引き起こす可能性があった線形スキャンスピルヒューリスティックのバグを修正。
+  (Nicolás Ojeda Bär、Vincent Lavironによるレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/13693][#13693]], [[https://github.com/ocaml/ocaml/issues/14514][#14514]]: s390x: PLTの遅延バインディングトランポリンがFPRをOCamlのファイバースタックに保存することで引き起こされるlibasmrun_shared.soによるヒープ破損を修正。s390xコードエミッターでPLT呼び出しをGOT間接呼び出しに置き換え。
+  (Zane Hambly、David AllsoppとXavier Leroyによるレビュー)
+
+**** 型システムのバグ修正
+
+- [[https://github.com/ocaml/ocaml/issues/14434][#14434]], [[https://github.com/ocaml/ocaml/issues/14652][#14652]]: check_counter_example_patを多相型から保護し、型の健全性を回復。
+  (Stephen DolanとJacques Garrigue、Alistair O'Brienによる報告とレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/14603][#14603]], [[https://github.com/ocaml/ocaml/issues/14604][#14604]]: 多相型とアンボックスドコンストラクタの混合時のCtype.applyの失敗を回避。
+  (Gabriel SchererとStefan Muenzel、Brandon Strideによる報告、
+   Florian Angelettиによるレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/14626][#14626]], [[https://github.com/ocaml/ocaml/issues/14675][#14675]]: オプショナル引数が消去不可能かどうかを決定する際に、モジュール依存関数を考慮するように。
+  (Alistair O'BrienとFlorian Angeletti、Gabriel Schererによるレビュー)
+
+**** 標準ライブラリの修正
+
+- [[https://github.com/ocaml/ocaml/issues/14635][#14635]]: ~caml_floatarray_gather~のバグを修正。これにより~Float.Array.sub~、~Float.Array.append~、~Float.Array.concat~（空の場合）の結果が~[||]~と等しくならない問題を解決。
+  (Marc Lasson、Gabriel Schererによるレビュー)
+
+**** ドキュメントの更新
+
+- [[https://github.com/ocaml/ocaml/issues/13590][#13590]]: Windows上でのランタイムによる~*~および~?~ワイルドカードのコマンドライン自動展開を文書化。
+  (Benjamin Sigonneau、Nicolás Ojeda Bärによるレビュー)
+      
+
+
+
+* ocaml-openapi-gen 0.1.0、ocaml-forgejo
+:PROPERTIES:
+:CUSTOM_ID: 6
+:END:
+Archive: https://discuss.ocaml.org/t/ann-ocaml-openapi-gen-0-1-0-ocaml-forgejo/17929/1
+
+** Zoggy が発表しました
+
+
+こんにちは。
+
+[[https://www.openapis.org/][openapis]]仕様からコードを生成するツール[[https://zoggy.frama.io/openapi/][ocaml-openapi-gen]]の最初のリリースを行いました。
+
+~openapi_gen~パッケージは私の[[https://framagit.org/zoggy/opam-repository][個人opamリポジトリ]]から利用可能です。
+
+このツールは[[https://zoggy.frama.io/ocaml-forgejo/][ocaml-forgejo]]のコードを生成するために使用されます。ocaml-forgejoはCodebergやその他のforgejo系プラットフォームと[[https://codeberg.org/api/swagger#/][提供されているREST API]]を通じてやり取りするためのライブラリです。
+
+生成されたインターフェースは将来的に変更される可能性があります。
+      
+
+
+
+* CS6868 並行プログラミング — コース資料
+:PROPERTIES:
+:CUSTOM_ID: 7
+:END:
+Archive: https://discuss.ocaml.org/t/ann-cs6868-concurrent-programming-course-materials/17932/1
+
+** KC Sivaramakrishnan が発表しました
+
+
+現在、IIT Madrasで「CS6868: Concurrent Programming（並行プログラミング）」というコースを教えています。このコースの目標は、OCaml 5を使って並行・並列プログラミングを教え、その後、安全で高速な並列処理のために[[https://oxcaml.org/][OxCaml]]を紹介することです。OCaml 5の部分は済みましたので、次はOxCamlを始める予定です。コース資料をコミュニティと共有するのが良いと思いました。
+
+https://github.com/kayceesrk/cs6868_s26
+
+CS6868はOCamlの知識を前提としており、それは[[https://github.com/kayceesrk/cs3100_m20][CS3100: Paradigms of Programming]]でカバーしています。このコースには全講義のノートブックと課題を含む[[https://www.youtube.com/watch?v=9R8Oim7YU20&list=PLt0HgEXFOHdkE-NTs87s7QjwYwqeihb-D][YouTubeプレイリスト]]があります。
+
+CS6868は並列性の基礎、線形化可能性による正確性の推論、スピンロック・ミューテックス・条件変数・メモリ一貫性モデルによる並列プログラミング、パフォーマンスの基礎とノンブロッキングデータ構造（ロックフリー連結リスト、キュー、スタック）を扱います。ここでは、コースは[[https://shop.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1][The Art of Multiprocessor Programming]]という本に密接に従っています。すべてのコードはOCaml 5で書き直されています。本のコンテンツに加え、コースではOCamlの緩和メモリモデルもカバーしています。また、[[https://github.com/ocaml-multicore/multicoretests/][qcheck-linとqcheck-stm]]を使った並行プロパティベーステストや、[[https://ocaml.org/manual/5.3/tsan.html][TSANを使ったデータレース検出]]など、OCaml固有のツールも相当量カバーしています。
+
+その後、[[https://xavierleroy.org/control-structures/][Control structures in programming languages: from goto to algebraic effects]]の特定の部分に従って、エフェクトハンドラーの基礎をカバーします。続いて、軽量スレッド・バッファードチャンネル・選択的通信（[[https://en.wikipedia.org/wiki/Concurrent_ML][Concurrent ML]]の流れで）・ネスト並列プログラミング（[[https://github.com/ocaml-multicore/domainslib][domainslib]]のように）・基本的な非同期IO（[[https://github.com/ocaml-multicore/eio][Eio]]のように）を備えた本格的なGoのようなマルチコア対応並行プログラミングライブラリを構築します。
+
+[[https://github.com/kayceesrk/cs6868_s26/blob/main/project_ideas.md][コースプロジェクト]]のコレクションも増えており、コース資料を通読すれば実施可能なものです。コースプロジェクトのアイデアがあればお知らせください。
+
+このコースは、過去に行った[[https://github.com/ocaml-multicore/ocaml-effects-tutorial][多くの]][[https://github.com/ocaml-multicore/ocaml5-parallelism-tutorial][チュートリアル]][[https://github.com/ocaml-multicore/parallel-programming-in-multicore-ocaml][から]][[https://github.com/ocaml-multicore/effects-examples][のコンテンツ]]をまとめようとしています。フィードバックがあればお知らせください。小さな問題を修正するPRは受け付けますが、進行中のコースであるため、大きなPRは受け付けられない可能性が高いです。作成するのと同じくらい楽しんで取り組んでいただければ幸いです。
+      
+
+
+
+* libinput - Linuxの入力デバイス向けOCamlバインディング
+:PROPERTIES:
+:CUSTOM_ID: 8
+:END:
+Archive: https://discuss.ocaml.org/t/ann-libinput-ocaml-bindings-for-linux-input-devices/17933/1
+
+** Thomas Leonard が発表しました
+
+
+[[https://github.com/talex5/libinput-ocaml][libinput-ocaml]]（libinput CライブラリのOCamlバインディング）の最初のリリースを発表できることを嬉しく思います。
+
+libinputは、Waylandコンポジターなどのアプリケーションがマウス、キーボード、タッチパッドなどにアクセスするために使用されます。
+
+[[https://roscidus.com/blog/blog/2026/03/28/input-devices/][Linux input devices (with libinput-ocaml)]]では、Linuxでの入力デバイスの仕組みを説明し、このライブラリを使って小さなゲームを作る方法を示しています：
+
+#+attr_html: :width 80%
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/8/87988f00d0f601de559c15f736118a8928c54664.png
+      
+
+
+
+* OCamlコンパイラオフィスアワー
+:PROPERTIES:
+:CUSTOM_ID: 9
+:END:
+Archive: https://discuss.ocaml.org/t/ocaml-compiler-office-hours/17230/32
+
+** このスレッドの続きとして、gasche が発表しました
+
+
+4月3日（金）、UTC 11:00〜12:00（現地時間では[date-range from=2026-04-03T11:00:00 to=2026-04-03T12:00:00 timezone=UTC]）にOCamlコンパイラオフィスアワーを開催することを提案します。
+
+- [[https://notes.irif.fr/ncfgJV9KRRGE5HUxvaKFww#][質問・トピックを準備するための共同パッド]]
+      
+
+
+
+* 過去のCWN
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+CWNを見逃した場合は、[[mailto:alan.schmitt@polytechnique.org][メッセージを送っていただければ]]メールでお届けします。また、[[https://alan.petitepomme.net/cwn/][アーカイブ]]や[[https://alan.petitepomme.net/cwn/cwn.rss][アーカイブのRSSフィード]]をご覧いただくこともできます。
+
+毎週メールで受け取りたい場合は、[[https://sympa.inria.fr/sympa/info/caml-list][caml-list]]を購読してください。
+
+#+BEGIN_authorname
+[[https://alan.petitepomme.net/][Alan Schmitt]]
+#+END_authorname
