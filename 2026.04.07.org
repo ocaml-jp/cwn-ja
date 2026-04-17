@@ -15,7 +15,7 @@
 #+TOC: headlines 1
 
 
-* restricted 2.0.0 プログラムがアクセスできるシステム操作とファイルシステムの範囲を制限する
+* restricted 2.0.0 — プログラムがアクセスできるシステム操作とファイルシステムの範囲を制限する
 :PROPERTIES:
 :CUSTOM_ID: 1
 :END:
@@ -26,14 +26,14 @@ Archive: https://discuss.ocaml.org/t/ann-restricted-2-0-0-limit-which-system-ope
 
 こんにちは、
 
-[[https://opam.ocaml.org/packages/restricted/][restricted]] の新バージョンを発表できることを嬉しく思います。
+[[https://opam.ocaml.org/packages/restricted/][restricted]] の新バージョンをお知らせできることを嬉しく思います。
 
-このライブラリを使うと、プログラムがアクセスできるシステム操作とファイルシステムの範囲を制限できます。プログラムのできるだけ早い段階で呼び出すことで、以降のコードが権限を縮小した状態で実行されます。現在、実際に強制される制限が実装されているオペレーティングシステムは以下の通りです：
+このライブラリを使うと、プログラムがアクセスできるシステム操作とファイルシステムの範囲を制限できます。プログラムのできるだけ早い段階で呼び出すことで、それ以降のコードが縮小された権限で実行されるようになります。現在、実際に強制される制限は以下のオペレーティングシステムで実装されています：
 
 - OpenBSD
 - Linux（ファイルシステムビューのみ）
 
-他のオペレーティングシステムでも、[[https://removewingman.codeberg.page/restricted/][restricted]] を使ってプログラムが必要とする権限を文書化することができます。ユーザーは [[https://justine.lol/pledge/][pledge on Linux]] などのツールを使って、プログラムがこれらの約束を守っているかどうかをテストできます。ぜひご活用ください :slight_smile:
+他のオペレーティングシステムでも、[[https://removewingman.codeberg.page/restricted/][restricted]] を使用してプログラムが必要とする権限を文書化できます。ユーザーはその後、[[https://justine.lol/pledge/][pledge on Linux]] などのツールを使って、プログラムがこれらの宣言を遵守しているかテストできます。ぜひお楽しみください :slight_smile:
 
 - [[https://opam.ocaml.org/packages/restricted/restricted.1.2.0/][opam]]
 - [[https://removewingman.codeberg.page/restricted/][api]]
@@ -43,13 +43,13 @@ Archive: https://discuss.ocaml.org/t/ann-restricted-2-0-0-limit-which-system-ope
 
 CHANGELOG:
 
-- テスト環境：
-  * x86_64 openbsd（16/16 テスト合格）
-  * x86_64-alpine-linux（Landlock ABI version: 7）（12テスト中4テスト合格：file_read_unv, file_write_unv, file_create_unv_linux, file_cwrr_unv_linux）
+- テスト済み環境：
+  * x86_64 openbsd（16/16 テスト通過）
+  * x86_64-alpine-linux（Landlock ABI version: 7）（4/12 テスト通過：file_read_unv, file_write_unv, file_create_unv_linux, file_cwrr_unv_linux）
 
 *** 追加
 
-- API: exec の promises と accesses をオプションに変更
+- API: exec promises および accesses をオプション化
 - OpenBSD: exec promises
 
 *** 削除
@@ -59,7 +59,7 @@ CHANGELOG:
 
 
 
-* 求人情報：CNAF（社会保障機関）での Catala コンパイラエンジニア
+* 求人情報：CNAF（社会給付機関）における Catala のコンパイラエンジニア
 :PROPERTIES:
 :CUSTOM_ID: 2
 :END:
@@ -68,7 +68,7 @@ Archive: https://discuss.ocaml.org/t/job-offer-compiler-engineer-for-catala-cnaf
 ** Denis Merigoux によるアナウンス
 
 
-[以下はフランス公共部門の求人であるためフランス語で記載されています]
+[以下はフランス公共部門の求人情報のため、フランス語で記載されています]
 
 *Candidatez ici :* https://www.lasecurecrute.fr/offre-emploi/ingenieur-expert-en-compilation-langages-de-programmation--f-h/normandie/1065497
 
@@ -86,14 +86,14 @@ Archive: https://discuss.ocaml.org/t/job-offer-compiler-engineer-for-catala-cnaf
  Le centre technique Catala a ainsi vocation à produire des contributions open-source sur Catala, mais aussi à répondre aux besoins d'expertise technique du département « Prestations Individuelles et Référentiels Métiers » pour ses projets liés aux moteurs de calcul des prestations sociales.
 #+end_quote
 
-採用された方は Inria の Catala チーム（Louis Gesbert、Vincent Botbol、Romain Primet、そして私）と共に働くことになります！ご質問があれば、お気軽にご連絡ください :slight_smile:
+採用される方は Inria の Catala チーム（Louis Gesbert、Vincent Botbol、Romain Primet、そして私）と一緒に働くことになります！ このポジションについてご質問がある方は遠慮なくご連絡ください :slight_smile:
 
-Catala のコンパイルに関して行われてきたこと・これから行うことの概要はこちら：https://blog.merigoux.ovh/en/2026/02/19/building-proper-pl.html
+Catala のコンパイラに関して行われてきたこと・今後行うことの概要はこちら：https://blog.merigoux.ovh/en/2026/02/19/building-proper-pl.html
       
 
 
 
-* ocgtk 0.1: GTK 4 の OCaml バインディング（プレビューリリース）
+* ocgtk 0.1: GTK 4 向け OCaml バインディング（プレビューリリース）
 :PROPERTIES:
 :CUSTOM_ID: 3
 :END:
@@ -102,66 +102,66 @@ Archive: https://discuss.ocaml.org/t/ann-ocgtk-0-1-ocaml-bindings-for-gtk-4-prev
 ** Chris Armstrong によるアナウンス
 
 
-GTK 4 の OCaml バインディングである ocgtk の最初のプレビューリリース（v0.1-preview0）を発表できることを嬉しく思います。
+GTK 4 向け OCaml バインディングである ocgtk の最初のプレビューリリース（v0.1-preview0）をお知らせできることを嬉しく思います。
 
-*** ocgtk とは？
+*** これは何ですか？
 
-[[https://github.com/chris-armstrong/ocgtk][ocgtk]] は GTK 4 ウィジェットツールキットおよび関連ライブラリ（GDK、GIO、Pango、GdkPixbuf、GSK、Graphene、Cairo）の OCaml バインディングを提供します。現時点では OCaml >=5.3 を対象としています。
+[[https://github.com/chris-armstrong/ocgtk][ocgtk]] は、GTK 4 ウィジェットツールキットおよびその関連ライブラリ（GDK、GIO、Pango、GdkPixbuf、GSK、Graphene、Cairo）向けの OCaml バインディングを提供します。現時点では OCaml >=5.3 を対象としています。
 
-長年使われてきた GTK 3 バインディングライブラリである lablgtk3 にインスパイアされ、コアとなる共通コードや多くの設計思想を取り入れています。ただし API には互換性がありません。lablgtk3 のバインディングは主に手書きであるのに対し、ocgtk はコードジェネレーターを使用して GObject Introspection（GIR）定義ファイルを読み込み、C スタブと OCaml ラッパーの両方を生成します。これにより、バインディングのカバレッジは手書きの労力ではなく GIR 定義に追従し、生成されたコードは一貫した手続き型の構造に従います。
+lablgtk3（長年使われてきた GTK 3 バインディングライブラリ）に触発されており、いくつかのコアコードと多くの設計思想を参考にしています。ただし、API には互換性がありません。lablgtk3 のバインディングが主に手書きであるのに対し、ocgtk は GObject Introspection（GIR）定義ファイルを読み込んで C スタブと OCaml ラッパーの両方を生成するコードジェネレーターを使用しています。これにより、バインディングのカバレッジは手書きの作業量ではなく GIR 定義に追随し、生成されたコードは一貫した手続き型の構造に従っています。
 
-*ツーリングに関する注記*：コードジェネレーター自体は LLM の多大な支援を受けて開発されました。ただし、実際のライブラリを構成する C スタブと OCaml モジュールという出力は、LLM によって書かれたものではなく、GIR 定義からプログラム的に生成されたものです。
+*ツーリングに関する注意*：コードジェネレーター自体は LLM の大きな支援を受けて開発されました。ただし、実際のライブラリを構成する C スタブと OCaml モジュールという出力は、LLM ではなく GIR 定義からプログラム的に生成されています。
 
-*** 実装済みの機能
+*** 実装済みの内容
 
 - GTK 4、GDK、GIO、Pango、GdkPixbuf、GSK、Graphene、Cairo のバインディング
 - クラス、レコード、列挙型、ビットフィールド
-- コンストラクタ、メソッド、プロパティ
-- シグナル（戻り値やパラメーターなし）
-- 動作するサンプル：GTK 4 電卓アプリケーション
+- コンストラクター、メソッド、プロパティ
+- シグナル（戻り値なし・パラメーターなし）
+- 動作するサンプル：GTK 4 の電卓アプリケーション
 
-*** 未実装の機能
+*** 未実装の内容
 
-これは最初のマイルストーンであり、本番対応リリースではありません。まだサポートされていない重要な機能がいくつかあります：
+これは最初のマイルストーンであり、プロダクション対応のリリースではありません。いくつかの重要な機能はまだサポートされていません：
 
-- *インターフェース*：GObject インターフェースはまだサポートされていません。これは見た目以上に広範な影響があります。インターフェース型そのものが存在しないだけでなく、インターフェースをパラメーターとして受け取ったりインターフェース型を返したりするクラスのメソッドも除外されています。このため、それ以外はサポートされているクラスでも一部のメソッドがバインディングから欠落することがあります。
-- *コールバック*：シグナル以外の OCaml コールバックを引数として受け取る関数はまだサポートされていません。これにより、多くの非同期 GIO API や一部の GTK パターンの使用が制限されます。
-- *フリー関数*：クラスに属さないトップレベル関数はまだ生成されていません。そのため一部のユーティリティ API が利用できません。
-- *不透明でないレコードフィールドへのアクセス*：不透明でない GLib/GDK レコードのフィールドはまだ直接読み取れません。
-- *複数パラメーターのシグナル*：パラメーターがゼロで戻り値のないシグナルのみサポートされており、複雑なシグネチャを持つシグナルは暗黙的にスキップされます。
-- *GLib 型*：ほとんどの GLib 型はバインドされていないため、リスト、バイト配列、GVariant（DBus で多用される）を使用するいくつかの有用な API が利用できません。
+- *インターフェース*：GObject インターフェースはまだサポートされていません。これは見た目以上に広範な影響があります。インターフェース型自体が存在しないだけでなく、インターフェースをパラメーターとして受け取ったり返したりするクラス上のメソッドも除外されます。つまり、その他の点ではサポートされているクラスの一部のメソッドがバインディングに含まれない場合があります。
+- *コールバック*：シグナル以外で OCaml のコールバックを引数として受け取る関数はまだサポートされていません。これにより、多くの非同期 GIO API や一部の GTK パターンの使用が制限されます。
+- *フリー関数*：クラスに紐づかないトップレベル関数はまだ生成されません。そのため、一部のユーティリティ API が利用できません。
+- *非 opaque なレコードフィールドへのアクセス*：非 opaque な GLib/GDK レコードのフィールドはまだ直接読み取ることができません。
+- *複数パラメーターのシグナル*：ゼロパラメーターで戻り値なしのシグナルのみサポートされており、複雑なシグネチャを持つシグナルは無視されます。
+- *GLib 型*：ほとんどの GLib 型がバインドされていないため、リスト、バイト配列、GVariant（DBus で多用される）を使用するいくつかの有用な API が利用できません。
 
-これらの制限により、基本的な GTK アプリケーションは構築できますが、より高度なウィジェットの使用、非同期 I/O、またはインターフェースに大きく依存する API では壁にぶつかることが予想されます。
+これらの欠点により、基本的な GTK アプリケーションは構築できますが、より高度なウィジェットの使用、非同期 I/O、またはインターフェースに大きく依存する API では壁にぶつかることが予想されます。
 
-上記の多くに対応するための大まかな計画を記載した [[https://github.com/chris-armstrong/ocgtk/blob/main/ROADMAP.md][ROADMAP.md]] があります。
+上記の多くに対処するための大まかな計画を記載した [[https://github.com/chris-armstrong/ocgtk/blob/main/ROADMAP.md][ROADMAP.md]] があります。
 
 *** ドキュメント
 
-API リファレンスドキュメントは現在不十分な状態です。GIR 定義からドキュメントを正確に生成することはこのプロジェクトにおいて未解決の問題であるため、現時点では生成されたモジュールのほとんどはドキュメント化されていません。当面は GTK 4 のドキュメントが各バインディングの対応を理解するための最良のリファレンスであり、リポジトリ内のサンプル（特に非自明な GTK 4 アプリケーションを示す電卓サンプル）が実際の使用方法を示しています。
+API リファレンスドキュメントは現時点では不十分です。GIR 定義から正確なドキュメントを生成することはこのプロジェクトにとってまだ未解決の問題であるため、生成されたモジュールはほとんどドキュメント化されていません。当面は、GTK 4 のドキュメントが各バインディングに対応するものを理解するための最良のリファレンスです。リポジトリ内のサンプル、特に重要でない GTK 4 アプリケーションを示す電卓サンプルが実際の使用方法を示しています。
 
 *** 安定性
 
-このコードは本番環境でテストされていません。生成されたバインディングは広い範囲をカバーしていますが、テストカバレッジはまだ包括的ではありません。現段階では本番環境や安全性が重要なコンテキストでの使用はお勧めしません。コメントやマージリクエストは歓迎します。
+このコードはプロダクション環境でテストされていません。生成されたバインディングは広い表面積をカバーしていますが、テストカバレッジはまだ包括的ではありません。この段階では、プロダクションや安全性が重要なコンテキストでの使用は避けることをお勧めします。コメントや MR は歓迎します。
 
 このコードは Linux 環境以外ではテストされていません。
 
 *** インストールと使用方法
 
-現時点ではソースコードをダウンロードしてピンしてください（opam リリースの準備を進めていますが、クロスプラットフォームの問題の解決に時間がかかっています。利用可能になり次第、こちらのコメントで更新します）。
+現時点ではソースコードをダウンロードしてピンしてください（opam リリースの準備中です。クロスプラットフォームの問題を整理するのに時間がかかっているため、利用可能になり次第コメントで更新します）。
 
-バインディングは GTK 4.14.5（Ubuntu 24.04）に対して生成されています。古いバージョンをお使いの場合、理論上はコンパイルできますが、お使いのバージョンで利用できない API を使用するとランタイムエラーが発生します。
+バインディングは GTK 4.14.5（Ubuntu 24.04）に対して生成されています。古いバージョンをお持ちの場合、理論上はコンパイルできますが、お使いのバージョンで利用できない API についてはランタイムエラーが発生します。
 
-1. リポジトリをダウンロード：https://github.com/chris-armstrong/ocgtk（ここで言及した内容については v0.1-preview0 タグを使用できます）
-2. 各サブディレクトリ内の conf-gtk4 および ocgtk パッケージをピン
+1. リポジトリをダウンロードする：https://github.com/chris-armstrong/ocgtk（ここで記載している内容を取得するには v0.1-preview0 タグを使用できます）
+2. それぞれのサブディレクトリにある conf-gtk4 と ocgtk パッケージをピンする
    1. ~opam pin conf-gtk~
    2. ~opam pin ocgtk~
-3. ~opam install ocgtk~ を実行
+3. ~opam install ocgtk~ を実行する
 
-各ライブラリは ocamlfind レベルでは ~ocgtk.<libname>~ として公開されています。例えば dune ファイルに ~ocgtk.gtk~ や ~ocgtk.gdk~ を追加し、~opam~ / ~dune-project~ ファイルでは ~ocgtk~ に依存するようにしてください。
+各ライブラリは ocamlfind レベルで ~ocgtk.<libname>~ として公開されています。例えば、dune ファイルに ~ocgtk.gtk~ や ~ocgtk.gdk~ を追加し、~opam~ / ~dune-project~ ファイルでは ~ocgtk~ に依存します。
 
-*ソースとイシュートラッカー*：https://github.com/chris-armstrong/ocgtk
+*ソースコードと Issue トラッカー*：https://github.com/chris-armstrong/ocgtk
 
-フィードバックやバグ報告を歓迎します。
+フィードバックやバグレポートをお待ちしています。
       
 
 
@@ -175,13 +175,13 @@ Archive: https://discuss.ocaml.org/t/ann-out-channel-redirect-0-1-redirect-and-c
 ** Hhugo によるアナウンス
 
 
-[[https://github.com/hhugo/out-channel-redirect][out-channel-redirect]] の最初のリリースを発表できることを嬉しく思います。これは out_channel に書き込まれた出力をリダイレクト・キャプチャするためのライブラリです。
+[[https://github.com/hhugo/out-channel-redirect][out-channel-redirect]] の最初のリリースをお知らせできることを嬉しく思います。これは out_channel に書き込まれた出力をリダイレクトおよびキャプチャするためのライブラリです。
 
 *** 機能：
 
-- 任意の out_channel を文字列にキャプチャ（stdout と stderr の便利なショートハンドあり）
-- あるチャネルを別のチャネルにリダイレクト
-- ネイティブ（dup/dup2 経由）、JavaScript（js_of_ocaml）、WebAssembly（wasm_of_ocaml）で動作
+- 任意の out_channel を文字列にキャプチャ（stdout と stderr 用の便利な省略記法も含む）
+- あるチャネルを別のチャネルへリダイレクト
+- native（dup/dup2 経由）、JavaScript（js_of_ocaml）、WebAssembly（wasm_of_ocaml）で動作
 - リダイレクトのライフタイムを手動で制御するエキスパート API
 
 *** インストール：
@@ -189,7 +189,7 @@ Archive: https://discuss.ocaml.org/t/ann-out-channel-redirect-0-1-redirect-and-c
 opam install out-channel-redirect
 #+end_example
 
-*** クイックサンプル：
+*** 簡単な例：
 #+begin_src ocaml
 let output, result =
   Out_channel_redirect.capture_channel some_channel ~f:(fun () → 
@@ -210,25 +210,25 @@ Archive: https://discuss.ocaml.org/t/ann-ppxlib-0-38-0/17948/1
 ** Nathan Rebours によるアナウンス
 
 
-ppxlib チームは ppxlib.0.38.0 のリリースを発表できることを嬉しく思います。
+ppxlib チームは ppxlib.0.38.0 のリリースをお知らせできることを嬉しく思います。
 
 このリリースの主な機能は OCaml 5.5 のサポートと、OCaml 5.4 および 5.3 のサポートの改善です。また、いくつかのバグ修正と新しい API エントリも含まれています。詳細なリリースノートは[[https://github.com/ocaml-ppx/ppxlib/releases/tag/0.38.0][こちら]]でご覧いただけます。
 
-これは[[https://discuss.ocaml.org/t/ann-ppxlib-support-for-future-compilers/17430][このスレッド]]で新しいコンパイラサポートのアプローチを発表して以来の初リリースです。~>= 5.3~ のコンパイラバージョンに対するすべてのサポートはこの手法を使用して実装されており、新しい言語機能は AST にエンコードされています。ラベル付きタプルやエフェクトパターンなど、それらの一部を操作できるように ~Ast_builder~ と ~Ast_pattern~ 関数を追加しました。これらは API ドキュメントの[[https://ocaml-ppx.github.io/ppxlib/ppxlib/Ppxlib/Ast_builder/Default/index.html#future-asts][こちら]]と[[https://ocaml-ppx.github.io/ppxlib/ppxlib/Ppxlib/Ast_pattern/index.html#future-asts][こちら]]でご確認いただけます。また、[[https://ocaml-ppx.github.io/ppxlib/ppxlib/compatibility.html#future_compilers][新しいマニュアルセクション]]でそれらの使い方を例示しています。現在の内部 AST（5.2）では表現できない新しい言語機能の生成や消費に興味がある場合は、[[https://github.com/ocaml-ppx/ppxlib/issues/new][イシューを開いて]]いただければ関連するヘルパーを追加します。
+これは[[https://discuss.ocaml.org/t/ann-ppxlib-support-for-future-compilers/17430][このスレッド]]で新しいコンパイラサポートのアプローチを発表して以来の最初のリリースです。~>= 5.3~ のコンパイラバージョンへのサポートはすべてこの技術を使用して実装されており、新しい言語機能は AST にエンコードされています。ラベル付きタプルやエフェクトパターンなど、それらを操作するための ~Ast_builder~ および ~Ast_pattern~ 関数を追加しました。これらは[[https://ocaml-ppx.github.io/ppxlib/ppxlib/Ppxlib/Ast_builder/Default/index.html#future-asts][こちら]]と[[https://ocaml-ppx.github.io/ppxlib/ppxlib/Ppxlib/Ast_pattern/index.html#future-asts][こちら]]の API ドキュメントでご覧いただけます。また、[[https://ocaml-ppx.github.io/ppxlib/ppxlib/compatibility.html#future_compilers][新しいマニュアルセクション]]でそれらの使用方法を示しています。現在の内部 AST（5.2）では表現できない他の新しい言語機能を生成または使用することに興味がある場合は、[[https://github.com/ocaml-ppx/ppxlib/issues/new][issue を開いて]]いただければ、関連するヘルパーを追加します。
 
-エコシステムが 5.2 の AST バンプと ~ppxlib.0.36.0~ からまだ回復していない中で、新たな破壊的変更を導入することなく新しいコンパイラのサポートを追加し、ppxlib の範囲内でメンテナンスの負担を維持できることを嬉しく思います。
-将来的にこのアプローチをさらに実用的にするために、コンパイラチームとの[[https://github.com/ocaml/ocaml/issues/14668][議論]]を開始しました。
+エコシステムがまだ 5.2 AST のバンプと ~ppxlib.0.36.0~ から回復していない中、さらなる破壊を導入することなく新しいコンパイラのサポートを追加し、メンテナンスの負担を ppxlib の範囲内に収めることができることを嬉しく思います。
+今後このアプローチをさらに実用的にするために、コンパイラチームとの[[https://github.com/ocaml/ocaml/issues/14668][議論]]を始めました。
 
 このリリースで唯一の外部コントリビューターである @ceastlund に感謝します。
 
-個人的には、このリリースの実現を助けてくれた @patricoferris、そして ppxlib での私の作業に資金提供してくださった OCaml Software Foundation と OCamlPro にも感謝します。
+個人的には、このリリースを完成させるのを助けてくれた @patricoferris、そして ppxlib における私の作業に資金提供してくださった OCaml Software Foundation と OCamlPro に感謝します。
 
-お読みいただきありがとうございます。良い前処理ライフを！
+お読みいただきありがとうございます。良い前処理を！
       
 
 
 
-* OCaml コードにおける AI 利用の自発的開示に関するプロポーザル
+* OCaml コードにおける AI 使用の自発的開示に関する提案
 :PROPERTIES:
 :CUSTOM_ID: 6
 :END:
@@ -239,9 +239,9 @@ Archive: https://discuss.ocaml.org/t/a-proposal-for-voluntary-ai-disclosure-in-o
 
 皆さん、
 
-opam メタデータとソースコード内の[[https://ocaml.org/manual/5.3/attributes.html][拡張属性]]を使用して、公開された OCaml コードにおける AI 利用を自発的に開示できるようにする *[[https://github.com/avsm/ocaml-ai-disclosure][ocaml-ai-disclosure]]* プロポーザルをまとめました。
+opam メタデータとソースコードの[[https://ocaml.org/manual/5.3/attributes.html][拡張属性]]を使用して、公開された OCaml コードにおける AI 使用を自発的に開示できるようにする *[[https://github.com/avsm/ocaml-ai-disclosure][ocaml-ai-disclosure]]* 提案をまとめました。
 
-リポジトリと[[https://anil.recoil.org/notes/opam-ai-disclosure][ブログ投稿]]に詳細、属性を抽出するためのプロトタイプツール、および FAQ がありますが、簡単に言えば [[https://www.w3.org/community/ai-content-disclosure/][HTML に関する W3C 開示プロポーザル]]と非常に似たものを提案しています。
+リポジトリと[[https://anil.recoil.org/notes/opam-ai-disclosure][ブログ投稿]]に詳細、属性を抽出するためのプロトタイプツール、そして FAQ があります。簡単に言えば、[[https://www.w3.org/community/ai-content-disclosure/][HTML 向けの W3C 開示提案]]に非常に似たものを提案しています。
 
 *** パッケージレベルの開示
 
@@ -253,11 +253,11 @@ x-ai-model: "claude-opus-4-6"
 x-ai-provider: "Anthropic"
 #+end_example
 
-/注：最終的なプロポーザルではただの値のリストになるかもしれませんが、概念はご理解いただけると思います。/
+/注意：最終的な提案ではこれが値のリストになる可能性がありますが、趣旨はご理解いただけると思います。/
 
 *** OCaml モジュールレベル
 
-OCaml は拡張属性をサポートしており、コンパイルユニット全体に適用されるフローティング属性を通じてこれを使用します：
+OCaml は拡張属性をサポートしており、コンパイル単位全体に適用されるフローティング属性を通じてこれを使用します：
 
 #+begin_src ocaml
 [@@@ai_disclosure "ai-generated"]
@@ -268,7 +268,7 @@ let foo = ...
 let bar = ...
 #+end_src
 
-単一のバインディングに適用される宣言属性を使用して、より細かくスコープを設定することもできます：
+これらは単一のバインディングに適用される宣言属性を介してより細かくスコープを設定することもできます：
 
 #+begin_src ocaml
 [@@@ai_disclosure "ai-assisted"]
@@ -279,16 +279,16 @@ let ai_helper y = ...
 [@@ai_disclosure "ai-generated"]
 #+end_src
 
-開示は W3C HTML プロポーザルと同様の最近傍の祖先継承モデルに従い、明示的なアノテーションが継承された値を上書きします。
+開示は W3C HTML 提案と同様の最近接祖先継承モデルに従い、明示的なアノテーションが継承された値を上書きします。
 
-詳細は[[https://anil.recoil.org/notes/opam-ai-disclosure][ブログ投稿]]に記載されており、また[[https://github.com/avsm/ocaml-ai-disclosure][プロポーザルリポジトリの FAQ]] にも一部の影響についての説明があります。
+詳細については[[https://anil.recoil.org/notes/opam-ai-disclosure][ブログ投稿]]を書きました。また、いくつかの影響についての[[https://github.com/avsm/ocaml-ai-disclosure][提案リポジトリの FAQ]] もご覧ください。
 
-他の言語エコシステムで同様のことを試みた先行事例を見つけられなかったので、皆さんがご存じのものがあればぜひ教えてください。より広いエコシステムでこれへの関心がなければ、自分だけで使いますが、議論を始めても害はないと思い、提案してみました！
+他の言語エコシステムが同様のことを試みている先行事例は見つけられませんでしたので、皆さんがご存知のものがあればぜひ教えてください。より広いエコシステムでこれに興味を持つ方がいなければ、自分自身で使用するだけですが、議論を始めることに害はないと思いました！
       
 
 
 
-* ブログ：マークダウンとしての OCaml ドキュメント
+* ブログ：Markdown としての OCaml ドキュメント
 :PROPERTIES:
 :CUSTOM_ID: 7
 :END:
@@ -297,11 +297,11 @@ Archive: https://discuss.ocaml.org/t/blog-ocaml-documentation-as-markdown/17951/
 ** David Sancho によるアナウンス
 
 
-odoc のマークダウンバックエンドについて、そしてそれを使って melange.re のドキュメントを改善した方法についてのブログ投稿を公開しました。ぜひご覧ください：
+odoc の Markdown バックエンドについて、そしてそれを使って melange.re のドキュメントをより良くした方法についてのブログ投稿を公開しました。お楽しみいただければ幸いです：
 
 https://sancho.dev/blog/ocaml-documentation-as-markdown
 
-これを可能にした作業をレビューしてくださった @jonludlam、@rgrinberg、@Alizter に感謝します。
+これを可能にした作業をレビューしてくれた @jonludlam、@rgrinberg、@Alizter に感謝します。
       
 
 
@@ -317,12 +317,12 @@ Archive: https://discuss.ocaml.org/t/ann-hotseat-squava-a-tiny-lablgtk2-demo/179
 
 https://pastebin.com/Nwu2aC7A
 
-[[https://boardgamegeek.com/boardgame/112745/squava][Squava ボードゲーム]]です。
+[[https://boardgamegeek.com/boardgame/112745/squava][Squava ボードゲーム]]。
 
 #+attr_html: :width 80%
 https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/8/87c31d9f127f99f12e96ecff6c579b710926f945.png
 
-Squava 1.1 はベクターグラフィックスを持ちませんが、~./squava.png~ を編集・縮小・拡大すると、プログラムは新しいピックスマップを使ってボードを適応させます。
+Squava 1.1 はベクターグラフィックを持ちませんが、~./squava.png~ を編集・縮小・拡大すると、プログラムが新しいピックスマップを使用してボードを適応させます。
 
 #+attr_html: :width 80%
 https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/6/66cc412e804f7d1e81a6d11ea5c4645f3edfc871.jpeg
@@ -341,19 +341,19 @@ Archive: https://discuss.ocaml.org/t/ann-opentelemetry-0-90-and-associated-libra
 
 こんにちは、
 
-[[https://github.com/ocaml-tracing/ocaml-opentelemetry/releases/tag/v0.90][opentelemetry 0.90]]（および ~opentelemetry-client~、~opentelemetry-client-cohttp-lwt~ など）を発表できることを大変嬉しく思います。
+[[https://github.com/ocaml-tracing/ocaml-opentelemetry/releases/tag/v0.90][opentelemetry 0.90]]（および ~opentelemetry-client~、~opentelemetry-client-cohttp-lwt~ など）をお知らせできることを大変嬉しく思います。
 
-Opentelemetry は https://opentelemetry.io/ の OCaml 実装で、ライブラリ等のインスツルメンテーションのためのコア _クライアント API_ と、さまざまな _エクスポーター_ を備えた完全な SDK の両方をカバーしています。[[https://github.com/ocaml-tracing/ocaml-trace/][Trace]] と互換性があります。
+Opentelemetry は https://opentelemetry.io/ の OCaml 向け実装です。コアの _クライアント API_（ライブラリなどのインストルメンテーション用）と、各種 _エクスポーター_ を備えたフル SDK の両方をカバーしています。[[https://github.com/ocaml-tracing/ocaml-trace/][Trace]] と互換性があります。
 
-このリリースは数ヶ月の作業の成果であり、1.0 までの最後のリリースの一つになることが期待されています。[[https://github.com/ocaml-tracing/ocaml-opentelemetry/blob/main/CHANGES.md#090][変更履歴]]はかなり大きく、多くのことを見直しました。主な変更点は以下の通りです：
-- ocaml-protoc/pbrt 4.0 への移行（可変フィールドと protobuf の異なるコード生成）
-- API が https://opentelemetry.io のガイドラインに近づいた（まだ完全ではないが改善）
-- シグナルの内部処理のモジュール性が大幅に向上し、コードの再利用の改善、プラグイン可能なすべての機能、より良いキューイング/バッチング、HTTP リトライ
-- protobuf の代わりに JSON でエクスポートするサポート
-- trace 0.11 のサポート（これにより ~opentelemetry.trace~ はグローバルな OTEL エクスポーター以外のすべてのグローバル状態を排除できる）
+このリリースは数ヶ月の作業の成果であり、1.0 前の最後のリリースの一つになることが期待されます。[[https://github.com/ocaml-tracing/ocaml-opentelemetry/blob/main/CHANGES.md#090][changelog]] は非常に大きく、多くのことを見直しました。主な変更点は以下の通りです：
+- ocaml-protoc/pbrt 4.0 への移行（ミュータブルフィールドと異なる protobuf コードジェネレーターを持つ）
+- API が https://opentelemetry.io のガイドラインに近くなった（まだ完全ではないが改善）
+- シグナルの内部処理のモジュール性が大幅に改善され、コードの再利用が向上し、すべてがプラグイン可能に、キューイング/バッチング、HTTP リトライも改善
+- protobuf の代わりに JSON としてエクスポートするサポート
+- trace 0.11 のサポート。これにより ~opentelemetry.trace~ はグローバル OTEL エクスポーター以外のすべてのグローバル状態を排除できるようになった
 - ライフサイクルとクリーンアップの改善
 
-API ドキュメントは[[https://ocaml-tracing.github.io/ocaml-opentelemetry/][こちら]]でご覧いただけます。いつものように、フィードバックやバグ報告などを大歓迎します。
+API ドキュメントは[[https://ocaml-tracing.github.io/ocaml-opentelemetry/][こちら]]でご覧いただけます。いつものように、フィードバックやバグレポートなどは大歓迎です。
       
 
 
@@ -367,17 +367,17 @@ Archive: https://discuss.ocaml.org/t/ann-dune-3-22/17912/2
 ** このスレッドの続きとして、Shon によるアナウンス
 
 
-Dune チームは [[https://github.com/ocaml/dune/releases/tag/3.22.1][dune 3.22.1 のリリース]]を発表できることを嬉しく思います。
+Dune チームは [[https://github.com/ocaml/dune/releases/tag/3.22.1][dune 3.22.1 のリリース]]をお知らせできることを嬉しく思います。
 
-このリリースで問題が発生した場合は、[[https://github.com/ocaml/dune/issues][イシュートラッカー]]に報告してください。
+このリリースで問題が発生した場合は、[[https://github.com/ocaml/dune/issues][Issue トラッカー]]にご報告ください。
 
 *** 修正内容
   
-- Windows 7 との互換性を復元（#13905、@nojb）
+- Windows 7 との互換性を復元 (#13905, @nojb)
   
-- ~dune test~ がデフォルトコンテキストのみでテストを実行するようになりました。コンテキストが一つの場合、それがデフォルトとして扱われます。これにより、ワークスペースに "default" という名前のコンテキストがない場合のクラッシュが修正されます（#13930、#13904 を修正、@Alizter）
+- ~dune test~ がデフォルトコンテキストのみでテストを実行するようになりました。単一のコンテキストがある場合、それがデフォルトとして扱われます。これにより、ワークスペースに "default" という名前のコンテキストがない場合のクラッシュが修正されます。(#13930, fixes #13904, @Alizter)
   
-- ~dune trace cat --chrome-trace~ がマイクロ秒単位のタイムスタンプと時間を提供することで Chrome Trace Event Format に準拠するように修正（#13911、#13906 を修正、@Alizter）
+- ~dune trace cat --chrome-trace~ が、タイムスタンプと期間をマイクロ秒の精度で提供することで Chrome Trace Event Format に準拠するよう修正しました (#13911, fixes #13906, @Alizter)
       
 
 
