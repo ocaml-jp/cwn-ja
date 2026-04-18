@@ -1,0 +1,8 @@
+(executable
+ (public_name cwn_ja)
+ (libraries
+  core
+  core_unix.command_unix
+  cwn_ja_lib)
+ (preprocess
+  (pps ppx_jane)))

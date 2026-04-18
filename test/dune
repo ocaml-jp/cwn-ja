@@ -1,0 +1,6 @@
+(library
+ (name test_cwn_ja)
+ (inline_tests)
+ (libraries core cwn_ja_lib expect_test_helpers_core.expect_test_helpers_base)
+ (preprocess
+  (pps ppx_jane)))
