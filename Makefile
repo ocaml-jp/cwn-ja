@@ -4,9 +4,16 @@ XML_FILES  := $(wildcard ja/*.xml)
 ORG_FILES  := $(XML_FILES:.xml=.org)
 HTML_FILES := $(ORG_FILES:.org=.html)
 
+# Dune handles incremental compilation internally, but make needs to know the
+# binary can become stale — without these prereqs, make thinks `_build/.../cwn_ja.exe`
+# is fresh just because the file exists, and skips `dune build` when sources change.
+CWN_JA_SOURCES := dune-project \
+                  $(wildcard lib/*.ml lib/*.mli) lib/dune \
+                  $(wildcard bin/*.ml) bin/dune
+
 all: $(HTML_FILES) ja/index.html ja/cwn.rss
 
-$(CWN_JA):
+$(CWN_JA): $(CWN_JA_SOURCES)
 	dune build bin/cwn_ja.exe
 
 # Also writes ja/%.rss as a side effect of the same invocation.
