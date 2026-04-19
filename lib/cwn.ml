@@ -168,16 +168,18 @@ let to_rss
       { date; entries; previous = _; next = _; date_text = _; extra_head = _ }
   =
   let parsed = Date_unix.parse ~fmt:"%Y.%m.%d" date in
-  let formatted = Date_unix.format parsed "%d %b %Y" in
-  let title = Language.title language in
+  let title = Language.rss_title language parsed in
+  (* RFC 822 pubDate. Assumes LC_TIME is C/en_* so strftime gives English
+     day/month abbreviations; Ubuntu CI and macOS dev both default to that. *)
+  let pub_date = Date_unix.format parsed "%a, %d %b %Y 12:00:00 GMT" in
   let site = Language.site_base_url language in
   let page_url = [%string "%{site}%{date}.html"] in
   let header =
     [%string
       {|<?xml version="1.0" encoding="utf-8"?>
 <item>
-  <title>%{title}, %{formatted}</title>
-  <pubDate>%{formatted} 12:00 GMT</pubDate>
+  <title>%{title}</title>
+  <pubDate>%{pub_date}</pubDate>
   <link>%{page_url}</link>
   <guid>%{page_url}</guid>
   <description>&lt;ol&gt;|}]

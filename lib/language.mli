@@ -28,3 +28,13 @@ val index_url : t -> string
     [alan.petitepomme.net/cwn/] archive; Japanese uses [ocaml.jp/cwn-ja/]
     where the translation site is published. *)
 val site_base_url : t -> string
+
+(** Render a date for display in RSS titles. English uses ["%d %b %Y"]
+    (e.g. ["31 Mar 2026"]); Japanese uses [YYYY年M月D日] without zero-padding
+    on month/day (e.g. ["2026年3月31日"]). *)
+val format_date : t -> Date.t -> string
+
+(** Full RSS [<title>] string: combines the publication title with the
+    localised date. English: ["OCaml Weekly News, 31 Mar 2026"]; Japanese:
+    ["OCaml Weekly News (2026年3月31日版）"]. *)
+val rss_title : t -> Date.t -> string

@@ -169,7 +169,7 @@ let%expect_test "cwn: to_rss English emits a formatted item" =
     <?xml version="1.0" encoding="utf-8"?>
     <item>
       <title>OCaml Weekly News, 20 Oct 2000</title>
-      <pubDate>20 Oct 2000 12:00 GMT</pubDate>
+      <pubDate>Fri, 20 Oct 2000 12:00:00 GMT</pubDate>
       <link>https://alan.petitepomme.net/cwn/2000.10.20.html</link>
       <guid>https://alan.petitepomme.net/cwn/2000.10.20.html</guid>
       <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://alan.petitepomme.net/cwn/2000.10.20.html#1"&gt;Title of the entry&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://alan.petitepomme.net/cwn/2000.10.20.html#2"&gt;Title of the second entry&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
@@ -182,8 +182,8 @@ let%expect_test "cwn: to_rss Japanese points item URLs at the JA site" =
   [%expect {|
     <?xml version="1.0" encoding="utf-8"?>
     <item>
-      <title>OCaml Weekly News, 20 Oct 2000</title>
-      <pubDate>20 Oct 2000 12:00 GMT</pubDate>
+      <title>OCaml Weekly News (2000年10月20日版）</title>
+      <pubDate>Fri, 20 Oct 2000 12:00:00 GMT</pubDate>
       <link>https://ocaml.jp/cwn-ja/2000.10.20.html</link>
       <guid>https://ocaml.jp/cwn-ja/2000.10.20.html</guid>
       <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2000.10.20.html#1"&gt;Title of the entry&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2000.10.20.html#2"&gt;Title of the second entry&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>

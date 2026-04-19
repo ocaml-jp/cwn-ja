@@ -83,3 +83,17 @@ let site_base_url = function
   | English -> "https://alan.petitepomme.net/cwn/"
   | Japanese -> "https://ocaml.jp/cwn-ja/"
 ;;
+
+let format_date t date =
+  match t with
+  | English -> Date_unix.format date "%d %b %Y"
+  | Japanese -> Date_unix.format date "%Y年%-m月%-d日"
+;;
+
+let rss_title t date =
+  let title = title t in
+  let d = format_date t date in
+  match t with
+  | English -> [%string "%{title}, %{d}"]
+  | Japanese -> [%string "%{title} (%{d}版）"]
+;;
