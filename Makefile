@@ -4,7 +4,7 @@ XML_FILES  := $(wildcard ja/*.xml)
 ORG_FILES  := $(XML_FILES:.xml=.org)
 HTML_FILES := $(ORG_FILES:.org=.html)
 
-all: $(HTML_FILES) ja/index.html
+all: $(HTML_FILES) ja/index.html ja/cwn.rss
 
 $(CWN_JA):
 	dune build bin/cwn_ja.exe
@@ -18,3 +18,8 @@ ja/%.html: ja/%.org scripts/org-export.el
 
 ja/index.html: $(HTML_FILES) scripts/gen-index.ts
 	node --experimental-strip-types scripts/gen-index.ts
+
+# Depends on $(ORG_FILES) — the .org rule produces .rss as a side effect, so
+# when any org is rebuilt the rss beside it is fresh and cwn.rss regenerates.
+ja/cwn.rss: $(ORG_FILES) scripts/gen-rss.ts
+	node --experimental-strip-types scripts/gen-rss.ts
