@@ -36,7 +36,7 @@ Here is the latest OCaml Weekly News, for the week of %{date_text}.
     [%string
       {|こんにちは
 
-%{date_text}の週の最新 OCaml Weekly News をお届けします。
+%{date_text}の週の OCaml Weekly News をお届けします。
 
 |}]
 ;;
