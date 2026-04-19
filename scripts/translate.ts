@@ -11,6 +11,7 @@ async function readSSEStream(body: ReadableStream<Uint8Array>): Promise<string> 
   const reader = body.getReader();
   let buffer = "";
   let result = "";
+  let stopReason: string | null = null;
   let lastReportedChars = 0;
   const startTime = Date.now();
 
@@ -46,7 +47,7 @@ async function readSSEStream(body: ReadableStream<Uint8Array>): Promise<string> 
 
       let event: {
         type: string;
-        delta?: { type: string; text?: string };
+        delta?: { type: string; text?: string; stop_reason?: string };
       };
       try {
         event = JSON.parse(data);
@@ -57,11 +58,22 @@ async function readSSEStream(body: ReadableStream<Uint8Array>): Promise<string> 
       if (event.type === "content_block_delta" && event.delta?.type === "text_delta") {
         result += event.delta.text ?? "";
         writeProgress(false);
+      } else if (event.type === "message_delta" && event.delta?.stop_reason) {
+        stopReason = event.delta.stop_reason;
       }
     }
   }
 
   writeProgress(true);
+
+  // end_turn = model finished naturally; anything else (max_tokens, refusal,
+  // tool_use, stop_sequence) means the text is partial or wrong shape.
+  if (stopReason !== null && stopReason !== "end_turn") {
+    throw new Error(
+      `Translation stopped with stop_reason=${stopReason} (got ${result.length} chars). ` +
+        `The output is likely truncated — raise max_tokens or investigate.`,
+    );
+  }
   return result;
 }
 
@@ -88,7 +100,7 @@ async function callClaudeAPI(systemPrompt: string, content: string): Promise<str
         },
         body: JSON.stringify({
           model,
-          max_tokens: 16384,
+          max_tokens: 128000,
           stream: true,
           system: systemPrompt,
           messages: [{ role: "user", content }],
