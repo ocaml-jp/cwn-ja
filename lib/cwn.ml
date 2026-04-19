@@ -74,37 +74,42 @@ let replace_markdown_links =
       [%string "[[%{url}][%{text}]]"])
 ;;
 
-let to_orgmode { previous; next; date_text; extra_head; entries; date = _ } =
+let to_orgmode
+      ~language
+      { previous; next; date_text; extra_head; entries; date = _ }
+  =
+  let title = Language.title language in
   let header =
-    {|#+OPTIONS: ^:nil
+    [%string
+      {|#+OPTIONS: ^:nil
 #+OPTIONS: html-postamble:nil
 #+OPTIONS: num:nil
 #+OPTIONS: toc:nil
 #+OPTIONS: author:nil
 #+HTML_HEAD: <style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
 #+HTML_HEAD: <style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
-#+TITLE: OCaml Weekly News
-|}
+#+TITLE: %{title}
+|}]
   in
   let nav =
+    let prev_url = Language.weekly_url language ~date:previous in
+    let next_url = Language.weekly_url language ~date:next in
+    let index_url = Language.index_url language in
+    let prev_label = Language.previous_week language in
+    let up_label = Language.up language in
+    let next_label = Language.next_week language in
     [%string
-      {|[[https://alan.petitepomme.net/cwn/%{previous}.html][Previous Week]] [[https://alan.petitepomme.net/cwn/index.html][Up]] [[https://alan.petitepomme.net/cwn/%{next}.html][Next Week]]
+      {|[[%{prev_url}][%{prev_label}]] [[%{index_url}][%{up_label}]] [[%{next_url}][%{next_label}]]
 
 |}]
   in
-  let greeting =
-    [%string
-      {|Hello
-
-Here is the latest OCaml Weekly News, for the week of %{date_text}.
-
-|}]
-  in
+  let greeting = Language.greeting language ~date_text in
   let extra_head_chunk =
     Option.value_map extra_head ~default:[] ~f:(fun eh ->
       [ [%string "%{eh}\n\n"] ])
   in
   let toc = "#+TOC: headlines 1\n" in
+  let archive_prefix = Language.archive_prefix language in
   let entry_chunks =
     List.concat
       (List.mapi entries ~f:(fun i entry ->
@@ -122,7 +127,7 @@ Here is the latest OCaml Weekly News, for the week of %{date_text}.
          in
          let url_chunk =
            Option.value_map url ~default:[] ~f:(fun u ->
-             [ [%string "Archive: %{u}\n\n"] ])
+             [ [%string "%{archive_prefix}%{u}\n\n"] ])
          in
          let messages =
            List.map content ~f:(fun (who, what) ->
@@ -137,46 +142,52 @@ Here is the latest OCaml Weekly News, for the week of %{date_text}.
          (head :: url_chunk) @ messages))
   in
   let footer =
-    {|
+    let heading = Language.old_cwn_heading language in
+    let body = Language.old_cwn_body language in
+    [%string
+      {|
 
-* Old CWN
+* %{heading}
 :PROPERTIES:
 :UNNUMBERED: t
 :END:
 
-If you happen to miss a CWN, you can [[mailto:alan.schmitt@polytechnique.org][send me a message]] and I'll mail it to you, or go take a look at [[https://alan.petitepomme.net/cwn/][the archive]] or the [[https://alan.petitepomme.net/cwn/cwn.rss][RSS feed of the archives]].
-
-If you also wish to receive it every week by mail, you may subscribe to the [[https://sympa.inria.fr/sympa/info/caml-list][caml-list]].
-
+%{body}
 #+BEGIN_authorname
 [[https://alan.petitepomme.net/][Alan Schmitt]]
 #+END_authorname
-|}
+|}]
   in
   List.concat
     [ [ header; nav; greeting ]; extra_head_chunk; [ toc ]; entry_chunks; [ footer ] ]
   |> String.concat
 ;;
 
-let to_rss { date; entries; previous = _; next = _; date_text = _; extra_head = _ } =
+let to_rss
+      ~language
+      { date; entries; previous = _; next = _; date_text = _; extra_head = _ }
+  =
   let parsed = Date_unix.parse ~fmt:"%Y.%m.%d" date in
   let formatted = Date_unix.format parsed "%d %b %Y" in
+  let title = Language.title language in
+  let site = Language.site_base_url language in
+  let page_url = [%string "%{site}%{date}.html"] in
   let header =
     [%string
       {|<?xml version="1.0" encoding="utf-8"?>
 <item>
-  <title>OCaml Weekly News, %{formatted}</title>
+  <title>%{title}, %{formatted}</title>
   <pubDate>%{formatted} 12:00 GMT</pubDate>
-  <link>https://alan.petitepomme.net/cwn/%{date}.html</link>
-  <guid>https://alan.petitepomme.net/cwn/%{date}.html</guid>
+  <link>%{page_url}</link>
+  <guid>%{page_url}</guid>
   <description>&lt;ol&gt;|}]
   in
   let items =
     List.mapi entries ~f:(fun i entry ->
-      let { Entry.title; url = _; content = _ } = entry in
+      let { Entry.title = entry_title; url = _; content = _ } = entry in
       let n = i + 1 in
       [%string
-        {|&lt;li&gt;&lt;a href="https://alan.petitepomme.net/cwn/%{date}.html#%{n#Int}"&gt;%{title}&lt;/a&gt;&lt;/li&gt;|}])
+        {|&lt;li&gt;&lt;a href="%{page_url}#%{n#Int}"&gt;%{entry_title}&lt;/a&gt;&lt;/li&gt;|}])
   in
   let footer = "&lt;/ol&gt;</description>\n</item>" in
   List.concat [ [ header ]; items; [ footer ] ] |> String.concat

@@ -98,8 +98,8 @@ let%expect_test "cwn: of_xmltree populates every field" =
     |}]
 ;;
 
-let%expect_test "cwn: to_orgmode emits the full document" =
-  parsed_cwn () |> Cwn.to_orgmode |> print_string;
+let%expect_test "cwn: to_orgmode English emits the full document" =
+  parsed_cwn () |> Cwn.to_orgmode ~language:English |> print_string;
   [%expect
     {|
     #+OPTIONS: ^:nil
@@ -162,8 +162,8 @@ let%expect_test "cwn: to_orgmode emits the full document" =
     |}]
 ;;
 
-let%expect_test "cwn: to_rss emits a formatted item" =
-  parsed_cwn () |> Cwn.to_rss |> print_string;
+let%expect_test "cwn: to_rss English emits a formatted item" =
+  parsed_cwn () |> Cwn.to_rss ~language:English |> print_string;
   [%expect
     {|
     <?xml version="1.0" encoding="utf-8"?>
@@ -174,6 +174,83 @@ let%expect_test "cwn: to_rss emits a formatted item" =
       <guid>https://alan.petitepomme.net/cwn/2000.10.20.html</guid>
       <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://alan.petitepomme.net/cwn/2000.10.20.html#1"&gt;Title of the entry&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://alan.petitepomme.net/cwn/2000.10.20.html#2"&gt;Title of the second entry&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
     </item>
+    |}]
+;;
+
+let%expect_test "cwn: to_rss Japanese points item URLs at the JA site" =
+  parsed_cwn () |> Cwn.to_rss ~language:Japanese |> print_string;
+  [%expect {|
+    <?xml version="1.0" encoding="utf-8"?>
+    <item>
+      <title>OCaml Weekly News, 20 Oct 2000</title>
+      <pubDate>20 Oct 2000 12:00 GMT</pubDate>
+      <link>https://ocaml.jp/cwn-ja/2000.10.20.html</link>
+      <guid>https://ocaml.jp/cwn-ja/2000.10.20.html</guid>
+      <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2000.10.20.html#1"&gt;Title of the entry&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2000.10.20.html#2"&gt;Title of the second entry&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+    </item>
+    |}]
+;;
+
+let%expect_test "cwn: to_orgmode Japanese swaps boilerplate and nav URLs" =
+  parsed_cwn () |> Cwn.to_orgmode ~language:Japanese |> print_string;
+  [%expect {|
+    #+OPTIONS: ^:nil
+    #+OPTIONS: html-postamble:nil
+    #+OPTIONS: num:nil
+    #+OPTIONS: toc:nil
+    #+OPTIONS: author:nil
+    #+HTML_HEAD: <style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+    #+HTML_HEAD: <style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+    #+TITLE: OCaml Weekly News
+    [[file:2000.10.10.html][先週号]] [[file:index.html][上へ]] [[file:2000.10.30.html][次週号]]
+
+    こんにちは
+
+    Date as textの週の最新 OCaml Weekly News をお届けします。
+
+    Extra text
+
+    #+TOC: headlines 1
+
+
+    * Title of the entry
+    :PROPERTIES:
+    :CUSTOM_ID: 1
+    :END:
+    Archive: https://myurl.com
+
+    ** Bob says
+
+    Hello everyone, see [[https://ocaml.org][OCaml]] for more.
+
+    ** Everyone replies
+
+    Hello Bob
+
+
+
+    * Title of the second entry
+    :PROPERTIES:
+    :CUSTOM_ID: 2
+    :END:
+    ** Alice says
+
+    Glad to be alone
+
+
+
+    * 過去の CWN
+    :PROPERTIES:
+    :UNNUMBERED: t
+    :END:
+
+    CWN を見逃した場合は、[[mailto:alan.schmitt@polytechnique.org][メッセージを送っていただければ]]メールでお送りします。また、[[https://alan.petitepomme.net/cwn/][アーカイブ]]や[[https://alan.petitepomme.net/cwn/cwn.rss][アーカイブの RSS フィード]]もご覧いただけます。
+
+    毎週メールで受け取りたい場合は、[[https://sympa.inria.fr/sympa/info/caml-list][caml-list]] を購読してください。
+
+    #+BEGIN_authorname
+    [[https://alan.petitepomme.net/][Alan Schmitt]]
+    #+END_authorname
     |}]
 ;;
 

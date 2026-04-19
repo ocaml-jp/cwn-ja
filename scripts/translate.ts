@@ -124,7 +124,7 @@ async function callClaudeAPI(systemPrompt: string, content: string): Promise<str
 async function main() {
   const [inputPath, outputPath] = process.argv.slice(2);
   if (!inputPath || !outputPath) {
-    console.error("Usage: translate.ts <input.org> <output.org>");
+    console.error("Usage: translate.ts <input.xml> <output.xml>");
     process.exit(1);
   }
 
