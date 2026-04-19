@@ -1,0 +1,5 @@
+(library
+ (name cwn_ja_lib)
+ (libraries core core_unix.date_unix re xmlm)
+ (preprocess
+  (pps ppx_jane)))
