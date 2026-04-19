@@ -57,7 +57,7 @@ let old_cwn_body = function
 If you also wish to receive it every week by mail, you may subscribe to the [[https://sympa.inria.fr/sympa/info/caml-list][caml-list]].
 |}
   | Japanese ->
-    {|CWN を見逃した場合は、[[mailto:alan.schmitt@polytechnique.org][メッセージを送っていただければ]]メールでお送りします。また、[[https://alan.petitepomme.net/cwn/][アーカイブ]]や[[https://alan.petitepomme.net/cwn/cwn.rss][アーカイブの RSS フィード]]もご覧いただけます。
+    {|CWN を見逃した場合は、[[mailto:alan.schmitt@polytechnique.org][メッセージを送っていただければ]]メールでお送りします。また、[[https://ocaml.jp/cwn-ja/][アーカイブ]]や[[https://ocaml.jp/cwn-ja/cwn.rss][RSS フィード]]もご覧いただけます。
 
 毎週メールで受け取りたい場合は、[[https://sympa.inria.fr/sympa/info/caml-list][caml-list]] を購読してください。
 |}
