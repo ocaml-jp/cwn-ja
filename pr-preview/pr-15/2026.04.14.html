@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-04-21 Tue 10:19 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.04.07.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.04.21.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年4月7日から14日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">発表募集: Caml in the Capital II</a></li>
+<li><a href="#2">OCaml の求人を OCaml.org の求人ボードに掲載しましょう</a></li>
+<li><a href="#3">YAMLx: pure-OCaml YAML 1.2/1.1 ライブラリ</a></li>
+<li><a href="#4">ocaml-letsencrypt：OCaml で TLS 証明書を取得する方法</a></li>
+<li><a href="#5">OCaml LSP 1.26.0 と Merlin 5.7.0-504 の新リリース</a></li>
+<li><a href="#6">OCaml YAML ライブラリ</a></li>
+<li><a href="#7">I18n 5.0 — あらゆる OCaml アプリを簡単に国際化</a></li>
+<li><a href="#8">ATD 4.1.0 - YAML サポートが追加されました</a></li>
+<li><a href="#orgbebad4a">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">発表募集: Caml in the Capital II</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/call-for-presentations-caml-in-the-capital-ii/17959/1">https://discuss.ocaml.org/t/call-for-presentations-caml-in-the-capital-ii/17959/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgf0c3d42" class="outline-3">
+<h3 id="orgf0c3d42">Sacha Ayoun が発表しました</h3>
+<div class="outline-text-3" id="text-orgf0c3d42">
+<p>
+皆さん、こんにちは :waving_hand:
+</p>
+
+<p>
+前回のイベントの成功を受けて、Caml In the Capital（ロンドン開催）の第2回目を企画しています。前回の参加者からのフィードバックを踏まえ、今回はより短いトークとより多くの交流の時間を設けます 🍕
+</p>
+
+<p>
+現時点では <b><b>5月14日</b></b> を予定しており、会場が確保でき次第、正式に確定します。もし私たちが把握していない重要なイベントと日程が重なる場合はお知らせください。
+</p>
+
+<p>
+日程と発表内容が確定したら、こちらおよび専用の <a href="https://ocaml.zulipchat.com/#narrow/channel/553375-Caml-In-The-Capital">Zulip チャンネル</a> と <a href="https://caml-in-the-capital.github.io">ウェブサイト</a> にも投稿します。
+</p>
+</div>
+
+<div id="outline-container-org98f1369" class="outline-4">
+<h4 id="org98f1369">発表募集</h4>
+<div class="outline-text-4" id="text-org98f1369">
+<p>
+OCaml コミュニティ全体に関心を持たれるトークを募集しています。
+トピックの例（これに限りません）：
+</p>
+<ul class="org-ul">
+<li>OCaml ツール（ビルドシステム、パッケージ管理、lsp、ドキュメントなど）</li>
+<li>現在開発中のライブラリの紹介</li>
+<li>OCaml 関連の研究（専門外の人にもわかりやすく説明できるもの）</li>
+<li>OCaml エコシステムの紹介（ocaml.org、OCaml Software Foundation など）</li>
+<li>OCaml の産業利用事例</li>
+<li>その他</li>
+</ul>
+
+<p>
+トークをご希望の方は、タイトルと簡単なアブストラクトを添えて、私か @Alistair に直接メッセージをお送りください。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">OCaml の求人を OCaml.org の求人ボードに掲載しましょう</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/list-your-open-ocaml-positions-on-the-ocaml-org-job-board/11377/21">https://discuss.ocaml.org/t/list-your-open-ocaml-positions-on-the-ocaml-org-job-board/11377/21</a>
+</p>
+</div>
+
+<div id="outline-container-orgafdb72b" class="outline-3">
+<h3 id="orgafdb72b">このスレッドを継続して、VikasK が発表しました</h3>
+<div class="outline-text-3" id="text-orgafdb72b">
+<p>
+以下の求人情報を掲載したいと思います。
+</p>
+
+<ul class="org-ul">
+<li>title: Lead Systems Software Engineer</li>
+<li>link: <a href="https://careers.cloud.com/jobs/lead-systems-software-engineer-remote-united-kingdom">https://careers.cloud.com/jobs/lead-systems-software-engineer-remote-united-kingdom</a></li>
+<li>locations:
+<ul class="org-ul">
+<li>Remote</li>
+<li>United-Kingdom</li>
+</ul></li>
+<li>publication_date: 2026-04-08</li>
+<li>company: Cloud Software Group</li>
+<li>company_logo: <img src="https://www.cloud.com/media_1e40e7d048f0117d4543c940f9e7433b549c08a03.svg" alt="media_1e40e7d048f0117d4543c940f9e7433b549c08a03.svg" class="org-svg" /></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">YAMLx: pure-OCaml YAML 1.2/1.1 ライブラリ</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-yamlx-pure-ocaml-yaml-1-2-1-1-library/17970/1">https://discuss.ocaml.org/t/ann-yamlx-pure-ocaml-yaml-1-2-1-1-library/17970/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgfeaaac6" class="outline-3">
+<h3 id="orgfeaaac6">Martin Jambon が発表しました</h3>
+<div class="outline-text-3" id="text-orgfeaaac6">
+<p>
+こんにちは、
+</p>
+
+<p>
+YAML 1.2 および 1.1 標準の完全な実装である <a href="https://github.com/mjambon/yamlx">YAMLx</a> の公開をお知らせします。これは、新しいアプリケーションでの設定ファイル形式としての利用や、他のアプリケーションの YAML ファイルの解析など、YAML のほとんどの用途をサポートすることを目的としています。
+</p>
+
+<p>
+詳細については、<a href="https://github.com/mjambon/yamlx/releases/tag/0.1.0">リリースノート</a>をご覧ください。
+</p>
+
+<p>
+<code>opam install yamlx</code> で始めることができます。その後、<code>yamlx</code> コンパニオンコマンドを使って、お気に入りの YAML ファイルが正しく解析・解釈されるか確認してください。
+</p>
+
+<p>
+以下は、ライブラリを使って YAML を JSON に変換する例です：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">(* YAMLx で stdin から YAML を読み込み、Yojson で JSON を stdout に出力する
+
+   これは YAMLx ライブラリをデフォルト設定で使用する方法を示すデモです。
+   'YAMLx.Values.one_of_yaml_exn' には入力言語を制限したり、
+   YAML 1.2 の代わりに YAML 1.1 として解釈を強制するオプションがあります。
+
+   コンパイル:
+     ocamlfind opt -o yaml-to-json \
+       -package yamlx,yojson -linkpkg yaml_to_json.ml
+*)
+
+open Printf
+
+let rec yojson_of_yamlx (x : YAMLx.value) : Yojson.Safe.t =
+  match x with
+  | Null _ -&gt; `Null
+  | Bool (_, x) -&gt; `Bool x
+  | Int (_, x) -&gt; `Intlit (Int64.to_string x)
+  | Float (_, x) -&gt; `Float x
+  | String (_, x) -&gt; `String x
+  | Seq (_, xs) -&gt; `List (List.map yojson_of_yamlx xs)
+  | Map (_, xs) -&gt;
+      `Assoc (List.map (fun (loc, k, v) -&gt;
+        match (k : YAMLx.value) with
+        | String (_, k) -&gt; (k, yojson_of_yamlx v)
+        | _ -&gt;
+            ksprintf failwith "%s: only string keys are supported"
+              (YAMLx.default_format_loc loc)
+      ) xs)
+
+let () =
+  YAMLx.register_exception_printers ();
+  stdin
+  |&gt; In_channel.input_all
+  |&gt; YAMLx.Values.one_of_yaml_exn
+  |&gt; yojson_of_yamlx
+  |&gt; Yojson.Safe.pretty_to_channel stdout
+  |&gt; print_newline
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orga3c8952" class="outline-4">
+<h4 id="orga3c8952">資金調達について</h4>
+<div class="outline-text-4" id="text-orga3c8952">
+<p>
+YAMLx は現在 <b><b>AGPL</b></b> ライセンスで公開されています。クラウドファンディングを実施中で、目標金額に達した時点で、すべての人に対してライセンスがパーミッシブな <b><b>ISC</b></b> ライセンスに切り替わります。一定額以上の寄付者には即座に<b><b>商用ライセンス</b></b>が付与されます。詳細は <a href="https://github.com/sponsors/mjambon">GitHub Sponsors プロフィール</a> をご覧ください。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">ocaml-letsencrypt：OCaml で TLS 証明書を取得する方法</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ocaml-letsencrypt-an-ocaml-way-to-get-tls-certificates/17975/1">https://discuss.ocaml.org/t/ann-ocaml-letsencrypt-an-ocaml-way-to-get-tls-certificates/17975/1</a>
+</p>
+</div>
+
+<div id="outline-container-org80b6b5b" class="outline-3">
+<h3 id="org80b6b5b">Calascibetta Romain が発表しました</h3>
+<div class="outline-text-3" id="text-org80b6b5b">
+<p>
+<a href="https://github.com/robur-coop/ocaml-letsencrypt">ocaml-letsencrypt</a>（バージョン 2.1.0）のリリースをお知らせします。このバージョンでは、スケジューラや HTTP クライアントに依存せず単独で動作できる新しい API が導入されています。また、新たに開発した <a href="https://github.com/robur-coop/jws">jws</a> ライブラリを使って書き直され、<a href="https://github.com/ocaml-community/yojson">yojson</a> の代わりに <a href="https://erratique.ch/logiciel/jsont">jsont</a> ライブラリを活用しています。
+</p>
+
+<p>
+<code>ocaml-letsencrypt</code> は、DNS、HTTP、ACME-TLS の3つの方法で証明書を取得するために必要な<a href="https://letsencrypt.org/fr/docs/challenge-types/">チャレンジ</a>を実装しています。これにより、（例えば <a href="https://github.com/robur-coop/vif">Vif</a> で実装された）ウェブサイトのデプロイ戦略を完全に OCaml で提供できるようになります。
+</p>
+
+<p>
+私たちのコープでは、以下のようなプロジェクトで利用しています：
+</p>
+<ul class="org-ul">
+<li><a href="https://github.com/robur-coop/dns-letsencrypt-secondary/"><code>dns-letsencrypt-secondary</code></a>：セカンダリ DNS サーバとして動作し、特定ドメインの DNS チャレンジを実行して証明書と秘密鍵を生成する unikernel。通常、プライマリ DNS サーバである <a href="https://github.com/robur-coop/dns-primary-git"><code>primary-git</code></a> と連携して動作します。</li>
+<li><a href="https://github.com/dinosaure/contruno"><code>contruno</code></a>：TLS リバースプロキシとして動作し、HTTP チャレンジを実行できる unikernel。現在、<a href="https://discuss.ocaml.org/t/ann-mnet-a-new-tcp-ip-stack-for-unikernels-in-ocaml/17851"><code>mnet</code></a> を使って完全に書き直し中です。</li>
+</ul>
+
+<p>
+ウェブサイトのデプロイにお役立てください。そして、<code>jws</code> も OCaml エコシステム内でライブラリとしての地位を確立することを願っています！
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="5">OCaml LSP 1.26.0 と Merlin 5.7.0-504 の新リリース</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-new-release-of-ocaml-lsp-1-26-0-merlin-5-7-0-504/17978/1">https://discuss.ocaml.org/t/ann-new-release-of-ocaml-lsp-1-26-0-merlin-5-7-0-504/17978/1</a>
+</p>
+</div>
+
+<div id="outline-container-org38bd9bb" class="outline-3">
+<h3 id="org38bd9bb">PizieDust が発表しました</h3>
+<div class="outline-text-3" id="text-org38bd9bb">
+<p>
+皆さん、こんにちは。
+</p>
+
+<p>
+<a href="https://github.com/ocaml/merlin/releases/tag/v5.7.0-504">merlin 5.7.0-504</a> と <a href="https://github.com/ocaml/ocaml-lsp/releases/tag/1.26.0">ocaml-lsp 1.26.0</a> の同時リリースをお知らせします。
+</p>
+
+<p>
+今回のリリースには、クラスやオブジェクト関連の各種項目に対する型エンクロージャの動作改善、シグネチャヘルプの改善、およびいくつかのバグ修正など、多くの変更が含まれています。
+</p>
+
+<p>
+問題が発生した場合は、遠慮なくバグトラッカーに issue を開いてください：
+</p>
+
+<ul class="org-ul">
+<li>Merlin: <a href="https://github.com/ocaml/merlin/issues">バグトラッカー</a></li>
+<li>OCaml LSP: <a href="https://github.com/ocaml/ocaml-lsp/issues">バグトラッカー</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="6">OCaml YAML ライブラリ</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ocaml-yaml-library/4297/7">https://discuss.ocaml.org/t/ocaml-yaml-library/4297/7</a>
+</p>
+</div>
+
+<div id="outline-container-org93c85e5" class="outline-3">
+<h3 id="org93c85e5">このスレッドを継続して、Martin Jambon が発表しました</h3>
+<div class="outline-text-3" id="text-org93c85e5">
+<p>
+2026年のアップデート：
+</p>
+<ul class="org-ul">
+<li>2025年12月、@avsm が AI エージェントを使って1日でpure-OCaml の YAML ライブラリを作成し、<a href="https://anil.recoil.org/notes/aoah-2025-6">その経緯を記事にしました</a>。</li>
+<li>2026年4月、私も同様のアプローチで取り組み、完全な本番品質の 1.2/1.1 YAML ライブラリ YAMLx として仕上げました。<a href="https://discuss.ocaml.org/t/ann-yamlx-pure-ocaml-yaml-1-2-1-1-library/17970">こちらで発表しています</a>。</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="7">I18n 5.0 — あらゆる OCaml アプリを簡単に国際化</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-i18n-5-0-internationalisation-made-easy-for-any-ocaml-app/17981/1">https://discuss.ocaml.org/t/ann-i18n-5-0-internationalisation-made-easy-for-any-ocaml-app/17981/1</a>
+</p>
+</div>
+
+<div id="outline-container-org3255c7f" class="outline-3">
+<h3 id="org3255c7f">Vincent Balat が発表しました</h3>
+<div class="outline-text-3" id="text-org3255c7f">
+<p>
+Ocsigen チームは、OCaml 向けの小さくも実用的な国際化ライブラリ <b><b>ocsigen-i18n 5.0</b></b> のリリースをお知らせします。
+</p>
+
+<p>
+今回の大きな変更点：ocsigen-i18n は Eliom への依存から解放されました。これからは<b><b>あらゆる OCaml プロジェクト</b></b>で使用でき、必要な場合には Tyxml や Eliom 向けのオプション拡張も利用できます。
+</p>
+
+<p>
+ocsigen-i18n はもともと Be Sport の @sagotch によって書かれました。今回のリリースは <a href="https://www.irill.org">IRILL</a> の資金援助を受けた <a href="https://github.com/mhjd">Habib</a> の作業によって実現しました。
+</p>
+
+<blockquote>
+<p>
+opam install ocsigen-i18n
+</p>
+</blockquote>
+</div>
+
+<div id="outline-container-org4f76f12" class="outline-4">
+<h4 id="org4f76f12">仕組み</h4>
+<div class="outline-text-4" id="text-org4f76f12">
+<p>
+翻訳はシンプルな <b><b>TSV ファイル</b></b>（1行1キー、1列1言語）で記述します：
+</p>
+
+<pre class="example" id="org88e479c">
+foo                 This is a simple key.        Ceci est une clé toute simple.
+a_human             a human                      un humain
+bar                 I am {{x}}.                  Je suis {{x}}.
+baz                 There {{{c?are||is an}}} apple{{{c?s||}}} here!  Il y a {{{c?des||une}}} pomme{{{c?s||}}} ici !
+bu                  I am {{x %s}} ({{n %d}}).    Je suis {{x %s}} ({{n %d}}).
+</pre>
+
+<p>
+ミニテンプレート言語がサポートするもの：
+</p>
+
+<ul class="org-ul">
+<li><code>{{x}}</code> 文字列変数 <code>x</code></li>
+<li><code>{{x %d}}</code> 指定されたフォーマット指定子を使った型付き変数</li>
+<li><code>{{{c?yes||no}}}</code> 二つの文字列を切り替えるオプションの真偽値 <code>?c</code></li>
+</ul>
+
+<p>
+コード内では、<b><b>PPX 拡張</b></b>が <code>[%i18n key]</code> を適切な呼び出しに変換します：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">print_endline [%i18n foo];
+print_endline [%i18n bar ~x:[%i18n a_human]];
+print_endline [%i18n baz ~c:(nb &gt; 1)];
+print_endline [%i18n bu ~x:"Jean-Michel" ~n:42];
+
+(* 言語を明示的に切り替える *)
+print_endline [%i18n foo ~lang:My_i18n.Fr];
+</pre>
+</div>
+
+<p>
+現在の言語はミュータブルな参照に保持されており、切り替えることができます（セッション/タブごとの言語が必要な場合は Eliom スコープ付き参照に置き換えることも可能です）。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgef5988c" class="outline-4">
+<h4 id="orgef5988c">Dune との統合</h4>
+<div class="outline-text-4" id="text-orgef5988c">
+<p>
+このツールは Dune に非常に自然に組み込めます。TSV ファイルから OCaml モジュールを生成するルール：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(rule
+ (target example_i18n.ml)
+ (deps example_i18n.tsv)
+ (action
+  (run %{bin:ocsigen-i18n} --languages en,fr --input-file %{deps}
+                           --output-file %{target})))
+</pre>
+</div>
+
+<p>
+ライブラリ/実行ファイルに PPX を設定：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(preprocess (pps ocsigen-i18n -- --default-module Example_i18n))
+</pre>
+</div>
+
+<p>
+純粋な OCaml プロジェクトにはこれだけで十分です。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge464bd1" class="outline-4">
+<h4 id="orge464bd1">Tyxml サポート</h4>
+<div class="outline-text-4" id="text-orge464bd1">
+<p>
+ジェネレータに <code>--tyxml</code> を渡すと、同じ <code>[%i18n key]</code> 式が文字列の代わりに <b><b>Tyxml HTML 要素のリスト</b></b>を生成します：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">(* HTML フラグメントを構築し、Tyxml ツリーに直接挿入できる *)
+let greeting = [%i18n bar ~x:[%i18n a_human]]
+</pre>
+</div>
+
+<p>
+変数自体も HTML ノードのリストにできるので、翻訳テキストとマークアップを自然に混在させることができます：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">[%i18n bar ~x:[ txt "Jean-Michel ("
+              ; txt (string_of_int id)
+              ; txt ")" ]]
+</pre>
+</div>
+
+<p>
+Tyxml モードで（属性などに）プレーンな文字列が必要な場合は、<code>S.</code> をプレフィックスとして付けるだけです：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">[%i18n S.bar ~x:[%i18n S.a_human]]   (* 文字列出力 *)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgefa3a6c" class="outline-4">
+<h4 id="orgefa3a6c">Eliom サポート</h4>
+<div class="outline-text-4" id="text-orgefa3a6c">
+<p>
+クライアント・サーバー型の Eliom アプリの場合は <code>--eliom</code> を渡します。ジェネレータは <code>.eliom</code> ファイルを生成し（同じ翻訳が両側で利用可能になる）、<code>--tyxml</code> を暗示し、言語型に <code>[@@deriving json]</code> を追加してワイヤ越しにシリアライズできるようにします：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(rule
+ (target example_i18n.eliom)
+ (deps example_i18n.tsv)
+ (action
+  (run %{bin:ocsigen-i18n} --eliom --languages en,fr --input-file %{deps}
+                           --output-file %{target})))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeecc337" class="outline-4">
+<h4 id="orgeecc337">複数の TSV ファイル</h4>
+<div class="outline-text-4" id="text-orgeecc337">
+<p>
+翻訳を複数のファイルに分割できます。PPX はモジュールパスを使って適切なファイルを見つけます：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">[%i18n foo]                          (* デフォルトモジュール *)
+[%i18n MyI18n.foo]                   (* MyI18n.foo *)
+[%i18n MyI18n.S.bar ~x:[%i18n S.foo]]
+</pre>
+</div>
+
+<p>
+オプションの <code>--prefix</code> / <code>--suffix</code> フラグを使うと、呼び出し箇所を簡潔に保てます（<code>[%i18n Feature.foo]</code> → <code>Pr_Feature_i18n.foo ()</code>）。
+</p>
+
+<p>
+&#x2014;
+</p>
+
+<ul class="org-ul">
+<li>ソース: <a href="https://github.com/ocsigen/ocsigen-i18n">https://github.com/ocsigen/ocsigen-i18n</a></li>
+<li>ドキュメント: リポジトリの README</li>
+<li>バグ報告: <a href="https://github.com/ocsigen/ocsigen-i18n/issues">https://github.com/ocsigen/ocsigen-i18n/issues</a></li>
+</ul>
+
+<p>
+翻訳作業をお楽しみください！
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="8">ATD 4.1.0 - YAML サポートが追加されました</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-atd-4-1-0-now-with-yaml-support/17982/1">https://discuss.ocaml.org/t/ann-atd-4-1-0-now-with-yaml-support/17982/1</a>
+</p>
+</div>
+
+<div id="outline-container-org5d0f656" class="outline-3">
+<h3 id="org5d0f656">Martin Jambon が発表しました</h3>
+<div class="outline-text-3" id="text-org5d0f656">
+<p>
+<a href="https://github.com/ahrefs/atd">ATD</a> は、YAML ファイルやその他のフォーマットからデータを簡単に読み込むための OCaml サポートを追加しました。具体的には以下の通りです：
+</p>
+
+<ol class="org-ol">
+<li><a href="https://github.com/ahrefs/atd/blob/master/atd-yamlx/examples/app_config.atd">設定データの型を定義</a>します。</li>
+<li><code>atdml --mode jsonlike app_config.atd</code> で、ソース位置情報を含む JSON ライクな AST を設定データ構造に変換する OCaml コードが生成されます。</li>
+<li><a href="https://github.com/ahrefs/atd/blob/master/atd-yamlx/examples/main.ml">プログラム</a>が YAML ファイルを読み込み、JSON ライクなツリーに変換し、生成された関数を呼び出して OCaml データ構造に変換します。</li>
+<li>設定が不正または不完全な場合、アプリケーションは有用なエラーメッセージを表示します。</li>
+</ol>
+
+<p>
+<a href="https://github.com/ahrefs/atd/blob/master/atd-yamlx/examples">サンプル</a>がディストリビューションに含まれています。<a href="https://discuss.ocaml.org/t/ann-yamlx-pure-ocaml-yaml-1-2-1-1-library/17970">最近リリースされた YAMLx ライブラリ</a>を使用しています。
+</p>
+
+<p>
+<span class="underline">YAMLx はこれまでの作業に資金を提供し、<a href="https://github.com/mjambon/yamlx/blob/main/FUNDING.md">パーミッシブな ISC ライセンスをすべての人に開放する</a>ために、寛大なスポンサーを必要としています。または、アプリケーションのソースコードをユーザーと共有することに問題がなければ、<a href="https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License">AGPL ライセンス</a>の条件を受け入れることもできます。</span>
+</p>
+
+<p>
+ソース位置情報が利用可能であれば、他の入力ファイルフォーマットや他の YAML ライブラリも最小限の労力で同様に使用できます。そのためには、AST を <a href="https://github.com/ahrefs/atd/blob/master/atd-jsonlike/src/AST.mli">JSON ライクな AST</a> に変換する<a href="https://github.com/ahrefs/atd/blob/master/atd-yamlx/src/Atd_yamlx.ml">ブリッジ</a>が必要です。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-orgbebad4a" class="outline-2">
+<h2 id="orgbebad4a">過去の CWN</h2>
+<div class="outline-text-2" id="text-orgbebad4a">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://ocaml.jp/cwn-ja/">アーカイブ</a>や<a href="https://ocaml.jp/cwn-ja/cwn.rss">RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> を購読してください。
+</p>
+
+<div class="authorname" id="org69a44ca">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
