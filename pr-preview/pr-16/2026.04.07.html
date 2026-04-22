@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-04-22 Wed 10:23 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.03.31.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.04.14.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年3月31日から4月7日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">restricted 2.0.0 — プログラムがアクセスできるシステム操作およびファイルシステムの範囲を制限する</a></li>
+<li><a href="#2">求人情報: CNAF（社会給付機関）での Catala コンパイラエンジニア</a></li>
+<li><a href="#3">ocgtk 0.1: GTK 4 向け OCaml バインディング（プレビューリリース）</a></li>
+<li><a href="#4">out-channel-redirect 0.1 — out_channel の出力をリダイレクト・キャプチャする</a></li>
+<li><a href="#5">ppxlib.0.38.0</a></li>
+<li><a href="#6">OCaml コードにおける AI 使用の自発的開示に関する提案</a></li>
+<li><a href="#7">ブログ: Markdown としての OCaml ドキュメント</a></li>
+<li><a href="#8">hotseat Squava（小さな LablGtk2 デモ）</a></li>
+<li><a href="#9">opentelemetry 0.90（および関連ライブラリ）</a></li>
+<li><a href="#10">Dune 3.22</a></li>
+<li><a href="#orgbf0e55b">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">restricted 2.0.0 — プログラムがアクセスできるシステム操作およびファイルシステムの範囲を制限する</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-restricted-2-0-0-limit-which-system-operations-and-which-parts-of-the-filesystem-your-program-can-access/17942/1">https://discuss.ocaml.org/t/ann-restricted-2-0-0-limit-which-system-operations-and-which-parts-of-the-filesystem-your-program-can-access/17942/1</a>
+</p>
+</div>
+
+<div id="outline-container-org29fcb37" class="outline-3">
+<h3 id="org29fcb37">removewingman が発表しました</h3>
+<div class="outline-text-3" id="text-org29fcb37">
+<p>
+こんにちは、
+</p>
+
+<p>
+<a href="https://opam.ocaml.org/packages/restricted/">restricted</a> の新バージョンをお知らせします。
+</p>
+
+<p>
+このライブラリを使うと、プログラムがアクセスできるシステム操作およびファイルシステムの範囲を制限できます。プログラムのなるべく早い段階で呼び出すことで、以降のコードを低い権限で実行できます。現在、実際に権限制限が実施されているオペレーティングシステムは以下の通りです：
+</p>
+
+<ul class="org-ul">
+<li>OpenBSD</li>
+<li>Linux（ファイルシステムのビューのみ）</li>
+</ul>
+
+<p>
+その他のオペレーティングシステムでも、<a href="https://removewingman.codeberg.page/restricted/">restricted</a> を使ってプログラムが必要とする権限を文書化することができます。ユーザーは <a href="https://justine.lol/pledge/">pledge on Linux</a> などのツールを使って、プログラムがこれらの宣言を守っているかテストできます。お楽しみください :slight_smile:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://opam.ocaml.org/packages/restricted/restricted.1.2.0/">opam</a></li>
+<li><a href="https://removewingman.codeberg.page/restricted/">api</a></li>
+<li><a href="https://codeberg.org/removewingman/restricted/src/branch/main#usage-and-examples">examples</a></li>
+<li><a href="https://codeberg.org/removewingman/restricted">git repo</a></li>
+<li><a href="https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License">License AGPL</a></li>
+</ul>
+
+<p>
+CHANGELOG:
+</p>
+
+<ul class="org-ul">
+<li>テスト環境:
+<ul class="org-ul">
+<li>x86_64 openbsd（16/16 テスト通過）</li>
+<li>x86_64-alpine-linux（Landlock ABI version: 7）（4/12 テスト通過: file_read_unv, file_write_unv, file_create_unv_linux, file_cwrr_unv_linux）</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org591cafd" class="outline-4">
+<h4 id="org591cafd">追加</h4>
+<div class="outline-text-4" id="text-org591cafd">
+<ul class="org-ul">
+<li>API: exec の promises と accesses をオプションに</li>
+<li>OpenBSD: exec promises</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org76cf06e" class="outline-4">
+<h4 id="org76cf06e">削除</h4>
+<div class="outline-text-4" id="text-org76cf06e">
+<ul class="org-ul">
+<li>SystemOperation.TmpPath（非推奨。<code>pledge (2)</code> を参照）</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">求人情報: CNAF（社会給付機関）での Catala コンパイラエンジニア</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/job-offer-compiler-engineer-for-catala-cnaf-social-benefits-agency/17943/1">https://discuss.ocaml.org/t/job-offer-compiler-engineer-for-catala-cnaf-social-benefits-agency/17943/1</a>
+</p>
+</div>
+
+<div id="outline-container-org2a37ea3" class="outline-3">
+<h3 id="org2a37ea3">Denis Merigoux が発表しました</h3>
+<div class="outline-text-3" id="text-org2a37ea3">
+<p>
+[以下はフランス公共機関の求人情報のため、フランス語で記載しています]
+</p>
+
+<p>
+<b>Candidatez ici :</b> <a href="https://www.lasecurecrute.fr/offre-emploi/ingenieur-expert-en-compilation-langages-de-programmation--f-h/normandie/1065497">https://www.lasecurecrute.fr/offre-emploi/ingenieur-expert-en-compilation-langages-de-programmation--f-h/normandie/1065497</a>
+</p>
+
+<blockquote>
+<p>
+La <b>CNAF</b> (Caisse Nationale des Allocations Familiales), tête de réseau des 101 CAF, représente la branche Famille de la Sécurité sociale et a pour mission de piloter la politique familiale et l'aide aux populations en situation de précarité ainsi que la politique d'action sociale.
+</p>
+
+<p>
+Au sein de la Direction des Systèmes d'Information (DSI), comptant environ 880 collaborateurs, la <b>Direction Prestations Flux et Décisionnel (DPFD)</b> est découpée en 4 départements et vous serez rattaché au <b>département « Prestations Individuelles et Référentiels Métiers »</b> qui est présent sur les sites de Caen, Le Mans et Rennes.
+</p>
+
+<p>
+Ce département a pour mission principale de concevoir, développer et maintenir le système d'information lié aux prestations individuelles (prestations versées aux allocataires telles que l'allocation familiale, l'allocation logement, la prime à la naissance, le RSA, la prime d'activité, …). Le département fournit ainsi des moteurs de règles, ainsi que les spécifications fonctionnelles associées afin de calculer le bon droit, au bon moment, pour les allocations versées par les CAF.
+</p>
+
+<p>
+Dans le cadre de projets stratégiques pour la branche famille, la ou le candidat intégrera le <b>centre technique Catala de la CNAF</b>.
+</p>
+
+<p>
+Catala est un langage de programmation dédié développé par l'Institut National de Recherche en Informatique et en Automatique (Inria), spécialement adapté à la transformation de spécifications juridiques et réglementaires en code informatique. La CNAF ayant décidé de s'appuyer sur Catala pour les projets de modernisation de son système de calcul des prestations sociales, elle souhaite également internaliser des compétences de maintenance sur l'outillage de Catala au travers de ce poste.
+</p>
+
+<p>
+Le centre technique Catala a ainsi vocation à produire des contributions open-source sur Catala, mais aussi à répondre aux besoins d'expertise technique du département « Prestations Individuelles et Référentiels Métiers » pour ses projets liés aux moteurs de calcul des prestations sociales.
+</p>
+</blockquote>
+
+<p>
+採用される方は Inria の Catala チーム（Louis Gesbert、Vincent Botbol、Romain Primet、そして私）と一緒に働くことになります！ご質問があればお気軽にご連絡ください :slight_smile:
+</p>
+
+<p>
+Catala のコンパイル関連で行ってきたこと・今後取り組む予定のことの概要はこちら: <a href="https://blog.merigoux.ovh/en/2026/02/19/building-proper-pl.html">https://blog.merigoux.ovh/en/2026/02/19/building-proper-pl.html</a>
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">ocgtk 0.1: GTK 4 向け OCaml バインディング（プレビューリリース）</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ocgtk-0-1-ocaml-bindings-for-gtk-4-preview-release/17944/1">https://discuss.ocaml.org/t/ann-ocgtk-0-1-ocaml-bindings-for-gtk-4-preview-release/17944/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgca90e94" class="outline-3">
+<h3 id="orgca90e94">Chris Armstrong が発表しました</h3>
+<div class="outline-text-3" id="text-orgca90e94">
+<p>
+GTK 4 向け OCaml バインディングである ocgtk の最初のプレビューリリース（v0.1-preview0）をお知らせします。
+</p>
+</div>
+
+<div id="outline-container-org356dc05" class="outline-4">
+<h4 id="org356dc05">ocgtk とは？</h4>
+<div class="outline-text-4" id="text-org356dc05">
+<p>
+<a href="https://github.com/chris-armstrong/ocgtk">ocgtk</a> は GTK 4 ウィジェットツールキットおよびその関連ライブラリ（GDK、GIO、Pango、GdkPixbuf、GSK、Graphene、Cairo）向けの OCaml バインディングです。現時点では OCaml &gt;=5.3 を対象としています。
+</p>
+
+<p>
+lablgtk3（長年使われてきた GTK 3 バインディングライブラリ）にインスパイアされており、コアの共通コードや多くの設計思想を引き継いでいます。ただし API の互換性はありません。lablgtk3 のバインディングが主に手書きなのに対し、ocgtk は GObject Introspection（GIR）定義ファイルを読み取って C スタブと OCaml ラッパーの両方を生成するコードジェネレーターを使用しています。これにより、バインディングのカバレッジは手書きの作業量ではなく GIR の定義に追随し、生成されたコードは一貫した手続き型の構造に従います。
+</p>
+
+<p>
+<b>ツールについての注記</b>: コードジェネレーター自体は LLM の多大なサポートを受けて開発されました。ただし、実際のライブラリを構成する C スタブと OCaml モジュールの出力は、GIR 定義からプログラム的に生成されたものであり、LLM によって書かれたものではありません。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8a1f9ee" class="outline-4">
+<h4 id="org8a1f9ee">実装済みの機能</h4>
+<div class="outline-text-4" id="text-org8a1f9ee">
+<ul class="org-ul">
+<li>GTK 4、GDK、GIO、Pango、GdkPixbuf、GSK、Graphene、Cairo のバインディング</li>
+<li>クラス、レコード、列挙型、ビットフィールド</li>
+<li>コンストラクタ、メソッド、プロパティ</li>
+<li>シグナル（戻り値やパラメーターなし）</li>
+<li>動作するサンプル: GTK 4 計算機アプリケーション</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc508e2f" class="outline-4">
+<h4 id="orgc508e2f">未実装の機能</h4>
+<div class="outline-text-4" id="text-orgc508e2f">
+<p>
+これは最初のマイルストーンリリースであり、本番向けのリリースではありません。いくつかの重要な機能はまだサポートされていません：
+</p>
+
+<ul class="org-ul">
+<li><b>インターフェース</b>: GObject インターフェースはまだサポートされていません。これは見た目以上に広範な影響があります。インターフェース型自体が存在しないだけでなく、インターフェースをパラメーターとして受け取ったり返したりするクラスのメソッドも抑制されます。これにより、サポートされているクラスでも一部のメソッドがバインディングから欠落します。</li>
+<li><b>コールバック</b>: OCaml コールバックを引数として受け取る関数（シグナル以外）はまだサポートされていません。これにより、多くの非同期 GIO API や一部の GTK パターンの使用が制限されます。</li>
+<li><b>フリー関数</b>: クラスに属さないトップレベル関数はまだ生成されません。そのため、一部のユーティリティ API が利用できません。</li>
+<li><b>非 opaque レコードフィールドアクセス</b>: 非 opaque な GLib/GDK レコードのフィールドはまだ直接読み取れません。</li>
+<li><b>マルチパラメーターシグナル</b>: パラメーターがなく戻り値もないシグナルのみサポートされており、複雑なシグネチャを持つシグナルはサイレントにスキップされます。</li>
+<li><b>GLib 型</b>: ほとんどの GLib 型はバインドされていないため、リスト、バイト配列、GVariant（DBus で多用される）を使用するいくつかの有用な API が利用できません。</li>
+</ul>
+
+<p>
+これらの欠落により、基本的な GTK アプリケーションは構築できますが、より高度なウィジェット使用、非同期 I/O、またはインターフェースに大きく依存する API では壁にぶつかることが予想されます。
+</p>
+
+<p>
+上記の多くに対処するための大まかな計画を示した <a href="https://github.com/chris-armstrong/ocgtk/blob/main/ROADMAP.md">ROADMAP.md</a> があります。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org204b69f" class="outline-4">
+<h4 id="org204b69f">ドキュメント</h4>
+<div class="outline-text-4" id="text-org204b69f">
+<p>
+API リファレンスドキュメントは現在不十分です。GIR 定義から正確なドキュメントを生成することはこのプロジェクトの未解決の課題であるため、生成されたモジュールはほとんどドキュメント化されていません。当面は、各バインディングが何に対応するかを理解するための最良のリファレンスとして GTK 4 のドキュメントをご参照ください。またリポジトリ内のサンプル（特に非自明な GTK 4 アプリケーションを示す計算機サンプル）が実用的な使い方を示しています。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7c53ded" class="outline-4">
+<h4 id="org7c53ded">安定性</h4>
+<div class="outline-text-4" id="text-org7c53ded">
+<p>
+このコードは本番環境でテストされていません。生成されたバインディングは広い範囲をカバーしていますが、テストカバレッジはまだ包括的ではありません。この段階では、本番環境や安全性が重要なコンテキストでの使用はお勧めしません。コメントやMRは歓迎します。
+</p>
+
+<p>
+このコードは Linux 環境以外ではテストされていません。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8c7e899" class="outline-4">
+<h4 id="org8c7e899">インストールと使用方法</h4>
+<div class="outline-text-4" id="text-org8c7e899">
+<p>
+現在はソースコードをダウンロードしてピンしてください（opam リリースの準備中です。クロスプラットフォームの問題の解消に時間がかかっているため、利用可能になり次第こちらにコメントで更新します）。
+</p>
+
+<p>
+バインディングは GTK 4.14.5（Ubuntu 24.04）に対して生成されています。古いバージョンをお持ちの場合、理論上はコンパイルできますが、お使いのバージョンで利用できない API を呼び出すと実行時エラーが発生します。
+</p>
+
+<ol class="org-ol">
+<li>リポジトリをダウンロードしてください: <a href="https://github.com/chris-armstrong/ocgtk%EF%BC%88%E3%81%93%E3%81%93%E3%81%A7%E8%AA%AC%E6%98%8E%E3%81%97%E3%81%9F%E5%86%85%E5%AE%B9%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E3%81%AB%E3%81%AF">https://github.com/chris-armstrong/ocgtk%EF%BC%88%E3%81%93%E3%81%93%E3%81%A7%E8%AA%AC%E6%98%8E%E3%81%97%E3%81%9F%E5%86%85%E5%AE%B9%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E3%81%AB%E3%81%AF</a> v0.1-preview0 タグを使用してください）</li>
+<li>それぞれのサブディレクトリで conf-gtk4 と ocgtk パッケージをピンしてください
+<ol class="org-ol">
+<li><code>opam pin conf-gtk</code></li>
+<li><code>opam pin ocgtk</code></li>
+</ol></li>
+<li><code>opam install ocgtk</code> を実行してください</li>
+</ol>
+
+<p>
+各ライブラリは ocamlfind レベルで <code>ocgtk.&lt;libname&gt;</code> として公開されています。例えば、dune ファイルに <code>ocgtk.gtk</code> や <code>ocgtk.gdk</code> を追加し、<code>opam</code> / <code>dune-project</code> ファイルで <code>ocgtk</code> に依存するように設定してください。
+</p>
+
+<p>
+<b>ソースとイシュートラッカー</b>: <a href="https://github.com/chris-armstrong/ocgtk">https://github.com/chris-armstrong/ocgtk</a>
+</p>
+
+<p>
+フィードバックやバグ報告を歓迎します。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">out-channel-redirect 0.1 — out_channel の出力をリダイレクト・キャプチャする</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-out-channel-redirect-0-1-redirect-and-capture-out-channel-output/17945/1">https://discuss.ocaml.org/t/ann-out-channel-redirect-0-1-redirect-and-capture-out-channel-output/17945/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgee8f4f2" class="outline-3">
+<h3 id="orgee8f4f2">Hhugo が発表しました</h3>
+<div class="outline-text-3" id="text-orgee8f4f2">
+<p>
+out_channel への出力をリダイレクト・キャプチャするためのライブラリ、<a href="https://github.com/hhugo/out-channel-redirect">out-channel-redirect</a> の最初のリリースをお知らせします。
+</p>
+</div>
+
+<div id="outline-container-org0ce7b1a" class="outline-4">
+<h4 id="org0ce7b1a">機能:</h4>
+<div class="outline-text-4" id="text-org0ce7b1a">
+<ul class="org-ul">
+<li>任意の out_channel を文字列にキャプチャ（stdout および stderr 向けの便利な短縮形あり）</li>
+<li>一方のチャンネルを別のチャンネルにリダイレクト</li>
+<li>ネイティブ（dup/dup2 経由）、JavaScript（js_of_ocaml）、WebAssembly（wasm_of_ocaml）で動作</li>
+<li>手動でリダイレクトのライフタイムを制御するエキスパート API</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org07b8c36" class="outline-4">
+<h4 id="org07b8c36">インストール:</h4>
+<div class="outline-text-4" id="text-org07b8c36">
+<pre class="example" id="org3857c6e">
+opam install out-channel-redirect
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgedc0132" class="outline-4">
+<h4 id="orgedc0132">クイックサンプル:</h4>
+<div class="outline-text-4" id="text-orgedc0132">
+<div class="org-src-container">
+<pre class="src src-ocaml">let output, result =
+  Out_channel_redirect.capture_channel some_channel ~f:(fun () → 
+    Printf.fprintf some_channel "hello";
+    42)
+(* output = "hello", result = 42 *)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="5">ppxlib.0.38.0</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ppxlib-0-38-0/17948/1">https://discuss.ocaml.org/t/ann-ppxlib-0-38-0/17948/1</a>
+</p>
+</div>
+
+<div id="outline-container-org2225c05" class="outline-3">
+<h3 id="org2225c05">Nathan Rebours が発表しました</h3>
+<div class="outline-text-3" id="text-org2225c05">
+<p>
+ppxlib チームは ppxlib.0.38.0 のリリースをお知らせします。
+</p>
+
+<p>
+このリリースの主な機能は OCaml 5.5 のサポートと、OCaml 5.4 および 5.3 のサポートの改善です。またいくつかのバグ修正と新しい API エントリも含まれています。詳細なリリースノートは<a href="https://github.com/ocaml-ppx/ppxlib/releases/tag/0.38.0">こちら</a>からご覧いただけます。
+</p>
+
+<p>
+これは<a href="https://discuss.ocaml.org/t/ann-ppxlib-support-for-future-compilers/17430">このスレッド</a>で新しいコンパイラーサポートのアプローチを発表して以来の最初のリリースです。バージョン <code>&gt;= 5.3</code> のコンパイラーへのすべてのサポートはこの手法を使って実装されており、新しい言語機能は AST にエンコードされています。ラベル付きタプルやエフェクトパターンなどを操作できるよう、`Ast_builder` および `Ast_pattern` 関数を追加しました。これらは API ドキュメントの<a href="https://ocaml-ppx.github.io/ppxlib/ppxlib/Ppxlib/Ast_builder/Default/index.html#future-asts">こちら</a>と<a href="https://ocaml-ppx.github.io/ppxlib/ppxlib/Ppxlib/Ast_pattern/index.html#future-asts">こちら</a>でご覧いただけます。また<a href="https://ocaml-ppx.github.io/ppxlib/ppxlib/compatibility.html#future_compilers">新しいマニュアルセクション</a>でその使い方を説明しています。現在の内部 AST（5.2）では表現できない他の新しい言語機能の生成や消費に興味がある場合は、関連するヘルパーを追加できるよう<a href="https://github.com/ocaml-ppx/ppxlib/issues/new">イシューを開いて</a>ください。
+</p>
+
+<p>
+エコシステムがまだ 5.2 AST の変更と <code>ppxlib.0.36.0</code> から回復しきっていない中、さらなる破壊を導入することなく新しいコンパイラーのサポートを追加し、メンテナンスの負担を ppxlib の範囲内に収められることを嬉しく思います。
+このアプローチをより実現可能にするため、コンパイラーチームとの<a href="https://github.com/ocaml/ocaml/issues/14668">議論</a>も開始しています。
+</p>
+
+<p>
+このリリースで唯一の外部コントリビューターである @ceastlund に感謝します。
+</p>
+
+<p>
+個人的には、リリースを助けてくれた @patricoferris、そして ppxlib での私の作業に資金を提供してくれた OCaml Software Foundation と OCamlPro に感謝します。
+</p>
+
+<p>
+お読みいただきありがとうございます。Happy preprocessing!
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="6">OCaml コードにおける AI 使用の自発的開示に関する提案</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/a-proposal-for-voluntary-ai-disclosure-in-ocaml-code/17950/1">https://discuss.ocaml.org/t/a-proposal-for-voluntary-ai-disclosure-in-ocaml-code/17950/1</a>
+</p>
+</div>
+
+<div id="outline-container-org81692d2" class="outline-3">
+<h3 id="org81692d2">Anil Madhavapeddy が発表しました</h3>
+<div class="outline-text-3" id="text-org81692d2">
+<p>
+皆さん、
+</p>
+
+<p>
+opam メタデータとソースコード内の<a href="https://ocaml.org/manual/5.3/attributes.html">拡張属性</a>を使って、公開された OCaml コードにおける AI 使用を自発的に開示できるようにする <b><a href="https://github.com/avsm/ocaml-ai-disclosure">ocaml-ai-disclosure</a></b> 提案をまとめました。
+</p>
+
+<p>
+リポジトリと<a href="https://anil.recoil.org/notes/opam-ai-disclosure">ブログ記事</a>に詳細、属性を抽出するためのプロトタイプツール、そして FAQ があります。要点としては、<a href="https://www.w3.org/community/ai-content-disclosure/">HTML に関する W3C 開示提案</a>と非常に似たものを提案しています。
+</p>
+</div>
+
+<div id="outline-container-org109ea76" class="outline-4">
+<h4 id="org109ea76">パッケージレベルの開示</h4>
+<div class="outline-text-4" id="text-org109ea76">
+<p>
+opam パッケージは拡張フィールドを使って開示を宣言できます：
+</p>
+
+<pre class="example" id="org20ce5ce">
+x-ai-disclosure: "ai-assisted"
+x-ai-model: "claude-opus-4-6"
+x-ai-provider: "Anthropic"
+</pre>
+
+<p>
+<b>注: 最終提案では値のリストになる可能性がありますが、概念はご理解いただけると思います。</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1392687" class="outline-4">
+<h4 id="org1392687">OCaml モジュールレベル</h4>
+<div class="outline-text-4" id="text-org1392687">
+<p>
+OCaml は拡張属性をサポートしており、コンパイルユニット全体に適用される浮動属性として使用できます：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">[@@@ai_disclosure "ai-generated"]
+[@@@ai_model "claude-opus-4-6"]
+[@@@ai_provider "Anthropic"]
+
+let foo = ...
+let bar = ...
+</pre>
+</div>
+
+<p>
+単一のバインディングに適用される宣言属性を使って、より細かいスコープにすることもできます：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">[@@@ai_disclosure "ai-assisted"]
+
+let human_written x = ...
+
+let ai_helper y = ...
+[@@ai_disclosure "ai-generated"]
+</pre>
+</div>
+
+<p>
+開示は W3C HTML 提案と同様の最近傍の祖先継承モデルに従い、明示的なアノテーションが継承された値を上書きします。
+</p>
+
+<p>
+詳細は<a href="https://anil.recoil.org/notes/opam-ai-disclosure">ブログ記事</a>と、いくつかの含意についての<a href="https://github.com/avsm/ocaml-ai-disclosure">提案リポジトリ内の FAQ</a>に書いています。
+</p>
+
+<p>
+他の言語エコシステムで同様の試みをしている先行事例は見当たりませんでしたので、皆さんがご存知のものがあればぜひ教えてください。もしより広いエコシステムでこれに関心がなければ自分だけで使いますが、議論を始めることに害はないと考えました！
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="7">ブログ: Markdown としての OCaml ドキュメント</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/blog-ocaml-documentation-as-markdown/17951/1">https://discuss.ocaml.org/t/blog-ocaml-documentation-as-markdown/17951/1</a>
+</p>
+</div>
+
+<div id="outline-container-org1548604" class="outline-3">
+<h3 id="org1548604">David Sancho が発表しました</h3>
+<div class="outline-text-3" id="text-org1548604">
+<p>
+odoc の Markdown バックエンドと、それを使って melange.re のドキュメントを改善した方法についてのブログ記事を公開しました。気に入っていただければ幸いです：
+</p>
+
+<p>
+<a href="https://sancho.dev/blog/ocaml-documentation-as-markdown">https://sancho.dev/blog/ocaml-documentation-as-markdown</a>
+</p>
+
+<p>
+これを実現したコードをレビューしてくれた @jonludlam、@rgrinberg、@Alizter に感謝します。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="8">hotseat Squava（小さな LablGtk2 デモ）</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-hotseat-squava-a-tiny-lablgtk2-demo/17957/1">https://discuss.ocaml.org/t/ann-hotseat-squava-a-tiny-lablgtk2-demo/17957/1</a>
+</p>
+</div>
+
+<div id="outline-container-org3db59c8" class="outline-3">
+<h3 id="org3db59c8">Damien Guichard が発表しました</h3>
+<div class="outline-text-3" id="text-org3db59c8">
+<p>
+<a href="https://pastebin.com/Nwu2aC7A">https://pastebin.com/Nwu2aC7A</a>
+</p>
+
+<p>
+<a href="https://boardgamegeek.com/boardgame/112745/squava">Squava ボードゲーム</a>です。
+</p>
+
+
+<div id="orge1b6edf" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/8/87c31d9f127f99f12e96ecff6c579b710926f945.png" alt="87c31d9f127f99f12e96ecff6c579b710926f945.png" width="80%" />
+</p>
+</div>
+
+<p>
+Squava 1.1 にはベクターグラフィックスはありませんが、<code>./squava.png</code> を編集・縮小・拡大すると、プログラムが新しいピックスマップを使ってボードを適応させます。
+</p>
+
+
+<div id="org6a8d725" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/6/66cc412e804f7d1e81a6d11ea5c4645f3edfc871.jpeg" alt="66cc412e804f7d1e81a6d11ea5c4645f3edfc871.jpeg" width="80%" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="9">opentelemetry 0.90（および関連ライブラリ）</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-opentelemetry-0-90-and-associated-libraries/17958/1">https://discuss.ocaml.org/t/ann-opentelemetry-0-90-and-associated-libraries/17958/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgbca5112" class="outline-3">
+<h3 id="orgbca5112">Simon Cruanes が発表しました</h3>
+<div class="outline-text-3" id="text-orgbca5112">
+<p>
+こんにちは、
+</p>
+
+<p>
+<a href="https://github.com/ocaml-tracing/ocaml-opentelemetry/releases/tag/v0.90">opentelemetry 0.90</a>（および <code>opentelemetry-client</code>、<code>opentelemetry-client-cohttp-lwt</code> など）のリリースをお知らせします。
+</p>
+
+<p>
+opentelemetry は OCaml 向けの <a href="https://opentelemetry.io/">https://opentelemetry.io/</a> の実装で、ライブラリなどのインストゥルメンテーション用のコア <span class="underline">クライアント API</span> と、各種エクスポーターを備えた完全な SDK の両方をカバーしています。<a href="https://github.com/ocaml-tracing/ocaml-trace/">Trace</a> と互換性があります。
+</p>
+
+<p>
+このリリースは数ヶ月の作業の結果であり、1.0 前の最後のリリースの一つになることを期待しています。<a href="https://github.com/ocaml-tracing/ocaml-opentelemetry/blob/main/CHANGES.md#090">changelog</a> はかなり大きく、多くのものを作り直しました。主な変更点は以下の通りです：
+</p>
+<ul class="org-ul">
+<li>ocaml-protoc/pbrt 4.0 への移行（ミュータブルフィールドと protobuf 向けの異なるコード生成）</li>
+<li>API が <a href="https://opentelemetry.io">https://opentelemetry.io</a> のガイドラインにより近づいた（まだ完全ではないが改善）</li>
+<li>シグナルの内部処理のモジュール性が大幅に改善され、コードの再利用性向上、すべてをプラグイン可能に、キューイング/バッチング改善、HTTP リトライ対応</li>
+<li>protobuf の代わりに JSON としてエクスポートするサポート</li>
+<li>trace 0.11 のサポート（<code>opentelemetry.trace</code> がグローバルな OTEL エクスポーター以外のすべてのグローバル状態を省けるようになった）</li>
+<li>ライフサイクルとクリーンアップの改善</li>
+</ul>
+
+<p>
+API ドキュメントは<a href="https://ocaml-tracing.github.io/ocaml-opentelemetry/">こちら</a>にあります。いつものように、フィードバックやバグ報告などは大歓迎です。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="10">Dune 3.22</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-dune-3-22/17912/2">https://discuss.ocaml.org/t/ann-dune-3-22/17912/2</a>
+</p>
+</div>
+
+<div id="outline-container-org09d3bfc" class="outline-3">
+<h3 id="org09d3bfc">このスレッドを続けて、Shon が発表しました</h3>
+<div class="outline-text-3" id="text-org09d3bfc">
+<p>
+Dune チームは <a href="https://github.com/ocaml/dune/releases/tag/3.22.1">dune 3.22.1 のリリース</a>をお知らせします。
+</p>
+
+<p>
+このリリースで問題が発生した場合は、<a href="https://github.com/ocaml/dune/issues">イシュートラッカー</a>にご報告ください。
+</p>
+</div>
+
+<div id="outline-container-org9b5a8c6" class="outline-4">
+<h4 id="org9b5a8c6">修正内容</h4>
+<div class="outline-text-4" id="text-org9b5a8c6">
+<ul class="org-ul">
+<li>Windows 7 との互換性を復元 (#13905, @nojb)</li>
+
+<li><code>dune test</code> がデフォルトコンテキストのみでテストを実行するようになりました。コンテキストが1つの場合、それがデフォルトとして扱われます。これにより、ワークスペースに "default" という名前のコンテキストがない場合のクラッシュが修正されます。(#13930, fixes #13904, @Alizter)</li>
+
+<li><code>dune trace cat --chrome-trace</code> がマイクロ秒単位のタイムスタンプと所要時間を提供することで Chrome Trace Event Format に準拠するよう修正 (#13911, fixes #13906, @Alizter)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-orgbf0e55b" class="outline-2">
+<h2 id="orgbf0e55b">過去の CWN</h2>
+<div class="outline-text-2" id="text-orgbf0e55b">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://ocaml.jp/cwn-ja/">アーカイブ</a>や<a href="https://ocaml.jp/cwn-ja/cwn.rss">RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> を購読してください。
+</p>
+
+<div class="authorname" id="orga31e080">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
