@@ -1,28 +1,6 @@
 (executable
  (name cwn_ja)
  (public_name cwn_ja)
- (modules cwn_ja)
- (libraries
-  core
-  core_unix.command_unix
-  cwn_ja_lib)
- (preprocess
-  (pps ppx_jane)))
-
-(executables
- (names gen_index gen_cwn_rss gen_dune_inc)
- (modules gen_index gen_cwn_rss gen_dune_inc)
- (libraries
-  core
-  core_unix.sys_unix
-  cwn_ja_lib
-  re)
- (preprocess
-  (pps ppx_jane)))
-
-(executable
- (name translate)
- (modules translate)
  (libraries
   async
   core
@@ -30,3 +8,14 @@
   cwn_ja_lib)
  (preprocess
   (pps ppx_jane)))
+
+; Snapshot of every subcommand + flag, regenerated on every build. Promoted
+; back into the source tree so `bin/help.txt` is browsable on GitHub and
+; reviewable as part of any CLI change.
+(rule
+ (target help.txt)
+ (mode promote)
+ (action
+  (with-stdout-to
+   %{target}
+   (run %{exe:cwn_ja.exe} help -recursive -flags))))

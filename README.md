@@ -24,11 +24,11 @@ ja/DATE.html
 
 Plus two aggregators that run after any per-issue rebuild:
 
-- `bin/gen_index.ml` → `ja/index.html` (calendar view of all weeks)
-- `bin/gen_cwn_rss.ml` → `ja/cwn.rss` (RSS 2.0 envelope wrapping the ~10 most recent fragments)
+- `cwn_ja gen-index` → `ja/index.html` (calendar view of all weeks)
+- `cwn_ja gen-cwn-rss` → `ja/cwn.rss` (RSS 2.0 envelope wrapping the ~10 most recent fragments)
 
 The xml→org→html pipeline and aggregators are driven by per-date dune rules.
-`bin/gen_dune_inc.ml` regenerates `ja/dune.inc` from the current set of
+`cwn_ja gen-dune-inc` regenerates `ja/dune.inc` from the current set of
 `ja/*.xml` inputs; `dune build` builds and promotes everything else into the
 source tree.
 
@@ -39,14 +39,11 @@ cwn-data/          # upstream CWN XML + org files (git submodule)
 ja/                # per-week xml/org/rss/html + cwn.rss + index.html
 ja/dune.inc        # generated per-date rules + aggregators (committed)
 lib/               # cwn_ja_lib OCaml library
-                   #   Xmltree, Cwn, Language, Cli   — xml → org/rss
-                   #   Translator, Source_set         — translation flow
-                   #   Index_page, Cwn_rss            — site aggregators
-bin/cwn_ja.ml      # CLI wrapping Cwn_ja_lib.Cli.command
-bin/translate.ml   # OpenRouter-driven translator
-bin/gen_index.ml   # writes ja/index.html
-bin/gen_cwn_rss.ml # writes ja/cwn.rss
-bin/gen_dune_inc.ml# writes ja/dune.inc
+                   #   Xmltree, Cwn, Language       — xml → org/rss core
+                   #   Translator, Source_set       — translation flow
+                   #   Index_page, Cwn_rss          — site aggregators
+                   #   Cli                           — Command.group of every subcommand
+bin/cwn_ja.ml      # single binary: `cwn_ja {convert,translate,gen-*}`
 scripts/
   prompt.md        # system prompt for translation
   org-export.el    # emacs config for org-to-HTML export (CJK fixes)
@@ -64,16 +61,16 @@ dune-project       # OCaml project; deps locked in dune.lock/ via (pkg enabled)
 
 ```bash
 # translate any untranslated weeks (candidate = upstream has both .xml and .org)
-dune exec ./bin/translate.exe
+dune exec cwn_ja -- translate
 
 # translate one specific date
-dune exec ./bin/translate.exe -- -file 2026.03.31
+dune exec cwn_ja -- translate -file 2026.03.31
 
 # force-retranslate everything from a date onward (bypasses the skip check)
-dune exec ./bin/translate.exe -- -since 2026.03.01
+dune exec cwn_ja -- translate -since 2026.03.01
 
 # translate weeks whose upstream files changed between two submodule commits
-dune exec ./bin/translate.exe -- -from-ref abc123 -to-ref def456
+dune exec cwn_ja -- translate -from-ref abc123 -to-ref def456
 
 # rebuild derived artefacts only — no translation, no API calls
 dune build && dune build
@@ -96,14 +93,14 @@ dune runtest         # run the expect tests in test/
 dune promote         # accept expect-test diffs after an intentional change
 ```
 
-Invoke the conversion CLI directly:
+Invoke the conversion subcommand directly:
 
 ```bash
 # English output (upstream alan.petitepomme.net URLs, both .org and .rss)
-dune exec cwn_ja -- path/to/DATE.xml
+dune exec cwn_ja -- convert path/to/DATE.xml
 
 # Japanese output (ocaml.jp URLs, Japanese boilerplate, both .org and .rss)
-dune exec cwn_ja -- -japanese path/to/DATE.xml
+dune exec cwn_ja -- convert -japanese path/to/DATE.xml
 ```
 
 Outputs land beside the input.

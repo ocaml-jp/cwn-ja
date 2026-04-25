@@ -46,7 +46,7 @@ jobs:
           else
             ARGS="-from-ref ${{ steps.before.outputs.sha }} -to-ref ${{ steps.after.outputs.sha }}"
           fi
-          dune exec ./bin/translate.exe -- $ARGS
+          dune exec cwn_ja -- translate $ARGS
 
       # Two passes: the first regenerates ja/dune.inc from the new *.xml glob,
       # the second uses the refreshed rules to build org/rss/html and the
