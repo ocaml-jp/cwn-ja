@@ -1,0 +1,15 @@
+(version dev)
+
+(build
+ (all_platforms ((dune))))
+
+(depends
+ (all_platforms
+  (ocaml ppx_jsonaf_conv ppx_jane async cohttp-async async_ssl core jsonaf)))
+
+(source
+ (fetch
+  (url
+   git+https://github.com/mt-caret/openrouter-ocaml.git#6790e521de1948e408191efae6590ecbf208e03c)))
+
+(dev)
