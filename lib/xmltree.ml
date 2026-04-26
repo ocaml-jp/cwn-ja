@@ -24,9 +24,7 @@ let of_input input =
   snd (Xmlm.input_doc_tree ~el ~data input) |> sanitise
 ;;
 
-let of_channel ic = of_input (Xmlm.make_input (`Channel ic))
 let of_string s = of_input (Xmlm.make_input (`String (0, s)))
-let of_file filename = In_channel.with_file filename ~f:of_channel
 
 let get_children_with_tag tag = function
   | Data _ -> failwith "No children found."

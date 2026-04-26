@@ -4,7 +4,6 @@
   async
   core
   core_unix.date_unix
-  core_unix.sys_unix
   openrouter_api
   re
   xmlm)

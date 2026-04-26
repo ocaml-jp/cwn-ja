@@ -13,7 +13,6 @@ type t =
 [@@deriving sexp_of]
 
 val of_string : string -> t
-val of_file : string -> t
 
 (** [get_children_with_tag tag tree] returns the children of the first
     element child of [tree] whose tag is [tag]. Raises [Failure] if no
