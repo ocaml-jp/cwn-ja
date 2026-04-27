@@ -31,11 +31,6 @@ jobs:
         id: after
         run: echo "sha=$(git -C cwn-data rev-parse HEAD)" >> $GITHUB_OUTPUT
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
       - name: Set up dune
         uses: ocaml-dune/setup-dune@v2
 
@@ -44,14 +39,22 @@ jobs:
 
       - name: Run translation
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           if [ -n "${{ inputs.since }}" ]; then
-            ARGS="--since ${{ inputs.since }}"
+            ARGS="-since ${{ inputs.since }}"
           else
-            ARGS="--from-ref ${{ steps.before.outputs.sha }} --to-ref ${{ steps.after.outputs.sha }}"
+            ARGS="-from-ref ${{ steps.before.outputs.sha }} -to-ref ${{ steps.after.outputs.sha }}"
           fi
-          node --experimental-strip-types scripts/pipeline.ts $ARGS
+          dune exec cwn_ja -- translate $ARGS
+
+      # Two passes: the first regenerates ja/dune.inc from the new *.xml glob,
+      # the second uses the refreshed rules to build org/rss/html and the
+      # aggregators. Both promote outputs back into ja/.
+      - name: Build site
+        run: |
+          dune build
+          dune build
 
       - name: Create PR (if there are changes)
         id: cpr
@@ -60,7 +63,7 @@ jobs:
           title: "translate: add Japanese CWN translations (${{ github.run_id }})"
           branch: auto-translate/${{ github.run_id }}
           commit-message: "translate: add new Japanese CWN translations"
-          body: "Automated Japanese translations of new CWN issues via Claude API."
+          body: "Automated Japanese translations of new CWN issues via OpenRouter."
           labels: translation, automated
 
       # peter-evans/create-pull-request restores the working tree to the base
@@ -73,7 +76,7 @@ jobs:
 
       # Deploys here rather than from preview.yml because PRs created by
       # GITHUB_TOKEN don't trigger pull_request workflows. HTML is already
-      # built by the translation step above (make runs inside pipeline.ts).
+      # built by the dune build step above.
       - name: Deploy PR preview
         if: steps.cpr.outputs.pull-request-number
         uses: rossjrw/pr-preview-action@v1

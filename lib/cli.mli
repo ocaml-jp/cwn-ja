@@ -1,4 +1,5 @@
-(** Command-line entry point for [cwn_ja]. Run with {!Command_unix.run}. *)
+(** Top-level [cwn_ja] CLI: a [Command.group] of every subcommand the build
+    pipeline drives. Run with {!Command_unix.run}. *)
 
 open! Core
 

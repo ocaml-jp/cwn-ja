@@ -1,6 +1,14 @@
 (require 'org)
 (require 'org-element)
 
+;; org-export-new-reference uses Emacs's PRNG to generate `orgXXXXXXX'
+;; anchors for headings without :CUSTOM_ID:. Seed the RNG with a fixed
+;; string so identical input .org files produce identical HTML anchors.
+(random "cwn-ja-export")
+
+;; The HTML output otherwise embeds a `<!-- YYYY-MM-DD HH:MM -->'
+;; export-time comment as its first non-doctype line.
+(setq org-export-time-stamp-file nil)
 
 ;; org-element--parse-generic-emphasis hardcodes ASCII-only character
 ;; classes for emphasis boundaries, breaking ~code~ adjacent to CJK

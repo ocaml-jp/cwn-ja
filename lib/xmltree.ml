@@ -1,4 +1,5 @@
 open! Core
+open! Async
 
 type t =
   | Element of string * t list
@@ -24,9 +25,7 @@ let of_input input =
   snd (Xmlm.input_doc_tree ~el ~data input) |> sanitise
 ;;
 
-let of_channel ic = of_input (Xmlm.make_input (`Channel ic))
 let of_string s = of_input (Xmlm.make_input (`String (0, s)))
-let of_file filename = In_channel.with_file filename ~f:of_channel
 
 let get_children_with_tag tag = function
   | Data _ -> failwith "No children found."
@@ -34,17 +33,24 @@ let get_children_with_tag tag = function
     List.find_map children ~f:(function
       | Element (t, cc) when String.equal t tag -> Some cc
       | _ -> None)
-    |> Option.value_exn
-         ~message:[%string "No element with tag %{tag} in the document."]
+    |> Option.value_or_thunk ~default:(fun () ->
+      raise_s [%message "no element with tag in document" (tag : string)])
 ;;
 
 let get_data_with_tag tag = function
   | [] -> failwith "No children found."
   | Element (t, [ Data d ]) :: rest ->
-    if String.equal t tag
-    then d, rest
-    else failwithf "Wrong tag on first child: expected %S, found %S." tag t ()
+    (match String.equal t tag with
+     | true -> d, rest
+     | false ->
+       raise_s
+         [%message "wrong tag on first child" ~expected:(tag : string) ~found:(t : string)])
   | _ -> failwith "The first child has no tag."
+;;
+
+let find_data_with_tag tag = function
+  | Element (t, [ Data d ]) :: rest when String.equal t tag -> Some (d, rest)
+  | _ -> None
 ;;
 
 let get_children = function

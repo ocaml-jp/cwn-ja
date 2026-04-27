@@ -13,7 +13,6 @@ type t =
 [@@deriving sexp_of]
 
 val of_string : string -> t
-val of_file : string -> t
 
 (** [get_children_with_tag tag tree] returns the children of the first
     element child of [tree] whose tag is [tag]. Raises [Failure] if no
@@ -22,7 +21,11 @@ val get_children_with_tag : string -> t -> t list
 
 (** [get_data_with_tag tag children] expects the head of [children] to be
     [Element (tag, [ Data d ])]. Returns [d] together with the remaining
-    siblings. Raises [Failure] otherwise. *)
+    siblings. Raises otherwise. *)
 val get_data_with_tag : string -> t list -> string * t list
+
+(** Like {!get_data_with_tag} but returns [None] (instead of raising) when
+    the head of [children] doesn't match the expected shape. *)
+val find_data_with_tag : string -> t list -> (string * t list) option
 
 val get_children : t -> t list

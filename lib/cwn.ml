@@ -1,4 +1,5 @@
 open! Core
+open! Async
 
 module Entry = struct
   type t =
@@ -10,9 +11,9 @@ module Entry = struct
 end
 
 type t =
-  { date : string
-  ; previous : string
-  ; next : string
+  { date : Date.t
+  ; previous : Date.t
+  ; next : Date.t
   ; date_text : string
   ; extra_head : string option
   ; entries : Entry.t list
@@ -26,24 +27,18 @@ let of_xmltree tree =
   let next, header = Xmltree.get_data_with_tag "cwn_next" header in
   let date_text, header = Xmltree.get_data_with_tag "cwn_date_text" header in
   let extra_head =
-    try
-      let e, _ = Xmltree.get_data_with_tag "cwn_extra_head" header in
-      match String.is_empty e with
-      | true -> None
-      | false -> Some e
-    with
-    | Failure _ -> None
+    match Xmltree.find_data_with_tag "cwn_extra_head" header with
+    | Some (e, _) when not (String.is_empty e) -> Some e
+    | _ -> None
   in
   let entry_elems = Xmltree.get_children_with_tag "cwn_body" tree in
   let parse_entry elem : Entry.t =
     let children = Xmltree.get_children elem in
     let title, children = Xmltree.get_data_with_tag "cwn_title" children in
     let url, children =
-      try
-        let u, rest = Xmltree.get_data_with_tag "cwn_url" children in
-        Some u, rest
-      with
-      | Failure _ -> None, children
+      match Xmltree.find_data_with_tag "cwn_url" children with
+      | Some (u, rest) -> Some u, rest
+      | None -> None, children
     in
     let rec messages acc = function
       | [] -> List.rev acc
@@ -54,9 +49,9 @@ let of_xmltree tree =
     in
     { title; url; content = messages [] children }
   in
-  { date
-  ; previous
-  ; next
+  { date = Cwn_date.of_string date
+  ; previous = Cwn_date.of_string previous
+  ; next = Cwn_date.of_string next
   ; date_text
   ; extra_head
   ; entries = List.map entry_elems ~f:parse_entry
@@ -78,7 +73,6 @@ let to_orgmode
       ~language
       { previous; next; date_text; extra_head; entries; date = _ }
   =
-  let title = Language.title language in
   let header =
     [%string
       {|#+OPTIONS: ^:nil
@@ -88,7 +82,7 @@ let to_orgmode
 #+OPTIONS: author:nil
 #+HTML_HEAD: <style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
 #+HTML_HEAD: <style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
-#+TITLE: %{title}
+#+TITLE: %{Language.title language}
 |}]
   in
   let nav =
@@ -108,7 +102,6 @@ let to_orgmode
     Option.value_map extra_head ~default:[] ~f:(fun eh ->
       [ [%string "%{eh}\n\n"] ])
   in
-  let toc = "#+TOC: headlines 1\n" in
   let archive_prefix = Language.archive_prefix language in
   let entry_chunks =
     List.concat
@@ -142,24 +135,27 @@ let to_orgmode
          (head :: url_chunk) @ messages))
   in
   let footer =
-    let heading = Language.old_cwn_heading language in
-    let body = Language.old_cwn_body language in
     [%string
       {|
 
-* %{heading}
+* %{Language.old_cwn_heading language}
 :PROPERTIES:
 :UNNUMBERED: t
 :END:
 
-%{body}
+%{Language.old_cwn_body language}
 #+BEGIN_authorname
 [[https://alan.petitepomme.net/][Alan Schmitt]]
 #+END_authorname
 |}]
   in
   List.concat
-    [ [ header; nav; greeting ]; extra_head_chunk; [ toc ]; entry_chunks; [ footer ] ]
+    [ [ header; nav; greeting ]
+    ; extra_head_chunk
+    ; [ "#+TOC: headlines 1\n" ]
+    ; entry_chunks
+    ; [ footer ]
+    ]
   |> String.concat
 ;;
 
@@ -167,18 +163,17 @@ let to_rss
       ~language
       { date; entries; previous = _; next = _; date_text = _; extra_head = _ }
   =
-  let parsed = Date_unix.parse ~fmt:"%Y.%m.%d" date in
-  let title = Language.rss_title language parsed in
   (* RFC 822 pubDate. Assumes LC_TIME is C/en_* so strftime gives English
      day/month abbreviations; Ubuntu CI and macOS dev both default to that. *)
-  let pub_date = Date_unix.format parsed "%a, %d %b %Y 12:00:00 GMT" in
-  let site = Language.site_base_url language in
-  let page_url = [%string "%{site}%{date}.html"] in
+  let pub_date = Date_unix.format date "%a, %d %b %Y 12:00:00 GMT" in
+  let page_url =
+    [%string "%{Language.site_base_url language}%{date#Cwn_date}.html"]
+  in
   let header =
     [%string
       {|<?xml version="1.0" encoding="utf-8"?>
 <item>
-  <title>%{title}</title>
+  <title>%{Language.rss_title language date}</title>
   <pubDate>%{pub_date}</pubDate>
   <link>%{page_url}</link>
   <guid>%{page_url}</guid>

@@ -1,0 +1,34 @@
+OCaml Weekly News Japanese translation toolchain
+
+  cwn_ja.exe SUBCOMMAND
+
+=== subcommands and flags ===
+
+  convert                    . Convert a CWN XML file into org-mode and RSS
+                               files.
+  . [-japanese]              . emit Japanese boilerplate, nav links, and RSS
+                               URLs
+  gen-cwn-rss                . Wrap the 10 most-recent ja/*.rss fragments in the
+                               channel envelope.
+  gen-dune-inc               . Emit ja/dune.inc — per-date build rules +
+                               aggregator rules.
+  gen-index                  . Scan DIR for *.html and emit ja/index.html to
+                               stdout.
+  translate                  . Translate cwn-data XML files to Japanese via
+                               OpenRouter.
+  . [-cwn-data DIR]          . upstream submodule (default: cwn-data)
+  . [-file DATE]             . single date to translate (YYYY.MM.DD)
+  . [-from-ref REF]          . cwn-data git ref (paired with --to-ref)
+  . [-ja DIR]                . translation output (default: ja)
+  . [-prompt FILE]           . path to system prompt (default:
+                               scripts/prompt.md)
+  . [-since DATE]            . force-retranslate dates >= DATE
+  . [-to-ref REF]            . cwn-data git ref (paired with --from-ref)
+  version                    . print version information
+  . [-build-info]            . print build info for this build
+  . [-version]               . print the version of this build
+  help                       . explain a given subcommand (perhaps recursively)
+  . [-expand-dots]           . expand subcommands in recursive help
+  . [-flags]                 . show flags as well in recursive help
+  . [-recursive]             . show subcommands of subcommands, etc.
+
