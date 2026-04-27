@@ -86,7 +86,7 @@ let%expect_test "cwn: of_xmltree populates every field" =
   print_s [%sexp (parsed_cwn () : Cwn.t)];
   [%expect
     {|
-    ((date 2000.10.20) (previous 2000.10.10) (next 2000.10.30)
+    ((date 2000-10-20) (previous 2000-10-10) (next 2000-10-30)
      (date_text "Date as text") (extra_head ("Extra text"))
      (entries
       (((title "Title of the entry") (url (https://myurl.com))

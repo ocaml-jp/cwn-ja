@@ -22,7 +22,7 @@ OCaml Weekly News Japanese translation toolchain
   . [-ja DIR]                . translation output (default: ja)
   . [-prompt FILE]           . path to system prompt (default:
                                scripts/prompt.md)
-  . [-since DATE]            . force-retranslate dates >= DATE (lexical compare)
+  . [-since DATE]            . force-retranslate dates >= DATE
   . [-to-ref REF]            . cwn-data git ref (paired with --from-ref)
   version                    . print version information
   . [-build-info]            . print build info for this build

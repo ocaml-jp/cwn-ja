@@ -21,7 +21,7 @@ val greeting : date_text:string -> t -> string
 val archive_prefix : t -> string
 val old_cwn_heading : t -> string
 val old_cwn_body : t -> string
-val weekly_url : t -> date:string -> string
+val weekly_url : t -> date:Date.t -> string
 val index_url : t -> string
 
 (** Absolute site root for RSS item URLs. English uses the upstream

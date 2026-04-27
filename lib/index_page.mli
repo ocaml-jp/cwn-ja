@@ -2,7 +2,5 @@
 
 open! Core
 
-(** [to_html ~dates] expects each entry of [dates] to be a [YYYY.MM.DD] string,
-    pre-sorted in display order (newest first). Dates are grouped by year, then
-    by month, in the order they appear in the input list. *)
-val to_html : dates:string list -> string
+(** Years, months, and days are emitted in descending order (newest first). *)
+val to_html : dates:Date.t list -> string

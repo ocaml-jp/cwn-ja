@@ -1,4 +1,5 @@
 open! Core
+open! Async
 
 type t =
   | English
@@ -68,8 +69,8 @@ If you also wish to receive it every week by mail, you may subscribe to the [[ht
    upstream alan.petitepomme.net archive. *)
 let weekly_url t ~date =
   match t with
-  | English -> [%string "https://alan.petitepomme.net/cwn/%{date}.html"]
-  | Japanese -> [%string "file:%{date}.html"]
+  | English -> [%string "https://alan.petitepomme.net/cwn/%{date#Cwn_date}.html"]
+  | Japanese -> [%string "file:%{date#Cwn_date}.html"]
 ;;
 
 let index_url = function

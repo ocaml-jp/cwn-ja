@@ -1,34 +1,31 @@
 open! Core
-
-let split_date date =
-  match String.split date ~on:'.' with
-  | [ year; month; day ] -> year, month, day
-  | _ -> failwithf "invalid date format: %s" date ()
-;;
+open! Async
 
 let to_html ~dates =
-  let parsed = List.map dates ~f:split_date in
-  let year_groups =
-    List.group parsed ~break:(fun (y1, _, _) (y2, _, _) ->
-      not (String.equal y1 y2))
-  in
-  let buf = Buffer.create 1024 in
-  List.iter year_groups ~f:(fun year_group ->
-    let year, _, _ = List.hd_exn year_group in
-    Buffer.add_string buf [%string "\n%{year}\n"];
-    let month_groups =
-      List.group year_group ~break:(fun (_, m1, _) (_, m2, _) ->
-        not (String.equal m1 m2))
-    in
-    List.iter month_groups ~f:(fun month_group ->
-      let _, month, _ = List.hd_exn month_group in
-      let links =
-        List.map month_group ~f:(fun (y, m, d) ->
-          [%string {|<a href="%{y}.%{m}.%{d}.html">%{d}</a>|}])
-        |> String.concat ~sep:"    "
+  let dates = List.sort dates ~compare:Date.descending in
+  let calendar =
+    List.map dates ~f:(fun d -> Date.year d, d)
+    |> Int.Map.of_alist_multi
+    |> Map.to_alist ~key_order:`Decreasing
+    |> List.map ~f:(fun (year, year_dates) ->
+      let months =
+        List.map year_dates ~f:(fun d -> Month.to_int (Date.month d), d)
+        |> Int.Map.of_alist_multi
+        |> Map.to_alist ~key_order:`Decreasing
+        |> List.map ~f:(fun (month_num, month_dates) ->
+          let month_str = sprintf "%02d" month_num in
+          let links =
+            List.map month_dates ~f:(fun d ->
+              let day_str = sprintf "%02d" (Date.day d) in
+              [%string {|<a href="%{d#Cwn_date}.html">%{day_str}</a>|}])
+            |> String.concat ~sep:"    "
+          in
+          [%string "%{month_str}    %{links}\n"])
+        |> String.concat
       in
-      Buffer.add_string buf [%string "%{month}    %{links}\n"]));
-  let calendar = Buffer.contents buf in
+      [%string "\n%{year#Int}\n%{months}"])
+    |> String.concat
+  in
   [%string
     {|<!DOCTYPE html>
 <html lang="ja">

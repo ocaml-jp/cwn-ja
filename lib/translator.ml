@@ -1,9 +1,8 @@
 open! Core
 open! Async
 
-(* Match the printing strategy from scripts/translate.ts:18-33: rewrite the
-   same line on a TTY; emit periodic newline-terminated lines otherwise so
-   batch logs stay readable. *)
+(* On a TTY, rewrite the same status line in place; otherwise emit periodic
+   newline-terminated lines so batch logs stay readable. *)
 module Progress = struct
   type t =
     { mutable last_chars : int

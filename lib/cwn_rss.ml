@@ -1,7 +1,7 @@
 open! Core
+open! Async
 
 let to_xml ~items =
-  let body = String.concat ~sep:"\n" items in
   [%string
     {|<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
@@ -9,7 +9,7 @@ let to_xml ~items =
 <title>OCaml Weekly News (日本語訳)</title>
 <link>https://ocaml.jp/cwn-ja/</link>
 <description>OCaml Weekly News の日本語訳</description>
-%{body}
+%{String.concat ~sep:"\n" items}
 </channel>
 </rss>
 |}]
