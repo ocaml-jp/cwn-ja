@@ -66,7 +66,23 @@
         --eval "(princ (org-export-as 'html))" --kill))))
 
 (rule
- (deps 2026.03.31.html 2026.04.07.html 2026.04.14.html 2026.04.21.html)
+ (deps 2026.04.28.xml)
+ (targets 2026.04.28.org 2026.04.28.rss)
+ (mode promote)
+ (action
+  (run %{exe:../bin/cwn_ja.exe} convert -japanese %{dep:2026.04.28.xml})))
+
+(rule
+ (deps 2026.04.28.org ../scripts/org-export.el)
+ (target 2026.04.28.html)
+ (mode promote)
+ (action
+  (with-stdout-to %{target}
+   (run emacs --batch -l ../scripts/org-export.el --visit %{dep:2026.04.28.org}
+        --eval "(princ (org-export-as 'html))" --kill))))
+
+(rule
+ (deps 2026.03.31.html 2026.04.07.html 2026.04.14.html 2026.04.21.html 2026.04.28.html)
  (target index.html)
  (mode promote)
  (action
@@ -74,7 +90,7 @@
    (run %{exe:../bin/cwn_ja.exe} gen-index))))
 
 (rule
- (deps 2026.03.31.rss 2026.04.07.rss 2026.04.14.rss 2026.04.21.rss)
+ (deps 2026.03.31.rss 2026.04.07.rss 2026.04.14.rss 2026.04.21.rss 2026.04.28.rss)
  (target cwn.rss)
  (mode promote)
  (action
@@ -83,4 +99,4 @@
 
 (alias
  (name default)
- (deps 2026.03.31.html 2026.04.07.html 2026.04.14.html 2026.04.21.html index.html cwn.rss))
+ (deps 2026.03.31.html 2026.04.07.html 2026.04.14.html 2026.04.21.html 2026.04.28.html index.html cwn.rss))

@@ -5,6 +5,13 @@
 <link>https://ocaml.jp/cwn-ja/</link>
 <description>OCaml Weekly News の日本語訳</description>
 <item>
+  <title>OCaml Weekly News (2026年4月28日版）</title>
+  <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.04.28.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.04.28.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#1"&gt;古いバグをテストで閉じる: Dune へのコントリビューション体験記&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#2"&gt;ocaml-wire: EverParse 3D 出力付きのバイナリワイヤフォーマット DSL&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#3"&gt;valkey: OCaml 5 + Eio 向けモダン Valkey クライアント、opam で公開&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#4"&gt;UnifiedScript_{Std,Top} - リテレートテスティング&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#5"&gt;openrouter_api: OpenRouter クライアントライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#6"&gt;発表募集: Caml in the Capital II&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
   <title>OCaml Weekly News (2026年4月21日版）</title>
   <pubDate>Tue, 21 Apr 2026 12:00:00 GMT</pubDate>
   <link>https://ocaml.jp/cwn-ja/2026.04.21.html</link>
