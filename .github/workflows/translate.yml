@@ -31,11 +31,13 @@ jobs:
         id: after
         run: echo "sha=$(git -C cwn-data rev-parse HEAD)" >> $GITHUB_OUTPUT
 
-      - name: Set up dune
-        uses: ocaml-dune/setup-dune@v2
-
+      # Install emacs before setup-dune: setup-dune@v2 runs `dune build`
+      # at the end of its setup, which needs emacs for the org → html rules.
       - name: Install emacs
         run: sudo apt-get install -y emacs-nox
+
+      - name: Set up dune
+        uses: ocaml-dune/setup-dune@v2
 
       - name: Run translation
         env:
