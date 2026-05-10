@@ -1,0 +1,26 @@
+(version 0.0.1)
+
+(build
+ (all_platforms
+  ((action
+    (progn
+     (when %{pkg-self:dev} (run dune subst))
+     (run dune build -p %{pkg-self:name} -j %{jobs} @install))))))
+
+(depends
+ (all_platforms
+  (dune
+   ocaml
+   ppx_jsonaf_conv
+   ppx_jane
+   async
+   cohttp-async
+   async_ssl
+   core
+   jsonaf)))
+
+(source
+ (fetch
+  (url
+   https://github.com/mt-caret/openrouter-ocaml/archive/refs/tags/v0.0.1.tar.gz)
+  (checksum md5=7340ede2957cd4ca5ea34ffc100384da)))
