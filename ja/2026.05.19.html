@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.05.12.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.05.26.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年5月12日から19日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">hotseat Squava（小さな LablGtk2 デモ）</a></li>
+<li><a href="#2">コメント募集：既知のセキュリティ脆弱性を持つ opam パッケージをどう扱うべきか</a></li>
+<li><a href="#3">odoc 3.2.1 リリース</a></li>
+<li><a href="#4">OCaml.org の求人掲示板に OCaml の採用情報を掲載しましょう</a></li>
+<li><a href="#5">Cammy Stories: 小さな OCaml ウェブコミックの実験 🐫</a></li>
+<li><a href="#6">MlFront_ProgressZig - Zig 互換プログレスツリー</a></li>
+<li><a href="#7">loo - lua of ocaml</a></li>
+<li><a href="#org5844e52">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">hotseat Squava（小さな LablGtk2 デモ）</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-hotseat-squava-a-tiny-lablgtk2-demo/17957/2">https://discuss.ocaml.org/t/ann-hotseat-squava-a-tiny-lablgtk2-demo/17957/2</a>
+</p>
+</div>
+
+<div id="outline-container-org0ccf6ed" class="outline-3">
+<h3 id="org0ccf6ed">このスレッドを引き継いで、Damien Guichard が発表しました</h3>
+<div class="outline-text-3" id="text-org0ccf6ed">
+<p>
+新しい 1.2 バージョンが公開されました。引き分けの検出機能が追加されています。
+</p>
+
+<p>
+<a href="https://pastebin.com/DjZ03yPa">https://pastebin.com/DjZ03yPa</a>
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">コメント募集：既知のセキュリティ脆弱性を持つ opam パッケージをどう扱うべきか</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/request-for-comments-what-to-do-with-opam-packages-that-have-known-security-vulnerabilities/18087/1">https://discuss.ocaml.org/t/request-for-comments-what-to-do-with-opam-packages-that-have-known-security-vulnerabilities/18087/1</a>
+</p>
+</div>
+
+<div id="outline-container-org1057dc6" class="outline-3">
+<h3 id="org1057dc6">Hannes Mehnert が発表しました</h3>
+<div class="outline-text-3" id="text-org1057dc6">
+<p>
+皆さんへ、
+</p>
+
+<p>
+私たち（OCaml セキュリティチーム）は、既知のセキュリティ脆弱性を持つ opam パッケージに対してどのような対処をすべきか、ご意見をお聞きしたいと思っています。
+</p>
+
+<p>
+一つの方法として、opam-repository において <code>available: false</code> でマークする方法があります。これにより、該当パッケージはインストール不可になります（opam ファイルを手動で編集した場合を除く）。
+</p>
+
+<p>
+特に OCaml コンパイラについては難しい問題があります。最近の脆弱性（Marshal に関するもの）は 4.14.3 より前のバージョン、および 5 以上かつ 5.4.1 より前のバージョンすべてに影響します。これらのコンパイラを利用不可としてマークすると、古い OCaml バージョンを必要とする多くのプロジェクトが簡単にインストールできなくなります。特に、Marshal の問題は多くのアプリケーション（もしくはほぼすべてのアプリケーション）で実際には露出していないため、これらのコンパイラのインストールを禁止または困難にするのは適切でないように感じます。
+</p>
+
+<p>
+将来に向けたいくつかのアイデアとして：
+</p>
+<ul class="org-ul">
+<li>セキュリティアドバイザリにおいて脆弱な関数を正確に注記することで、その関数の使用を自動的に検索できるようにする</li>
+<li>アドバイザリデータベースを参照してインストール済みの脆弱なパッケージを確認する「opam audit」コマンドを提供する</li>
+</ul>
+
+<p>
+短期・中期的には、アドバイザリが存在する通常の opam パッケージをどう扱うか、またコンパイラパッケージを別扱いにすべきかどうかについて、ご意見をいただければ幸いです。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">odoc 3.2.1 リリース</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-odoc-3-2-1-release/18088/1">https://discuss.ocaml.org/t/ann-odoc-3-2-1-release/18088/1</a>
+</p>
+</div>
+
+<div id="outline-container-org82a3551" class="outline-3">
+<h3 id="org82a3551">Jon Ludlam が発表しました</h3>
+<div class="outline-text-3" id="text-org82a3551">
+<p>
+odoc チームは odoc 3.2.1 のリリースを喜んでお知らせします！
+</p>
+</div>
+
+<div id="outline-container-org411e243" class="outline-4">
+<h4 id="org411e243">ハイライト</h4>
+<div class="outline-text-4" id="text-org411e243">
+</div>
+<ul class="org-ul">
+<li><a id="org1925932"></a>OCaml 5.5.0 サポート<br />
+<div class="outline-text-5" id="text-org1925932">
+<p>
+odoc は OCaml 5.5.0 に対してコンパイルおよびドキュメント生成ができるようになりました（@panglesd、@xvw、<a href="https://github.com/ocaml/odoc/issues/1406">#1406</a>）。
+</p>
+</div>
+</li>
+
+<li><a id="org929f474"></a>OxCaml サポート<br />
+<div class="outline-text-5" id="text-org929f474">
+<p>
+@lukemaurer および @art-w の貢献により、odoc は OxCaml をネイティブにサポートするようになりました（<a href="https://github.com/ocaml/odoc/issues/1399">#1399</a>）。現時点では非常に基本的なサポートにとどまっていますが、OxCaml のさまざまな機能への完全なサポートは既に進行中です。興味がある方は <a href="https://github.com/ocaml/odoc/pulls">PRs</a> をご確認ください！
+</p>
+
+<p>
+注意点として：OxCaml は上流の OCaml よりもはるかに速いペースで開発が進んでいるため、各 odoc リリースは通常の OCaml 4.08 以降のすべてをサポートするというポリシーとは異なり、単一の OxCaml リリースのみをサポートすることになる可能性があります。OxCaml プロジェクトのドキュメントを生成する場合は、odoc と oxcaml-compiler の対応するバージョンの組み合わせをご使用ください。
+</p>
+</div>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-orge184bee" class="outline-4">
+<h4 id="orge184bee">追加</h4>
+<div class="outline-text-4" id="text-orge184bee">
+<ul class="org-ul">
+<li>HTML/KaTeX バックエンドにおける永続的な LaTeX マクロ（@dlesbre、<a href="https://github.com/ocaml/odoc/issues/1391">#1391</a>）。</li>
+<li><code>markdown-generate</code> コマンドが一度の呼び出しで複数の <code>.odocl</code> ファイルを受け付けるようになりました。シェルのループで囲む必要がなくなりました（@davesnx、<a href="https://github.com/ocaml/odoc/issues/1387">#1387</a>）。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1a26558" class="outline-4">
+<h4 id="org1a26558">変更・修正</h4>
+<div class="outline-text-4" id="text-org1a26558">
+<ul class="org-ul">
+<li>長年にわたるコンパイル時クラッシュ <a href="https://github.com/ocaml/odoc/issues/930">#930</a> および #1385 を修正しました（@jonludlam、<a href="https://github.com/ocaml/odoc/issues/1400">#1400</a>）。</li>
+<li>Markdown バックエンドは宣言時の言語 id として <code>ocaml</code> を使用するようになりました。また、バリアント・レコードをコンストラクタ・フィールドごとに分割するのではなく、コードスニペットをコメント付きの単一ブロックにまとめるようになりました。</li>
+<li>ページ参照に対する URL リマッピングが正しく機能するようになりました（@jonludlam、<a href="https://github.com/ocaml/odoc/issues/1395">#1395</a>）。</li>
+<li><a href="https://github.com/ocaml/odoc/issues/1396">#1396</a> で説明されている条件下でインクリメンタルビルドが壊れなくなりました（@jonludlam、<a href="https://github.com/ocaml/odoc/issues/1402">#1402</a>）。</li>
+<li><code>--warn-error</code> がすべての警告を確実にエラーに昇格させるようになりました（@jonludlam、<a href="https://github.com/ocaml/odoc/issues/1402">#1402</a>）。</li>
+<li>多相引数の括弧が欠落しなくなりました（@art-w、<a href="https://github.com/ocaml/odoc/issues/1404">#1404</a>）。</li>
+<li>OCaml 5.5.0 において <code>base</code> に依存するパッケージのドキュメント生成が壊れるリグレッションを修正しました（@jonludlam、<a href="https://github.com/ocaml/odoc/issues/1426">#1426</a>、<a href="https://github.com/ocaml/odoc/issues/1427">#1427</a>）。</li>
+<li><code>merlin-lib</code> に依存するパッケージのドキュメント生成が壊れるリグレッションを修正しました（@jonludlam、<a href="https://github.com/ocaml/odoc/issues/1429">#1429</a>、<a href="https://github.com/ocaml/odoc/issues/1430">#1430</a>）。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org82134d2" class="outline-4">
+<h4 id="org82134d2">インストール</h4>
+<div class="outline-text-4" id="text-org82134d2">
+<pre class="example" id="orgc80f778">
+opam update
+opam install odoc
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org10526a6" class="outline-4">
+<h4 id="org10526a6">使い方</h4>
+<div class="outline-text-4" id="text-org10526a6">
+<p>
+パッケージのドキュメントをローカルでビルド・テストし、ocaml.org での表示を確認するには <a href="https://ocaml.github.io/odoc/odoc-driver/index.html">odoc_driver</a> を使用してください。
+</p>
+
+<p>
+Odig と Dune は従来通り動作します。変更は不要です。odoc 3.x のすべての機能への完全なサポートは Dune で現在対応中です。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org048f175" class="outline-4">
+<h4 id="org048f175">謝辞</h4>
+<div class="outline-text-4" id="text-org048f175">
+<p>
+このリリースにコード、レビュー、バグ報告、テストで貢献してくださったすべての方に感謝します：@art-w、@davesnx、@dlesbre、@jonludlam、@lukemaurer、@panglesd、@xvw、そして挙げ忘れた方々も含めて！
+</p>
+
+<p>
+いつものように、問題があれば <a href="https://github.com/ocaml/odoc/issues">github</a> にご報告ください。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">OCaml.org の求人掲示板に OCaml の採用情報を掲載しましょう</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/list-your-open-ocaml-positions-on-the-ocaml-org-job-board/11377/24">https://discuss.ocaml.org/t/list-your-open-ocaml-positions-on-the-ocaml-org-job-board/11377/24</a>
+</p>
+</div>
+
+<div id="outline-container-orgab855aa" class="outline-3">
+<h3 id="orgab855aa">このスレッドを引き継いで、Daniel Lamping が発表しました</h3>
+<div class="outline-text-3" id="text-orgab855aa">
+<p>
+採用中の求人情報を掲載させていただけますでしょうか。
+</p>
+
+<ul class="org-ul">
+<li>title: Senior Systems Software Engineer</li>
+<li>link: <a href="https://careers.cloud.com/jobs/senior-software-engineer-xenserver-toolstack-remote-united-kingdom">https://careers.cloud.com/jobs/senior-software-engineer-xenserver-toolstack-remote-united-kingdom</a></li>
+<li>locations: Remote, United-Kingdom</li>
+<li>publication_date: 2026-05-14</li>
+<li>company: Cloud Software Group</li>
+<li>company_logo: <img src="https://www.cloud.com/media_1e40e7d048f0117d4543c940f9e7433b549c08a03.svg" alt="media_1e40e7d048f0117d4543c940f9e7433b549c08a03.svg" class="org-svg" /></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="5">Cammy Stories: 小さな OCaml ウェブコミックの実験 🐫</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/cammy-stories-a-small-ocaml-webcomic-experiment/18128/1">https://discuss.ocaml.org/t/cammy-stories-a-small-ocaml-webcomic-experiment/18128/1</a>
+</p>
+</div>
+
+<div id="outline-container-org70b6c97" class="outline-3">
+<h3 id="org70b6c97">Ramiro Checa-Garcia が発表しました</h3>
+<div class="outline-text-3" id="text-org70b6c97">
+<p>
+こんにちは、皆さん。
+</p>
+
+<p>
+最近、技術的なトピックをもう少し視覚的でとっつきやすくする方法を色々試していたのですが、気づけば Cammy Stories という小さな趣味のプロジェクトになっていました。
+</p>
+
+<p>
+これは、ラクダのマスコット「Cammy」と、Dune、OPAM、Merlin、Odoc などエコシステムのおなじみの存在をキャラクターとして登場させた、OCaml についての短いコミックのコレクションです。
+</p>
+
+<p>
+目的は正式なチュートリアルやドキュメントを作ることではなく、バリアント、functor、並行処理、Dune のスタンザ、OPAM スイッチなど、私が学習・探索する中で面白いと感じた OCaml のトピックを、遊び心ある視覚的な説明で伝えることです。
+</p>
+
+<p>
+画像のほとんどは AI 画像生成ツールを使って多くの試行錯誤を経て作成しました。結果が驚くほど良い場合もあれば、テキストが意味不明になったり、なぜかランダムにハートが現れたりすることもあります。プロセス自体が面白く興味深いと思ったので、ボツになった下書きも多数そのまま公開しています。
+</p>
+
+<p>
+関数型プログラミングのコミュニティは非常に技術的で真面目という印象があります。私は時々、より視覚的でコミュニティ主導のアプローチがこれらのアイデアをもう少し親しみやすく感じさせるのに役立つのではないかと感じています。これはそういった方向への小さな実験です。
+</p>
+
+<p>
+フィードバックは大歓迎です。技術的な不正確さや誤解を招く表現がところどころあるかもしれませんので、特にご指摘いただければ助かります。将来のトピック、フォーマット、コンセプトについてのご提案も歓迎します。
+</p>
+
+<p>
+現在、ほとんどのページには各コミックがどのように作られたかについての小さなメモ、コメント、短い話が含まれています。プロジェクトはまだ議論と実験の段階にあります。
+</p>
+
+<ul class="org-ul">
+<li>🔗 公開サイト: <a href="https://rchg.github.io/cammy/">https://rchg.github.io/cammy/</a></li>
+<li>🔗 リポジトリ: <a href="https://github.com/RCHG/cammy">https://github.com/RCHG/cammy</a></li>
+</ul>
+
+<p>
+楽しんでいただければ幸いです 🐫
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="6">MlFront_ProgressZig - Zig 互換プログレスツリー</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-mlfront-progresszig-zig-compatible-progress-trees/18142/1">https://discuss.ocaml.org/t/ann-mlfront-progresszig-zig-compatible-progress-trees/18142/1</a>
+</p>
+</div>
+
+<div id="outline-container-org541670b" class="outline-3">
+<h3 id="org541670b">jbeckford が発表しました</h3>
+<div class="outline-text-3" id="text-org541670b">
+<p>
+MlFront_ProgressZig の公開を喜んでお知らせします。インストール方法、ドキュメント、サンプルは以下をご覧ください。
+</p>
+
+<p>
+TLDR: プログレスツリー（プログレスバーを一般化したもの）をレンダリングします。最大の特徴は、互換性のある子・孫プロセスなどからのプログレスデータを取り込んで、単一のプログレスツリーとしてレンダリングできることです（2番目・3番目のサンプルを参照）。MlFront_ProgressZig は Zig の <code>progress</code> 標準ライブラリを移植したもので、Windows 向けの改善と zig プロセスとのプロトコル互換性が追加されています。動機とアルゴリズムについては <a href="https://andrewkelley.me/post/zig-new-cli-progress-bar-explained.html">https://andrewkelley.me/post/zig-new-cli-progress-bar-explained.html</a> をご覧ください。移植は最初 AI を活用して行いました。progress.zig のプロンプトは<a href="https://gitlab.com/dkml/build-tools/MlFront/-/blob/b8787f345238bfe131c4f92bbe141c96788c3b1a/src/MlFront_ProgressZig/Zig.ml">こちらの1行目から始まります</a>、Cabinet（政府）データは<a href="https://gitlab.com/dkml/build-tools/MlFront/-/blob/b8787f345238bfe131c4f92bbe141c96788c3b1a/tests/DkZero_RuntimeC/SyntheticDemoD.ml#L218">218行目から始まります</a>。
+</p>
+</div>
+
+<div id="outline-container-org5a3cf5f" class="outline-4">
+<h4 id="org5a3cf5f">サンプル：通常のプログレスツリー</h4>
+<div class="outline-text-4" id="text-org5a3cf5f">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">内容</th>
+<th scope="col" class="org-left">アニメーションリンク</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">1975年以降の内閣閣僚</td>
+<td class="org-left"><a href="https://asciinema.org/a/NWc2vbPeRQuOyGAa">https://asciinema.org/a/NWc2vbPeRQuOyGAa</a></td>
+</tr>
+
+<tr>
+<td class="org-left">OCaml が zig ビルドを起動</td>
+<td class="org-left"><a href="https://asciinema.org/a/Tu9ofrH3ekKUCyLk">https://asciinema.org/a/Tu9ofrH3ekKUCyLk</a></td>
+</tr>
+
+<tr>
+<td class="org-left">OCaml が OCaml を起動し、さらに OCaml を起動</td>
+<td class="org-left"><a href="https://asciinema.org/a/Tdtt52iQqSsIXcku">https://asciinema.org/a/Tdtt52iQqSsIXcku</a></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<i>Zig には少なくとも Windows 上でバグがあるようで、zig の親プロセスが OCaml/zig の子プロセスからデータを収集できません。そのため「zig が OCaml を起動する」サンプルはありません。</i>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgda47f24" class="outline-4">
+<h4 id="orgda47f24">サンプル：パフォーマンスモニタリング</h4>
+<div class="outline-text-4" id="text-orgda47f24">
+<p>
+以下は私のシングルスレッドビルドシステムのスナップショットです。コールスタックの重要な部分がプログレスツリーに追加されています（基本的には関数の前後に <code>start</code> と <code>end_</code> を配置します）：
+</p>
+
+<pre class="example" id="org89201ad">
+$ ./dk0 distribute CommonsBase_Std-dist-win32 --library 'CommonsBase_Std@2.5.999911122233' dist-win32.u
+
+[signify] New build key pair in t/k/build.pub and t/k/build.sec ...
+[signify] Distribute key pair among trusted coworkers only!
+►0/2] distribute CommonsBase_Std-dist-win32
+   └─ [2/5] prepare distribution
+      └─ [29/32] get-object CommonsBase_Std.Toybox@0...
+         └─ dl toybox-aarch64@toybox sz 806K
+            └─ landley.net/toybox...oads/binaries/0.8.9
+               └─ [0/1] MiB downloaded
+</pre>
+
+<p>
+「►」ツリーが10秒以上更新されないことに気づき、<code>landley.net/toybox</code> ウェブサーバから小さな 806K ファイルをダウンロードすることがパフォーマンスを著しく低下させていることがわかりました。
+</p>
+<blockquote>
+<p>
+0.5秒以上続くパフォーマンスのボトルネックを簡単に特定できます。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgace99e0" class="outline-4">
+<h4 id="orgace99e0">パッケージ</h4>
+<div class="outline-text-4" id="text-orgace99e0">
+<ul class="org-ul">
+<li>MlFront_Progress: 4つのバックエンドのいずれかで使用できる API。「silent」および「plain」バックエンドを含む。</li>
+<li>MlFront_ProgressZig: zig 互換バックエンド（高リフレッシュレート）</li>
+<li>MlFront_ProgressPeriod: プログレスツリーを定期的にコンソールに出力するバックエンド。</li>
+</ul>
+
+<p>
+ドキュメントは <a href="https://dkml.gitlab.io/build-tools/MlFront/">https://dkml.gitlab.io/build-tools/MlFront/</a> にあります。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org316a142" class="outline-4">
+<h4 id="org316a142">インストール</h4>
+<div class="outline-text-4" id="text-org316a142">
+<p>
+opam キュー（<a href="https://github.com/ocaml/opam-repository/pull/29918">https://github.com/ocaml/opam-repository/pull/29918</a>）に登録済みで、AI スレッドが解決されるまでリリースされないと思います。最新の開発版は以下でインストールできます：
+</p>
+
+<pre class="example" id="org01ce69e">
+for pkg in MlFront_Progress MlFront_Core MlFront_Lua MlFront_ZipFile UnifiedScript_Std MlFront_Thunk MlFront_Console MlFront_ProgressZig; do
+  opam pin add $pkg https://gitlab.com/dkml/build-tools/MlFront/-/releases/permalink/latest/downloads/MlFront.tar.gz
+done
+</pre>
+
+<p>
+（いくつかのファイルに「AI」を記載していますが、それは自分自身のためであり、狭い範囲で適用し、自分のコントロール下に置いています。また、パッケージに「AI 利用/等」というラベルを積極的かつ半永久的に付けることが賢明だと言う弁護士（米国の）はほとんどいないと思うので、それが新しいポリシーになる場合は opam リポジトリへの登録を取り下げます。）
+</p>
+
+<p>
+お楽しみください！
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="7">loo - lua of ocaml</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-loo-lua-of-ocaml/18143/1">https://discuss.ocaml.org/t/ann-loo-lua-of-ocaml/18143/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgc6dd4b3" class="outline-3">
+<h3 id="orgc6dd4b3">Ben が発表しました</h3>
+<div class="outline-text-3" id="text-orgc6dd4b3">
+<p>
+こんにちは
+</p>
+
+<p>
+タイトルの通り、OCaml（バイトコード）を Lua（lua5.1）にコンパイルするプロジェクトです。このプロジェクトは AI によって生成されており、ocaml-ai-disclosure プロジェクトに記載されている方法でその旨を完全に開示するよう努めました：
+</p>
+
+<p>
+<a href="https://github.com/maltasea/lua_of_ocaml">https://github.com/maltasea/lua_of_ocaml</a>
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org5844e52" class="outline-2">
+<h2 id="org5844e52">過去の CWN</h2>
+<div class="outline-text-2" id="text-org5844e52">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://ocaml.jp/cwn-ja/">アーカイブ</a>や<a href="https://ocaml.jp/cwn-ja/cwn.rss">RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> を購読してください。
+</p>
+
+<div class="authorname" id="org882f23c">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

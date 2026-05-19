@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cwn>
+  <cwn_head>
+    <cwn_date>2026.05.19</cwn_date>
+    <cwn_prev>2026.05.12</cwn_prev>
+    <cwn_next>2026.05.26</cwn_next>
+    <cwn_date_text>2026年5月12日から19日まで</cwn_date_text>
+  </cwn_head>
+  <cwn_body>
+    <cwn_entry>
+      <cwn_title>hotseat Squava（小さな LablGtk2 デモ）</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-hotseat-squava-a-tiny-lablgtk2-demo/17957/2</cwn_url>
+      <cwn_who>このスレッドを引き継いで、Damien Guichard が発表しました</cwn_who>
+      <cwn_what>
+新しい 1.2 バージョンが公開されました。引き分けの検出機能が追加されています。
+
+https://pastebin.com/DjZ03yPa
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>コメント募集：既知のセキュリティ脆弱性を持つ opam パッケージをどう扱うべきか</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/request-for-comments-what-to-do-with-opam-packages-that-have-known-security-vulnerabilities/18087/1</cwn_url>
+      <cwn_who>Hannes Mehnert が発表しました</cwn_who>
+      <cwn_what>
+皆さんへ、
+
+私たち（OCaml セキュリティチーム）は、既知のセキュリティ脆弱性を持つ opam パッケージに対してどのような対処をすべきか、ご意見をお聞きしたいと思っています。
+
+一つの方法として、opam-repository において ~available: false~ でマークする方法があります。これにより、該当パッケージはインストール不可になります（opam ファイルを手動で編集した場合を除く）。
+
+特に OCaml コンパイラについては難しい問題があります。最近の脆弱性（Marshal に関するもの）は 4.14.3 より前のバージョン、および 5 以上かつ 5.4.1 より前のバージョンすべてに影響します。これらのコンパイラを利用不可としてマークすると、古い OCaml バージョンを必要とする多くのプロジェクトが簡単にインストールできなくなります。特に、Marshal の問題は多くのアプリケーション（もしくはほぼすべてのアプリケーション）で実際には露出していないため、これらのコンパイラのインストールを禁止または困難にするのは適切でないように感じます。
+
+将来に向けたいくつかのアイデアとして：
+- セキュリティアドバイザリにおいて脆弱な関数を正確に注記することで、その関数の使用を自動的に検索できるようにする
+- アドバイザリデータベースを参照してインストール済みの脆弱なパッケージを確認する「opam audit」コマンドを提供する
+
+短期・中期的には、アドバイザリが存在する通常の opam パッケージをどう扱うか、またコンパイラパッケージを別扱いにすべきかどうかについて、ご意見をいただければ幸いです。
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>odoc 3.2.1 リリース</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-odoc-3-2-1-release/18088/1</cwn_url>
+      <cwn_who>Jon Ludlam が発表しました</cwn_who>
+      <cwn_what>
+odoc チームは odoc 3.2.1 のリリースを喜んでお知らせします！
+
+*** ハイライト
+
+**** OCaml 5.5.0 サポート
+
+odoc は OCaml 5.5.0 に対してコンパイルおよびドキュメント生成ができるようになりました（@panglesd、@xvw、[#1406](https://github.com/ocaml/odoc/issues/1406)）。
+
+**** OxCaml サポート
+
+@lukemaurer および @art-w の貢献により、odoc は OxCaml をネイティブにサポートするようになりました（[#1399](https://github.com/ocaml/odoc/issues/1399)）。現時点では非常に基本的なサポートにとどまっていますが、OxCaml のさまざまな機能への完全なサポートは既に進行中です。興味がある方は [PRs](https://github.com/ocaml/odoc/pulls) をご確認ください！
+
+注意点として：OxCaml は上流の OCaml よりもはるかに速いペースで開発が進んでいるため、各 odoc リリースは通常の OCaml 4.08 以降のすべてをサポートするというポリシーとは異なり、単一の OxCaml リリースのみをサポートすることになる可能性があります。OxCaml プロジェクトのドキュメントを生成する場合は、odoc と oxcaml-compiler の対応するバージョンの組み合わせをご使用ください。
+
+*** 追加
+
+- HTML/KaTeX バックエンドにおける永続的な LaTeX マクロ（@dlesbre、[#1391](https://github.com/ocaml/odoc/issues/1391)）。
+- ~markdown-generate~ コマンドが一度の呼び出しで複数の ~.odocl~ ファイルを受け付けるようになりました。シェルのループで囲む必要がなくなりました（@davesnx、[#1387](https://github.com/ocaml/odoc/issues/1387)）。
+
+*** 変更・修正
+
+- 長年にわたるコンパイル時クラッシュ [#930](https://github.com/ocaml/odoc/issues/930) および #1385 を修正しました（@jonludlam、[#1400](https://github.com/ocaml/odoc/issues/1400)）。
+- Markdown バックエンドは宣言時の言語 id として ~ocaml~ を使用するようになりました。また、バリアント・レコードをコンストラクタ・フィールドごとに分割するのではなく、コードスニペットをコメント付きの単一ブロックにまとめるようになりました。
+- ページ参照に対する URL リマッピングが正しく機能するようになりました（@jonludlam、[#1395](https://github.com/ocaml/odoc/issues/1395)）。
+- [#1396](https://github.com/ocaml/odoc/issues/1396) で説明されている条件下でインクリメンタルビルドが壊れなくなりました（@jonludlam、[#1402](https://github.com/ocaml/odoc/issues/1402)）。
+- ~--warn-error~ がすべての警告を確実にエラーに昇格させるようになりました（@jonludlam、[#1402](https://github.com/ocaml/odoc/issues/1402)）。
+- 多相引数の括弧が欠落しなくなりました（@art-w、[#1404](https://github.com/ocaml/odoc/issues/1404)）。
+- OCaml 5.5.0 において ~base~ に依存するパッケージのドキュメント生成が壊れるリグレッションを修正しました（@jonludlam、[#1426](https://github.com/ocaml/odoc/issues/1426)、[#1427](https://github.com/ocaml/odoc/issues/1427)）。
+- ~merlin-lib~ に依存するパッケージのドキュメント生成が壊れるリグレッションを修正しました（@jonludlam、[#1429](https://github.com/ocaml/odoc/issues/1429)、[#1430](https://github.com/ocaml/odoc/issues/1430)）。
+
+*** インストール
+
+#+begin_example
+opam update
+opam install odoc
+#+end_example
+
+*** 使い方
+
+パッケージのドキュメントをローカルでビルド・テストし、ocaml.org での表示を確認するには [odoc_driver](https://ocaml.github.io/odoc/odoc-driver/index.html) を使用してください。
+
+Odig と Dune は従来通り動作します。変更は不要です。odoc 3.x のすべての機能への完全なサポートは Dune で現在対応中です。
+
+*** 謝辞
+
+このリリースにコード、レビュー、バグ報告、テストで貢献してくださったすべての方に感謝します：@art-w、@davesnx、@dlesbre、@jonludlam、@lukemaurer、@panglesd、@xvw、そして挙げ忘れた方々も含めて！
+
+いつものように、問題があれば [github](https://github.com/ocaml/odoc/issues) にご報告ください。
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>OCaml.org の求人掲示板に OCaml の採用情報を掲載しましょう</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/list-your-open-ocaml-positions-on-the-ocaml-org-job-board/11377/24</cwn_url>
+      <cwn_who>このスレッドを引き継いで、Daniel Lamping が発表しました</cwn_who>
+      <cwn_what>
+採用中の求人情報を掲載させていただけますでしょうか。
+
+- title: Senior Systems Software Engineer
+- link: https://careers.cloud.com/jobs/senior-software-engineer-xenserver-toolstack-remote-united-kingdom
+- locations: Remote, United-Kingdom
+- publication_date: 2026-05-14
+- company: Cloud Software Group
+- company_logo: https://www.cloud.com/media_1e40e7d048f0117d4543c940f9e7433b549c08a03.svg
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>Cammy Stories: 小さな OCaml ウェブコミックの実験 🐫</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/cammy-stories-a-small-ocaml-webcomic-experiment/18128/1</cwn_url>
+      <cwn_who>Ramiro Checa-Garcia が発表しました</cwn_who>
+      <cwn_what>
+こんにちは、皆さん。
+
+最近、技術的なトピックをもう少し視覚的でとっつきやすくする方法を色々試していたのですが、気づけば Cammy Stories という小さな趣味のプロジェクトになっていました。
+
+これは、ラクダのマスコット「Cammy」と、Dune、OPAM、Merlin、Odoc などエコシステムのおなじみの存在をキャラクターとして登場させた、OCaml についての短いコミックのコレクションです。
+
+目的は正式なチュートリアルやドキュメントを作ることではなく、バリアント、functor、並行処理、Dune のスタンザ、OPAM スイッチなど、私が学習・探索する中で面白いと感じた OCaml のトピックを、遊び心ある視覚的な説明で伝えることです。
+
+画像のほとんどは AI 画像生成ツールを使って多くの試行錯誤を経て作成しました。結果が驚くほど良い場合もあれば、テキストが意味不明になったり、なぜかランダムにハートが現れたりすることもあります。プロセス自体が面白く興味深いと思ったので、ボツになった下書きも多数そのまま公開しています。
+
+関数型プログラミングのコミュニティは非常に技術的で真面目という印象があります。私は時々、より視覚的でコミュニティ主導のアプローチがこれらのアイデアをもう少し親しみやすく感じさせるのに役立つのではないかと感じています。これはそういった方向への小さな実験です。
+
+フィードバックは大歓迎です。技術的な不正確さや誤解を招く表現がところどころあるかもしれませんので、特にご指摘いただければ助かります。将来のトピック、フォーマット、コンセプトについてのご提案も歓迎します。
+
+現在、ほとんどのページには各コミックがどのように作られたかについての小さなメモ、コメント、短い話が含まれています。プロジェクトはまだ議論と実験の段階にあります。
+
+- 🔗 公開サイト: https://rchg.github.io/cammy/
+- 🔗 リポジトリ: https://github.com/RCHG/cammy
+
+楽しんでいただければ幸いです 🐫
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>MlFront_ProgressZig - Zig 互換プログレスツリー</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-mlfront-progresszig-zig-compatible-progress-trees/18142/1</cwn_url>
+      <cwn_who>jbeckford が発表しました</cwn_who>
+      <cwn_what>
+MlFront_ProgressZig の公開を喜んでお知らせします。インストール方法、ドキュメント、サンプルは以下をご覧ください。
+
+TLDR: プログレスツリー（プログレスバーを一般化したもの）をレンダリングします。最大の特徴は、互換性のある子・孫プロセスなどからのプログレスデータを取り込んで、単一のプログレスツリーとしてレンダリングできることです（2番目・3番目のサンプルを参照）。MlFront_ProgressZig は Zig の ~progress~ 標準ライブラリを移植したもので、Windows 向けの改善と zig プロセスとのプロトコル互換性が追加されています。動機とアルゴリズムについては https://andrewkelley.me/post/zig-new-cli-progress-bar-explained.html をご覧ください。移植は最初 AI を活用して行いました。progress.zig のプロンプトは[こちらの1行目から始まります](https://gitlab.com/dkml/build-tools/MlFront/-/blob/b8787f345238bfe131c4f92bbe141c96788c3b1a/src/MlFront_ProgressZig/Zig.ml)、Cabinet（政府）データは[218行目から始まります](https://gitlab.com/dkml/build-tools/MlFront/-/blob/b8787f345238bfe131c4f92bbe141c96788c3b1a/tests/DkZero_RuntimeC/SyntheticDemoD.ml#L218)。
+
+*** サンプル：通常のプログレスツリー
+
+| 内容 | アニメーションリンク |
+|-----|-----|
+| 1975年以降の内閣閣僚 | [https://asciinema.org/a/NWc2vbPeRQuOyGAa](https://asciinema.org/a/NWc2vbPeRQuOyGAa) |
+| OCaml が zig ビルドを起動 | [https://asciinema.org/a/Tu9ofrH3ekKUCyLk](https://asciinema.org/a/Tu9ofrH3ekKUCyLk) |
+| OCaml が OCaml を起動し、さらに OCaml を起動 | [https://asciinema.org/a/Tdtt52iQqSsIXcku](https://asciinema.org/a/Tdtt52iQqSsIXcku) |
+
+/Zig には少なくとも Windows 上でバグがあるようで、zig の親プロセスが OCaml/zig の子プロセスからデータを収集できません。そのため「zig が OCaml を起動する」サンプルはありません。/
+
+*** サンプル：パフォーマンスモニタリング
+
+以下は私のシングルスレッドビルドシステムのスナップショットです。コールスタックの重要な部分がプログレスツリーに追加されています（基本的には関数の前後に ~start~ と ~end_~ を配置します）：
+
+#+begin_example
+$ ./dk0 distribute CommonsBase_Std-dist-win32 --library 'CommonsBase_Std@2.5.999911122233' dist-win32.u
+
+[signify] New build key pair in t/k/build.pub and t/k/build.sec ...
+[signify] Distribute key pair among trusted coworkers only!
+►0/2] distribute CommonsBase_Std-dist-win32
+   └─ [2/5] prepare distribution
+      └─ [29/32] get-object CommonsBase_Std.Toybox@0...
+         └─ dl toybox-aarch64@toybox sz 806K
+            └─ landley.net/toybox...oads/binaries/0.8.9
+               └─ [0/1] MiB downloaded
+#+end_example
+
+「►」ツリーが10秒以上更新されないことに気づき、~landley.net/toybox~ ウェブサーバから小さな 806K ファイルをダウンロードすることがパフォーマンスを著しく低下させていることがわかりました。
+#+begin_quote
+0.5秒以上続くパフォーマンスのボトルネックを簡単に特定できます。
+#+end_quote
+
+*** パッケージ
+
+- MlFront_Progress: 4つのバックエンドのいずれかで使用できる API。「silent」および「plain」バックエンドを含む。
+- MlFront_ProgressZig: zig 互換バックエンド（高リフレッシュレート）
+- MlFront_ProgressPeriod: プログレスツリーを定期的にコンソールに出力するバックエンド。
+
+ドキュメントは [https://dkml.gitlab.io/build-tools/MlFront/](https://dkml.gitlab.io/build-tools/MlFront/) にあります。
+
+*** インストール
+
+opam キュー（[https://github.com/ocaml/opam-repository/pull/29918](https://github.com/ocaml/opam-repository/pull/29918)）に登録済みで、AI スレッドが解決されるまでリリースされないと思います。最新の開発版は以下でインストールできます：
+
+#+begin_example
+for pkg in MlFront_Progress MlFront_Core MlFront_Lua MlFront_ZipFile UnifiedScript_Std MlFront_Thunk MlFront_Console MlFront_ProgressZig; do
+  opam pin add $pkg https://gitlab.com/dkml/build-tools/MlFront/-/releases/permalink/latest/downloads/MlFront.tar.gz
+done
+#+end_example
+
+（いくつかのファイルに「AI」を記載していますが、それは自分自身のためであり、狭い範囲で適用し、自分のコントロール下に置いています。また、パッケージに「AI 利用/等」というラベルを積極的かつ半永久的に付けることが賢明だと言う弁護士（米国の）はほとんどいないと思うので、それが新しいポリシーになる場合は opam リポジトリへの登録を取り下げます。）
+
+お楽しみください！
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>loo - lua of ocaml</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-loo-lua-of-ocaml/18143/1</cwn_url>
+      <cwn_who>Ben が発表しました</cwn_who>
+      <cwn_what>
+こんにちは
+
+タイトルの通り、OCaml（バイトコード）を Lua（lua5.1）にコンパイルするプロジェクトです。このプロジェクトは AI によって生成されており、ocaml-ai-disclosure プロジェクトに記載されている方法でその旨を完全に開示するよう努めました：
+
+https://github.com/maltasea/lua_of_ocaml
+      </cwn_what>
+    </cwn_entry>
+  </cwn_body>
+</cwn>
