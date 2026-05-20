@@ -5,6 +5,13 @@
 <link>https://ocaml.jp/cwn-ja/</link>
 <description>OCaml Weekly News の日本語訳</description>
 <item>
+  <title>OCaml Weekly News (2026年5月19日版）</title>
+  <pubDate>Tue, 19 May 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.05.19.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.05.19.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#1"&gt;hotseat Squava（小さな LablGtk2 デモ）&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#2"&gt;コメント募集：既知のセキュリティ脆弱性を持つ opam パッケージへの対応について&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#3"&gt;odoc 3.2.1 リリース&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#4"&gt;OCaml.org のジョブボードに OCaml の求人を掲載しましょう&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#5"&gt;Cammy Stories：小さな OCaml ウェブコミックの実験 🐫&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#6"&gt;MlFront_ProgressZig - Zig 互換プログレスツリー&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#7"&gt;loo - lua of ocaml&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
   <title>OCaml Weekly News (2026年5月12日版）</title>
   <pubDate>Tue, 12 May 2026 12:00:00 GMT</pubDate>
   <link>https://ocaml.jp/cwn-ja/2026.05.12.html</link>
