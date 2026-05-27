@@ -50,6 +50,17 @@ let%expect_test "xmltree: get_data_with_tag raises on mismatch" =
   [%expect {| (Failure "The first child has no tag.") |}]
 ;;
 
+(* Named HTML entities outside XML's five predefined ones resolve to their
+   characters instead of aborting the parse; an entity the resolver doesn't
+   know ([&zzz;]) is kept verbatim rather than raising. *)
+let%expect_test "xmltree: named HTML entities resolve, unknown ones survive" =
+  print_s
+    [%sexp
+      (Xmltree.of_string {|<cwn_what>foo&nbsp;bar&mdash;baz&zzz;qux</cwn_what>|}
+       : Xmltree.t)];
+  [%expect {| (Element cwn_what ((Data "foo\194\160bar\226\128\148baz&zzz;qux"))) |}]
+;;
+
 (* Entry 1's first message embeds a markdown link so [to_orgmode] covers the
    md-to-org link rewrite. *)
 let test_cwn_xml =

@@ -12,6 +12,10 @@ type t =
   | Data of string
 [@@deriving sexp_of]
 
+(** Parses [s] into a tree. In addition to XML's five predefined entities and
+    numeric character references (handled by {!Xmlm}), common named HTML
+    entities ([&nbsp;], [&mdash;], …) are resolved to their characters; any
+    other reference is kept verbatim rather than raising. *)
 val of_string : string -> t
 
 (** [get_children_with_tag tag tree] returns the children of the first

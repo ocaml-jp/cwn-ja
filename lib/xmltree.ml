@@ -25,7 +25,50 @@ let of_input input =
   snd (Xmlm.input_doc_tree ~el ~data input) |> sanitise
 ;;
 
-let of_string s = of_input (Xmlm.make_input (`String (0, s)))
+(* Xmlm resolves XML's five predefined entities and numeric character
+   references on its own; everything else is left to this callback. CWN bodies
+   are technical prose, so the named HTML entities a translator is liable to
+   emit are punctuation and arrows. *)
+let entity =
+  let html_entities =
+    String.Map.of_alist_exn
+      [ "nbsp", "\u{00A0}"
+      ; "ensp", "\u{2002}"
+      ; "emsp", "\u{2003}"
+      ; "mdash", "\u{2014}"
+      ; "ndash", "\u{2013}"
+      ; "hellip", "\u{2026}"
+      ; "lsquo", "\u{2018}"
+      ; "rsquo", "\u{2019}"
+      ; "ldquo", "\u{201C}"
+      ; "rdquo", "\u{201D}"
+      ; "laquo", "\u{00AB}"
+      ; "raquo", "\u{00BB}"
+      ; "copy", "\u{00A9}"
+      ; "reg", "\u{00AE}"
+      ; "trade", "\u{2122}"
+      ; "deg", "\u{00B0}"
+      ; "times", "\u{00D7}"
+      ; "divide", "\u{00F7}"
+      ; "middot", "\u{00B7}"
+      ; "bull", "\u{2022}"
+      ; "dagger", "\u{2020}"
+      ; "rarr", "\u{2192}"
+      ; "larr", "\u{2190}"
+      ; "uarr", "\u{2191}"
+      ; "darr", "\u{2193}"
+      ; "harr", "\u{2194}"
+      ]
+  in
+  fun name ->
+    match Map.find html_entities name with
+    | Some _ as replacement -> replacement
+    (* An unknown reference is preserved verbatim rather than raising: one stray
+       entity should degrade to literal text, not sink the whole build. *)
+    | None -> Some [%string "&%{name};"]
+;;
+
+let of_string s = of_input (Xmlm.make_input ~entity (`String (0, s)))
 
 let get_children_with_tag tag = function
   | Data _ -> failwith "No children found."
