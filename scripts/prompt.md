@@ -30,6 +30,12 @@ Do NOT translate or modify:
 
 Rules:
 - Preserve the XML structure exactly: same elements, same order, same attributes.
+- Preserve XML entity escaping exactly. The input escapes special characters as
+  XML entities (`&amp;` for `&`, `&lt;` for `<`, `&gt;` for `>`); copy every such
+  entity verbatim and NEVER decode it to its literal character, even inside
+  inline code or `~...~` code spans. Any literal `&` or `<` you write in text
+  content must be escaped as `&amp;` and `&lt;`. The output must be a well-formed
+  XML document that parses without modification.
 - Inside `<cwn_what>`, preserve Markdown formatting (links like `[text](url)`,
   inline code, lists, code fences) verbatim. Do NOT rewrite Markdown links into
   org-mode syntax — that happens in a later pipeline step.
