@@ -13,7 +13,36 @@ permissions:
   pull-requests: write
 
 jobs:
+  # Skip scheduled runs while a previous translation PR is still open, so we
+  # don't pile up a new PR each day. Manual (workflow_dispatch) runs bypass the
+  # guard — that's the escape hatch for forcing a run once the PR is merged.
+  guard:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - name: Skip if an open translation PR exists
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manual run: bypassing the open-PR guard."
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          open=$(gh pr list --repo "${{ github.repository }}" \
+            --label automated --state open --json number --jq 'length')
+          if [ "$open" -gt 0 ]; then
+            echo "An open translation PR already exists; skipping this run."
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          fi
+
   translate:
+    needs: guard
+    if: needs.guard.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
