@@ -5,6 +5,13 @@
 <link>https://ocaml.jp/cwn-ja/</link>
 <description>OCaml Weekly News の日本語訳</description>
 <item>
+  <title>OCaml Weekly News (2026年7月7日版）</title>
+  <pubDate>Tue, 07 Jul 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.07.07.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.07.07.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.07.html#1"&gt;opam-minver 0.2.0 — 依存関係の最小バージョンを自動的に特定する&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.07.html#2"&gt;Zanuda — OCaml linter 実験&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.07.html#3"&gt;rpgm-decrypt — OCaml による形式検証済み RPG Maker アセット復号化ツール&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.07.html#4"&gt;menhirformat 0.1.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.07.html#5"&gt;Solo5 0.12.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.07.html#6"&gt;Landmarks 1.7&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.07.html#7"&gt;Ocsigen が（今のところ）Lwt を使い続ける理由&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.07.html#8"&gt;Dune 3.24&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
   <title>OCaml Weekly News (2026年6月30日版）</title>
   <pubDate>Tue, 30 Jun 2026 12:00:00 GMT</pubDate>
   <link>https://ocaml.jp/cwn-ja/2026.06.30.html</link>
@@ -66,13 +73,6 @@
   <link>https://ocaml.jp/cwn-ja/2026.05.05.html</link>
   <guid>https://ocaml.jp/cwn-ja/2026.05.05.html</guid>
   <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.05.html#1"&gt;Oc — OCaml 初心者向けの Cargo ライクな CLI（AI 支援、フィードバック歓迎）&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.05.html#2"&gt;Dune パッケージ管理のアップデート&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.05.html#3"&gt;OCaml ユーザーサーベイ 2026&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.05.html#4"&gt;OCaml Web チュートリアル&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.05.html#5"&gt;Valkey 0.3.1：クライアントサイドキャッシング、ブロッキングプール、IAM 認証、mTLS&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
-</item>
-<item>
-  <title>OCaml Weekly News (2026年4月28日版）</title>
-  <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
-  <link>https://ocaml.jp/cwn-ja/2026.04.28.html</link>
-  <guid>https://ocaml.jp/cwn-ja/2026.04.28.html</guid>
-  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#1"&gt;古いバグをテストで閉じる: Dune へのコントリビューション体験記&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#2"&gt;ocaml-wire: EverParse 3D 出力付きのバイナリワイヤフォーマット DSL&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#3"&gt;valkey: OCaml 5 + Eio 向けモダン Valkey クライアント、opam で公開&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#4"&gt;UnifiedScript_{Std,Top} - リテレートテスティング&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#5"&gt;openrouter_api: OpenRouter クライアントライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.28.html#6"&gt;発表募集: Caml in the Capital II&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
 </item>
 </channel>
 </rss>
