@@ -11,6 +11,7 @@
   async
   core
   core_unix
+  jsonaf
   openrouter_api
   re
   xmlm))

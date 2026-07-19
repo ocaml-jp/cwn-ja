@@ -11,4 +11,5 @@
  (fetch
   (url
    https://github.com/janestreet/ppx_jsonaf_conv/archive/refs/tags/v0.17.1.tar.gz)
-  (checksum md5=2e9916fed20953aee759623b21502293)))
+  (checksum
+   sha512=6ab435f0bd47a829d75471e7c8bec7b1db68d074ea806805854cdf25c76d4aa89a294163fbdbf8451e5a61d48cf26489cf7f94fece8d59e76dde954ecee269e9)))

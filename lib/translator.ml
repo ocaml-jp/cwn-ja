@@ -60,37 +60,23 @@ module Progress = struct
   ;;
 end
 
-let build_request ~model ~system_prompt ~content : Openrouter_api.Completions.Request.t =
-  { model
-  ; messages =
-      [ Openrouter_api.Completions.Request.Message.system system_prompt
-      ; Openrouter_api.Completions.Request.Message.user content
-      ]
-  ; stream = true
-  ; reasoning = None
-  ; tools = []
-  ; tool_choice = None
-  ; parallel_tool_calls = None
-  ; plugins = []
-  ; temperature = None
-  ; top_p = None
-  ; max_tokens = Some 128_000
-  ; seed = None
-  ; stop = None
-  ; frequency_penalty = None
-  ; presence_penalty = None
-  ; repetition_penalty = None
-  ; response_format = None
-  }
-;;
-
 let translate ~api_key ~model ~system_prompt ~content =
-  let request = build_request ~model ~system_prompt ~content in
+  let request =
+    Openrouter_api.Completions.Request.create_streaming
+      ~max_tokens:128_000
+      ~model
+      ~messages:
+        [ Openrouter_api.Completions.Request.Message.system system_prompt
+        ; Openrouter_api.Completions.Request.Message.user content
+        ]
+      ()
+  in
   let%bind reader = Openrouter_api.Completions.create_stream ~api_key request in
   let buf = Buffer.create 64_000 in
   let progress = Progress.create () in
   let finish_reason = ref None in
   let stream_error = ref None in
+  let provider_error = ref None in
   let%map () =
     Pipe.iter_without_pushback reader ~f:(fun chunk_result ->
       match chunk_result with
@@ -106,6 +92,13 @@ let translate ~api_key ~model ~system_prompt ~content =
            | Some text ->
              Buffer.add_string buf text;
              Progress.advance progress ~chars:(String.length text));
+          (match choice.error with
+           | None -> ()
+           | Some error ->
+             (* Keep the first provider error so we report the original cause. *)
+             (match !provider_error with
+              | Some _ -> ()
+              | None -> provider_error := Some error));
           match choice.finish_reason with
           | None -> ()
           | Some reason -> finish_reason := Some reason))
@@ -115,12 +108,20 @@ let translate ~api_key ~model ~system_prompt ~content =
   | Some err -> Error err
   | None ->
     let result = Buffer.contents buf in
-    (match !finish_reason with
-     | None | Some "stop" -> Ok result
-     | Some reason ->
+    (match !provider_error with
+     | Some error ->
        Or_error.error_s
          [%message
-           "Translation finished with non-stop finish_reason — output likely truncated"
-             ~finish_reason:(reason : string)
-             ~chars:(String.length result : int)])
+           "Provider reported an error mid-stream"
+             (error : Jsonaf.t)
+             ~chars:(String.length result : int)]
+     | None ->
+       (match !finish_reason with
+        | None | Some "stop" -> Ok result
+        | Some reason ->
+          Or_error.error_s
+            [%message
+              "Translation finished with non-stop finish_reason — output likely truncated"
+                ~finish_reason:(reason : string)
+                ~chars:(String.length result : int)]))
 ;;

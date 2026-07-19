@@ -2,10 +2,13 @@
 
 ; Regenerates dune.inc whenever the set of *.xml inputs changes. The mode is
 ; promote so the regenerated file lands back in the source tree; commit it.
+
 (rule
- (deps (glob_files *.xml))
+ (deps
+  (glob_files *.xml))
  (target dune.inc)
  (mode promote)
  (action
-  (with-stdout-to %{target}
+  (with-stdout-to
+   %{target}
    (run %{exe:../bin/cwn_ja.exe} gen-dune-inc))))

@@ -1,4 +1,4 @@
-(version 0.0.1)
+(version 0.1.0)
 
 (build
  (all_platforms
@@ -13,6 +13,7 @@
    ocaml
    ppx_jsonaf_conv
    ppx_jane
+   ppx_typed_fields
    async
    cohttp-async
    async_ssl
@@ -22,5 +23,6 @@
 (source
  (fetch
   (url
-   https://github.com/mt-caret/openrouter-ocaml/archive/refs/tags/v0.0.1.tar.gz)
-  (checksum md5=7340ede2957cd4ca5ea34ffc100384da)))
+   https://github.com/mt-caret/openrouter-ocaml/archive/refs/tags/v0.1.0.tar.gz)
+  (checksum
+   sha512=0f6e6d347094aff4efb50330d50ade3f1706929400498998a8d8f409f1ab45099d792cc469210e53c2ca06b0e1a9b20fdf8e89361a52969cc495812092fe584b)))

@@ -1,11 +1,5 @@
 (library
  (name cwn_ja_lib)
- (libraries
-  async
-  core
-  core_unix.date_unix
-  openrouter_api
-  re
-  xmlm)
+ (libraries async core core_unix.date_unix jsonaf openrouter_api re xmlm)
  (preprocess
   (pps ppx_jane)))

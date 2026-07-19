@@ -7,8 +7,9 @@ open! Async
 
 (** [translate ~api_key ~model ~system_prompt ~content] sends [content] as the
     user message, [system_prompt] as the system message, and accumulates the
-    streamed text deltas. A non-["stop"] [finish_reason] is treated as an
-    error since it usually means the output was truncated. *)
+    streamed text deltas. A mid-stream provider error or a non-["stop"]
+    [finish_reason] is treated as an error since it usually means the output
+    was truncated. *)
 val translate
   :  api_key:string
   -> model:string
