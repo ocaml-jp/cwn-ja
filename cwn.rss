@@ -5,6 +5,13 @@
 <link>https://ocaml.jp/cwn-ja/</link>
 <description>OCaml Weekly News の日本語訳</description>
 <item>
+  <title>OCaml Weekly News (2026年7月21日版）</title>
+  <pubDate>Tue, 21 Jul 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.07.21.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.07.21.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.21.html#1"&gt;ocamlgrep 0.1.1&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.21.html#2"&gt;MirageOS on Unikraft&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.21.html#3"&gt;ppx_deriving_melange 0.1.0 - Melange 向け eq、ord、show、map、iter deriver&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.21.html#4"&gt;hegel 0.12.1&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.21.html#5"&gt;Bigarray.Genarray に iteration、mapping、folding を追加する小さな拡張&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.21.html#6"&gt;OCaml Security Team、2026年前半のレポート&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.21.html#7"&gt;Dune パッケージ管理のアップデート&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.21.html#8"&gt;opam 2.6.0~alpha1&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.21.html#9"&gt;使いすぎた小さな型&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
   <title>OCaml Weekly News (2026年7月14日版）</title>
   <pubDate>Tue, 14 Jul 2026 12:00:00 GMT</pubDate>
   <link>https://ocaml.jp/cwn-ja/2026.07.14.html</link>
@@ -66,13 +73,6 @@
   <link>https://ocaml.jp/cwn-ja/2026.05.19.html</link>
   <guid>https://ocaml.jp/cwn-ja/2026.05.19.html</guid>
   <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#1"&gt;hotseat Squava（小さな LablGtk2 デモ）&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#2"&gt;コメント募集：既知のセキュリティ脆弱性を持つ opam パッケージへの対応について&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#3"&gt;odoc 3.2.1 リリース&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#4"&gt;OCaml.org のジョブボードに OCaml の求人を掲載しましょう&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#5"&gt;Cammy Stories：小さな OCaml ウェブコミックの実験 🐫&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#6"&gt;MlFront_ProgressZig - Zig 互換プログレスツリー&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.19.html#7"&gt;loo - lua of ocaml&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
-</item>
-<item>
-  <title>OCaml Weekly News (2026年5月12日版）</title>
-  <pubDate>Tue, 12 May 2026 12:00:00 GMT</pubDate>
-  <link>https://ocaml.jp/cwn-ja/2026.05.12.html</link>
-  <guid>https://ocaml.jp/cwn-ja/2026.05.12.html</guid>
-  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.12.html#1"&gt;Dune 3.23.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.12.html#2"&gt;Orcaset: コードによる財務モデル&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.12.html#3"&gt;Miou、OCaml 5 向けのシンプルなスケジューラ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.05.12.html#4"&gt;実行時型：用途とニーズ&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
 </item>
 </channel>
 </rss>
