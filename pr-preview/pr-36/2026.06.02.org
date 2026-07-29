@@ -1,0 +1,434 @@
+#+OPTIONS: ^:nil
+#+OPTIONS: html-postamble:nil
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: author:nil
+#+HTML_HEAD: <style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+#+HTML_HEAD: <style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+#+TITLE: OCaml Weekly News
+[[file:2026.05.26.html][先週号]] [[file:index.html][上へ]] [[file:2026.06.09.html][次週号]]
+
+こんにちは
+
+2026年5月26日から6月2日までの週の OCaml Weekly News をお届けします。
+
+#+TOC: headlines 1
+
+
+* Caml In The Capital: 今すぐ登録！6月3日開催
+:PROPERTIES:
+:CUSTOM_ID: 1
+:END:
+Archive: https://discuss.ocaml.org/t/london-caml-in-the-capital-register-now-june-3rd/18183/1
+
+** Sacha Ayoun が発表しました
+
+
+皆さん、こんにちは！
+
+来週6月3日に開催される Caml In The Capital への参加登録を[[https://www.eventbrite.sg/e/caml-in-the-capital-june-tickets-1990385560792][こちらのリンク]]からお願いします。JaneStreet が会場を提供してくださるため、登録していただくと運営がスムーズになります。
+
+*重要事項*: 当日は写真付き身分証明書をお持ちください！🪪
+イベントの詳細は[[https://caml-in-the-capital.github.io][公式サイト]]でご確認いただけます。
+
+*** 開催情報
+
+イベントは *Jane Street のロンドンオフィス*（2 & A Half Devonshire Square, Premier Place, London, EC2M 4UJ）で開催されます。
+受付はビルのロビーで行われます。*当日は必ず写真付き身分証明書をご持参ください*。
+⌛ イベントは17:30に開始し、トークは18:30頃から始まります。
+🍕 軽食と飲み物をご用意しています。
+
+*** トーク内容
+
+**** Dune Package Management
+*発表者:* Ali Caglayan
+*概要:* Dune package management は、dune が opam パッケージをビルド・使用できるようにすることを目標としたプロジェクトです。2023年から活発に開発が進められており、より洗練された実用的な形に育ってきています。現時点ではまだ実験的とされていますが、本トークでは現在できること（リロケータブルコンパイラ、ロックレスビルド、OxCaml サポート）、現在取り組んでいる機能（in-and-out、dev-tools）、そして安定化への道筋について紹介します。
+
+**** Opam の Nix システム依存関係メカニズム
+*発表者:* Ryan Gibb
+*概要:* OCaml 言語のパッケージマネージャである Opam は、言語外部の依存関係を提供するためにシステムパッケージマネージャと連携する仕組みを持っています。Nix に対応するにあたり、従来のパッケージマネージャとのインターフェースに用いていた抽象化を見直す必要がありましたが、その結果、Nix の再現性のあるシステム依存関係を活かしながら Opam を開発環境として手軽に利用できるようになりました。これは、Nix が他のソフトウェア開発・デプロイ技術とどのように連携するかの一例です。
+      
+
+
+
+* Slipshow!
+:PROPERTIES:
+:CUSTOM_ID: 2
+:END:
+Archive: https://discuss.ocaml.org/t/ann-slipshow/16337/23
+
+** このスレッドを継続して、Paul-Elliot が発表しました
+
+
+まず小さなお知らせです：Slipshow に[[https://slipshow.zulipchat.com/][専用の Zulip]] ができました！プレゼンテーションを準備しながら質問したり、素晴らしい作品を披露したりするためにぜひご活用ください！
+
+すべての手続きを終えた上で、opam への Slipshow 次期リリースを正式にアナウンスします：
+
+*Slipshow 0.11.0: Brazlip*
+
+タイポが /劇的な/ 結果をもたらしかねないことは皆さんもご存知の通りです。そのため、私たちはタイポを *何としても* 避けたいと思っています。
+
+このリリースにより、Slipshow はエラーをエディタ上に直接表示できるようになりました。Slipshow はあなたが書いている内容をリアルタイムで把握し、警告・タイポ・その他の問題を即座に報告します。
+
+以下は、プレゼンテーション中のタイポをリアルタイムで修正した様子の録画です：
+
+#+attr_html: :width 80%
+https://github.com/user-attachments/assets/ac675cdf-1d08-41e4-b384-25a3bfd764ef
+
+LSP サーバーがサポートする機能：
+- 開いているバッファへのエラー表示
+- ID を引数として使用するアクション向けの ID 補完
+- アクションのホバー時のドキュメント表示
+- ID の出現箇所のハイライト
+- 指定した ID への定義ジャンプ
+- マルチファイルプレゼンテーション
+- 同期プレビューサーバー
+- 保存時のコンパイル
+
+毎リリース、素晴らしい OCaml ライブラリを新たに発見することに驚かされます。今回は @c-cbue による [[https://github.com/c-cube/linol][linlol]] です。作成・メンテナンスしてくださって本当にありがとうございます！
+
+いつものように、NNLet の惜しみない多大なるサポートに感謝します。そして...❤️ [[https://github.com/sponsors/panglesd][スポンサー]]の皆様にも感謝を！
+
+#+begin_example
+$ opam update
+$ opam upgrade slipshow
+#+end_example
+
+今回のリリースの完全な変更履歴もご確認ください。LSP サーバー以外にも改善点があります！
+
+*** 追加
+
+- プレビュアーの状態（切断、更新中など）を示す視覚的インジケーターを追加 (#220, #222)
+- インクルードされたファイルでのフロントマターに対応 (#228)
+- (#229) エディタと連携するための LSP サーバーを追加。~slipshow lsp~ コマンドで利用可能。サポート機能：
+  - 診断（Diagnostics）
+  - ホバー時のアクションドキュメント表示
+  - 定義へジャンプ（アクション内の ID から対応する要素へ）
+  - ID の出現箇所
+  - アクション内 ID の補完
+- LSP サーバーへのプレビューサーバー機能を追加 (#233)
+- 生の HTML をファイル内または外部ファイルとしてインクルードするための構文を追加 (#236)
+
+*** 変更
+
+- フロントマターにおいて、~attributes~（ファイル全体の属性）と ~toplevel-attributes~（プレゼンテーション全体の属性）を区別するように変更。この破壊的変更に対応するには、プレゼンテーション内の ~toplevel-attributes~ を ~attributes~ に変更してください。(#229)
+
+*** 修正
+
+- 切断後にホットリロードが再開しない問題を修正 (#220)
+      
+
+
+
+* doctor 0.3.0: 読み取り専用の OCaml 環境診断ツール
+:PROPERTIES:
+:CUSTOM_ID: 3
+:END:
+Archive: https://discuss.ocaml.org/t/ann-doctor-0-3-0-read-only-ocaml-environment-diagnostics/18186/1
+
+** Funwithcthulhu が発表しました
+
+
+こんにちは、
+
+~doctor~ 0.3.0 をリリースしました。
+
+~doctor~ は、ローカルの OCaml 開発環境をチェックするための小さな読み取り専用 CLI ツールです。opam、スイッチ、PATH、dune、ocaml-lsp-server、ocamlformat、VS Code OCaml Platform 拡張機能に関するよくあるセットアップの問題を報告します。
+
+インストール方法：
+
+#+begin_example
+opam update
+opam install doctor
+#+end_example
+
+基本的な使い方：
+
+#+begin_example
+doctor check
+doctor check --json
+#+end_example
+
+バージョン 0.3.0 では opam スイッチ環境の診断に重点を置いています。特に、ツールが見つからないケースと、opam にアクティブなスイッチはあるものの現在のシェルがそのスイッチ環境を読み込んでいないケースを区別しようとしています。
+
+たとえば、~ocaml~ がアクティブなスイッチ外で解決されている場合や、~dune~・~ocamllsp~・~ocamlformat~ などのスイッチにインストール済みのツールが ~PATH~ に存在しない場合に報告できます。
+
+このコマンドは ~opam init~ の実行、スイッチの作成、パッケージのインストール、シェルやエディタのファイル編集は一切行いません。確認した内容を報告し、手動で実行すべきコマンドを提案するだけです。
+
+JSON 出力は、安定した診断名とエラーコードマッピングを必要とするエディタ統合や小規模スクリプト向けに設計されています。
+
+リポジトリ：
+
+https://github.com/funwithcthulhu/doctor
+
+opam パッケージ：
+
+https://opam.ocaml.org/packages/doctor/
+
+わかりにくい診断内容や、一般的なセットアップのケースで漏れているものがあればフィードバックをお寄せください。
+
+ありがとうございました！
+      
+
+
+
+* Solo5: ユニカーネル向けサンドボックス実行環境
+:PROPERTIES:
+:CUSTOM_ID: 4
+:END:
+Archive: https://discuss.ocaml.org/t/ann-solo5-a-sandboxed-execution-environment-for-unikernels/18191/1
+
+** Calascibetta Romain が発表しました
+
+
+[[https://github.com/solo5/solo5][Solo5 0.11.0]] のリリースをお知らせできることを大変嬉しく思います。このリリースは、OCaml によるユニカーネルのパフォーマンス改善への取り組みが始まったという点で重要な意味を持ちます。
+
+プロジェクト自体は C で書かれていますが、ユニカーネル開発の礎となるものです。OCaml サポートは [[https://github.com/mirage/ocaml-solo5][~ocaml-solo5~]]（OCaml コンパイラのバージョンを追跡）を通じて提供されています。以下は OCaml による Solo5 (hvt) ユニカーネルの簡単な例です：
+
+#+begin_src shell
+$ opam install ocaml-solo5
+$ eval $(opam env)
+$ cat >startup.c<<EOF
+#include "solo5.h"
+#include <caml/callback.h>
+
+static char *argv[] = { "unikernel", NULL };
+
+void _nolibc_init(uintptr_t, size_t);
+
+int solo5_app_main(const struct solo5_start_info *si) {
+  _nolibc_init(si->heap_start, si->heap_size);
+  caml_startup(argv);
+  return (0);
+}
+EOF
+$ cat >manifest.json<<EOF
+{
+  "type": "solo5.manifest",
+  "version": 1,
+  "devices": []
+}
+EOF
+$ cat >main.ml<<EOF
+let () = print_endline "Hello World!"
+EOF
+$ solo5-elftool gen-manifest manifest.json manifest.c
+$ ocamlfind -toolchain solo5 opt \
+  manifest.c startup.c main.ml \
+  -cclib "-z solo5-abi=hvt" -o main.hvt
+$ solo5-hvt -- main.hvt
+            |      ___|
+  __|  _ \  |  _ \ __ \
+\__ \ (   | | (   |  ) |
+____/\___/ _|\___/____/
+Solo5: Bindings version v0.11.0
+Solo5: Memory map: 512 MB addressable:
+Solo5:   reserved @ (0x0 - 0xfffff)
+Solo5:       text @ (0x100000 - 0x14efff)
+Solo5:     rodata @ (0x14f000 - 0x166fff)
+Solo5:       data @ (0x167000 - 0x371fff)
+Solo5:       heap >= 0x372000 < stack < 0x20000000
+Hello World!
+Solo5: solo5_exit(0) called
+#+end_src
+
+OCaml でのユニカーネル開発についてさらに詳しく知りたい方は、[[https://github.com/robur-coop/mkernel/blob/main/slides/retreat.md][スライド]]（最後の MirageOS リトリートで発表）や [[https://github.com/robur-coop/mnet][~mnet~]] の[[https://robur-coop.github.io/mnet/][チュートリアル]]をご覧ください。
+
+*** Solo5 とは？
+
+Solo5 は、サンドボックス内でプログラムを作成・実行するための C フレームワークとツールセットです。このサンドボックスは当初、外部との相互作用を以下の5つのみに制限しています：
+1) _net_ デバイスへの Ethernet フレームの読み書き
+2) _block_ デバイスへのページの読み書き
+3) 終了
+
+サンドボックス環境で利用可能な関数はすべてこの[[https://github.com/Solo5/solo5/blob/main/include/solo5.h][ヘッダー]]に記述されています。
+
+Solo5 の注目すべき点は、この API が [[https://lwn.net/Articles/239238/][VirtIO]]、[[https://www.xenserver.com/][Xen]]（および [[https://www.qubes-os.org/][QubesOS]]）、そして私たちのミニマリストなハイパーバイザー ~hvt~（KVM、[[https://bhyve.org/][BHyve]]、[[https://man.openbsd.org/vmm][VMM]] 上で動作）と連携できる点です。これにより、Solo5 アプリケーションを幅広いプラットフォームにデプロイできます。Ubuntu では以下の手順で Solo5 をインストールできます：
+#+begin_src shell
+$ curl -fsSL https://apt.robur.coop/gpg.pub | \
+  gpg --dearmor > /etc/apt/trusted.gpg.d/apt.robur.coop.gpg
+$ echo "deb [signed-by=/etc/apt/trusted.gpg.d/apt.robur.coop.gpg] https://apt.robur.coop ubuntu-24.04 main" > /etc/apt/sources.list.d/robur.list
+$ apt update
+$ apt install solo5
+#+end_src
+
+*** ~hvt~ ユニカーネル
+
+[[https://robur.coop/][Robur]] では ~hvt~ ユニカーネルの構築を好んでいます。これらのユニカーネルの実行には ~solo5-hvt~ 「テンダー」（約200KB）のみが必要で、Linux・FreeBSD・OpenBSD で利用可能です（WSL は _ネスト仮想化_ をサポートしているため、WSL 上でもユニカーネルを実行できます！）。
+
+~hvt~ の利点はそのミニマリズム（Solo5 全般の特徴でもあります）にあります。今回のリリースでは、~libseccomp~ を使用してユニカーネルの実行に必要な権限のみを保持するようにすることで、Linux 上でのサンドボックス化が完成しました（合計18のシステムコール）。このサンドボックス化はすでに FreeBSD では [[https://wiki.freebsd.org/Capsicum][Capsicum]]、OpenBSD では [[https://man.openbsd.org/pledge.2][pledge(2)]] を通じて利用可能でした。
+
+また今回のリリースでは、[[https://man7.org/linux/man-pages/man2/eventfd.2.html][eventfd(2)]] と tap インターフェースに直接書き込む並列スレッドを使用することで、Linux 上の tap インターフェースへの Ethernet フレーム書き込みスループットの向上も実現しました。これにより、コストのかかる VM 退出の回数を減らすことができます。
+
+この目的のために、[[https://iperf.fr/iperf-download.php][~iperf3~]]（および [[https://github.com/robur-coop/mnet][~mnet~]] を使用してこのプロトコルを実装した[[https://git.robur.coop/robur/iperf3][ユニカーネル]]）を使ってベンチマークを実施し、スループットの改善を実証しました。
+
+|   solo5.0.10.1 |    solo5.0.11.0 |
+|----------------|-----------------|
+| ~700 Mbits/sec | ~2.15 Gbits/sec |
+
+*** ユニカーネルのデプロイ
+
+[[https://robur.coop/][Robur]] では、ユニカーネルのデプロイをできる限り簡単にすることを目指しています。そのために、様々なサービスをデプロイするためのソフトウェアとユニカーネルのスイートを開発しました：
+1) [[https://github.com/robur-coop/albatross][Albatross]] は（~apt~ 経由でもインストール可能な）プロジェクトで、~hvt~ ユニカーネルの起動と監視が可能なデーモンを実行できます。このサービスは特に ~hvt~ ユニカーネル向けに設計されています（ただし最近はシステムのデプロイにも対応できるようになっています）。
+2) [[https://github.com/robur-coop/dnsvizor][dnsvizor]] は IP アドレス割り当てと DNS 解決の問題を解決するユニカーネルです。このユニカーネルを起動することで、後続のユニカーネルがそれを基準にネットワーク設定を行えるようになります。
+3) 最後に、[[https://github.com/robur-coop/mollymawk][mollymawk]] を積極的に開発しています。これは新しいユニカーネルのデプロイを（できるだけ簡単な方法で）可能にする Albatross 向け Web インターフェースを提供するユニカーネルです。
+
+また [[https://github.com/robur-coop/aussi][~aussi~]]（まだ**実験的**段階）も開発しています。これはユニカーネル向けの [[https://opencontainers.org/][OCI]] ランタイムで、中でも [[https://www.docker.com/][Docker]] を使ってユニカーネルをビルド・デプロイできます。[[https://github.com/dinosaure/annuaire][~annuaire~]] ユニカーネルを使用した例が[[https://github.com/robur-coop/aussi#with-docker][こちら]]で公開されています。
+
+*** ユニカーネルの開発
+
+最後に、ユニカーネルとその開発というもう一つの側面があります。Robur では、潜在的な新規ユーザーが自身でユニカーネルを開発できるよう（オーナーシップを感じてもらえるよう）、標準的なユニカーネル開発を可能にするライブラリ（特にプロトコルとフォーマット）を開発しています。
+
+この件に関してご質問があれば、遠慮なくお聞かせください！
+
+この取り組みの一環として、私たちは以下のような標準的なユニカーネル開発を可能にするライブラリを長年にわたって開発してきました：
+- ユニカーネル（およびサービス）向けのスケジューラとして [[https://github.com/robur-coop/miou][Miou]] を引き続き開発中
+- ユニカーネル向け新しい TCP/IP スタックである [[https://github.com/robur-coop/mnet][~mnet~]] と [[https://github.com/robur-coop/utcp][~utcp~]] を開発中
+- ユニカーネル向け FAT32 ファイルシステム [[https://github.com/robur-coop/mfat][~mfat~]] も利用可能
+- ウェブサイトをユニカーネルとして開発するための Web フレームワーク [[https://github.com/robur-coop/vif][~vifu~]] も利用可能
+- その他、長年にわたってメンテナンスしてきた多くのプロジェクト！
+
+*** まとめ
+
+このリリースは、私たちの協同組合の取り組みを包括的（かつわかりやすく）に紹介する機会を与えてくれました。この取り組みの本質は、OCaml によるユニカーネルの開発・デプロイに必要なコンポーネントを構築しながら、通信と生産手段の自己管理というアイデアを推進することにあります。
+
+Happy hacking!
+      
+
+
+
+* OCaml コンパイラ オフィスアワー
+:PROPERTIES:
+:CUSTOM_ID: 5
+:END:
+Archive: https://discuss.ocaml.org/t/ocaml-compiler-office-hours/17230/38
+
+** このスレッドを継続して、gasche が発表しました
+
+
+皆さん、
+
+来週、6月5日（金）11:00〜12:00 UTC（現地時間は [date-range from=2026-06-05T11:00:00 to=2026-06-05T12:00:00 timezone=UTC]）に OCaml Compiler Office Hours が再び開催されることをお知らせします。
+
+今回のミーティングの共同メモは https://notes.irif.fr/UGGkT7aqTpmOCsqvW2VFZQ で公開されています。
+現時点ではほぼ空白の状態ですので、ミーティングで取り上げてほしいトピックをご自由に追加してください。（ご参加できない場合でも質問を書いていただいて構いません。いずれにせよ回答しますし、良い議論につながります。）
+
+ビデオリンクも記載されています（変更になる場合があります）。
+      
+
+
+
+* OCaml Workshop 2026 トーク提案募集
+:PROPERTIES:
+:CUSTOM_ID: 6
+:END:
+Archive: https://discuss.ocaml.org/t/call-for-talk-proposals-ocaml-workshop-2026/18192/1
+
+** Sudha Parimala が発表しました
+
+
+皆さん、こんにちは！今年の OCaml Workshop はパリで開催されます。ワークショップへの発表提案を募集しますので、ぜひご応募ください。
+
+#+attr_html: :width 80%
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/d/df969f0f9bb4c84623413a5805111b147b822ed7.jpeg
+
+*** 重要情報
+
+- *開催地:* パリ（[[https://www.irif.fr/~scherer/events/fpw-2026/announce.html][FPW 2026]] と併催）
+- *日程:* 8月27日（*変更の可能性あり！* 代替日：8月31日）
+- *提出締め切り:* 7月1日（AoE）
+- *採択通知:* 7月27日
+- *提出サイト:* [[https://types-hotcrp.paris.inria.fr/ocaml26/][https://types-hotcrp.paris.inria.fr/ocaml26/]]
+
+*** 対象範囲
+
+OCaml Workshop は、OCaml の魔法を初めて発見する入門者から、unsafe なスペルの詠唱に熟達した魔術師まで、幅広い OCaml ユーザーを歓迎します。彼らに共通するのは OCaml への情熱と、より深く学びたい・仲間の OCaml ユーザーとつながりたい・言語を改善する方法を共に探りたいという思いです。
+
+トーク提案についても同様に幅広く受け付けます：**OCaml に関連するものであれば何でも歓迎**です！
+
+テーマは以下に限りませんが、過去の例を挙げると、OCaml 編集ツール、検証済み OCaml 成果物、OCaml と他言語との相互運用性、OCaml 行動規範、コンパイラ最適化、OS 移植性、OCaml テストフレームワーク、OCaml における並行性パッケージなどがあります。
+
+過去の全カタログは以下のリンクからご覧いただけます：
+
+- 2025: [[https://ocaml.org/conferences/ocaml-workshop-2025][https://ocaml.org/conferences/ocaml-workshop-2025]]
+- 2024: [[https://ocaml.org/conferences/ocaml-workshop-2024][https://ocaml.org/conferences/ocaml-workshop-2024]]
+- 2023: [[https://ocaml.org/conferences/ocaml-workshop-2023][https://ocaml.org/conferences/ocaml-workshop-2023]]
+- 2022: [[https://ocaml.org/conferences/ocaml-workshop-2022][https://ocaml.org/conferences/ocaml-workshop-2022]]
+- 2021: [[https://ocaml.org/conferences/ocaml-workshop-2021][https://ocaml.org/conferences/ocaml-workshop-2021]]
+
+*** 発表形式
+
+20分の**標準トーク**形式に加え、以下の形式も受け付けます：
+
+- **デモ。** ツールのチュートリアル形式によるデモンストレーション（30分）。
+- **意見発表。** OCaml の設計空間（機能の追加・削除など）に関するトピックの発表（20分）。
+- **事例報告。** OCaml またはツールの使用に関する報告（20分）。
+
+*** 提出方法
+
+提出サイトはこちら：[[https://types-hotcrp.paris.inria.fr/ocaml26/][https://types-hotcrp.paris.inria.fr/ocaml26/]]
+
+トークの説明（通常2〜3ページ程度、それより短くても長くても構いません）として、取り上げる問題と提案する解決策・手法を提出してください。発表方法そのものがトークの独自の特徴であると考える場合は、発表方法の説明も含めていただいて構いません。
+
+LaTeX で作成した PDF が一般的ですが必須ではありません。
+
+昨年採択されたプレゼンテーションはオンラインで公開されています：[[https://icfp25.sigplan.org/home/ocaml-2025#event-overview][https://icfp25.sigplan.org/home/ocaml-2025#event-overview]]
+
+**** 評価基準
+
+提出物は以下の基準で評価されます：
+
+- OCaml コミュニティへの関連性
+- 厳密さと妥当性
+- 新規性
+- 明確さ
+- 魅力的で有益なプレゼンテーションを行う可能性
+
+*** LLM 使用に関する推奨事項
+
+LLM が主体となって書かれた提案は受け付けられず、即座に不採択となります。文法の修正やスタイルの改善に LLM を使用することは問題ありません（特に英語が母国語でない方には有益です）が、内容を直接生成させることは危険かつ非専門的であり、著者性とレビュアーの労力を損なうものです。
+
+*** 開催地情報
+
+今回の Caml Workshop はパリで開催され、8月末に行われる[[https://www.irif.fr/~scherer/events/fpw-2026/announce.html][Functional Programming Workshops (FPW) 2026]] の一環として、他のワークショップやイベントとともに開催されます。これは、OCaml Workshop が通常 ICFP と併催されてきた慣例からの変更です。FPW'26 の一部のイベントは ICFP とも共催されるため、開催日程はほぼ同時期となります。
+
+*** ML Workshop との連携
+
+[[https://icfp26.sigplan.org/home/mlfamilyworkshop-2026#About][ML Family Workshop]] も今年 FPW'26 と共催されており、参加者にとって関心のある内容かもしれません。OCaml Workshop が OCaml エコシステムの発展に焦点を当てているのに対し、ML Workshop は言語を問わず、よりリサーチ指向の内容となっています。両会場に適した提出物をお持ちの著者は、提出時にその旨を記載するか、プログラム委員長にご連絡ください。
+
+*** プログラム委員会
+
+- Clément Allain
+- Pedro Carrott
+- Simon Cruanes
+- Marko Doko
+- Patrick Ferris
+- Jean-Christophe Filliâtre
+- Sadiq Jaffer
+- Robbert Krebbers
+- Vincent Laviron
+- Tim McGilchrist
+- António Monteiro
+- Carine Morel
+- Andreas Rossberg
+- Vimala Soundarapandian
+- Jérôme Vouillon
+- John Whitington
+- Paulo de Vilhena（委員長）
+- Sudha Parimala（委員長）
+      
+
+
+
+* 過去の CWN
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+CWN を見逃した場合は、[[mailto:alan.schmitt@polytechnique.org][メッセージを送っていただければ]]メールでお送りします。また、[[https://ocaml.jp/cwn-ja/][アーカイブ]]や[[https://ocaml.jp/cwn-ja/cwn.rss][RSS フィード]]もご覧いただけます。
+
+毎週メールで受け取りたい場合は、[[https://sympa.inria.fr/sympa/info/caml-list][caml-list]] を購読してください。
+
+#+BEGIN_authorname
+[[https://alan.petitepomme.net/][Alan Schmitt]]
+#+END_authorname
