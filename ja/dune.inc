@@ -290,7 +290,23 @@
         --eval "(princ (org-export-as 'html))" --kill))))
 
 (rule
- (deps 2026.03.31.html 2026.04.07.html 2026.04.14.html 2026.04.21.html 2026.04.28.html 2026.05.05.html 2026.05.12.html 2026.05.19.html 2026.05.26.html 2026.06.02.html 2026.06.09.html 2026.06.16.html 2026.06.23.html 2026.06.30.html 2026.07.07.html 2026.07.14.html 2026.07.21.html 2026.07.28.html)
+ (deps 2026.08.04.xml)
+ (targets 2026.08.04.org 2026.08.04.rss)
+ (mode promote)
+ (action
+  (run %{exe:../bin/cwn_ja.exe} convert -japanese %{dep:2026.08.04.xml})))
+
+(rule
+ (deps 2026.08.04.org ../scripts/org-export.el)
+ (target 2026.08.04.html)
+ (mode promote)
+ (action
+  (with-stdout-to %{target}
+   (run emacs --batch -l ../scripts/org-export.el --visit %{dep:2026.08.04.org}
+        --eval "(princ (org-export-as 'html))" --kill))))
+
+(rule
+ (deps 2026.03.31.html 2026.04.07.html 2026.04.14.html 2026.04.21.html 2026.04.28.html 2026.05.05.html 2026.05.12.html 2026.05.19.html 2026.05.26.html 2026.06.02.html 2026.06.09.html 2026.06.16.html 2026.06.23.html 2026.06.30.html 2026.07.07.html 2026.07.14.html 2026.07.21.html 2026.07.28.html 2026.08.04.html)
  (target index.html)
  (mode promote)
  (action
@@ -298,7 +314,7 @@
    (run %{exe:../bin/cwn_ja.exe} gen-index))))
 
 (rule
- (deps 2026.03.31.rss 2026.04.07.rss 2026.04.14.rss 2026.04.21.rss 2026.04.28.rss 2026.05.05.rss 2026.05.12.rss 2026.05.19.rss 2026.05.26.rss 2026.06.02.rss 2026.06.09.rss 2026.06.16.rss 2026.06.23.rss 2026.06.30.rss 2026.07.07.rss 2026.07.14.rss 2026.07.21.rss 2026.07.28.rss)
+ (deps 2026.03.31.rss 2026.04.07.rss 2026.04.14.rss 2026.04.21.rss 2026.04.28.rss 2026.05.05.rss 2026.05.12.rss 2026.05.19.rss 2026.05.26.rss 2026.06.02.rss 2026.06.09.rss 2026.06.16.rss 2026.06.23.rss 2026.06.30.rss 2026.07.07.rss 2026.07.14.rss 2026.07.21.rss 2026.07.28.rss 2026.08.04.rss)
  (target cwn.rss)
  (mode promote)
  (action
@@ -307,4 +323,4 @@
 
 (alias
  (name default)
- (deps 2026.03.31.html 2026.04.07.html 2026.04.14.html 2026.04.21.html 2026.04.28.html 2026.05.05.html 2026.05.12.html 2026.05.19.html 2026.05.26.html 2026.06.02.html 2026.06.09.html 2026.06.16.html 2026.06.23.html 2026.06.30.html 2026.07.07.html 2026.07.14.html 2026.07.21.html 2026.07.28.html index.html cwn.rss))
+ (deps 2026.03.31.html 2026.04.07.html 2026.04.14.html 2026.04.21.html 2026.04.28.html 2026.05.05.html 2026.05.12.html 2026.05.19.html 2026.05.26.html 2026.06.02.html 2026.06.09.html 2026.06.16.html 2026.06.23.html 2026.06.30.html 2026.07.07.html 2026.07.14.html 2026.07.21.html 2026.07.28.html 2026.08.04.html index.html cwn.rss))
