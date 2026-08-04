@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.06.02.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.06.16.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年6月2日から9日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">Richard Bird Distinguished Dissertation Award</a></li>
+<li><a href="#2">Pyro Caml 発表：OCaml 向け継続的プロファイラー</a></li>
+<li><a href="#3">awso 0.9.1：400 以上の AWS API に対するタイプセーフなカバレッジ</a></li>
+<li><a href="#4">Plan 9 向け OCaml 4.14.3</a></li>
+<li><a href="#5">OCaml Workshop 2026 トーク提案募集</a></li>
+<li><a href="#6">Ahrefs OCaml グラントプログラム</a></li>
+<li><a href="#org5844e52">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">Richard Bird Distinguished Dissertation Award</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/richard-bird-distinguished-dissertation-award/18215/1">https://discuss.ocaml.org/t/richard-bird-distinguished-dissertation-award/18215/1</a>
+</p>
+</div>
+
+<div id="outline-container-org0ccf6ed" class="outline-3">
+<h3 id="org0ccf6ed">François Pottier が発表しました</h3>
+<div class="outline-text-3" id="text-org0ccf6ed">
+<p>
+OCaml ユーザーの皆さん、こんにちは。
+関数型プログラミングに関連するテーマで 2025 年に博士号を取得された方、またはそのような学生をお持ちの方は、新設された Richard Bird Distinguished Dissertation Award にご応募いただけます。以下に告知文を転載します。
+</p>
+
+<p>
+<code>===============================================================</code>
+</p>
+
+<p>
+候補者募集のお知らせ
+</p>
+
+<p>
+Richard Bird Distinguished Dissertation Award 2025
+</p>
+
+<p>
+締め切り：2026年8月31日
+</p>
+
+<p>
+<a href="http://tinyurl.com/jfp-bird-award">http://tinyurl.com/jfp-bird-award</a>
+</p>
+
+<p>
+<code>===============================================================</code>
+</p>
+
+<p>
+概要
+</p>
+
+<p>
+Journal of Functional Programming は、関数型プログラミングにおける優れた博士論文を表彰するため、Richard Bird Distinguished Dissertation Award を設立しました。
+</p>
+
+<p>
+Richard Bird（1943–2022）は、関数型プログラミングの分野を牽引した第一人者のひとりです。Oxford 大学の教授として Algebra of Programming グループを創設し、Computing Laboratory の所長を務めました。Richard は、明快かつエレガントな記述の高い基準を確立した関数型プログラミングに関する数多くの著書と「パール」で広く知られています。この分野においてこうした価値観をさらに奨励するために、彼の名を冠した賞が設立されることは誠にふさわしいことと言えます。
+</p>
+
+<p>
+本賞には £1,000 の賞金が贈られます。賞金の財源は、関数型プログラミングの発展を目的として Richard 自身から寄せられた寄付によって支えられています。
+</p>
+
+<p>
+選考基準
+</p>
+
+<p>
+対象となる論文は、2025 年中に完成したものに限ります。機関によって、口述試験の日付、修正承認日、学位授与式の日付など、完成日の定義が異なる場合があります。
+</p>
+
+<p>
+本賞は JFP の対象範囲内のすべてのトピックに開かれており、特に Richard 自身の価値観である明快さ・簡潔さ・エレガンスを体現した論文を重視します。審査対象となる論文は以下の条件を満たす必要があります。
+</p>
+
+<ul class="org-ul">
+<li>高水準の記述に達していること；</li>
+
+<li>分野において注目すべき貢献をなしていること；</li>
+
+<li>結果をコンピュータサイエンスの広い文脈に位置づけていること。</li>
+</ul>
+
+<p>
+推薦方法
+</p>
+
+<p>
+2026年8月31日までに、以下の情報を審査委員長 graham.hutton@nottingham.ac.uk 宛にご提出ください。
+</p>
+
+<ul class="org-ul">
+<li>推薦理由を説明する推薦状 2 通。1 通は指導教員から、もう 1 通は候補者と利益相反のない独立した立場の方（外部審査員や分野の専門家など）からのものとしてください。</li>
+
+<li>論文本体のコピー。</li>
+</ul>
+
+<p>
+審査委員会
+</p>
+
+<ul class="org-ul">
+<li>Graham Hutton（委員長）、University of Nottingham</li>
+<li>Matthew Flatt、University of Utah</li>
+<li>Jeremy Gibbons、University of Oxford</li>
+<li>François Pottier、INRIA</li>
+<li>Wouter Swierstra、University of Utrecht</li>
+<li>Ningning Xie、University of Toronto</li>
+</ul>
+
+<p>
+JFP の編集長は委員会のオブザーバーとして参加します。
+</p>
+
+<p>
+<code>===============================================================</code>
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">Pyro Caml 発表：OCaml 向け継続的プロファイラー</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/announcing-pyro-caml-a-continuous-profiler-for-ocaml/18217/1">https://discuss.ocaml.org/t/announcing-pyro-caml-a-continuous-profiler-for-ocaml/18217/1</a>
+</p>
+</div>
+
+<div id="outline-container-org1057dc6" class="outline-3">
+<h3 id="org1057dc6">Austin Theriault が発表しました</h3>
+<div class="outline-text-3" id="text-org1057dc6">
+<p>
+皆さん、昨年 Fun OCaml で observability に関する<a href="https://fun-ocaml.com/2025/ocaml-observability-with-opentelemetry/">ワークショップ</a>を行った際、継続的プロファイリングについて何が利用可能かを尋ねてくださった方が何人かいましたが、当時は OCaml を直接サポートするソリューションを把握していませんでした。
+</p>
+
+<p>
+その後、開発に取り組む機会を得て Semgrep の本番環境に導入し、数ヶ月間の実運用テストを経て、<a href="https://github.com/semgrep/pyro-caml">Pyro Caml</a> が公開されました。<a href="https://opam.ocaml.org/packages/pyro-caml/">opam</a> でもご利用いただけます。
+</p>
+
+<p>
+ocaml-rs、runtime event システム、memprof など、多くの優れた OCaml ツールを活用できたので、実に楽しい開発でした 😄。詳細にご興味のある方は、<a href="https://semgrep.dev/blog/2026/announcing-pyro-caml-continuous-profiler-ocaml/">こちら</a>のブログ記事をご覧ください。
+</p>
+
+<p>
+現在は CPU プロファイリングのみ対応していますが、今後数ヶ月のうちにメモリ/GC プロファイリングの追加も検討しています。ぜひご活用ください！
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">awso 0.9.1：400 以上の AWS API に対するタイプセーフなカバレッジ</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-awso-0-9-1-type-safe-coverage-for-400-aws-apis/18220/1">https://discuss.ocaml.org/t/ann-awso-0-9-1-type-safe-coverage-for-400-aws-apis/18220/1</a>
+</p>
+</div>
+
+<div id="outline-container-org82a3551" class="outline-3">
+<h3 id="org82a3551">Michael Bacarella が発表しました</h3>
+<div class="outline-text-3" id="text-org82a3551">
+<p>
+OCaml ファンの皆さん、こんにちは。
+</p>
+
+<p>
+`terraform plan` が 10 分後になってタイポを指摘してくることにうんざりしていませんか？クラウドの型が曖昧すぎることに不満を感じていませんか？（Abe Simpson がクラウドに向かって拳を振り上げているあのシーンのように）
+</p>
+
+<p>
+あるいは、信頼できるエコシステム内で AWS ライブラリを使いたいと思っていませんか？
+</p>
+
+<p>
+このリリースはまさにそんな方のためのものです！
+</p>
+
+<p>
+<code>awso</code>、包括的な AWS ライブラリを発表できることを嬉しく思います。これは <code>https://github.com/solvuu/awsm</code> からフォークされたもので、opam には公開されていませんでした。<code>awso</code> は botocore のサービス定義から生成された、型付きの OCaml バインディングを AWS サービスに提供します。これにより、コンパイラがタイポや型の不一致を検出してくれます。
+</p>
+
+<p>
+<code>awso</code> リポジトリ: <a href="https://github.com/mbacarella/ocaml-awso">https://github.com/mbacarella/ocaml-awso</a>
+</p>
+</div>
+
+<div id="outline-container-org1925932" class="outline-4">
+<h4 id="org1925932">内容</h4>
+<div class="outline-text-4" id="text-org1925932">
+<p>
+botocore 1.43.9 から生成された、AWS の全サービスに対応する型付きクライアント
+</p>
+
+<p>
+4 つの I/O バックエンド：
+</p>
+
+<ul class="org-ul">
+<li><code>awso-eio</code> - Eio</li>
+<li><code>awso-async</code> &#x2014; Async</li>
+<li><code>awso-lwt</code> &#x2014; Lwt</li>
+<li><code>awso-sync</code> &#x2014; libcurl による同期（ブロッキング）、スクリプトや CLI に最適</li>
+</ul>
+
+<p>
+その他
+</p>
+
+<ul class="org-ul">
+<li><code>awso-cli</code>: 楽しみのために、Python の aws CLI の精神に倣い、全サービスを組み合わせ可能なサブコマンドとして公開するキッチンシンクバイナリ（約 400 のネイティブサービスライブラリをリンクすると ARM64 の実行ファイルサイズ制限を超えるため、バイトコードとして提供されます；本当の話です）</li>
+</ul>
+
+<p>
+注意：AWS API は非常に大きいため、<code>opam install</code> には時間がかかる場合があります。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org929f474" class="outline-4">
+<h4 id="org929f474">Eio を使ったサンプル</h4>
+<div class="outline-text-4" id="text-org929f474">
+<div class="org-src-container">
+<pre class="src src-ocaml">(* ec2_describe_instances.ml *)
+module Ec2 = Awso_ec2_eio
+
+let print_row a b c d = Printf.printf "%-16s  %-15s  %-39s  %-20s\n" a b c d
+
+let print_instance instance =
+  let name =
+    Option.bind instance.Ec2.Instance.tags (fun tags -&gt;
+      List.find_map
+        (function
+          | { Ec2.Tag.key = Some "Name"; value = Some v } -&gt; Some v
+          | _ -&gt; None)
+        tags)
+  in
+  let instance_type =
+    match instance.instanceType with
+    | Some it -&gt; Ec2.InstanceType.to_string it
+    | None -&gt; ""
+  in
+  print_row
+    instance_type
+    (Option.value instance.publicIpAddress ~default:"")
+    (Option.value instance.ipv6Address ~default:"")
+    (Option.value name ~default:"")
+;;
+
+let main env =
+  let cfg = Awso_eio.Cfg.get_exn ~env () in
+  match Ec2.describe_instances ~cfg (Ec2.DescribeInstancesRequest.make ()) with
+  | Error e -&gt;
+    failwith
+      (Printf.sprintf
+         "Ec2.describe_instances: %s"
+         (Yojson.Safe.to_string (Ec2.Ec2_error.to_json e)))
+  | Ok { reservations; _ } -&gt; (
+    let instances =
+      reservations
+      |&gt; Option.value ~default:[]
+      |&gt; List.concat_map (function
+        | { Ec2.Reservation.instances = None; _ } -&gt; []
+        | { instances = Some instances; _ } -&gt; instances)
+    in
+    match instances with
+    | [] -&gt; print_endline "no instances"
+    | instances -&gt;
+      print_row "instance-type" "public ipv4" "public ipv6" "name";
+      print_row
+        (String.make 16 '-')
+        (String.make 15 '-')
+        (String.make 39 '-')
+        (String.make 20 '-');
+      List.iter print_instance instances)
+;;
+
+let () = Eio_main.run main
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org411e243" class="outline-4">
+<h4 id="org411e243">awsm からのフォークにおける主な変更点</h4>
+<div class="outline-text-4" id="text-org411e243">
+<ul class="org-ul">
+<li>軽量な高階多相の代わりに functor を使ったアプローチを採用（アーキテクチャ上の詳細：エンドユーザーが functor を使う必要はありません！）</li>
+<li><code>aws/{eio,async,lwt,sync}/</code> に再構成し、各バックエンドが必要なものだけを含むように</li>
+<li>opam-repository チームの助言に従い、サービスごとの opam パッケージを各バックエンドのサブライブラリに統合。`opam install awso-async` で全サービスバインディングが awso-async として取得できます</li>
+<li>トランスポートエラーは例外を投げるようになり、Result 型を汚染しなくなりました。AWS 側のエラーのみが Result に残ります。これは Async の慣習に合致しています</li>
+<li>小さな Jane_compat シムを通じて非 Async ランタイムから Jane Street Core を除外；アドホックな JSON の代わりに Yojson.Safe.t を全面採用；Base は一部のリライタや他のツールに引き続き必要ですが、Core 全体よりずっと軽量になっています</li>
+<li>コード生成結果をツリーにコミットすることで、<code>opam install</code> 時に約 25 のビルド時パッケージが依存関係に引き込まれないようになりました</li>
+<li>AWS 自体が required とマークしたフィールドを日常的に省略するため（あなたのことですよ、Message のない AccessDeniedException）、出力シェイプでは required をアドバイザリーとして扱います。入力シェイプは引き続き respect します</li>
+<li><a href="https://github.com/mbacarella/ocaml-awso/tree/main/examples">動作するサンプルはこちら</a></li>
+</ul>
+
+<p>
+opam からインストールするには OCaml 5.3.0 以上が必要です。スタック制限を引き上げれば OCaml 4.14 でもビルド可能です。
+</p>
+
+<p>
+変更の全一覧は CHANGES.md を、既知の課題は TODO.md をご参照ください。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge184bee" class="outline-4">
+<h4 id="orge184bee">少し歴史について</h4>
+<div class="outline-text-4" id="text-orge184bee">
+<p>
+OCaml の AWS バインディングの系譜はこのフォークより何年も前に遡り、Solvuu での多大な開発と Tarides との協力によって成り立っています。また、Jane Street のご貢献にも特別な感謝を申し上げます。以前にオープンソース化されてから、しばらく静かに置かれていました。
+</p>
+
+<p>
+<code>awso</code> は、それを刷新し、現在の OCaml に対応させ、コミュニティが活用できる場所を提供しようとする試みです。このプロジェクトの基盤となったすべての方々の仕事に心から感謝します！内部には優れたエンジニアリングが詰まっており、引き続き動き続けるべきものです。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1a26558" class="outline-4">
+<h4 id="org1a26558">クレジットを正確にしたい</h4>
+<div class="outline-text-4" id="text-org1a26558">
+<p>
+公開 solvuu リポジトリのコードは内部リポジトリからコピーペーストされたものであるため、公開 git の履歴には貢献者全員が反映されていません。以前のバージョンに携わっており、クレジットに名前を載せてほしい方は、ぜひご連絡ください。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc80f778" class="outline-4">
+<h4 id="orgc80f778">今後の展望</h4>
+<div class="outline-text-4" id="text-orgc80f778">
+<p>
+0.9.1 は 1.0.0 に向けたリリース候補品質のベースラインとして位置づけています。近期的には：TODO.md の対応と、より多くの動作サンプルの追加。Issue や PR は歓迎します。特に実運用からのバグレポートをお待ちしています。
+</p>
+
+<p>
+4.14 でも動作しますが、OCaml コンパイラの一部の非末尾呼び出し最適化部分を回避するために、スタックサイズを少し増やす必要があります。opam-ci で OCaml 4.14 を通過させるために処理を別の方法で分割できるか検討中です。
+</p>
+
+<ul class="org-ul">
+<li>リポジトリ: <a href="https://github.com/mbacarella/ocaml-awso">https://github.com/mbacarella/ocaml-awso</a></li>
+<li>opam: opam install awso-eio（または -lwt、-async、-sync）</li>
+</ul>
+
+<p>
+TODO.md の項目を GitHub Issues に転記する間、少々お待ちください。また、このリリースで何が不足しているかについてもぜひお聞かせください。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org82134d2" class="outline-4">
+<h4 id="org82134d2">AI 利用に関する開示</h4>
+<div class="outline-text-4" id="text-org82134d2">
+<p>
+この作業のほとんどは、複数の人間が数年にわたって直接コーディングしたものです。私自身のプロジェクトへの貢献の大部分は 2022 年に行われた、ppxlib へのポート、OCaml 5 での動作、対応サービスを少数から数百に拡大する作業（バグ修正、欠落サポート、botocore spec エラーの回避）でした。これらの作業の多くは LLM の時代以前に行われました。「生成されたコード」が「OCaml によって生成された」を意味していた時代を覚えていますか？私は覚えています。
+</p>
+
+<p>
+その後、opam リリースに向けた作業では Claude Code with Opus 4.7 を活用しました：主にリファクタリング、最新の botocore spec へのキャッチアップ、依存関係の削減に使用しました。awso のすべてのコードを私は理解しており、責任を持てることをここに宣言します。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org10526a6" class="outline-4">
+<h4 id="org10526a6">最後に</h4>
+<div class="outline-text-4" id="text-org10526a6">
+<p>
+特に API のエルゴノミクスに関するフィードバックをお待ちしております。
+</p>
+
+<p>
+&lt;3 Michael
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">Plan 9 向け OCaml 4.14.3</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ocaml-4-14-3-for-plan-9/18223/1">https://discuss.ocaml.org/t/ocaml-4-14-3-for-plan-9/18223/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgab855aa" class="outline-3">
+<h3 id="orgab855aa">Eduardo Cavazos が発表しました</h3>
+<div class="outline-text-3" id="text-orgab855aa">
+<p>
+皆さん 🙋‍♂️
+</p>
+
+<p>
+Plan 9 向け OCaml 4.14.3 のポートをいろいろ試しています：
+</p>
+
+<p>
+<a href="https://github.com/dharmatech/ocaml">https://github.com/dharmatech/ocaml</a>
+</p>
+
+<p>
+ネイティブコンパイラはまだ対応していません。バイトコードのサポート、repl などのみです。
+</p>
+
+
+<div id="org048f175" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/0/0b5d1dbf8b4ae9b3918143a6a790d19f422280bf.png" alt="0b5d1dbf8b4ae9b3918143a6a790d19f422280bf.png" width="80%" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="5">OCaml Workshop 2026 トーク提案募集</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/call-for-talk-proposals-ocaml-workshop-2026/18192/2">https://discuss.ocaml.org/t/call-for-talk-proposals-ocaml-workshop-2026/18192/2</a>
+</p>
+</div>
+
+<div id="outline-container-org70b6c97" class="outline-3">
+<h3 id="org70b6c97">このスレッドを続けて、Sudha Parimala が発表しました</h3>
+<div class="outline-text-3" id="text-org70b6c97">
+<p>
+ウェブサイトが <a href="https://ocaml.org/ocaml-workshop-2026">https://ocaml.org/ocaml-workshop-2026</a> で公開されました。最新情報はこちらをご参照ください！
+</p>
+
+<p>
+提出締め切りはおよそ 3 週間後です！ぜひご自身の研究をご投稿ください。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="6">Ahrefs OCaml グラントプログラム</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ahrefs-grant-program-for-ocaml/17604/5">https://discuss.ocaml.org/t/ahrefs-grant-program-for-ocaml/17604/5</a>
+</p>
+</div>
+
+<div id="outline-container-org541670b" class="outline-3">
+<h3 id="org541670b">このスレッドを続けて、Louis Roché が発表しました</h3>
+<div class="outline-text-3" id="text-org541670b">
+<p>
+グラントの受賞者は以下の通りです：
+</p>
+
+<ul class="org-ul">
+<li>Chris Armstrong による <a href="https://github.com/chris-armstrong/ocgtk">OCaml bindings for GTK 4</a></li>
+<li>Federico Dal Pio Luogo による <a href="https://github.com/dalps/menhir-lsp">LSP for menhir</a></li>
+<li>University of Toronto の Ningning Xie チームによる <a href="https://github.com/ocaml/ocaml/issues/14627">Programmable Patterns for OCaml</a></li>
+<li>Robur による <a href="https://github.com/robur-coop/webauthn/">WebAuthn OCaml ライブラリを仕様レベル 2（2021 年）からレベル 3 へのアップデート</a></li>
+<li>ocamlpro による <a href="https://github.com/OCamlPro/ocp-indent">ocp-indent の OCaml 5.x 向けモダナイズ</a></li>
+<li>Sebastian Willenbrink による <a href="https://github.com/camlworks/dream">Dream Web Framework のメンテナンスと開発</a></li>
+<li><a href="http://shogan.ai">Shogan.ai</a>（Frederic Bour と Thomas Refis）による Introspectable OCaml（コンパイル時オプション付きの OCaml バリアント）：デバッグとプロファイリングの体験を向上させるもの</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org5844e52" class="outline-2">
+<h2 id="org5844e52">過去の CWN</h2>
+<div class="outline-text-2" id="text-org5844e52">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://ocaml.jp/cwn-ja/">アーカイブ</a>や<a href="https://ocaml.jp/cwn-ja/cwn.rss">RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> を購読してください。
+</p>
+
+<div class="authorname" id="org5a3cf5f">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

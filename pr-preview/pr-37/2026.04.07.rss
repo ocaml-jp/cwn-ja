@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <title>OCaml Weekly News (2026年4月7日版）</title>
+  <pubDate>Tue, 07 Apr 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.04.07.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.04.07.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.07.html#1"&gt;restricted 2.0.0 — プログラムがアクセスできるシステム操作およびファイルシステムの範囲を制限する&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.07.html#2"&gt;求人情報: CNAF（社会給付機関）での Catala コンパイラエンジニア&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.07.html#3"&gt;ocgtk 0.1: GTK 4 向け OCaml バインディング（プレビューリリース）&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.07.html#4"&gt;out-channel-redirect 0.1 — out_channel の出力をリダイレクト・キャプチャする&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.07.html#5"&gt;ppxlib.0.38.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.07.html#6"&gt;OCaml コードにおける AI 使用の自発的開示に関する提案&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.07.html#7"&gt;ブログ: Markdown としての OCaml ドキュメント&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.07.html#8"&gt;hotseat Squava（小さな LablGtk2 デモ）&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.07.html#9"&gt;opentelemetry 0.90（および関連ライブラリ）&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.04.07.html#10"&gt;Dune 3.22&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>

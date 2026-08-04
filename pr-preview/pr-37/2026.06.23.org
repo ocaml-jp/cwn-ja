@@ -1,0 +1,361 @@
+#+OPTIONS: ^:nil
+#+OPTIONS: html-postamble:nil
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: author:nil
+#+HTML_HEAD: <style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+#+HTML_HEAD: <style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+#+TITLE: OCaml Weekly News
+[[file:2026.06.16.html][先週号]] [[file:index.html][上へ]] [[file:2026.06.30.html][次週号]]
+
+こんにちは
+
+2026年6月16日から23日までの週の OCaml Weekly News をお届けします。
+
+#+TOC: headlines 1
+
+
+* Docfd 13.0.0: TUI マルチライン fuzzy ドキュメントファインダー
+:PROPERTIES:
+:CUSTOM_ID: 1
+:END:
+Archive: https://discuss.ocaml.org/t/ann-docfd-13-0-0-tui-multiline-fuzzy-document-finder/18259/1
+
+** Darren が発表しました
+
+
+皆さん、Docfd 13.0.0 のリリースをお知らせできることを嬉しく思います。
+
+[[https://github.com/darrenldl/docfd][リポジトリ]] - [[https://demo.docfd.sh/][オンラインデモ]]
+
+（デモでは ~/list file~ と入力して始めてみてください。~x/~ で検索をクリアできます。ドキュメントはまだ作成中です。）
+
+*** Docfd とは
+
+テキストファイル、PDF、DOCX などを対象としたインタラクティブな grep をイメージしてください。ただし、正規表現や行ベースではなく、単語／トークンベースなので、行をまたいだ検索が簡単に行えます。
+
+Docfd は一般的なテキストエディタや PDF ビューアとの統合により優れた UX を提供することを目指しており、キー一つで検索結果に直接ジャンプできます。
+
+*インタラクティブ使用*
+
+#+attr_html: :width 80%
+https://github.com/darrenldl/docfd/raw/main/demo-vhs-gifs/repo.gif
+
+*非インタラクティブ使用*
+
+#+attr_html: :width 80%
+https://github.com/darrenldl/docfd/raw/main/demo-vhs-gifs/repo-non-interactive.gif
+
+*** 機能
+
+- マルチスレッドによるインデックス作成と検索
+- 複数ファイルのマルチライン fuzzy 検索
+- 選択した検索結果周辺のスニペットを表示するコンテンツビューペイン
+- テキストエディタおよび PDF ビューアとの統合
+- 編集可能なコマンド履歴 — テキストエディタでアクションを書き直したり計画したりできる
+- 検索スコープの絞り込み — 現在の検索結果に基づいて次の検索範囲を限定できる
+- クリップボード統合
+
+*** 11.0.0 からの変更点
+
+前回のアナウンス以来、Docfd は大きく進化しました。改善点や新機能に興味がある方は [[https://github.com/darrenldl/docfd/blob/main/CHANGELOG.md][changelog]] をご確認ください。
+      
+
+
+
+* google-drive-ocamlfuse 0.9.0
+:PROPERTIES:
+:CUSTOM_ID: 2
+:END:
+Archive: https://discuss.ocaml.org/t/ann-google-drive-ocamlfuse-0-9-0/18263/1
+
+** Alessandro Strada が発表しました
+
+
+皆さん、こんにちは。
+
+~google-drive-ocamlfuse~ 0.9.0 が opam で利用可能になったことをお知らせします。
+
+このリリースでは ~libfuse~ 2 から ~libfuse~ 3 へ移行しており、~libfuse~ 2 を提供しなくなった最新の Linux ディストリビューションでもパッケージをインストールできるようになりました。
+
+#+begin_example
+opam update
+opam install google-drive-ocamlfuse
+#+end_example
+
+リポジトリ:
+
+- [[https://github.com/astrada/google-drive-ocamlfuse][~google-drive-ocamlfuse~]]
+- [[https://github.com/astrada/ocamlfuse][~ocamlfuse~]] — ~libfuse~ の OCaml バインディング
+
+よろしくお願いします。
+Alessandro
+      
+
+
+
+* OCaml 5.5.0 リリース
+:PROPERTIES:
+:CUSTOM_ID: 3
+:END:
+Archive: https://discuss.ocaml.org/t/ocaml-5-5-0-released/18265/1
+
+** octachron が発表しました
+
+
+Blaise Pascal の誕生日を祝いながら、OCaml バージョン 5.5.0 のリリースをお知らせできることを嬉しく思います。
+
+OCaml 5.5.0 の主なハイライトは以下の通りです。
+
+*** モジュール依存関数（Module-dependent Functions）
+
+モジュールを関数引数として使用できる、軽量な functor の形式が利用可能になりました。
+
+たとえば、~Map.Make~ functor で生成されたマップを表示する関数を次のように定義できます。
+
+#+begin_src ocaml
+let pp_map (module M: Map.S) pp_key pp_v ppf set =
+  if M.is_empty set then
+    Format.fprintf ppf "ø"
+  else
+   let pp_sep ppf () = Format.fprintf ppf ",@ " in
+   let pp_binding ppf (k,v) =
+     Format.fprintf ppf "@[%a@ =@ %a@]" pp_key k pp_v v
+   in
+   Format.fprintf ppf "@[{@ %a@ }@]"
+     (Format.pp_print_seq ~pp_sep pp_binding) (M.to_seq set)
+#+end_src
+
+そして、この関数を文字列マップに適用できます。
+#+begin_src ocaml
+module String_map = Map.Make(String)
+#+end_src
+次のように使います。
+#+begin_src ocaml
+let () =
+  let m = String_map.of_list ["Zero", "Zero"; "One", "Un"] in
+  let pp_str = Format.pp_print_string in
+  Format.printf "%a@."
+  (pp_map (module String_map) pp_str pp_str) m
+#+end_src
+
+第一級モジュールと比較すると、関数 ~pp_map~ の型
+#+begin_src ocaml
+type 'a printer = Format.formatter -> 'a -> unit
+val pp_map: (module M: Map.S) -> M.key printer -> 'a printer -> 'a M.t printer
+#+end_src
+はモジュール ~S~ の値に依存しており、静的に既知のモジュールにのみ適用できます。
+
+#+begin_src ocaml
+let f (): (module Map.S) =
+  if Random.bool () then
+    (module Map.Make(Int))
+  else
+    (module Map.Make(Float))
+let fail = pp_map (f ())
+#+end_src
+#+begin_src ocaml
+ Error: This expression has type
+         (module M : Map.S) ->
+         (Format.formatter -> M.key -> unit) ->
+         (Format.formatter -> 'a -> unit) -> Format.formatter -> 'a M.t -> unit
+       but an expression was expected of type (module Map.S) -> 'b
+       The module M would escape its scope
+This function is module-dependent. The dependency is preserved
+when the function is passed a static module argument (module M : S)
+or (module M). Its argument here is not static, so the type-checker
+tried instead to change the function type to be non-dependent.
+#+end_src
+
+
+*** 再配置可能コンパイラ（Relocatable Compiler）
+
+コンパイラのインストールを移動またはコピーしても、非互換なバイトコードランタイムインタープリタの混在によるデバッグが困難なエラーが発生しなくなりました。
+
+実際には、グローバルスイッチと同じコンパイラバージョン・設定のローカルスイッチを作成する際に、コンパイラ全体を再コンパイルするのではなく、グローバルスイッチをクローンすることで実現できます。
+
+これにより、新しいローカル opam スイッチをそのまま作成するのに必要な時間が大幅に短縮されます。
+
+*** 多相関数を関数引数として使用（Polymorphic Functions as Function Arguments）
+
+高階多相関数を、関数引数に明示的な型注釈を使って直接定義できるようになりました。
+
+#+begin_src ocaml
+let apply_map (map: 'a 'b. ('a -> 'b) -> 'a list -> 'b list) =
+  map string_of_int [1;2;3], map List.singleton ["x"; "y"]
+let _ = apply_map List.map
+#+end_src
+
+以前は、このような関数を定義するには多相フィールドやメソッドを持つレコードかオブジェクトを経由する必要がありました。
+
+#+begin_src ocaml
+type map = { map: 'a 'b. ('a -> 'b) -> 'a list -> 'b list }
+let apply_map {map} =
+  map string_of_int [1;2;3], map List.singleton ["x"; "y"]
+#+end_src
+
+*** 部分文字列の検索と置換関数（Search and Replace Substring Functions）
+
+~String~ モジュールに、文字列内の部分文字列を検索・置換するための多数の関数が追加されました。
+
+#+begin_src ocaml
+let _true = String.includes ~affix:"aba" "abbaba"
+let sentence = String.replace_all ~sub:"𝄽" ~by:"word" "A 𝄽 is re𝄽ed"
+#+end_src
+
+部分文字列の検索には 2-way 文字列マッチングアルゴリズムが使用されており、ニードルのサイズに依存しない定数空間のメモリオーバーヘッドという利点があります。
+
+*** 汎化されたローカル定義（Generalised Local Definitions）
+
+型、クラス、モジュール型、その他グローバルに定義できるあらゆる項目をローカルに定義できるようになりました。
+
+#+begin_src ocaml
+let mandelbrot n x =
+  let type t = Converge | Escape of int in
+  ...
+  match orbit n x with
+  | Converge -> 0
+  | Exit_at n -> colorize n
+#+end_src
+
+*** 外部型（External Types）
+
+外部関数ライブラリとのインターフェースにおいて、外部型を定義できるようになりました。
+
+#+begin_src ocaml
+type int_gmp = external "mpz_t"
+type float_gmp = external "mpf_t"
+#+end_src
+
+抽象型定義と比較して、外部型名 "mpz_t"（および ~mpf_t~）により、その型を非抽象型や異なる名前の外部型と区別できます。
+
+特に、FFI 型を Generalised Abstract Data Types (GADTs) と組み合わせる際の挙動が改善されます。たとえば、型検査器は
+
+#+begin_src ocaml
+let ok: (int_gmp,[` A] ) Type.eq -> _ = function _ -> .
+#+end_src
+
+が全域関数であることを証明できます。これは外部型 ~int_gmp~ が多相バリアント型と互換性がないためです。
+
+*** 警告: 現在のモジュール内の抽象型
+
+鋭い読者はすでに気づいているかもしれませんが、OCaml 5.4.0 では型検査器が以下を受け入れます。
+
+#+begin_src ocaml
+type int_gmp
+let ok: (int_gmp, [` A] ) Type.eq -> _ = function _ -> .
+#+end_src
+これを全域関数として扱います。
+
+実際、OCaml 5.5.0 まで、現在のモジュールで定義された抽象型
+#+begin_src ocaml
+type a
+type b
+#+end_src
+
+は一意であり、証明可能に異なるものとして扱われていました。
+
+#+begin_src ocaml
+let f: 'x. (a,b) Type.eq -> 'x = function _ -> .
+#+end_src
+
+しかし、ローカルな抽象型定義に対するこの特別なルールは非常に脆弱でした。現在のモジュールの外に出た途端、型が異なることを証明できなくなりました。
+
+#+begin_src ocaml
+module M = struct
+  type a
+  type b
+end
+let fail: 'x. (M.a,M.b) Type.eq -> 'x = function _ -> .
+#+end_src
+#+begin_example
+Error: This match case could not be refuted.
+       Here is an example of a value that would reach it: Equal
+#+end_example
+
+この特別な型検査ルールは OCaml 5.5.0 で削除されました。たとえば GADT における型レベルラベルとして抽象型を使っていた場合は、多相バリアントの possibly private な省略形に変更できます。
+
+#+begin_src ocaml
+type a = private [`A]
+type b = [`B]
+#+end_src
+または（possibly private な）直和型を使うこともできます。
+
+#+begin_src ocaml
+type a = A
+type b = private B
+#+end_src
+
+抽象型を型レベルラベルと FFI 型の両方として使用していた場合は、外部型定義を使用できます。これにより、現在のモジュールの外でも証明可能に異なる型が得られます。
+
+*** GC の改善
+
+ガベージコレクタのペーシングを改善するための継続的な作業の一部が OCaml 5.5.0 に統合されました。OCaml 5.5 GC における重要な変更点は以下の 2 つです。
+
+- メジャー GC の開始時にスイープ専用フェーズを追加
+- 開始時の GC の動作を滑らかにするためのアイドルフェーズを追加
+
+*** 多数の段階的な変更
+
+- Windows 実装が Winpthreads に依存しなくなりました
+- 約 60 個の新しい標準ライブラリ関数
+- 約 90 件のさまざまな改善
+- 約 12 件のドキュメント更新
+- 約 40 件のバグ修正
+
+予期しない動作があれば [[https://github.com/ocaml/ocaml/issues][OCaml issue tracker]] に報告し、質問やコメントは [[https://discuss.ocaml.org][ディスカッションフォーラム]] に投稿してください。
+
+変更の完全なリストは完全な changelog でご確認いただけます。
+
+Happy hacking,
+OCaml チームを代表して Florian Angeletti より。
+
+---
+
+*** インストール手順
+
+ベースコンパイラは以下のコマンドで opam スイッチとしてインストールできます。
+
+#+begin_example
+opam update
+opam switch create 5.5.0
+#+end_example
+
+リリースのソースコードは以下からも直接入手できます。
+
+- [[https://github.com/ocaml/ocaml/releases/download/5.5.0/ocaml-5.5.0.tar.gz][GitHub]]
+- [[https://caml.inria.fr/pub/distrib/ocaml-5.5/ocaml-5.5.0.tar.gz][Inria の OCaml アーカイブ]]
+
+**** コンパイラ設定の細かい調整
+
+コンパイラの設定を調整したい場合は、以下でオプションバリアントに切り替えられます。
+
+#+begin_example
+opam update
+opam switch create <switch_name> ocaml-variants.5.5.0+options <option_list>
+#+end_example
+
+ここで ~<option_list>~ は ~ocaml-option-*~ パッケージのスペース区切りリストです。たとえば ~flambda~ と ~no-flat-float-array~ のスイッチを作成するには:
+
+#+begin_example
+opam switch create 5.5.0+flambda+nffa ocaml-variants.5.5.0+options ocaml-option-flambda ocaml-option-no-flat-float-array
+#+end_example
+
+/編集者注: 完全な changelog はポストをご覧ください。/
+
+      
+
+
+
+* 過去の CWN
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+CWN を見逃した場合は、[[mailto:alan.schmitt@polytechnique.org][メッセージを送っていただければ]]メールでお送りします。また、[[https://ocaml.jp/cwn-ja/][アーカイブ]]や[[https://ocaml.jp/cwn-ja/cwn.rss][RSS フィード]]もご覧いただけます。
+
+毎週メールで受け取りたい場合は、[[https://sympa.inria.fr/sympa/info/caml-list][caml-list]] を購読してください。
+
+#+BEGIN_authorname
+[[https://alan.petitepomme.net/][Alan Schmitt]]
+#+END_authorname
