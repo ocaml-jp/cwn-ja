@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <title>OCaml Weekly News (2026年8月4日版）</title>
+  <pubDate>Tue, 04 Aug 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.08.04.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.08.04.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#1"&gt;Mirage Unikernel で使用するために Claude Code で SQLite を Pure OCaml に書き直した&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#2"&gt;新しい opam パッケージ：CamlSurf と Gles3&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#3"&gt;bcfg：退屈なくらいシンプルな設定ファイルフォーマット&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#4"&gt;Introcaml（アルファ版）：OCaml のための多相的な表示とイントロスペクション&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#5"&gt;OxCaml フレーバーの SWAR memchr をベンチマークして学んだこと&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#6"&gt;OCaml Runtime Meeting：月曜日 7月6日 @ 10:00 UTC（10:00 London/Cambridge、11:00 Paris、19:00 Sydney）&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
