@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.05.19.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.06.02.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年5月19日から26日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">Dune 3.23</a></li>
+<li><a href="#2">発表募集: ML Family Workshop 2026</a></li>
+<li><a href="#3">ocaml-halo 0.1 &#x2013; libuv 上に構築されたパフォーマンス指向の HTTP 1.1 サーバー</a></li>
+<li><a href="#4">dead_code_analyzer 1.1.1 および 1.2.0</a></li>
+<li><a href="#org5844e52">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">Dune 3.23</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-dune-3-23/18055/5">https://discuss.ocaml.org/t/ann-dune-3-23/18055/5</a>
+</p>
+</div>
+
+<div id="outline-container-org0ccf6ed" class="outline-3">
+<h3 id="org0ccf6ed">このスレッドを引き継いで、Shon が発表しました</h3>
+<div class="outline-text-3" id="text-org0ccf6ed">
+<p>
+Dune チームは <a href="https://github.com/ocaml/dune/releases/tag/3.23.1">dune 3.23.1 のリリース</a>を喜んでお知らせします。
+</p>
+
+<p>
+これは以下のバグ修正からなるパッチリリースです。
+</p>
+
+<p>
+このリリースで問題が発生した場合は、<a href="https://github.com/ocaml/dune/issues">issue tracker</a> にご報告ください。
+</p>
+</div>
+
+<div id="outline-container-org1057dc6" class="outline-4">
+<h4 id="org1057dc6">修正内容</h4>
+<div class="outline-text-4" id="text-org1057dc6">
+<ul class="org-ul">
+<li>3.23 で導入された <code>menhir</code> の opam 依存性注入を修正しました。Dune は既存のユーザー宣言済み <code>menhir</code> 依存に対して下限 <code>{&gt;= "20180523"}</code> を設定するのみとなり、自身で宣言していないパッケージに <code>menhir</code> を新たな依存として追加しなくなりました。(#14434、#14428 を修正、@robinbb)</li>
+<li>生成された opam ファイルにおける <code>dune</code> バージョン境界の重複排除（3.23 で導入）を <code>(lang dune 3.23)</code> に限定するよう変更しました。それ以前の lang バージョンのプロジェクトは従来の <code>And [...]</code> 形式 — 例: <code>{&gt;= "3.17" &amp; &gt;= "3.20"}</code> — を維持し、dune バイナリのアップグレード時に opam 出力が意図せず変更される問題を回避して 3.22 の動作を復元します。(#14436、@robinbb)</li>
+<li>共有 jsoo スタンドアロンランタイムのビルド時にライブラリの順序を保持するようにしました。(#14438、@vouillon)</li>
+<li>セカンダリコンパイラへのフォールバックを修正し、OCaml 4.14 未満の上限を持つパッケージのサポートを回復できるようにしました。dune 3.23.1 以降に依存し、OCaml コンパイラの上限が 4.14 未満のパッケージは最新の dune を使用できるようになりますが、dune はバージョン 4.14 のセカンダリコンパイラでビルドされます。(#14443、@Alizter)</li>
+<li><code>lev_stubs.c</code> に <code>&lt;sys/wait.h&gt;</code> を追加することで NetBSD でのブートストラップを修正しました。既存の FreeBSD/OpenBSD のガードと一致させた変更です。(#14512、#14484 を修正、@0-wiz-0)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">発表募集: ML Family Workshop 2026</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/call-for-presentations-ml-family-workshop-2026/18155/1">https://discuss.ocaml.org/t/call-for-presentations-ml-family-workshop-2026/18155/1</a>
+</p>
+</div>
+
+<div id="outline-container-org82a3551" class="outline-3">
+<h3 id="org82a3551">Benoît Montagu が発表しました</h3>
+<div class="outline-text-3" id="text-org82a3551">
+<p>
+<b>高階、型付き、推論、正格: ML Family Workshop 2026</b>
+</p>
+
+<p>
+<b>2026年8月28日</b>
+</p>
+
+<p>
+<b>インディアナポリス（<a href="https://icfp26.sigplan.org/">ICFP</a> と併設）+ パリ（<a href="https://www.irif.fr/~scherer/events/fpw-2026/announce.html">FW'26</a> と併設）</b>
+</p>
+
+<p>
+<b>ウェブサイト:</b> <a href="https://icfp26.sigplan.org/home/mlfamilyworkshop-2026">https://icfp26.sigplan.org/home/mlfamilyworkshop-2026</a>
+</p>
+
+<p>
+<b>投稿リンク:</b> <a href="https://ml2026.hotcrp.com/">https://ml2026.hotcrp.com/</a>
+</p>
+
+<p>
+<b>投稿締切:</b> 2026年6月24日 AoE
+</p>
+</div>
+
+<div id="outline-container-org1925932" class="outline-4">
+<h4 id="org1925932">発表募集</h4>
+<div class="outline-text-4" id="text-org1925932">
+<p>
+ML（元々は「Meta Language」）は Standard ML、OCaml、F# などの方言を含むプログラミング言語のファミリーです。これらの言語の開発は、実践的・理論的の両面で多くのコンピュータサイエンス研究に影響を与えてきました。
+</p>
+
+<p>
+ML 2026 ワークショップは 2010 年以来続く非形式的なアプローチを引き継ぎます。発表はプログラム委員会が提出されたプロポーザルから選考します。予稿集は発行されないため、投稿内容は他の場所に発表することが可能です。主な選考基準は、ML ファミリー全体の発展を促進・周知し、活気あるワークショップの雰囲気を生み出すことです。進行中の研究、否定的な結果（期待したが思うように機能しなかったもの）、および根拠に基づく意見の発表を特に奨励します。
+</p>
+
+<p>
+各発表は 20〜25 分を予定していますが、スケジュールの制約に応じて決定されます。
+</p>
+
+<p>
+<b>注意</b>: 今年のワークショップは 2 つのイベントにわたって開催されます。(1) <a href="https://icfp26.sigplan.org/">ICFP'26</a> との併設、および (2) <a href="https://www.irif.fr/~scherer/events/fpw-2026/announce.html">FW'26</a> との併設です。投稿の審査は単一のプログラム委員会が行います。発表者はどちらかのイベントに直接参加することができます。また、リモート参加も奨励しており、リモート発表も対応できるよう計画しています。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org929f474" class="outline-4">
+<h4 id="org929f474">対象範囲</h4>
+<div class="outline-text-4" id="text-org929f474">
+<p>
+以下のトピック（これに限らず）に関する発表を募集します:
+</p>
+
+<ul class="org-ul">
+<li>言語設計: 抽象化、高次多相性、並行・並列処理、分散・移動性、ステージング、半構造化データの拡張、ジェネリックプログラミング、オブジェクトシステムなど</li>
+<li>実装: コンパイラ、インタプリタ、型検査器、部分評価器、ランタイムシステム、ガーベジコレクタ、外部関数インターフェースなど</li>
+<li>型システム: 推論、エフェクト、モジュール、コントラクト、仕様とアサーション、動的型付け、エラーレポートなど</li>
+<li>応用: ケーススタディ、経験報告、パールなど</li>
+<li>環境: ライブラリ、ツール、エディタ、デバッガ、言語間相互運用性、関数的データ構造など</li>
+<li>ML ファミリー言語の意味論: 操作的・表示的意味論、プログラム等価性、パラメトリシティ、機械化など</li>
+</ul>
+
+<p>
+期待に応えられなかったこと、あるいはあらゆる努力にもかかわらず満足のいく結果が得られなかったことの報告も特に奨励します。
+</p>
+
+<p>
+4 種類の投稿を募集します: 研究発表、経験報告、デモ、根拠に基づく意見。
+</p>
+
+<ul class="org-ul">
+<li>研究発表: 研究発表は、新しいアイデア、実験結果、または ML 関連プロジェクトの重要な進展を説明するものであるべきです。進行中の研究、将来の研究課題の概説、活発な議論を促すような発表を特に奨励します。これらの発表は、少なくとも部分的に（上級）ユーザーにとっても興味深い内容であるべきです。</li>
+<li>経験報告: ML および関連言語の使用に関する経験報告の投稿を歓迎します。これらの発表は独自の研究を含む必要はありませんが、高度な機能の革新的・予想外の使用方法や、直面している課題・解決しようとしている問題の説明など、研究者や他の上級ユーザーにとって興味深い内容であるべきです。</li>
+<li>デモ: ライブデモンストレーションや短いチュートリアルは、ML および関連言語上に構築された、またはそれらに関連したツール、ライブラリ、アプリケーションの形で、新しい開発、興味深いプロトタイプ、または進行中の作業を示すべきです。（デモに必要なハードウェアおよびソフトウェアはご自身でご用意ください。ワークショップ主催者が提供できるのはプロジェクターのみです。）</li>
+<li>根拠に基づく意見: 言語機能に対する賛否についての正当化された議論。その議論は、理論的（例: (非)健全性の証明、推論アルゴリズム、計算量解析）、実証的、または相当な経験によって裏付けられている必要があります。個人的な経験も、それが広範で具体的な例によって示されていれば正当化として受け入れられます。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org411e243" class="outline-4">
+<h4 id="org411e243">投稿の詳細</h4>
+<div class="outline-text-4" id="text-org411e243">
+<p>
+投稿は PDF 形式で、冒頭に短い要旨（アブストラクト）を含む必要があります。経験報告、デモ、根拠に基づく意見のカテゴリの投稿は、タイトルまたはサブタイトルでその旨を示してください。投稿の要点は最初の 2 ページから明確に伝わるようにしてください（プログラム委員はそれ以上を読む義務はありません）。
+</p>
+
+<p>
+投稿は締切前にワークショップの投稿ウェブサイトにアップロードしてください。
+</p>
+
+<p>
+採択された投稿の短い要旨/アブストラクトのみが会議ウェブサイトに掲載されます。採択後、著者は関連資料（更新版の投稿、スライドなど）をその要旨に添付またはリンクする機会があります。
+</p>
+
+<p>
+<b>投稿ウェブサイト</b>: <a href="https://ml2026.hotcrp.com/">https://ml2026.hotcrp.com/</a>
+</p>
+
+<p>
+<b>ワークショップウェブサイト</b>: <a href="https://icfp26.sigplan.org/home/mlfamilyworkshop-2026">https://icfp26.sigplan.org/home/mlfamilyworkshop-2026</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge184bee" class="outline-4">
+<h4 id="orge184bee">日程と締切</h4>
+<div class="outline-text-4" id="text-orge184bee">
+<p>
+<b>投稿締切</b>: 2026年6月24日（水）AoE
+</p>
+
+<p>
+<b>初回採否通知</b>（多くの場合）: 2026年7月23日（木）
+</p>
+
+<p>
+<b>最終採否通知</b>（必要な場合）: 2026年7月30日（木）
+</p>
+
+<p>
+<b>ワークショップ開催日</b>: 2026年8月28日（金）
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1a26558" class="outline-4">
+<h4 id="org1a26558">プログラム委員会</h4>
+<div class="outline-text-4" id="text-org1a26558">
+<ul class="org-ul">
+<li>Benoît Montagu (Inria, フランス)</li>
+<li>Gabriel Scherer (Inria, フランス)</li>
+<li>Sam Westrick (New York University, アメリカ)</li>
+<li>Clément Blaudeau (Inria, フランス)</li>
+<li>Richard A. Eisenberg (Jane Street, アメリカ)</li>
+<li>Kavon Farvardin (Apple, アメリカ)</li>
+<li>Kiran Gopinathan (Basis, アメリカ)</li>
+<li>Magnus Madsen (Aarhus University, デンマーク)</li>
+<li>Alexandre Moine (New York University, アメリカ)</li>
+<li>Dominic Orchard (University of Cambridge; University of Kent, イギリス)</li>
+<li>Lionel Parreaux (HKUST (The Hong Kong University of Science and Technology), 香港 SAR 中国)</li>
+<li>Gabriel Radanne (Inria, フランス)</li>
+<li>Takafumi Saikawa (Nagoya University, 日本)</li>
+<li>Milla Valnet (Sorbonne Université, フランス)</li>
+<li>Michael Vollmer (University of Kent, イギリス)</li>
+<li>Ningning Xie (University of Toronto, カナダ)</li>
+<li>Yizhou Zhang (University of Waterloo, カナダ)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc80f778" class="outline-4">
+<h4 id="orgc80f778">過去の開催</h4>
+<div class="outline-text-4" id="text-orgc80f778">
+<p>
+2025: <a href="https://conf.researchr.org/home/icfp-splash-2025/mlsymposium-2025">https://conf.researchr.org/home/icfp-splash-2025/mlsymposium-2025</a>
+</p>
+
+<p>
+2024: <a href="https://icfp24.sigplan.org/home/mlworkshop-2024">https://icfp24.sigplan.org/home/mlworkshop-2024</a>
+</p>
+
+<p>
+2023: <a href="https://icfp23.sigplan.org/home/mlworkshop-2023">https://icfp23.sigplan.org/home/mlworkshop-2023</a>
+</p>
+
+<p>
+2022: <a href="https://icfp22.sigplan.org/home/mlfamilyworkshop-2022">https://icfp22.sigplan.org/home/mlfamilyworkshop-2022</a>
+</p>
+
+<p>
+2021: <a href="https://icfp21.sigplan.org/home/mlfamilyworkshop-2021">https://icfp21.sigplan.org/home/mlfamilyworkshop-2021</a>
+</p>
+
+<p>
+詳細: <a href="https://www.mlworkshop.org/home">https://www.mlworkshop.org/home</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org82134d2" class="outline-4">
+<h4 id="org82134d2">OCaml Users and Developers Workshop との連携</h4>
+<div class="outline-text-4" id="text-org82134d2">
+<p>
+OCaml ワークショップはより実践的な性格を持ち、OCaml コミュニティの構築と OCaml システムの開発に大きく貢献しています。一方、ML ファミリーワークショップは特定の言語に焦点を当てず、より研究志向であり、ML スタイルのプログラミングと型システムの一般的な問題を扱います。両ワークショップには重複する部分があり、さまざまな形で探求することに前向きです。自身の投稿が両ワークショップに適していると感じる著者は、投稿時にその旨を記載するか、プログラム委員長に連絡することをお勧めします。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">ocaml-halo 0.1 &#x2013; libuv 上に構築されたパフォーマンス指向の HTTP 1.1 サーバー</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ocaml-halo-0-1-performance-oriented-http-1-1-server-built-on-top-of-libuv/18161/1">https://discuss.ocaml.org/t/ann-ocaml-halo-0-1-performance-oriented-http-1-1-server-built-on-top-of-libuv/18161/1</a>
+</p>
+</div>
+
+<div id="outline-container-org10526a6" class="outline-3">
+<h3 id="org10526a6">Firgeis が発表しました</h3>
+<div class="outline-text-3" id="text-org10526a6">
+<p>
+こんにちは、コミュニティの皆さん。パフォーマンス指向の OCaml HTTP 1.1 サーバーである <a href="https://github.com/Firgeis/ocaml-halo">ocaml-halo</a> の最初の「アルファ」リリースをお知らせできることを嬉しく思います。
+</p>
+
+<p>
+このサーバーの主なアイデアは、HTTP のパフォーマンスに敏感な部分を C で実装し、Effects を活用して FFI の境界と OCaml のリゾルバ間の橋渡しをしやすくすることです。
+</p>
+</div>
+
+<div id="outline-container-org048f175" class="outline-4">
+<h4 id="org048f175">特徴</h4>
+<div class="outline-text-4" id="text-org048f175">
+<ul class="org-ul">
+<li>HTTP 1.1 仕様の完全サポート</li>
+<li>SSL/TLS 対応</li>
+<li>ストリーミング</li>
+<li>パフォーマンス：現在 gin-gonic などの Go フレームワークと同等の性能</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">dead_code_analyzer 1.1.1 および 1.2.0</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-dead-code-analyzer-1-1-1-and-1-2-0/18164/1">https://discuss.ocaml.org/t/ann-dead-code-analyzer-1-1-1-and-1-2-0/18164/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgab855aa" class="outline-3">
+<h3 id="orgab855aa">fantazio が発表しました</h3>
+<div class="outline-text-3" id="text-orgab855aa">
+<p>
+皆さん、こんにちは。
+</p>
+
+<p>
+<a href="https://github.com/LexiFi/dead_code_analyzer/releases">dead_code_analyzer の 2 つのリリース</a>（<code>opam</code> 経由で利用可能）をお知らせします:
+</p>
+
+<ul class="org-ul">
+<li>リリース <a href="https://github.com/LexiFi/dead_code_analyzer/releases/tag/1.1.1">1.1.1</a> には多数のバグ修正とセマンティクスの強化が含まれています。また、各レポートセクションの説明、使用方法、例を用いた制限事項を記述した<a href="https://github.com/LexiFi/dead_code_analyzer/blob/1.1.1/docs/USER_DOC.md">ユーザードキュメント</a>も改善されています。このリリースは <b><b>OCaml 5.2</b></b> と互換性があります。</li>
+
+<li>リリース <a href="https://github.com/LexiFi/dead_code_analyzer/releases/tag/1.2.0">1.2.0</a> は 1.1.1 のアップデートで、<b><b>OCaml 5.3</b></b> と互換性があります。アナライザーは入力として <code>.cmi</code> と <code>.cmt</code> の代わりに <code>.cmti</code> と <code>.cmt</code> ファイルを受け取るようになりました。メモリ消費量が増加する場合があります（詳細は<a href="https://github.com/LexiFi/dead_code_analyzer/pull/38">こちら</a>）。</li>
+</ul>
+
+<p>
+これらのリリースに加え、<b><b>OCaml 4.14</b></b> と互換性のあるバージョンが<a href="https://github.com/fantazio/dead_code_analyzer/tree/4.14">私のフォーク</a>で利用可能です。
+</p>
+
+<p>
+<a href="https://ocaml-sf.org/">OCaml Software Foundation</a> の資金援助に感謝します！
+</p>
+
+<p>
+これらのリリースで問題が発生した場合は、<a href="https://github.com/LexiFi/dead_code_analyzer/issues">GitHub リポジトリで報告</a>してください。
+フィードバックと貢献を歓迎します。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org5844e52" class="outline-2">
+<h2 id="org5844e52">過去の CWN</h2>
+<div class="outline-text-2" id="text-org5844e52">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://ocaml.jp/cwn-ja/">アーカイブ</a>や<a href="https://ocaml.jp/cwn-ja/cwn.rss">RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> を購読してください。
+</p>
+
+<div class="authorname" id="org70b6c97">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
