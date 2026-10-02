@@ -1,0 +1,392 @@
+#+OPTIONS: ^:nil
+#+OPTIONS: html-postamble:nil
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: author:nil
+#+HTML_HEAD: <style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+#+HTML_HEAD: <style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+#+TITLE: OCaml Weekly News
+[[file:2026.09.22.html][先週号]] [[file:index.html][上へ]] [[file:2026.10.06.html][次週号]]
+
+こんにちは
+
+2026年9月22日から29日までの週の OCaml Weekly News をお届けします。
+
+#+TOC: headlines 1
+
+
+* elm_playground 第2リリース（初心者向けゲームエンジン）
+:PROPERTIES:
+:CUSTOM_ID: 1
+:END:
+Archive: https://discuss.ocaml.org/t/ann-2nd-release-elm-playground-a-game-engine-for-beginners/18552/1
+
+** Yoann Padioleau が発表しました
+
+
+~elm_playground~ の第2リリースをお知らせできることを嬉しく思います。これは OCaml パッケージで、画面・キーボード・マウスといったコンピュータとそのデバイスの見方を大幅に簡略化する API を使って、/絵/、/アニメーション/、さらには/ビデオゲーム/をポータブルな方法で簡単に作成できます。このライブラリはターミナルからゲームを実行するためのネイティブバックエンドと、ブラウザでゲームを実行するための Web バックエンドを提供しています。
+
+これは優れた Elm playground パッケージ
+https://github.com/evancz/elm-playground を OCaml に移植したものです。
+
+OPAM 経由でインストールできます：
+
+~opam install elm_playground; opam install elm_playground_native~.
+
+主な変更点は、第1リリースのバグのほとんどが修正されたこと（主に Claude Code によって）、そしてネイティブバックエンドと Web バックエンドの両方がすべてのサンプルとゲームで完全に動作するようになったことです。例えば、jsoo でコンパイルされた Tetris をプレイする方法は以下の通りです：
+
+https://aryx.github.io/ocaml-elm-playground/games/Tetris.html
+
+以下にライブラリを使用したコードの例をいくつか示します。
+
+まず「picture」アプリ：
+
+#+begin_src ocaml
+(* from https://elm-lang.org/examples/picture *)
+open Playground
+
+let app =
+  picture [
+    rectangle brown 40. 200.
+      |> move_down 80.;
+    circle green 100.
+      |> move_up 100.;
+  ]
+
+let main = Playground_platform.run_app app
+#+end_src
+
+#+attr_html: :width 470
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/optimized/2X/7/76fc1990fe116911097764df986f64fed41c28a4_2_470x500.png
+
+次に「animation」アプリ：
+
+#+begin_src ocaml
+(* from https://elm-lang.org/examples/animation *)
+open Playground
+
+let view time = [
+    octagon darkGray 36.
+      |> move_left 100.
+      |> rotate (spin 3. time);
+    octagon darkGray 36.
+      |> move_right 100.
+      |> rotate (spin 3. time);
+    rectangle red 300. 80.
+      |> move_up (wave 50. 54. 2. time)
+      |> rotate (zigzag (-. 2.) 2. 8. time);
+  ]
+
+let app =
+  animation view
+
+let main = Playground_platform.run_app app
+#+end_src
+
+#+attr_html: :width 470
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/optimized/2X/e/e91563cbb6a0863570bbb19b057f5e8dae7164bf_2_470x500.png
+
+そして最後に「game」アプリ：
+
+#+begin_src ocaml
+(* from https://elm-lang.org/examples/mouse *)
+open Playground
+
+let view _computer (x, y) = [ 
+  square blue 40.
+   |> move x y
+ ]
+
+let update computer (x, y) =
+  (x +. to_x computer.keyboard, y +. to_y computer.keyboard)
+
+let app = 
+  game view update (0., 0.)
+
+let main = Playground_platform.run_app app
+#+end_src
+
+#+attr_html: :width 470
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/optimized/2X/2/24e8ffe672cda66c6a49e02013347cda0640f771_2_470x500.png
+
+より複雑なゲームも作れることに注意してください。例えば、簡単な Tetris アプリのスクリーンショットを以下に示します：
+
+#+attr_html: :width 582
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/4/4ded1d55c9994935c5ec3786ae549ba3a71b8eb6.png
+
+詳細については、https://github.com/aryx/ocaml-elm-playground の README をご覧ください。
+
+jsoo のおかげでオンラインで試せるいくつかのクラシックなサンプルのコードもご覧ください：https://aryx.github.io/ocaml-elm-playground/games/
+      
+
+
+
+* moonpool 0.12
+:PROPERTIES:
+:CUSTOM_ID: 2
+:END:
+Archive: https://discuss.ocaml.org/t/ann-moonpool-0-12/18553/1
+
+** Simon Cruanes が発表しました
+
+
+やあ、moonpool 0.12 をリリースしました。もうすぐ近くの opam リポジトリに届くでしょう。
+
+Moonpool（最初の発表は[[https://discuss.ocaml.org/t/ann-moonpool-0-1/12387][こちら]]）は OCaml 5 向けのスレッドプールライブラリで、domain を活用して複数のコアで本当に高速に動作します。moonpool のユニーク（今でも唯一？）な設計により、ユーザーは合計サイズが ~Domain.recommended_domain_count()~ を超える複数のプールを、速度低下なしに作成できます。それを実現するのは……スレッドを使うことで……です。そう。
+
+とにかく、多数のバグ修正（#45 での病的なメモリ使用を修正するものを含む。いつものように @gasche さん :heart_hands: に感謝）、~ambient-context~ のサポート、いくつかのクリーンアップ、テスト用の dscheck などが含まれています。
+
+あなたとあなたのシリアルボウルに乾杯
+      
+
+
+
+* tw 1.1.0、OCaml における Tailwind CSS
+:PROPERTIES:
+:CUSTOM_ID: 3
+:END:
+Archive: https://discuss.ocaml.org/t/ann-tw-1-1-0-tailwind-css-in-ocaml/18554/1
+
+** Thomas Gazagnaire が発表しました
+
+
+[[https://github.com/samoht/tw/][tw]] 1.1.0 のリリースをお知らせできることを嬉しく思います（brew では既に利用可能で、[[https://github.com/ocaml/opam-repository/pull/30790][opam]] にも近日公開予定）。
+
+#+begin_example
+$ brew install samoht/tap/tw
+$ opam install tw.1.1.0
+#+end_example
+
+~tw~ は純粋な OCaml で実装された [[https://tailwindcss.com/][Tailwind CSS v4]] です。これは実際に使用することをお勧めする最初のバージョンです。以前のバージョンは一部の機能しかサポートしておらず、どこで問題が起きているか不明確でした。1.1.0 リリースでは Tailwind v4 のすべてのユーティリティ、バリアント、公式プラグインをカバーし、さらに重要なことに、その出力が Tailwind のものと視覚的な差異がないことを確認する適切で機械的な方法を備えています。
+
+~tw~ には Tailwind CLI のドロップイン置き換えとなる CLI が付属しています。CSS エントリポイントから Tailwind プロジェクト全体をビルドし（~tw -i src/app.css -o dist/app.css~）、~@theme~、~@source~、~@apply~、カスタムユーティリティとバリアント、typography と forms プラグインをサポートします。これはすべて *Node.js なし* で動作します。HTML を生成する言語が何であれ、CSS で設定されたあらゆるプロジェクトで機能します。
+
+OCaml を使っている場合は、[[https://github.com/samoht/tw/blob/main/lib/html/tw_html.mli][Tw_html]] を通じて OCaml API を直接使用でき、独自のスタイルを持つ HTML コンポーネントを構築できます。[[https://github.com/dbuenzli/htmlit][htmlit]] の API を公開しますが、すべてのノードに ~tw~ クラスを付与するので、特定の HTML フラグメントを表示するためにどの CSS が必要かをクエリできます。
+
+このリリースに至るプロセスについては私の[[https://gazagnaire.org/blog/2026-09-23-tailwind-parity.html][ブログ記事]]で詳しく読めます。[[https://github.com/samoht/tw/issues][issue tracker]] や DM でのフィードバックをお待ちしています！
+      
+
+
+
+* Cascade: OCaml における型付き CSS ツールキット
+:PROPERTIES:
+:CUSTOM_ID: 4
+:END:
+Archive: https://discuss.ocaml.org/t/cascade-a-typed-css-toolkit-in-ocaml/18383/6
+
+** このスレッドを続けて、Thomas Gazagnaire が発表しました
+
+
+~opam~ と Homebrew への ~cascade~ 1.2.1 のリリースをお知らせできることを嬉しく思います。このリリースは主に（多数の）バグ修正を含み、その多くはヘッドレス Chrome でスタイルシートをレンダリングしてピクセルを比較することで発見されました。
+
+1.1.0 でビルドしたミニファイ済み CSS を配信している場合は、再生成して差異を確認してください：
+
+#+begin_example
+$ cascade diff --diff=canonical old.css new.css
+#+end_example
+
+特定のページのレンダリングのピクセルレベルの差異を確認したい場合は、以下を使用できます：
+
+#+begin_example
+$ cascade diff --browser --html page.html a.css b.css
+#+end_example
+
+この新しいコマンドが多数の問題の特定と修正に役立ちました。そのため、[[https://github.com/samoht/cascade/blob/main/CHANGES.md#120][CHANGES.md]] には（非常に長い）修正リストがあります。
+      
+
+
+
+* ppx_deriving_{yaml,ezjsonm,yamlx} 0.5.0
+:PROPERTIES:
+:CUSTOM_ID: 5
+:END:
+Archive: https://discuss.ocaml.org/t/ann-ppx-deriving-yaml-ezjsonm-yamlx-0-5-0/18556/1
+
+** Patrick Ferris が発表しました
+
+
+こんにちは！
+
+~ppx_deriving_yaml~ と ~ppx_deriving_ezjsonm~ バージョン ~0.5.0~ のリリース、および [[https://github.com/mjambon/yamlx][YAMLx]] をバックエンドとして使用する ~ppx_deriving_yamlx~ の最初のリリースをお知らせできることを嬉しく思います（@raphael-proust さんと @mjambon さんの作業とご意見をいただきありがとうございます）。3つのデライバはすべて同じコアコーデックを使用し、それぞれが特定の表現に特化しています。
+
+このリリースには ~_ array~ 型のデライブに関するバグ修正も含まれています。これは完全に壊れていました（コードがコンパイルすらできないほど壊れていました）。
+
+*** インストール
+
+#+begin_example
+opam update
+opam install ppx_deriving_yaml
+opam install ppx_deriving_ezjsonm
+opam install ppx_deriving_yamlx
+#+end_example
+
+*** ドキュメント
+
+ドキュメントは ocaml.org でご覧いただけます。例えば [[https://ocaml.org/p/ppx_deriving_yamlx/latest/doc/index.html][ppx_deriving_yamlx のドキュメント]]。
+
+Happy deriving :two_hump_camel:
+      
+
+
+
+* kqueue-ml 0.5.0
+:PROPERTIES:
+:CUSTOM_ID: 6
+:END:
+Archive: https://discuss.ocaml.org/t/ann-kqueue-ml-0-5-0/17835/2
+
+** このスレッドを続けて、Anurag Soni が発表しました
+
+
+0.5 以降、いくつかの新しいリリースを公開しました。
+
+- ~EVFILT_USER~ と ~EVFILT_SIGNAL~ のサポートを追加
+- レコードのアロケートを避けるため、イベント登録のインターフェースを変更
+
+新しいアップデートは [[https://opam.ocaml.org/packages/kqueue/kqueue.0.7.0/][opam]] で確認できます。
+      
+
+
+
+* Windtrap: OCaml テストのためのオールインワンライブラリ
+:PROPERTIES:
+:CUSTOM_ID: 7
+:END:
+Archive: https://discuss.ocaml.org/t/ann-windtrap-one-library-for-all-your-ocaml-tests/18561/1
+
+** Thibaut Mattio が発表しました
+
+
+こんにちは！
+
+OCaml 向けのテストフレームワーク [[https://github.com/invariant-hq/windtrap][Windtrap]] のリリースをお知らせできることを嬉しく思います。このフレームワークはエコシステムのさまざまなテスト手法を1つのライブラリにまとめています：
+
+- ユニットテスト（Alcotest ライクな API）
+- Expect テストとスナップショットテスト（~ppx_expect~ や ~ppx_inline_test~ と互換性のあるコンパニオン PPX があり、なしでも使用可能）
+- [[https://github.com/c-cube/qcheck][QCheck]] で見られるようなプロパティテスト（ラウンドトリップ、順序、結合則などの教科書的な法則ライブラリ付き）
+- [[https://github.com/ocaml-multicore/multicoretests][qcheck-stm]] や [[https://gitlab.inria.fr/fpottier/monolith][Monolith]] で見られるようなステートフルテストと差分テスト（1つまたは複数のドメインで）
+- テストカバレッジ（[[https://github.com/aantron/bisect_ppx][Bisect_ppx]] のような）とミューテーションテスト（[[https://github.com/jmid/mutaml][mutaml]] のような）
+
+あらゆる種類のテストが1つのスイートと1つの出力に組み合わさり、ライブラリは OCaml 以外に **依存関係なし** です（オプションの PPX は ppxlib を使用）。
+
+以下は、ユニットテスト、教科書的な法則として述べられたプロパティ、リストに対する ~Stack~ のステートフルテストを使って標準ライブラリをテストする小さなスイートです：
+
+#+begin_src ocaml
+open Windtrap
+
+(* A reference for Stack: a list, its top first. *)
+module Model = struct
+  type t = int list ref
+
+  let create () = ref []
+  let push x m = m := x :: !m
+  let length m = List.length !m
+
+  let pop m =
+    match !m with
+    | [] -> raise Stack.Empty
+    | x :: rest ->
+        m := rest;
+        x
+end
+
+let stack = abstract "s" ~pp:(fun ppf m -> Testable.pp (list int) ppf !m)
+
+let lists =
+  group "list"
+    [
+      test "rev reverses a list" (fun () ->
+          equal (list int) [ 3; 2; 1 ] (List.rev [ 1; 2; 3 ]));
+      prop "rev is an involution" (Gen.list Gen.int)
+        (Law.involutive (list int) List.rev);
+    ]
+
+let stacks =
+  group "stack"
+    [
+      stateful "behaves like a list"
+        [
+          command "create" (Gen.unit @-> makes stack) Model.create Stack.create;
+          command "push"
+            (Gen.int @-> stack ^-> returns unit)
+            Model.push Stack.push;
+          command "pop" (stack ^-> returns int) Model.pop Stack.pop;
+          command "length" (stack ^-> returns int) Model.length Stack.length;
+        ];
+    ]
+
+let () = exit (run "stdlib" [ lists; stacks ])
+#+end_src
+
+Windtrap は [[https://invarianthq.dev/][Invariant]] でエージェントが書いたコードをより信頼できるものにするための取り組みの一環として構築しました。エージェントはリポジトリ内で見つけたものを複製するので、強力なテストで満たされたプロジェクトにはより多くのテストが追加されます。Windtrap には適切な種類のテストへエージェントを誘導する[[https://github.com/invariant-hq/windtrap/blob/main/SKILL.md][エージェントスキル]]が付属していますが、人間のことも同様に重視しており、API と出力をエルゴノミックで快適にするために多くの努力を注ぎました。
+
+詳細は[[https://invarianthq.dev/blog/announcing-windtrap/][アナウンス記事]]でお読みいただけます。サンプルスイートのウォークスルー、失敗の見た目、カバレッジとミューテーションテスト、そして Windtrap を使って OCaml 標準ライブラリをテストした実験が含まれています。
+
+インストールするには（[[https://github.com/ocaml/opam-repository/pull/30817][PR]] が opam-repository にマージされたら）：
+
+#+begin_example
+opam install windtrap ppx_windtrap 
+#+end_example
+
+[[https://github.com/invariant-hq/windtrap/tree/main/doc/manual][マニュアル]]（私のガイダンスのもとエージェントが書いたもので、文章スタイルが許容範囲内であることを願っていますが、不満が多ければ手で書き直すことを検討します）には各種テストについて1ページずつ説明があります。フィードバックは大歓迎です。こちらか [[https://github.com/invariant-hq/windtrap/issues][issue tracker]] にどうぞ。
+
+Happy hacking!
+
+---
+*** 謝辞
+
+Windtrap はいくつかの OCaml プロジェクトのアイデアとコードを基にしています：
+
+- *[[https://github.com/mirage/alcotest][Alcotest]]* by Thomas Gazagnaire: テスト構造とランナーの設計。
+- *Craig Ferguson の Alcotest PR* （[[https://github.com/mirage/alcotest/pull/294][#294]]、[[https://github.com/mirage/alcotest/pull/247][#247]]）: API 設計、サブコンポーネントの差分。
+- *[[https://github.com/c-cube/qcheck][QCheck2]]* by Simon Cruanes et al.: ジェネレータ設計と統合シュリンキング。
+- *[[https://gitlab.inria.fr/fpottier/monolith][Monolith]]* by François Pottier、および *[[https://github.com/ocaml-multicore/multicoretests][qcheck-stm]]* by Jan Midtgaard et al.: 参照に対するステートフルテスト（1つまたは複数のドメインで）。
+- *[[https://github.com/janestreet/ppx_expect][ppx_expect]]* および *[[https://github.com/janestreet/ppx_inline_test][ppx_inline_test]]* by Jane Street: expect テストのパラダイムと dune 統合、および ppx_expect のテストコーパス。
+- *[[https://github.com/aantron/bisect_ppx][Bisect_ppx]]* by Anton Bachin et al.: カバレッジ計装とランタイム。
+- *[[https://github.com/jmid/mutaml][mutaml]]* by Jan Midtgaard: PPX としての OCaml 向けミューテーションテスト。
+- *[[https://erratique.ch/software/mtime][mtime]]* by Daniel Bünzli: モノトニッククロック。
+      
+
+
+
+* Ocsigen Server 8.0.0
+:PROPERTIES:
+:CUSTOM_ID: 8
+:END:
+Archive: https://discuss.ocaml.org/t/ann-ocsigen-server-8-0-0/18564/1
+
+** Vincent Balat が発表しました
+
+
+こんにちは！
+
+OCaml で書かれた Web サーバー Ocsigen Server 8.0.0 がリリースされました。実行可能ファイルとしてもライブラリとしても使用できます。主なハイライト：
+
+- *コマンド1つ、設定ファイル不要*: ~ocsigenserver ./public~ でディレクトリを配信し、~ocsigenserver --reverse-proxy http://localhost:9000~ でアプリの前にプロキシを置きます。圧縮とセキュリティヘッダーは既に有効です。
+- *静的ファイル* が条件付きリクエスト（ETag、304）とバイト範囲に対応するようになり、動画のシーク操作やダウンロードの再開がそのまま機能します。
+- *zstd 圧縮*（新しい bytesrw バックエンド上で）。
+- 新しい *Securityheaders* 拡張。
+- 標準的なツールで読める標準 *Combined Log Format* のアクセスログ。
+- パブリックモジュールが改名されました（~Ocsigen.Server~、~Ocsigen.Config~、...）。新しい ~ocsigenserver-compat~ パッケージが古い名前を維持するので、既存のコードは引き続きビルドできます。
+
+~opam install ocsigenserver~
+
+Eliom および他のプロジェクトのこのバージョンと互換性のあるリリースは、数週間後に続きます。
+
+詳細はブログ記事をご覧ください：https://ocsigen.org/blog/posts/ocsigenserver-8.0.0.html
+      
+
+
+
+* 過去の CWN
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+CWN を見逃した場合は、[[mailto:alan.schmitt@polytechnique.org][メッセージを送っていただければ]]メールでお送りします。また、[[https://ocaml.jp/cwn-ja/][アーカイブ]]や[[https://ocaml.jp/cwn-ja/cwn.rss][RSS フィード]]もご覧いただけます。
+
+毎週メールで受け取りたい場合は、[[https://sympa.inria.fr/sympa/info/caml-list][caml-list]] を購読してください。
+
+#+BEGIN_authorname
+[[https://alan.petitepomme.net/][Alan Schmitt]]
+#+END_authorname
