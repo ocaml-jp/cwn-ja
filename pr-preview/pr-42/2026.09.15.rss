@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <title>OCaml Weekly News (2026年9月15日版）</title>
+  <pubDate>Tue, 15 Sep 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.09.15.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.09.15.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#1"&gt;opam 2.6.0~alpha1&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#2"&gt;tiny_httpd 0.22&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#3"&gt;Owebview 0.1 — OCaml からネイティブデスクトップウィンドウに Web UI を表示&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#4"&gt;OSEC-2026-18: Marshal の整数オーバーフローによるヒープ外読み取り&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#5"&gt;OSEC-2026-19: JOSE における RSA 署名検証の欠如&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#6"&gt;OSEC-2026-20: Cstruct のインデックスバグによるフィルタ出力の破損と逆方向パース結果の誤り&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#7"&gt;VSCode での Dune パッケージ管理サポート&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#8"&gt;Liquidsoap 2.5.x: OCaml 5.x 並行処理の実践的な研究&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#9"&gt;OCaml 公開セキュリティミーティング&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#10"&gt;dead_code_analyzer 1.2.1 および 1.3.0&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>

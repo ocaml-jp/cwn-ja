@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+<channel>
+<title>OCaml Weekly News (日本語訳)</title>
+<link>https://ocaml.jp/cwn-ja/</link>
+<description>OCaml Weekly News の日本語訳</description>
+<item>
+  <title>OCaml Weekly News (2026年9月29日版）</title>
+  <pubDate>Tue, 29 Sep 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.09.29.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.09.29.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.29.html#1"&gt;elm_playground 第2リリース（初心者向けゲームエンジン）&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.29.html#2"&gt;moonpool 0.12&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.29.html#3"&gt;tw 1.1.0、OCaml における Tailwind CSS&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.29.html#4"&gt;Cascade: OCaml における型付き CSS ツールキット&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.29.html#5"&gt;ppx_deriving_{yaml,ezjsonm,yamlx} 0.5.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.29.html#6"&gt;kqueue-ml 0.5.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.29.html#7"&gt;Windtrap: OCaml テストのためのオールインワンライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.29.html#8"&gt;Ocsigen Server 8.0.0&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
+  <title>OCaml Weekly News (2026年9月22日版）</title>
+  <pubDate>Tue, 22 Sep 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.09.22.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.09.22.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.22.html#1"&gt;ortac-0.8 Domains を使った仕様駆動テスト&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.22.html#2"&gt;静的リンクに関するブログ記事&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.22.html#3"&gt;opam 2.6.0 がリリースされました！&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.22.html#4"&gt;Uucd、Uucp、Uunf、Uuseg の Unicode 18.0.0 対応アップデート&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.22.html#5"&gt;ozstd 0.1&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.22.html#6"&gt;rtree 0.3.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.22.html#7"&gt;opam-monore 0.5.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.22.html#8"&gt;boulodrome：証明アシスタントとしての LLM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.22.html#9"&gt;リロケータブル OCaml を使った Dk ビルド&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.22.html#10"&gt;VS Code から直接 OCaml ファイルを実行する&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.22.html#11"&gt;melange-json が jsonkit になりました&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
+  <title>OCaml Weekly News (2026年9月15日版）</title>
+  <pubDate>Tue, 15 Sep 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.09.15.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.09.15.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#1"&gt;opam 2.6.0~alpha1&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#2"&gt;tiny_httpd 0.22&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#3"&gt;Owebview 0.1 — OCaml からネイティブデスクトップウィンドウに Web UI を表示&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#4"&gt;OSEC-2026-18: Marshal の整数オーバーフローによるヒープ外読み取り&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#5"&gt;OSEC-2026-19: JOSE における RSA 署名検証の欠如&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#6"&gt;OSEC-2026-20: Cstruct のインデックスバグによるフィルタ出力の破損と逆方向パース結果の誤り&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#7"&gt;VSCode での Dune パッケージ管理サポート&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#8"&gt;Liquidsoap 2.5.x: OCaml 5.x 並行処理の実践的な研究&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#9"&gt;OCaml 公開セキュリティミーティング&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.15.html#10"&gt;dead_code_analyzer 1.2.1 および 1.3.0&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
+  <title>OCaml Weekly News (2026年9月8日版）</title>
+  <pubDate>Tue, 08 Sep 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.09.08.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.09.08.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.08.html#1"&gt;OCaml コンパイラバックエンドでの取り組み&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.08.html#2"&gt;forcamla 0.4.0 - シンプルな Functional Reactive Programming&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.08.html#3"&gt;Typegist 0.0.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.08.html#4"&gt;依存型なしでの依存 if 式&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.08.html#5"&gt;Caps 0.1.0、OCaml 向けケイパビリティ型システムおよびライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.08.html#6"&gt;bstr、slice、bin（bigstring、バイナリフォーマット向けエンコーダとデコーダ）&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.08.html#7"&gt;OCaml 5.5.1 リリース&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.08.html#8"&gt;Slipshow!&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.08.html#9"&gt;ocp-indent 1.10.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.08.html#10"&gt;Intel ISA 仕様のインタープリタ/コンパイラが OCaml で書かれている&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.08.html#11"&gt;TyXML 5.0.0&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
+  <title>OCaml Weekly News (2026年9月1日版）</title>
+  <pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.09.01.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.09.01.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#1"&gt;Unhandled: OCaml 5 における未処理エフェクトの静的チェッカーと、ある否定的な結果について&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#2"&gt;mirage-crypto* リリースシリーズについて&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#3"&gt;Rpmfile 1.0.0 と Bytream 0.2&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#4"&gt;oxbow: Wayland コンポジター River 向けの動的タイリングウィンドウマネージャー&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#5"&gt;cdp 0.1.0 - OCaml 向けの型付き Chrome DevTools Protocol ライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#6"&gt;Hardcaml ネットワーキングライブラリ - おもちゃプロジェクト&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#7"&gt;FUN OCaml 2027 バンガロール開催（1月25〜26日）- トークとワークショップの提案を9月30日まで受付中&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#8"&gt;ease-caml - OCaml 向けのイージングライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#9"&gt;opam 2.6.0~alpha1&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
+  <title>OCaml Weekly News (2026年8月25日版）</title>
+  <pubDate>Tue, 25 Aug 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.08.25.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.08.25.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.25.html#1"&gt;OSEC-2026-16: cohttp: パストラバーサル&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.25.html#2"&gt;Cascade: OCaml による型付き CSS ツールキット&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.25.html#3"&gt;YAMLx 0.5.0 + プロジェクトにまつわる変わった話&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.25.html#4"&gt;opam リポジトリのパッケージ貢献者は人間が背後にいるべき&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.25.html#5"&gt;Cohttp 6.3.0 リリース (OSEC-2026-16)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.25.html#6"&gt;opam 2.6.0~alpha1&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.25.html#7"&gt;Jane Street ライブラリ (base/core/async/etc) と 5.5 の対応&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.25.html#8"&gt;1960年代の UNIVAC 1219B 上で動く OCaml&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
+  <title>OCaml Weekly News (2026年8月18日版）</title>
+  <pubDate>Tue, 18 Aug 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.08.18.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.08.18.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.18.html#1"&gt;Affect 0.0.0 – OCaml 向けの洗練された自然な並行モデル&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.18.html#2"&gt;Slipshow!&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.18.html#3"&gt;intel_hex.0.4&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.18.html#4"&gt;Bisect_ppx_ng 3 -- bisect_ppx のフォーク&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.18.html#5"&gt;OSEC-2026-17: mirage-crypto-ec: NIST 楕円曲線スカラー乗算におけるタイミングリーク&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
+  <title>OCaml Weekly News (2026年8月11日版）</title>
+  <pubDate>Tue, 11 Aug 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.08.11.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.08.11.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#1"&gt;Dune 3.24&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#2"&gt;OCaml 5.5 および trunk 向け Merlin と OCaml-LSP の新リリース&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#3"&gt;sdl3 バインディング&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#4"&gt;JFLA2027 : Premier appel à communications&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#5"&gt;hegel 0.14.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#6"&gt;ifs-fractals の新リリース 1.1.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#7"&gt;OSEC-2026-14: mirage-crypto-pk: RSA 署名検証が未ドキュメントの例外を発生させる&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#8"&gt;OSEC-2026-15: mirage-crypto-ec: EC 公開鍵の範囲外読み取り&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#9"&gt;新パッケージ: floatml&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#10"&gt;ocaml-android リブート！&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#11"&gt;Ravel 1.0.1 — interaction net にコンパイルする関数型言語&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#12"&gt;新パッケージ: P4-SpecTec&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#13"&gt;新パッケージ: NeoDriver 0.1.2 – Neo4j データベースドライバー&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#14"&gt;opam-audit&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#15"&gt;shakuhachi v0.3.2 - 音楽コレクションマネージャー&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#16"&gt;Bytream 0.1 – 初回リリース&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#17"&gt;Smaji Glyph Path&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.11.html#18"&gt;Smaji Glyph Path の2つの使用例、Smaji Outline Description と Smaji Stroke Description&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
+  <title>OCaml Weekly News (2026年8月4日版）</title>
+  <pubDate>Tue, 04 Aug 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.08.04.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.08.04.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#1"&gt;Mirage Unikernel で使用するために Claude Code で SQLite を Pure OCaml に書き直した&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#2"&gt;新しい opam パッケージ：CamlSurf と Gles3&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#3"&gt;bcfg：退屈なくらいシンプルな設定ファイルフォーマット&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#4"&gt;Introcaml（アルファ版）：OCaml のための多相的な表示とイントロスペクション&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#5"&gt;OxCaml フレーバーの SWAR memchr をベンチマークして学んだこと&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.08.04.html#6"&gt;OCaml Runtime Meeting：月曜日 7月6日 @ 10:00 UTC（10:00 London/Cambridge、11:00 Paris、19:00 Sydney）&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+<item>
+  <title>OCaml Weekly News (2026年7月28日版）</title>
+  <pubDate>Tue, 28 Jul 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.07.28.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.07.28.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#1"&gt;Theo 0.1.0: 理論サポート付き BDD ライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#2"&gt;qiskit 2.0.1&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#3"&gt;Wax 0.1.0: WebAssembly の Rust 風構文&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#4"&gt;Cascade: OCaml による型付き CSS ツールキット&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#5"&gt;Dune 3.24&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#6"&gt;ocaml-wire: EverParse 3D 出力対応バイナリワイヤーフォーマット DSL&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#7"&gt;Eio 1.4（エフェクトベース並行処理ライブラリ）&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#8"&gt;ocaml-sbom 0.1.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#9"&gt;Union-find-lattice ライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#10"&gt;IFS フラクタルと OCaml で Claude の創造性に挑む&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#11"&gt;Simple_http 1.1 リリース&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
+</channel>
+</rss>

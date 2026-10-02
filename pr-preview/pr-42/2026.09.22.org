@@ -1,0 +1,436 @@
+#+OPTIONS: ^:nil
+#+OPTIONS: html-postamble:nil
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: author:nil
+#+HTML_HEAD: <style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+#+HTML_HEAD: <style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+#+TITLE: OCaml Weekly News
+[[file:2026.09.15.html][先週号]] [[file:index.html][上へ]] [[file:2026.09.29.html][次週号]]
+
+こんにちは
+
+2026年9月15日から22日までの週の OCaml Weekly News をお届けします。
+
+#+TOC: headlines 1
+
+
+* ortac-0.8 Domains を使った仕様駆動テスト
+:PROPERTIES:
+:CUSTOM_ID: 1
+:END:
+Archive: https://discuss.ocaml.org/t/ann-ortac-0-8-specification-driven-testing-with-domains/17927/2
+
+** このスレッドを引き継いで、Nicolas Osborne が発表しました
+
+
+設計上の選択とメソドロジーについてより詳しく説明した拡張版の投稿を[[https://tarides.com/blog/2026-09-16-ortac-0-8-0-testing-with-domains/][こちら]]に公開しました。
+      
+
+
+
+* 静的リンクに関するブログ記事
+:PROPERTIES:
+:CUSTOM_ID: 2
+:END:
+Archive: https://discuss.ocaml.org/t/blog-post-on-static-linking/18535/1
+
+** Matt Teichman が発表しました
+
+
+OCaml の皆さん、こんにちは。
+
+静的リンクに関する新しいブログ記事に興味を持っていただける方がいるかもしれないと思い、共有します：
+https://elucidations.vercel.app/posts/static-linking
+
+ご自愛ください！
+      
+
+
+
+* opam 2.6.0 がリリースされました！
+:PROPERTIES:
+:CUSTOM_ID: 3
+:END:
+Archive: https://discuss.ocaml.org/t/ann-opam-2-6-0-is-out/18536/1
+
+** Kate が発表しました
+
+
+皆さん、こんにちは。
+
+opam 2.6.0 のリリースを発表できることを嬉しく思います。すべてのユーザーにアップグレードをお勧めします。
+
+*注意*：以下のセクションでは、以前のプレリリースのアナウンスをまだ読んでいない方のために、opam ~2.6.0~ における主な変更点をまとめます。すでに読んでいる方への補足として、~2.6.0~rc1~ と最終版 ~2.6.0~ の間に特筆すべき変更はありません。
+
+
+*** 新機能のハイライト：
+
+- :money_bag: シェルフックを使用しているユーザーへ：今回のリリースでは、~PATH~ を最新の状態に保つ方法が変更されました。従来は opam が ~PATH~ の先頭を常に占有していましたが、opam が管理するディレクトリをその場で置き換えることで、ユーザーが指定した順序を維持するようになりました。この機能を利用するには、このバージョンにアップグレードした後に一度 ~opam init --reinit -ni~ を実行してください（既存の opam インストールが検出された場合、インストールスクリプトが自動的に実行します）。*[[https://github.com/gridbugs][@gridbugs]] の貢献に感謝します。*
+
+- :wastebasket: ~build~ ディレクトリをできるだけ早く削除し、重複したアーカイブキャッシュを削除することで、opam のディスク使用量を削減しました。パッケージを再インストールするだけで時間をかけてディスク使用量を減らすこともできますが、~opam clean --all-switches~ を使えば一度に数 GB を解放できます。
+
+- :high_speed_train: HTTP リポジトリ（例：opam.ocaml.org）の内部保存形式を変更することで、特定のファイルシステム（Windows の NTFS や IO に制約のあるマシンなど）でのパフォーマンスを大幅に改善しました。
+
+- :envelope_with_arrow: ルートプレフィックスからファイルをインストールするための ~root~ および ~rootexec~ セクションを ~.install~ ファイルに追加しました。*[[https://github.com/WardBrian][@WardBrian]] の貢献に感謝します。*
+
+- :woman_technologist: 特定のパッケージの ~available:~ フィールドを無視できる新しい引数 ~--ignore-available-on~ を追加しました。*再び [[https://github.com/WardBrian][@WardBrian]] の貢献に感謝します。*
+
+- :shuffle_tracks_button: opam が管理するリポジトリで git の gc/メンテナンスを無効化するようになりました。git がバックグラウンドでメンテナンスタスクを起動し、ファイルを作成・削除・変更するため、そのような git リポジトリを操作する際に opam プロセスが競合状態で壊れることがあるためです。
+
+- :houses: ~--safe~ が指定されている場合、以前は opam がデバッグレベルを 0 にリセットしていましたが、この動作は変更されました。スクリプトを適宜更新してください。
+
+- :ocean: UI の追加・改善、バグ修正など多数あります。
+
+:open_book: これらの変更点やその他の詳細については[[https://opam.ocaml.org/blog/opam-2-6-0/][ブログ記事]]をご覧ください。さらに詳しい内容は[[https://github.com/ocaml/opam/releases/tag/2.6.0][リリースノート]]や[[https://github.com/ocaml/opam/blob/2.6.0/CHANGES][変更履歴]]もご参照ください。
+
+
+*** 試してみましょう！
+
+アップグレードの手順は変わっていません：
+
+Unix システムの場合
+#+begin_example
+bash -c "sh <(curl -fsSL https://opam.ocaml.org/install.sh) --version 2.6.0"
+#+end_example
+Windows システムの PowerShell から実行する場合
+#+begin_example
+Invoke-Expression "& { $(Invoke-RestMethod https://opam.ocaml.org/install.ps1) } -Version 2.6.0"
+#+end_example
+問題が発生した場合は[[https://github.com/ocaml/opam/issues][バグトラッカー]]に報告してください。
+
+Happy hacking,
+<> <> opam チーム <> <> :camel:
+      
+
+
+
+* Uucd、Uucp、Uunf、Uuseg の Unicode 18.0.0 対応アップデート
+:PROPERTIES:
+:CUSTOM_ID: 4
+:END:
+Archive: https://discuss.ocaml.org/t/ann-unicode-18-0-0-update-for-uucd-uucp-uunf-and-uuseg/18537/1
+
+** Daniel Bünzli が発表しました
+
+
+こんにちは、
+
+Unicode 18.0.0 が9月16日にリリースされました。13,007 の新文字が追加され、合計 172,808 文字になりました。
+
+数字のお話！今回のリリースでは原楔形文字スクリプトのサポートが特に注目されています。興味のある方は[[https://www.unicode.org/L2/L2025/25211-proto-cuneiform.pdf][エンコーディング提案]]の §3 をご覧ください。
+
+その他の追加内容については[[https://blog.unicode.org/2026/09/announcing-unicode-standard-version-180.html][こちらのページ]]をご覧ください。
+
+これに伴い、以下のライブラリを更新しました（まとめたリリースノートは[[https://github.com/ocaml/opam-repository/pull/30764][こちら]]）：
+
+- [[http://erratique.ch/software/uucd][Uucd]] 18.0.0 OCaml 用 Unicode 文字データベースデコーダー、[[http://erratique.ch/software/uucd/doc][ドキュメント]]
+- [[http://erratique.ch/software/uucp][Uucp]] 18.0.0 OCaml 用 Unicode 文字プロパティ、[[http://erratique.ch/software/uucp/doc][ドキュメント]]
+- [[http://erratique.ch/software/uunf][Uunf]] 18.0.0 OCaml 用 Unicode テキスト正規化、[[http://erratique.ch/software/uunf/doc][ドキュメント]]
+- [[http://erratique.ch/software/uuseg][Uuseg]] 18.0.0 OCaml 用 Unicode テキスト分割、[[http://erratique.ch/software/uuseg/doc][ドキュメント]]
+
+~Uucd~ と ~Uucp~ はどちらも非互換リリースです。新しいブロックとスクリプトの列挙子が追加されたためです。
+
+それ以外については、[[https://erratique.ch/software/uucp/doc/unicode.html][Unicode の最小限の入門と Unicode OCaml のヒント]]が引き続き利用できます。また、俗説にもかかわらず OCaml :heart: Unicode であることを忘れないでください（この毎年恒例のリマインダーも古くなってきました。主に、これらの軽信的な LLM が OCaml の Unicode サポートについて正確で熱意ある文章を生成するようになることを期待して書いています）。
+
+[[http://ocaml-sf.org/][OCaml Software Foundation]] および私の[[https://github.com/sponsors/dbuenzli][寄付者の皆さん]]からの資金援助に深く感謝します。
+
+Daniel
+      
+
+
+
+* ozstd 0.1
+:PROPERTIES:
+:CUSTOM_ID: 5
+:END:
+Archive: https://discuss.ocaml.org/t/ann-ozstd-0-1/18538/1
+
+** Mikhail が発表しました
+
+
+やあ！
+
+[[https://github.com/dx3mod/ozstd][*ozstd*]] ライブラリの最初のリリースを発表できて嬉しいです！これは [[https://github.com/facebook/zstd][Zstandard]] への小さくモダンな OCaml バインディングです。一般的なワンショットおよびストリーミング C API をシンプルで慣用的なインターフェースでラップしています。
+
+#+attr_html: :width 200
+https://i.ibb.co/LXfsM8S3/logos-001-2.png
+
+*機能*
+
+- 文字列とビッグストリングのワンショットおよびストリーミング圧縮/展開。
+- 再利用可能な圧縮・展開コンテキスト。
+- 手動バッファ用の低レベル ~Stream~ API と、スライス処理用の高レベル ~State~ API。
+
+これはメンテナンスが停止している [[https://github.com/ygrek/ocaml-zstd][zstd]] OCaml バインディングの**ハードフォーク**です。**完全に書き直され**、元のメンテナーがプルリクエストをマージしないため、別途リリースしています。
+
+このライブラリを作成した主な目的は、私の [[https://github.com/dx3mod/bytream][Bytream]] ライブラリに対してインクリメンタルな圧縮・展開機能を提供するためでした。Bytream は私の別のライブラリ [[https://github.com/dx3mod/rpmfile][Rpmfile]] で使用されており、パッケージのペイロードを圧縮された cpio アーカイブとしてデコードします。
+
+通常の用途では、ワンショット API を使用できます。
+#+begin_src ocaml
+let source = 
+  "Contrary to popular belief, Lorem Ipsum is not simply random text."
+
+let compressed = 
+  Ozstd.Compressor.compress_string ~level:3 source
+
+let decompressed =
+  Ozstd.Decompressor.decompress_string compressed
+#+end_src
+
+または、ストリーミング API も利用できます（~State~ モジュールは高レベル API で、入力スライスを受け取り出力スライスを生成します）。
+#+begin_src ocaml
+let compress_sequence_into_channel seq oc =
+  let state = Ozstd.Compressor.State.create () in
+
+  let output Slice.{ buf; off; len } = 
+    Out_channel.output_bigarray oc buf off len 
+  in
+
+  let aux slice =
+    Ozstd.Compressor.State.feed state slice `Continue |> output
+  in
+
+  Seq.iter aux seq;
+  Ozstd.Compressor.State.finish state |> output
+#+end_src
+
+Bytream コンテキストでの使用例はこちらです。
+#+begin_src ocaml
+let uncompressed_payload =
+  Rpmfile.Payload.to_incoming_bytes compressed_payload 
+  |> Bytream_zstd.In.of_stream
+in
+#+end_src
+
+詳細は [[https://github.com/dx3mod/ozstd][README]] およびその他のドキュメントをご覧ください。
+
+*制限事項*：このバインディングは Zstandard の C API の多くをカバーしていますが、すべてではありません！プルリクエストは歓迎します。
+
+このリリースで問題が発生した場合は、[[https://github.com/dx3mod/ozstd/issues][GitHub リポジトリで報告]]してください。フィードバックと貢献を歓迎します。
+      
+
+** Louis Roché が返信しました（全文はリンク先をご覧ください）
+
+
+#+begin_quote
+これはメンテナンスが停止している [[https://github.com/ygrek/ocaml-zstd][zstd]] OCaml バインディングの**ハードフォーク**です。
+#+end_quote
+それらは非常に活発にメンテナンスされており、本番環境で広く使われています。
+
+#+begin_quote
+元のメンテナーがプルリクエストをマージしないため
+#+end_quote
+
+これも事実ではありません。
+      
+
+
+
+* rtree 0.3.0
+:PROPERTIES:
+:CUSTOM_ID: 6
+:END:
+Archive: https://discuss.ocaml.org/t/ann-rtree-0-3-0/18545/1
+
+** Patrick Ferris が発表しました
+
+
+geocaml プログラマーを代表して、~rtree.0.3.0~ のリリースを発表できることを嬉しく思います。このリリースでは、[[https://discuss.ocaml.org/t/ann-rtree-0-1-0/12785/6][コミュニティ]]からの[[https://github.com/geocaml/ocaml-rtree/issues/41][フィードバック]]を受けて、~repr~ への依存を削除しました。デバッグや高コストな ~Stdlib.( = )~ 比較を避けるために、~rtree~ に格納するものに対してユーザー自身が ~pp~ および ~equal~ 関数を提供する必要があります。
+
+~rtree.0.2.0~ のアナウンスを追加していなかったことに気づきました。そのリリースでは削除関数が追加されていました。
+
+*** 移行ガイド
+
+関数を手書きしなくても済むように、すでに ~rtree~ に依存しているユーザーは、既存のランタイム型表現を再利用して ~pp~ と ~equal~ 関数を定義できます。以下のようにします：
+
+#+begin_src ocaml
+module Line = struct
+  type t = { p0 : float * float; p1 : float * float }
+
+  let t =
+    let open Repr in
+    record "line" (fun p0 p1 -> { p0; p1 })
+    |+ field "p0" (pair float float) (fun t -> t.p0)
+    |+ field "p1" (pair float float) (fun t -> t.p1)
+    |> sealr
+
+  (* 追加: 既存のランタイム型表現を使って [equal] と [pp] 関数を定義する新しい行 *)
+  let equal = Repr.equal t |> Repr.unstage
+  let pp = Repr.pp t
+
+  type envelope = Rtree.Rectangle.t
+
+  let envelope { p0 = (x1, y1); p1 = (x2, y2) } =
+    let x0 = Float.min x1 x2 in
+    let x1 = Float.max x1 x2 in
+    let y0 = Float.min y1 y2 in
+    let y1 = Float.max y1 y2 in
+    Rtree.Rectangle.v ~x0 ~y0 ~x1 ~y1
+end
+
+module R = Rtree.Make(Rtree.Rectangle)(Line)
+#+end_src
+
+ただし、依存を完全に削除してこれらの関数を手書きで定義することをお勧めします。
+
+空間的なグルーピングをお楽しみください！ :two_hump_camel:
+      
+
+
+
+* opam-monore 0.5.0
+:PROPERTIES:
+:CUSTOM_ID: 7
+:END:
+Archive: https://discuss.ocaml.org/t/ann-opam-monore-0-5-0/18546/1
+
+** Virgile Robles が発表しました
+
+
+皆さん、こんにちは。
+
+[[https://github.com/tarides/opam-monorepo][opam-monorepo]] の新バージョンのリリースを発表できることを嬉しく思います。opam-monorepo は、プロジェクトの依存関係の monorepo を組み立て、~dune~ で一括コンパイルするためのツールで、主に Mirage でクロスコンパイルを容易にするために使用されています。
+
+いくつかの軽微な使い勝手の改善に加え、~opam-monorepo~ は ~opam 2.6.0~ に対応しました（古いバージョンとの互換性も維持しています）。また、アップストリームのすべての改善の恩恵を受けられます。
+
+~opam >= 2.6.0~ と古いバージョンの ~opam-monorepo~ を組み合わせて使用すると、特にパッケージが再ビルドされていない場合に、依存関係のロック時に ~"No known implementations at all"~ のようなエラーが発生することがあります。その場合は ~opam-monorepo~ をアップグレードしてください！
+
+Happy hacking
+      
+
+
+
+* boulodrome：証明アシスタントとしての LLM
+:PROPERTIES:
+:CUSTOM_ID: 8
+:END:
+Archive: https://discuss.ocaml.org/t/ann-boulodrome-llm-as-proof-assistant/18547/1
+
+** vbergeron が発表しました
+
+
+皆さん、こんにちは。
+
+~boulodrome~ の[[https://opam.ocaml.org/packages/boulodrome/][最初の公開リリース]]がついに利用可能になりました！
+
+これは Pétanque プロトコルを介した Rocq/Coq 証明支援のための MCP サーバーです。
+Boulodrome は LLM に Rocq 証明アシスタントへの対話的なアクセスを提供します。
+
+証明セッションの開始、タクティクの実行、ゴールの検査、ライブラリの検索、ステップの取り消しのためのツールを公開することで、定理証明をツール呼び出しのループとして機能させます。OCaml から Rocq をライブラリとして使用しているため、レイテンシは非常に低いです。
+
+現時点では、dune で管理されているプロジェクトの Rocq 9.1 でのみ動作します。
+
+ご意見をお聞かせください！
+      
+
+
+
+* リロケータブル OCaml を使った Dk ビルド
+:PROPERTIES:
+:CUSTOM_ID: 9
+:END:
+Archive: https://discuss.ocaml.org/t/dk-builds-with-relocatable-ocaml/18548/1
+
+** jbeckford が発表しました
+
+
+他の方にも共有する価値があると思ったので投稿します。私のビルドシステム（"dk"）の Windows ビルドが、実行に2時間かかる（パブリック GitLab CI の制限時間が2時間）ため失敗していました。ビルドは通常の opam と dune を使ったものです。キャッシュを準備する別のジョブを設けることで、ギリギリ2時間以内に収めることができました。しかし、その解決策はもろくてハック的で気に入りませんでした。そこで、dk の分散キャッシュ機能を使って dk のビルドをブートストラップすることにしました。そして、opam / dune / ocamlbuild / リロケータブル OCaml の機能を dk のビルドルール（/package: CommonsLang_OCaml/）に十分スクリプト化したので、opam パッケージのメンテナーにとって有用かもしれないと考えています。
+
+~ocamlearlybird~ を代表的なパッケージとして選びました。以前使ったことがあり、「通常の」OCaml プロジェクトのサイズを代表しているように思えたためです。GitHub 上にあるので setup-ocaml が利用できます。
+
+- GitHub の windows-latest（2 vCPU・8 GB RAM）で初回 ~ocamlearlybird.exe~ をビルドするのに 13 分 56 秒かかりましたが、setup-ocaml がキャッシュを初期化した後は 10 分 50 秒に短縮されました。**CI では 10 分 50 秒が関連する数値であり、デスクトップでは 13 分 56 秒が関連します。**
+- 私の採用ビルドルール（**モジュール：~CommonsLang_OCaml.Dk.OpamLock.Adopt@1.1.14~**）を実行した後、スクラッチからビルドするのに 8 分 48 秒かかりました。バイナリキャッシュとしてはあまり印象的なパフォーマンスではありませんが、これは Dune やリロケータブル OCaml コンパイラーなどの特別なパッケージのみをキャッシュしていたためです。**これは下記 Web サイトの quick-setup ブランチです。**
+- 中間ビルド成果物を格納する GitHub リリースジョブも作成した後、スクラッチからビルドするのに 2 分 18 秒になりました。dk は1つ以上の GitHub リリースから「リストア」してキャッシュとして使用できます。各リリースには zip ファイルがあり、dk は HTTP Range リクエストを使って中間ビルド成果物（バイナリ opam パッケージ、リロケータブル OCaml コンパイラーなど）をある程度効率的に取得する方法を知っています。**これは下記 Web サイトの high-performance ブランチです。**
+
+まとめ：OCaml パッケージのメンテナーがこれらの dk ベースの GitHub リリースを採用・作成すれば、通常の OCaml ユーザーがデスクトップや CI で疎結合なバイナリキャッシュのフェデレーションにアクセスできるようになります。
+
+さらに：dk が AI のコストを削減する一助になれればと思っています。今日の AI は現在の opam によく似ています。ソースが入力として、成果物が出力として存在しますが、成果物の共有はありません。しかし成果物を共有できれば、コスト・無駄・時間・複雑さが削減されます。
+
+AI の出所：dk のパッケージ（例：CommonsLang_OCaml）は 2026 年 6 月から 100% AI によって生成・維持されており、"dk" 自体は 2026 年 6 月から手作りですが AI アシスト付きです。
+
+注意事項：macOS と Linux は長い間テストしていませんが、CI には入っています。実際、自分自身の安全のため、Windows でのテストのほとんどは Windows CI で行い、AI の問題を避けるようにしています。また、~ocamlearlybird~ が OCaml 5.5（最初の正式なリロケータブルバージョン）で利用できないことに後から気づいたため、リロケータブルパッチを当てた OCaml 4.14 でのテストが主になっています。さらに、Windows での MSVC パッケージと MinGW をまだ分けていません。Windows では Visual Studio が必要になるかもしれません。**バグが出ることを想定してください！**
+
+謝辞：リロケータブル OCaml の実現のために長年取り組んでくださった @dra27 に感謝します！
+
+事前のお詫び：これは dune pkg と多少重複があると思います。ただし私は Windows を使っておりまだ試していません。
+
+リンク：
+- [[https://jonahbeckford.github.io/ocamlearlybird/][https://jonahbeckford.github.io/ocamlearlybird/]]（パフォーマンス計測と採用方法のミニ Web サイト）
+- [[https://diskuv.com/dk/][https://diskuv.com/dk/]]（ビルドシステムの詳細；このディスカッション投稿には必須ではありません）
+      
+
+
+
+* VS Code から直接 OCaml ファイルを実行する
+:PROPERTIES:
+:CUSTOM_ID: 10
+:END:
+Archive: https://discuss.ocaml.org/t/running-ocaml-files-straight-from-vs-code/18549/1
+
+** Tim ats が発表しました
+
+
+皆さん、こんにちは。VSCode OCaml Platform のリリース [[https://github.com/ocamllabs/vscode-ocaml-platform/releases/tag/2.4.0][2.4.0]] に追加された新機能を紹介できることをとても嬉しく思います。この作業は [[https://tarides.com/][Tarides]] によって実装され、[[https://ocaml-sf.org/][OCaml Software Foundation]] の資金援助を受けています。
+
+エディターのツールバーに「Run」ボタンが追加されました。このボタンをクリックすると、現在のワークスペースで検出された実行可能ファイルの一覧がドロップダウンで表示されます。この機能はもともと大学教授と学生を対象としていましたが、素早いデバッグのために誰にでも役立ちます。
+
+#+attr_html: :width 80%
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/optimized/2X/8/84b8051fe4a1db5d9f2c5a263ea8d18294b48d01_2_1034x408.jpeg
+
+実行可能ファイルの検出方法はワークスペースの設定によって異なります。ユーザーが Dune を使用していてワークスペースのルートに ~dune-project~ ファイルがある場合、Dune API を活用して定義済みの実行可能ファイルの一覧を取得し、基本的な ~dune exec ./file~ コマンドで選択した実行可能ファイルを起動します。それ以外の場合（Dune がプロジェクトビルダーとして検出されない場合）、表示される一覧にはワークスペース内で検出されたすべての ~.ml~ ファイルが含まれ、OCaml バイトコードインタープリタで実行されます。
+
+実行可能ファイルが実行されるたびに、その出力が専用の VS Code ターミナルに表示されます。
+
+#+attr_html: :width 80%
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/optimized/2X/3/38b71e76fa06b49d5f4c52e2938f08134d4f493d_2_1380x544.png
+
+フィードバックやバグ報告を大歓迎します！
+      
+
+
+
+* melange-json が jsonkit になりました
+:PROPERTIES:
+:CUSTOM_ID: 11
+:END:
+Archive: https://discuss.ocaml.org/t/ann-melange-json-is-now-jsonkit/18550/1
+
+** Pedro Braga が発表しました
+
+
+こんにちは！
+
+少し前に、[[https://github.com/ahrefs/ppx_deriving_jsonschema][ppx_deriving_jsonschema]] を ~melange-json~ プロジェクトに移行しました。これにより、1つの PPX で JSON デコーディング/エンコーディングと jsonschema ツールの両方が提供されるようになりました。その時点で ~melange-json~ という名前はもはや適切ではなくなったため、OCaml の JSON ツールを提供するプロジェクトとして ~melange-json~ を **[[https://github.com/melange-community/jsonkit][~jsonkit~]]** に改名しました。動作は以前の ~melange-json~ とまったく同じですが、同じ PPX で jsonschema も扱えるようになっています：
+
+#+begin_src ocaml
+open Jsonkit.Primitives
+
+type user = { name : string; age : int } [@@deriving json, jsonschema]
+
+let schema = Jsonkit.Jsonschema.make user_jsonschema
+#+end_src
+新しいパッケージ名：
+
+| 変更前 | 変更後 |
+|----|----|
+| ~melange-json~ / ~melange-json.ppx~ | ~jsonkit-melange~ / ~jsonkit-melange.ppx~ |
+| ~melange-json-native~ / ~melange-json-native.ppx~ | ~jsonkit~ / ~jsonkit.ppx~ |
+
+移行後の変更点については[[https://github.com/melange-community/jsonkit/blob/main/CHANGES.md#jsonkit100-2026-07-30][変更履歴]]をご覧ください。
+      
+
+
+
+* 過去の CWN
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+CWN を見逃した場合は、[[mailto:alan.schmitt@polytechnique.org][メッセージを送っていただければ]]メールでお送りします。また、[[https://ocaml.jp/cwn-ja/][アーカイブ]]や[[https://ocaml.jp/cwn-ja/cwn.rss][RSS フィード]]もご覧いただけます。
+
+毎週メールで受け取りたい場合は、[[https://sympa.inria.fr/sympa/info/caml-list][caml-list]] を購読してください。
+
+#+BEGIN_authorname
+[[https://alan.petitepomme.net/][Alan Schmitt]]
+#+END_authorname
