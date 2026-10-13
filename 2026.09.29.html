@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.09.22.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.10.06.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年9月22日から29日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">elm_playground 第2リリース（初心者向けゲームエンジン）</a></li>
+<li><a href="#2">moonpool 0.12</a></li>
+<li><a href="#3">tw 1.1.0、OCaml における Tailwind CSS</a></li>
+<li><a href="#4">Cascade: OCaml における型付き CSS ツールキット</a></li>
+<li><a href="#5">ppx_deriving_{yaml,ezjsonm,yamlx} 0.5.0</a></li>
+<li><a href="#6">kqueue-ml 0.5.0</a></li>
+<li><a href="#7">Windtrap: OCaml テストのためのオールインワンライブラリ</a></li>
+<li><a href="#8">Ocsigen Server 8.0.0</a></li>
+<li><a href="#org5844e52">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">elm_playground 第2リリース（初心者向けゲームエンジン）</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-2nd-release-elm-playground-a-game-engine-for-beginners/18552/1">https://discuss.ocaml.org/t/ann-2nd-release-elm-playground-a-game-engine-for-beginners/18552/1</a>
+</p>
+</div>
+
+<div id="outline-container-org929f474" class="outline-3">
+<h3 id="org929f474">Yoann Padioleau が発表しました</h3>
+<div class="outline-text-3" id="text-org929f474">
+<p>
+<code>elm_playground</code> の第2リリースをお知らせできることを嬉しく思います。これは OCaml パッケージで、画面・キーボード・マウスといったコンピュータとそのデバイスの見方を大幅に簡略化する API を使って、<i>絵</i>、<i>アニメーション</i>、さらには<i>ビデオゲーム</i>をポータブルな方法で簡単に作成できます。このライブラリはターミナルからゲームを実行するためのネイティブバックエンドと、ブラウザでゲームを実行するための Web バックエンドを提供しています。
+</p>
+
+<p>
+これは優れた Elm playground パッケージ
+<a href="https://github.com/evancz/elm-playground">https://github.com/evancz/elm-playground</a> を OCaml に移植したものです。
+</p>
+
+<p>
+OPAM 経由でインストールできます：
+</p>
+
+<p>
+<code>opam install elm_playground; opam install elm_playground_native</code>.
+</p>
+
+<p>
+主な変更点は、第1リリースのバグのほとんどが修正されたこと（主に Claude Code によって）、そしてネイティブバックエンドと Web バックエンドの両方がすべてのサンプルとゲームで完全に動作するようになったことです。例えば、jsoo でコンパイルされた Tetris をプレイする方法は以下の通りです：
+</p>
+
+<p>
+<a href="https://aryx.github.io/ocaml-elm-playground/games/Tetris.html">https://aryx.github.io/ocaml-elm-playground/games/Tetris.html</a>
+</p>
+
+<p>
+以下にライブラリを使用したコードの例をいくつか示します。
+</p>
+
+<p>
+まず「picture」アプリ：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">(* from https://elm-lang.org/examples/picture *)
+open Playground
+
+let app =
+  picture [
+    rectangle brown 40. 200.
+      |&gt; move_down 80.;
+    circle green 100.
+      |&gt; move_up 100.;
+  ]
+
+let main = Playground_platform.run_app app
+</pre>
+</div>
+
+
+<div id="org0ccf6ed" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/optimized/2X/7/76fc1990fe116911097764df986f64fed41c28a4_2_470x500.png" alt="76fc1990fe116911097764df986f64fed41c28a4_2_470x500.png" width="470" />
+</p>
+</div>
+
+<p>
+次に「animation」アプリ：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">(* from https://elm-lang.org/examples/animation *)
+open Playground
+
+let view time = [
+    octagon darkGray 36.
+      |&gt; move_left 100.
+      |&gt; rotate (spin 3. time);
+    octagon darkGray 36.
+      |&gt; move_right 100.
+      |&gt; rotate (spin 3. time);
+    rectangle red 300. 80.
+      |&gt; move_up (wave 50. 54. 2. time)
+      |&gt; rotate (zigzag (-. 2.) 2. 8. time);
+  ]
+
+let app =
+  animation view
+
+let main = Playground_platform.run_app app
+</pre>
+</div>
+
+
+<div id="org1057dc6" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/optimized/2X/e/e91563cbb6a0863570bbb19b057f5e8dae7164bf_2_470x500.png" alt="e91563cbb6a0863570bbb19b057f5e8dae7164bf_2_470x500.png" width="470" />
+</p>
+</div>
+
+<p>
+そして最後に「game」アプリ：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">(* from https://elm-lang.org/examples/mouse *)
+open Playground
+
+let view _computer (x, y) = [ 
+  square blue 40.
+   |&gt; move x y
+ ]
+
+let update computer (x, y) =
+  (x +. to_x computer.keyboard, y +. to_y computer.keyboard)
+
+let app = 
+  game view update (0., 0.)
+
+let main = Playground_platform.run_app app
+</pre>
+</div>
+
+
+<div id="org82a3551" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/optimized/2X/2/24e8ffe672cda66c6a49e02013347cda0640f771_2_470x500.png" alt="24e8ffe672cda66c6a49e02013347cda0640f771_2_470x500.png" width="470" />
+</p>
+</div>
+
+<p>
+より複雑なゲームも作れることに注意してください。例えば、簡単な Tetris アプリのスクリーンショットを以下に示します：
+</p>
+
+
+<div id="org1925932" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/4/4ded1d55c9994935c5ec3786ae549ba3a71b8eb6.png" alt="4ded1d55c9994935c5ec3786ae549ba3a71b8eb6.png" width="582" />
+</p>
+</div>
+
+<p>
+詳細については、<a href="https://github.com/aryx/ocaml-elm-playground">https://github.com/aryx/ocaml-elm-playground</a> の README をご覧ください。
+</p>
+
+<p>
+jsoo のおかげでオンラインで試せるいくつかのクラシックなサンプルのコードもご覧ください：<a href="https://aryx.github.io/ocaml-elm-playground/games/">https://aryx.github.io/ocaml-elm-playground/games/</a>
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">moonpool 0.12</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-moonpool-0-12/18553/1">https://discuss.ocaml.org/t/ann-moonpool-0-12/18553/1</a>
+</p>
+</div>
+
+<div id="outline-container-org411e243" class="outline-3">
+<h3 id="org411e243">Simon Cruanes が発表しました</h3>
+<div class="outline-text-3" id="text-org411e243">
+<p>
+やあ、moonpool 0.12 をリリースしました。もうすぐ近くの opam リポジトリに届くでしょう。
+</p>
+
+<p>
+Moonpool（最初の発表は<a href="https://discuss.ocaml.org/t/ann-moonpool-0-1/12387">こちら</a>）は OCaml 5 向けのスレッドプールライブラリで、domain を活用して複数のコアで本当に高速に動作します。moonpool のユニーク（今でも唯一？）な設計により、ユーザーは合計サイズが <code>Domain.recommended_domain_count()</code> を超える複数のプールを、速度低下なしに作成できます。それを実現するのは……スレッドを使うことで……です。そう。
+</p>
+
+<p>
+とにかく、多数のバグ修正（#45 での病的なメモリ使用を修正するものを含む。いつものように @gasche さん :heart_hands: に感謝）、<code>ambient-context</code> のサポート、いくつかのクリーンアップ、テスト用の dscheck などが含まれています。
+</p>
+
+<p>
+あなたとあなたのシリアルボウルに乾杯
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">tw 1.1.0、OCaml における Tailwind CSS</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-tw-1-1-0-tailwind-css-in-ocaml/18554/1">https://discuss.ocaml.org/t/ann-tw-1-1-0-tailwind-css-in-ocaml/18554/1</a>
+</p>
+</div>
+
+<div id="outline-container-org1a26558" class="outline-3">
+<h3 id="org1a26558">Thomas Gazagnaire が発表しました</h3>
+<div class="outline-text-3" id="text-org1a26558">
+<p>
+<a href="https://github.com/samoht/tw/">tw</a> 1.1.0 のリリースをお知らせできることを嬉しく思います（brew では既に利用可能で、<a href="https://github.com/ocaml/opam-repository/pull/30790">opam</a> にも近日公開予定）。
+</p>
+
+<pre class="example" id="orge184bee">
+$ brew install samoht/tap/tw
+$ opam install tw.1.1.0
+</pre>
+
+<p>
+<code>tw</code> は純粋な OCaml で実装された <a href="https://tailwindcss.com/">Tailwind CSS v4</a> です。これは実際に使用することをお勧めする最初のバージョンです。以前のバージョンは一部の機能しかサポートしておらず、どこで問題が起きているか不明確でした。1.1.0 リリースでは Tailwind v4 のすべてのユーティリティ、バリアント、公式プラグインをカバーし、さらに重要なことに、その出力が Tailwind のものと視覚的な差異がないことを確認する適切で機械的な方法を備えています。
+</p>
+
+<p>
+<code>tw</code> には Tailwind CLI のドロップイン置き換えとなる CLI が付属しています。CSS エントリポイントから Tailwind プロジェクト全体をビルドし（<code>tw -i src/app.css -o dist/app.css</code>）、<code>@theme</code>、<code>@source</code>、<code>@apply</code>、カスタムユーティリティとバリアント、typography と forms プラグインをサポートします。これはすべて <b>Node.js なし</b> で動作します。HTML を生成する言語が何であれ、CSS で設定されたあらゆるプロジェクトで機能します。
+</p>
+
+<p>
+OCaml を使っている場合は、<a href="https://github.com/samoht/tw/blob/main/lib/html/tw_html.mli">Tw_html</a> を通じて OCaml API を直接使用でき、独自のスタイルを持つ HTML コンポーネントを構築できます。<a href="https://github.com/dbuenzli/htmlit">htmlit</a> の API を公開しますが、すべてのノードに <code>tw</code> クラスを付与するので、特定の HTML フラグメントを表示するためにどの CSS が必要かをクエリできます。
+</p>
+
+<p>
+このリリースに至るプロセスについては私の<a href="https://gazagnaire.org/blog/2026-09-23-tailwind-parity.html">ブログ記事</a>で詳しく読めます。<a href="https://github.com/samoht/tw/issues">issue tracker</a> や DM でのフィードバックをお待ちしています！
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">Cascade: OCaml における型付き CSS ツールキット</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/cascade-a-typed-css-toolkit-in-ocaml/18383/6">https://discuss.ocaml.org/t/cascade-a-typed-css-toolkit-in-ocaml/18383/6</a>
+</p>
+</div>
+
+<div id="outline-container-org10526a6" class="outline-3">
+<h3 id="org10526a6">このスレッドを続けて、Thomas Gazagnaire が発表しました</h3>
+<div class="outline-text-3" id="text-org10526a6">
+<p>
+<code>opam</code> と Homebrew への <code>cascade</code> 1.2.1 のリリースをお知らせできることを嬉しく思います。このリリースは主に（多数の）バグ修正を含み、その多くはヘッドレス Chrome でスタイルシートをレンダリングしてピクセルを比較することで発見されました。
+</p>
+
+<p>
+1.1.0 でビルドしたミニファイ済み CSS を配信している場合は、再生成して差異を確認してください：
+</p>
+
+<pre class="example" id="orgc80f778">
+$ cascade diff --diff=canonical old.css new.css
+</pre>
+
+<p>
+特定のページのレンダリングのピクセルレベルの差異を確認したい場合は、以下を使用できます：
+</p>
+
+<pre class="example" id="org82134d2">
+$ cascade diff --browser --html page.html a.css b.css
+</pre>
+
+<p>
+この新しいコマンドが多数の問題の特定と修正に役立ちました。そのため、<a href="https://github.com/samoht/cascade/blob/main/CHANGES.md#120">CHANGES.md</a> には（非常に長い）修正リストがあります。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="5">ppx_deriving_{yaml,ezjsonm,yamlx} 0.5.0</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ppx-deriving-yaml-ezjsonm-yamlx-0-5-0/18556/1">https://discuss.ocaml.org/t/ann-ppx-deriving-yaml-ezjsonm-yamlx-0-5-0/18556/1</a>
+</p>
+</div>
+
+<div id="outline-container-org048f175" class="outline-3">
+<h3 id="org048f175">Patrick Ferris が発表しました</h3>
+<div class="outline-text-3" id="text-org048f175">
+<p>
+こんにちは！
+</p>
+
+<p>
+<code>ppx_deriving_yaml</code> と <code>ppx_deriving_ezjsonm</code> バージョン <code>0.5.0</code> のリリース、および <a href="https://github.com/mjambon/yamlx">YAMLx</a> をバックエンドとして使用する <code>ppx_deriving_yamlx</code> の最初のリリースをお知らせできることを嬉しく思います（@raphael-proust さんと @mjambon さんの作業とご意見をいただきありがとうございます）。3つのデライバはすべて同じコアコーデックを使用し、それぞれが特定の表現に特化しています。
+</p>
+
+<p>
+このリリースには <code>_ array</code> 型のデライブに関するバグ修正も含まれています。これは完全に壊れていました（コードがコンパイルすらできないほど壊れていました）。
+</p>
+</div>
+
+<div id="outline-container-org70b6c97" class="outline-4">
+<h4 id="org70b6c97">インストール</h4>
+<div class="outline-text-4" id="text-org70b6c97">
+<pre class="example" id="orgab855aa">
+opam update
+opam install ppx_deriving_yaml
+opam install ppx_deriving_ezjsonm
+opam install ppx_deriving_yamlx
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org541670b" class="outline-4">
+<h4 id="org541670b">ドキュメント</h4>
+<div class="outline-text-4" id="text-org541670b">
+<p>
+ドキュメントは ocaml.org でご覧いただけます。例えば <a href="https://ocaml.org/p/ppx_deriving_yamlx/latest/doc/index.html">ppx_deriving_yamlx のドキュメント</a>。
+</p>
+
+<p>
+Happy deriving :two_hump_camel:
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="6">kqueue-ml 0.5.0</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-kqueue-ml-0-5-0/17835/2">https://discuss.ocaml.org/t/ann-kqueue-ml-0-5-0/17835/2</a>
+</p>
+</div>
+
+<div id="outline-container-org5a3cf5f" class="outline-3">
+<h3 id="org5a3cf5f">このスレッドを続けて、Anurag Soni が発表しました</h3>
+<div class="outline-text-3" id="text-org5a3cf5f">
+<p>
+0.5 以降、いくつかの新しいリリースを公開しました。
+</p>
+
+<ul class="org-ul">
+<li><code>EVFILT_USER</code> と <code>EVFILT_SIGNAL</code> のサポートを追加</li>
+<li>レコードのアロケートを避けるため、イベント登録のインターフェースを変更</li>
+</ul>
+
+<p>
+新しいアップデートは <a href="https://opam.ocaml.org/packages/kqueue/kqueue.0.7.0/">opam</a> で確認できます。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="7">Windtrap: OCaml テストのためのオールインワンライブラリ</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-windtrap-one-library-for-all-your-ocaml-tests/18561/1">https://discuss.ocaml.org/t/ann-windtrap-one-library-for-all-your-ocaml-tests/18561/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgda47f24" class="outline-3">
+<h3 id="orgda47f24">Thibaut Mattio が発表しました</h3>
+<div class="outline-text-3" id="text-orgda47f24">
+<p>
+こんにちは！
+</p>
+
+<p>
+OCaml 向けのテストフレームワーク <a href="https://github.com/invariant-hq/windtrap">Windtrap</a> のリリースをお知らせできることを嬉しく思います。このフレームワークはエコシステムのさまざまなテスト手法を1つのライブラリにまとめています：
+</p>
+
+<ul class="org-ul">
+<li>ユニットテスト（Alcotest ライクな API）</li>
+<li>Expect テストとスナップショットテスト（<code>ppx_expect</code> や <code>ppx_inline_test</code> と互換性のあるコンパニオン PPX があり、なしでも使用可能）</li>
+<li><a href="https://github.com/c-cube/qcheck">QCheck</a> で見られるようなプロパティテスト（ラウンドトリップ、順序、結合則などの教科書的な法則ライブラリ付き）</li>
+<li><a href="https://github.com/ocaml-multicore/multicoretests">qcheck-stm</a> や <a href="https://gitlab.inria.fr/fpottier/monolith">Monolith</a> で見られるようなステートフルテストと差分テスト（1つまたは複数のドメインで）</li>
+<li>テストカバレッジ（<a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> のような）とミューテーションテスト（<a href="https://github.com/jmid/mutaml">mutaml</a> のような）</li>
+</ul>
+
+<p>
+あらゆる種類のテストが1つのスイートと1つの出力に組み合わさり、ライブラリは OCaml 以外に <b><b>依存関係なし</b></b> です（オプションの PPX は ppxlib を使用）。
+</p>
+
+<p>
+以下は、ユニットテスト、教科書的な法則として述べられたプロパティ、リストに対する <code>Stack</code> のステートフルテストを使って標準ライブラリをテストする小さなスイートです：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">open Windtrap
+
+(* A reference for Stack: a list, its top first. *)
+module Model = struct
+  type t = int list ref
+
+  let create () = ref []
+  let push x m = m := x :: !m
+  let length m = List.length !m
+
+  let pop m =
+    match !m with
+    | [] -&gt; raise Stack.Empty
+    | x :: rest -&gt;
+        m := rest;
+        x
+end
+
+let stack = abstract "s" ~pp:(fun ppf m -&gt; Testable.pp (list int) ppf !m)
+
+let lists =
+  group "list"
+    [
+      test "rev reverses a list" (fun () -&gt;
+          equal (list int) [ 3; 2; 1 ] (List.rev [ 1; 2; 3 ]));
+      prop "rev is an involution" (Gen.list Gen.int)
+        (Law.involutive (list int) List.rev);
+    ]
+
+let stacks =
+  group "stack"
+    [
+      stateful "behaves like a list"
+        [
+          command "create" (Gen.unit @-&gt; makes stack) Model.create Stack.create;
+          command "push"
+            (Gen.int @-&gt; stack ^-&gt; returns unit)
+            Model.push Stack.push;
+          command "pop" (stack ^-&gt; returns int) Model.pop Stack.pop;
+          command "length" (stack ^-&gt; returns int) Model.length Stack.length;
+        ];
+    ]
+
+let () = exit (run "stdlib" [ lists; stacks ])
+</pre>
+</div>
+
+<p>
+Windtrap は <a href="https://invarianthq.dev/">Invariant</a> でエージェントが書いたコードをより信頼できるものにするための取り組みの一環として構築しました。エージェントはリポジトリ内で見つけたものを複製するので、強力なテストで満たされたプロジェクトにはより多くのテストが追加されます。Windtrap には適切な種類のテストへエージェントを誘導する<a href="https://github.com/invariant-hq/windtrap/blob/main/SKILL.md">エージェントスキル</a>が付属していますが、人間のことも同様に重視しており、API と出力をエルゴノミックで快適にするために多くの努力を注ぎました。
+</p>
+
+<p>
+詳細は<a href="https://invarianthq.dev/blog/announcing-windtrap/">アナウンス記事</a>でお読みいただけます。サンプルスイートのウォークスルー、失敗の見た目、カバレッジとミューテーションテスト、そして Windtrap を使って OCaml 標準ライブラリをテストした実験が含まれています。
+</p>
+
+<p>
+インストールするには（<a href="https://github.com/ocaml/opam-repository/pull/30817">PR</a> が opam-repository にマージされたら）：
+</p>
+
+<pre class="example" id="org89201ad">
+opam install windtrap ppx_windtrap 
+</pre>
+
+<p>
+<a href="https://github.com/invariant-hq/windtrap/tree/main/doc/manual">マニュアル</a>（私のガイダンスのもとエージェントが書いたもので、文章スタイルが許容範囲内であることを願っていますが、不満が多ければ手で書き直すことを検討します）には各種テストについて1ページずつ説明があります。フィードバックは大歓迎です。こちらか <a href="https://github.com/invariant-hq/windtrap/issues">issue tracker</a> にどうぞ。
+</p>
+
+<p>
+Happy hacking!
+</p>
+
+<p>
+&#x2014;
+</p>
+</div>
+<div id="outline-container-orgace99e0" class="outline-4">
+<h4 id="orgace99e0">謝辞</h4>
+<div class="outline-text-4" id="text-orgace99e0">
+<p>
+Windtrap はいくつかの OCaml プロジェクトのアイデアとコードを基にしています：
+</p>
+
+<ul class="org-ul">
+<li><b><a href="https://github.com/mirage/alcotest">Alcotest</a></b> by Thomas Gazagnaire: テスト構造とランナーの設計。</li>
+<li><b>Craig Ferguson の Alcotest PR</b> （<a href="https://github.com/mirage/alcotest/pull/294">#294</a>、<a href="https://github.com/mirage/alcotest/pull/247">#247</a>）: API 設計、サブコンポーネントの差分。</li>
+<li><b><a href="https://github.com/c-cube/qcheck">QCheck2</a></b> by Simon Cruanes et al.: ジェネレータ設計と統合シュリンキング。</li>
+<li><b><a href="https://gitlab.inria.fr/fpottier/monolith">Monolith</a></b> by François Pottier、および <b><a href="https://github.com/ocaml-multicore/multicoretests">qcheck-stm</a></b> by Jan Midtgaard et al.: 参照に対するステートフルテスト（1つまたは複数のドメインで）。</li>
+<li><b><a href="https://github.com/janestreet/ppx_expect">ppx_expect</a></b> および <b><a href="https://github.com/janestreet/ppx_inline_test">ppx_inline_test</a></b> by Jane Street: expect テストのパラダイムと dune 統合、および ppx_expect のテストコーパス。</li>
+<li><b><a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a></b> by Anton Bachin et al.: カバレッジ計装とランタイム。</li>
+<li><b><a href="https://github.com/jmid/mutaml">mutaml</a></b> by Jan Midtgaard: PPX としての OCaml 向けミューテーションテスト。</li>
+<li><b><a href="https://erratique.ch/software/mtime">mtime</a></b> by Daniel Bünzli: モノトニッククロック。</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="8">Ocsigen Server 8.0.0</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ocsigen-server-8-0-0/18564/1">https://discuss.ocaml.org/t/ann-ocsigen-server-8-0-0/18564/1</a>
+</p>
+</div>
+
+<div id="outline-container-org01ce69e" class="outline-3">
+<h3 id="org01ce69e">Vincent Balat が発表しました</h3>
+<div class="outline-text-3" id="text-org01ce69e">
+<p>
+こんにちは！
+</p>
+
+<p>
+OCaml で書かれた Web サーバー Ocsigen Server 8.0.0 がリリースされました。実行可能ファイルとしてもライブラリとしても使用できます。主なハイライト：
+</p>
+
+<ul class="org-ul">
+<li><b>コマンド1つ、設定ファイル不要</b>: <code>ocsigenserver ./public</code> でディレクトリを配信し、<code>ocsigenserver --reverse-proxy http://localhost:9000</code> でアプリの前にプロキシを置きます。圧縮とセキュリティヘッダーは既に有効です。</li>
+<li><b>静的ファイル</b> が条件付きリクエスト（ETag、304）とバイト範囲に対応するようになり、動画のシーク操作やダウンロードの再開がそのまま機能します。</li>
+<li><b>zstd 圧縮</b>（新しい bytesrw バックエンド上で）。</li>
+<li>新しい <b>Securityheaders</b> 拡張。</li>
+<li>標準的なツールで読める標準 <b>Combined Log Format</b> のアクセスログ。</li>
+<li>パブリックモジュールが改名されました（<code>Ocsigen.Server</code>、<code>Ocsigen.Config</code>、&#x2026;）。新しい <code>ocsigenserver-compat</code> パッケージが古い名前を維持するので、既存のコードは引き続きビルドできます。</li>
+</ul>
+
+<p>
+<code>opam install ocsigenserver</code>
+</p>
+
+<p>
+Eliom および他のプロジェクトのこのバージョンと互換性のあるリリースは、数週間後に続きます。
+</p>
+
+<p>
+詳細はブログ記事をご覧ください：<a href="https://ocsigen.org/blog/posts/ocsigenserver-8.0.0.html">https://ocsigen.org/blog/posts/ocsigenserver-8.0.0.html</a>
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org5844e52" class="outline-2">
+<h2 id="org5844e52">過去の CWN</h2>
+<div class="outline-text-2" id="text-org5844e52">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://ocaml.jp/cwn-ja/">アーカイブ</a>や<a href="https://ocaml.jp/cwn-ja/cwn.rss">RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> を購読してください。
+</p>
+
+<div class="authorname" id="org316a142">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
