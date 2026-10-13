@@ -1,0 +1,1196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.09.01.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.09.15.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年9月1日から8日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">OCaml コンパイラバックエンドでの取り組み</a></li>
+<li><a href="#2">forcamla 0.4.0 - シンプルな Functional Reactive Programming</a></li>
+<li><a href="#3">Typegist 0.0.0</a></li>
+<li><a href="#4">依存型なしでの依存 if 式</a></li>
+<li><a href="#5">Caps 0.1.0、OCaml 向けケイパビリティ型システムおよびライブラリ</a></li>
+<li><a href="#6">bstr、slice、bin（bigstring、バイナリフォーマット向けエンコーダとデコーダ）</a></li>
+<li><a href="#7">OCaml 5.5.1 リリース</a></li>
+<li><a href="#8">Slipshow!</a></li>
+<li><a href="#9">ocp-indent 1.10.0</a></li>
+<li><a href="#10">Intel ISA 仕様のインタープリタ/コンパイラが OCaml で書かれている</a></li>
+<li><a href="#11">TyXML 5.0.0</a></li>
+<li><a href="#org5844e52">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">OCaml コンパイラバックエンドでの取り組み</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/working-in-the-ocaml-compilers-backend/18499/1">https://discuss.ocaml.org/t/working-in-the-ocaml-compilers-backend/18499/1</a>
+</p>
+</div>
+
+<div id="outline-container-org0ccf6ed" class="outline-3">
+<h3 id="org0ccf6ed">Zane Hambly が発表しました</h3>
+<div class="outline-text-3" id="text-org0ccf6ed">
+<p>
+こんにちは！長年の閲覧者で、初めて投稿します。
+</p>
+
+<p>
+私は主に OCaml バックエンドのネイティブエミッションと <code>asmcomp</code> において、コンパイラがサポートする各アーキテクチャ向けに C 呼び出しを命令へ置き換える作業をしてきました。一部の作業は OCSF の支援を受けましたが、他のプロジェクトでも貢献しようとしています。
+</p>
+
+<p>
+詳しい内容は<a href="https://zanehambly.com/ocaml">私のウェブサイト</a>にまとめています。
+</p>
+
+<p>
+ネイティブアトミックの追加にも取り組んでいたため、OCaml のメモリモデルに関する litmus testing も行っています。結果に興味があれば、<a href="https://zanehambly.com/reference/ocaml-atomics">こちら</a>にもページを用意しています。今後も定期的に更新していく予定で、他にも計画しているテストをいくつか追加する予定です。多数のマシンにアクセスできるので、せっかくなら活用しようと思っています！
+</p>
+
+<p>
+私は主にホビーストおよびヒストリカルコンピューティングの背景を持ち、OCaml をそれらの取り組みに広く活用してきました。コンパイラへの貢献を続けていく予定なので、プルリクエストのレビューや自分でのプルリクエスト送信などでお目にかかることがあるかもしれません。ご質問があればお気軽にどうぞ！
+</p>
+
+<p>
+よろしくお願いします。
+</p>
+
+<p>
+Zane
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">forcamla 0.4.0 - シンプルな Functional Reactive Programming</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-forcamla-0-4-0-simple-functional-reactive-programming/18501/1">https://discuss.ocaml.org/t/ann-forcamla-0-4-0-simple-functional-reactive-programming/18501/1</a>
+</p>
+</div>
+
+<div id="outline-container-org1057dc6" class="outline-3">
+<h3 id="org1057dc6">Christopher Sumnicht が発表しました</h3>
+<div class="outline-text-3" id="text-org1057dc6">
+<p>
+みなさん、こんにちは。
+</p>
+
+<p>
+少し前に <a href="https://github.com/rxdt-labs/forcamla">forcamla</a>（<a href="https://opam.ocaml.org/packages/forcamla/">opam</a>）というパッケージを作りました（昨日まで discuss.ocaml.org の存在を知りませんでした）。非常に強力なスプレッドシートエディタのようなものだと考えていただければわかりやすいと思います。特に forcamla では、変数を「代入」するのではなく「等値化」します。また、forcamla はスプレッドシートの機能とイベントリスナーを組み合わせて、プログラムの実行を整理します。
+</p>
+</div>
+
+<div id="outline-container-org82a3551" class="outline-4">
+<h4 id="org82a3551">小さな例</h4>
+<div class="outline-text-4" id="text-org82a3551">
+<div class="org-src-container">
+<pre class="src src-ocaml">open Formula (* To use formula *)
+
+let x = v 2 (* Create an integer term called x *)
+let y = v 2 (* Create an integer term called y *)
+let z = x + y
+let () = x =: 3 (* Set x to 3, and z now is 5 *)
+</pre>
+</div>
+
+<p>
+<code>z</code> を再代入する必要がないことに注目してください。<code>z</code> は <code>x + y</code> に「等値化」されており、<code>x</code> や <code>y</code> が変化するたびに常に更新されます。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1925932" class="outline-4">
+<h4 id="org1925932">イベントリスナー</h4>
+<div class="outline-text-4" id="text-org1925932">
+<p>
+このフレームワークを使ってイベントリスナーを構築することもできます。以下にゲームの小さな例を示します。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">open Formula
+
+type hero =
+{
+  (* A bunuch of fields *)
+  health: int formula
+}
+
+let player =
+{
+  (* Assign the fields *)
+  health = v 3; (* Give health a value of something, say 3 in this case. *)
+}
+
+let game_over () = print_endline "Game Over!"
+let () = when_satisfied (player.health =? 0) game_over
+</pre>
+</div>
+
+<p>
+そして次のように使えます。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">let () = player.health =: !(player.health - c 1) (* Nothing happens yet! player.health is 2 now. *)
+let () = player.health =: !(player.health - c 1) (* Nothing happens yet! player health is 1 now. *)
+let () = player.health =: !(player.health - c 1) (* Now something happens! player.health is 0 and "Game Over!" is printed to the screen! *)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org929f474" class="outline-4">
+<h4 id="org929f474">なぜ作ったのか</h4>
+<div class="outline-text-4" id="text-org929f474">
+<p>
+もともと forcamla はゲーム向けに設計しましたが、汎用的な整理ツールとしても有用だと気づきました。Jane Street の <a href="https://github.com/janestreet/incremental">Incremental</a> に似ていますが、forcamla は効率よりも使いやすさを優先しています。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">Typegist 0.0.0</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-typegist-0-0-0/18503/1">https://discuss.ocaml.org/t/ann-typegist-0-0-0/18503/1</a>
+</p>
+</div>
+
+<div id="outline-container-org411e243" class="outline-3">
+<h3 id="org411e243">Daniel Bünzli が発表しました</h3>
+<div class="outline-text-3" id="text-org411e243">
+<p>
+こんにちは。
+</p>
+
+<p>
+<code>typegist</code> の最初のリリースをお知らせできることを嬉しく思います。
+</p>
+
+<blockquote>
+<p>
+Typegist は OCaml の型の本質を値として表現します。
+この動的な型表現は、汎用的な型インデックス付き関数、すなわち値のシリアライザ、プリンタ、パーサ、差分ツール、乱数ジェネレータ、エディタ、FFI グルーなどを構築するために使用できます。アクセス可能な型であれば、そのパブリックインターフェースが定める限界まで記述できます。
+Typegist は OCaml の型言語を完全にモデル化するのではなく、プロデューサーとプロセッサの両方にとって使いやすいインターフェースを提供するために、型インデックスメタデータで装飾されたコアな構造的サブセットに焦点を当てています。
+Typegist は ISC ライセンスで配布されています。依存関係はありません。
+</p>
+</blockquote>
+
+<p>
+上述のとおり、これらの値は OCaml の型定義言語を部分的にしかモデル化していません。そのため、これらは <code>Type.Repr.t</code> 値ではなく <code>Type.Gist.t</code> 値となっています。typegist は型の忠実または正規の表現というよりも、型のためのデータインターフェース言語として捉えていただければと思います（実際にはその方が有用だと感じています）。
+</p>
+
+<p>
+この表現は <code>Stdlib</code> の一部の型を特別扱いし、注釈を付けています。あまりに汎用的になり、他のシステムとのインターフェース時にすべてのセマンティクスが失われてしまうのは望ましくありません。例えば、JSON では <code>list</code> 値は配列として現れてほしいのであって、入れ子になった cons case オブジェクトとしてではありません。<code>None</code> は <code>null</code> にマッピングされてほしく、定数 case オブジェクトではありません。テキストデータを保持する <code>string</code> 値は、16進数や base64 ではなく、プレーンな JSON 文字列として現れてほしいのです。
+</p>
+
+<p>
+これは<a href="https://erratique.ch/software/typegist/doc/Typegist/Type/Gist/Expr/index.html">表現</a>の一部が意図的にアドホックであることを意味します。OCaml の型式言語の無意味な詳細に煩わされることなく、自分自身の gist プロセッサを<a href="https://erratique.ch/software/typegist/doc/cookbook.html#generic_funs_template">合理的に簡単に</a>構築できるよう、精度と汎用性のバランスを取っています。
+</p>
+
+<p>
+次回 <code>M.pp : t Fmt.t</code> 関数を書く機会があれば、代わりに <code>M.gist : t Type.Gist.t</code> を書いてみてください。プリンタとそれ<a href="https://erratique.ch/software/typegist/doc/Typegist/Fun/Generic/index.html">以上のもの</a>が手に入ります。また、<code>jsont</code> のコンパニオンリリースとして、型の gist を <code>jsont</code> の JSON 型に<a href="https://erratique.ch/software/jsont/doc/Jsont_typegist/index.html">変換する</a> 新しいオプションの <code>jsont.typegist</code> ライブラリも用意しました（JSON シリアライゼーションをお楽しみいただけます）。
+</p>
+
+<p>
+typegist はあまり変更されないと思いますが、まだ実際の使用での試練を受けていません—でもすぐに始めるつもりです。これはリポジトリで長すぎる時間を過ごしてきた設計です。フィードバックに基づいて、より精度が必要な場合や、より良い表現が見つかった場合には、表現の変更が行われる可能性があります。ただし、そのような変更は主に gist プロセッサに影響するものになると予想されます。問題や改善点があれば、issue トラッカーでお知らせください。
+</p>
+
+<p>
+型定義から gist を自動導出する手段を提案する予定はありませんが、過去に何人かがそれに興味を示してくれました。
+</p>
+
+<p>
+楽しい型インデックスプログラミングを！
+</p>
+
+<p>
+この最初のリリースは <a href="https://ocaml-sf.org/">OCaml Software Foundation</a> からの助成金により実現できました。また、<a href="https://github.com/sponsors/dbuenzli">ドナー</a>の皆さんにもサポートに感謝します。
+</p>
+
+<ul class="org-ul">
+<li>ホームページ: <a href="https://erratique.ch/software/typegist">https://erratique.ch/software/typegist</a></li>
+<li>ドキュメント: <a href="https://erratique.ch/software/typegist/doc">https://erratique.ch/software/typegist/doc</a> または <code>odig doc typegist</code></li>
+<li>インストール: <code>opam install typegist</code>（[opam PR]）</li>
+</ul>
+
+<p>
+よろしくお願いします。
+</p>
+
+<p>
+Daniel
+</p>
+
+<p>
+&#x2014;
+追記: API では OCaml 5.5 で導入されたすべての新しい型機能を活用しています :–)
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">依存型なしでの依存 if 式</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/dependent-if-expressions-without-dependent-types/18506/1">https://discuss.ocaml.org/t/dependent-if-expressions-without-dependent-types/18506/1</a>
+</p>
+</div>
+
+<div id="outline-container-orge184bee" class="outline-3">
+<h3 id="orge184bee">Didier Wenzek が発表しました</h3>
+<div class="outline-text-3" id="text-orge184bee">
+<p>
+<a href="https://haskellforall.com/2026/09/dependent-if-expressions">Haskell for all のこの投稿</a>では、Church エンコーディングを使って依存型なしで依存 if 式を実装する洞察に富んだ活用法が示されています。
+</p>
+
+<p>
+以下の OCaml コードは型検査が通り、動作します。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml"># let example bool = if_then_else bool 5 "hi!";;
+
+# example t;;
+ - : int = 5
+# example f;;
+- : string = "hi!"
+# example (f &amp;&amp; t);;
+- : string = "hi!"
+# example (f || t);;
+- : int = 5
+# example (not t);;
+- : string = "hi!"
+</pre>
+</div>
+
+<p>
+これは単純に Hindley-Milner 型推論に基づいており、Church エンコードされたブール型の型をあまり制限しないという単一のトリックを使っています。
+</p>
+
+<p>
+ブール型を Church エンコードする最初のアイデアは、<code>then</code> ケースと <code>else</code> ケースを同じ型に制限することでしょう
+（forall 型をエンコードするためにレコードを使って）。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">type bool = { check : 'a. 'a -&gt; 'a -&gt; 'a; }
+</pre>
+</div>
+
+<p>
+依存 if 式にはよりリベラルな定義が必要です。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">type bool = { check : 'a 'b 'c. 'a -&gt; 'b -&gt; 'c; }
+</pre>
+</div>
+
+<p>
+そして、型を強制しない場合に推論されるのはこうなります
+（forall 型の代わりに弱多相型が得られるという事実は無視して）。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">let t if_branch else_branch = if_branch
+let f if_branch else_branch = else_branch
+
+let if_then_else bool if_branch else_branch = bool if_branch else_branch
+
+let (&amp;&amp;) a b if_branch else_branch = a (b if_branch else_branch) else_branch
+let (||) a b if_branch else_branch = a if_branch (b if_branch else_branch)
+let not a if_branch else_branch = a else_branch if_branch
+</pre>
+</div>
+
+<p>
+ぜひ全文をお読みください。本当に素晴らしい読み物です。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="5">Caps 0.1.0、OCaml 向けケイパビリティ型システムおよびライブラリ</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-caps-0-1-0-a-capability-type-system-and-library-for-ocaml/18507/1">https://discuss.ocaml.org/t/ann-caps-0-1-0-a-capability-type-system-and-library-for-ocaml/18507/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgc80f778" class="outline-3">
+<h3 id="orgc80f778">Yoann Padioleau が発表しました</h3>
+<div class="outline-text-3" id="text-orgc80f778">
+<p>
+みなさん、こんにちは。
+</p>
+
+<p>
+caps ライブラリの最初のリリースをお知らせできることを嬉しく思います。このライブラリを使用すると、OCaml プログラム（およびライブラリ）で「ケイパビリティ型」を使用できるようになります。
+</p>
+
+<p>
+主なアイデアは、このライブラリを使用した後、関数が次のようなシグネチャを持てるということです。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">val foo: &lt; Cap.network; Cap.stdout; Cap.random; .. &gt; -&gt;
+  int -&gt; float
+</pre>
+</div>
+
+<p>
+これは、この関数が動作するために network、stdout、random の各ケイパビリティを必要とすることを意味します。シグネチャはこの関数が内部的に持つ副作用の種類と、内部的に行うシステムコール（またはその呼び出し先）を明らかにします。
+</p>
+
+<p>
+このライブラリは Semgrep のコードベースで作業中に設計しました。コードベースの特定の部分を「サンドボックス化」または制御するのに有用で、若いエンジニアが特定の部分で危険な関数を呼び出せないようにするためです。新しいコーディングエージェント時代において、シグネチャで AI が生成するコードを制御するためにさらに有用だと思います。
+</p>
+
+<p>
+詳細については、OCaml 2026 ワークショップでの発表をご覧ください: <a href="https://www.youtube.com/watch?v=4t_2wLz9EOo">https://www.youtube.com/watch?v=4t_2wLz9EOo</a> および対応するスライド <a href="https://aryx.github.io/ocaml-caps/caps.html%EF%BC%88%E3%81%93%E3%81%93%E3%81%A7%E4%BD%95%E5%BA%A6%E3%81%8B%E7%B4%B9%E4%BB%8B%E3%81%95%E3%82%8C%E3%81%9F%E8%B6%85%E3%82%AF%E3%83%BC%E3%83%AB%E3%81%AA">https://aryx.github.io/ocaml-caps/caps.html%EF%BC%88%E3%81%93%E3%81%93%E3%81%A7%E4%BD%95%E5%BA%A6%E3%81%8B%E7%B4%B9%E4%BB%8B%E3%81%95%E3%82%8C%E3%81%9F%E8%B6%85%E3%82%AF%E3%83%BC%E3%83%AB%E3%81%AA</a> Slipshow プレゼンテーションツールを使用）。プロジェクトページ <a href="https://github.com/aryx/ocaml-caps">https://github.com/aryx/ocaml-caps</a> もご参照ください。
+</p>
+
+<p>
+opam 経由で簡単に試せます。
+</p>
+
+<pre class="example" id="org1a26558">
+$ opam update
+$ opam install caps
+</pre>
+
+<p>
+質問があればお気軽にどうぞ。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="6">bstr、slice、bin（bigstring、バイナリフォーマット向けエンコーダとデコーダ）</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-bstr-slice-bin-bigstring-encoders-decoders-for-binary-formats/18509/1">https://discuss.ocaml.org/t/ann-bstr-slice-bin-bigstring-encoders-decoders-for-binary-formats/18509/1</a>
+</p>
+</div>
+
+<div id="outline-container-org82134d2" class="outline-3">
+<h3 id="org82134d2">Calascibetta Romain が発表しました</h3>
+<div class="outline-text-3" id="text-org82134d2">
+<p>
+<a href="https://github.com/robur-coop/bstr"><code>bstr.0.1.0</code></a> のリリース、および <code>bin.0.1.0</code> と <code>slice.0.1.0</code> のリリースをお知らせできることを嬉しく思います。これらのリリースは複数のライブラリを統合した作業の成果であり、<a href="https://robur.coop">私たちのコoperative</a> 内でのフォーマットとプロトコルの実装に役立つものをまとめることを目指しています。特に、これらのライブラリは以下を提供します。
+</p>
+<ul class="org-ul">
+<li><span class="underline">bigstring</span> として知られるものを操作するための包括的なモジュール（<a href="https://github.com/inhabitedtype/bigstringaf">bigstringaf</a> の代替 — あのライブラリの名前は長すぎるので）</li>
+<li>bigstring と bytes へのアクセスを提供するライブラリ（簡潔に言えば、<a href="https://github.com/mirage/ocaml-cstruct">ocaml-cstruct</a> の<a href="https://github.com/robur-coop/bstr/blob/b427711671c1654df37550849efe5265c866ebcc/lib/slice.mli#L1">抽象化</a>）</li>
+<li>最後に、バイナリフォーマットを記述するためのライブラリ。エンコーダとデコーダを導出できます（<a href="https://github.com/mirage/repr">repr</a> が提供するものの精神に倣って）</li>
+</ul>
+
+<p>
+bigstring の利点を理解したい方のために、以前<a href="https://discuss.ocaml.org/t/buffered-io-bytes-vs-bigstring/8978/3?u=dinosaure">こちら</a>で考えを共有しました。パフォーマンス上の理由（<a href="https://blog.robur.coop/articles/miragevpn-performance.html">この記事</a>を参照）から <code>ocaml-cstruct</code> の使用を後退させましたが、bigstring は特定のケースでは依然として有用です: 根本的には、慎重に使用すべきです。
+</p>
+
+<p>
+<a href="https://github.com/mirage/bechamel"><code>bechamel</code></a>（マイクロベンチマーク用）を使ったパフォーマンスには特に注意を払い、以下の結論が得られました。
+</p>
+<ul class="org-ul">
+<li><p>
+<code>bstr</code> は <code>bigstringaf</code> よりも優れたパフォーマンスを発揮します。<code>bigstringaf</code> が開発された当時は存在しなかったタグを使用しているためです。
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">bstr</th>
+<th scope="col" class="org-left">bigstringaf</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">blit</td>
+<td class="org-left">4.4ns</td>
+<td class="org-left">4.8ns</td>
+</tr>
+
+<tr>
+<td class="org-left">sub</td>
+<td class="org-left">15.4ns</td>
+<td class="org-left">18.9ns</td>
+</tr>
+</tbody>
+</table></li>
+<li><code>slice.bstr</code> は <code>ocaml-cstruct</code> と同等のパフォーマンスを発揮します（予想通り）</li>
+<li><p>
+<code>bin</code> はデコードにおいて手書きコードに匹敵します
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">bin</th>
+<th scope="col" class="org-left">手書き（<code>ocaml-cstruct</code>）</th>
+<th scope="col" class="org-left"><code>repr</code></th>
+<th scope="col" class="org-left"><code>angstrom</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">ipv4</td>
+<td class="org-left">11.9ns</td>
+<td class="org-left">11.9ns</td>
+<td class="org-left">93.9ns</td>
+<td class="org-left">136ns</td>
+</tr>
+</tbody>
+</table>
+<div class="org-src-container">
+<pre class="src src-ocaml">let bin =
+  let fn vihl tos total_length id ff ttl protocol checksum src dst =
+    { version= vihl lsr 4; ihl= vihl land 0x0f; tos; total_length; id
+    ; flags= ff lsr 13; frag_offset= ff land 0x1fff; ttl; protocol; checksum
+    ; src; dst }
+  in
+  let open Bin in
+  record ~name:"ipv4" fn
+  |+ field ~name:"vihl" uint8 (fun t -&gt; (t.version lsl 4) lor t.ihl)
+  |+ field ~name:"tos" uint8 (fun t -&gt; t.tos)
+  |+ field ~name:"total_length" beuint16 (fun t -&gt; t.total_length)
+  |+ field ~name:"id" beuint16 (fun t -&gt; t.id)
+  |+ field ~name:"flags_frag" beuint16 (fun t -&gt;
+      (t.flags lsl 13) lor t.frag_offset)
+  |+ field ~name:"ttl" uint8 (fun t -&gt; t.ttl)
+  |+ field ~name:"protocol" uint8 (fun t -&gt; t.protocol)
+  |+ field ~name:"checksum" beuint16 (fun t -&gt; t.checksum)
+  |+ field ~name:"src" beint32 (fun t -&gt; t.src)
+  |+ field ~name:"dst" beint32 (fun t -&gt; t.dst)
+  |&gt; sealr
+
+let cstruct cs =
+  let vihl = Cstruct.get_uint8 cs 0 in
+  let tos = Cstruct.get_uint8 cs 1 in
+  let total_length = Cstruct.BE.get_uint16 cs 2 in
+  let id = Cstruct.BE.get_uint16 cs 4 in
+  let ff = Cstruct.BE.get_uint16 cs 6 in
+  let ttl = Cstruct.get_uint8 cs 8 in
+  let protocol = Cstruct.get_uint8 cs 9 in
+  let checksum = Cstruct.BE.get_uint16 cs 10 in
+  let src = Cstruct.BE.get_uint32 cs 12 in
+  let dst = Cstruct.BE.get_uint32 cs 16 in
+  { version= vihl lsr 4; ihl= vihl land 0x0f; tos; total_length; id
+  ; flags= ff lsr 13; frag_offset= ff land 0x1fff; ttl; protocol; checksum
+  ; src; dst }
+</pre>
+</div></li>
+</ul>
+
+<p>
+これらのライブラリは、bigarrays を扱うための一貫したライブラリセットを提供しつつ、パフォーマンスにおけるトレードオフをほとんど設けないという野心のもとに作られました。functor、GADT、ADT、さらには高階多相（ケイパビリティでさえも）を試すために<a href="https://github.com/dinosaure/buffet">いくつかの試み</a>が行われました&#x2026;
+</p>
+
+<p>
+その結果、「貧者の functor」が十分であり、いくつかの調整（特に <code>caml_apply2</code> 呼び出しを避けるため）を加えることで、手書きコードと比較してかなり競争力のあるものが実現できました。
+</p>
+
+<p>
+これらのライブラリは、bigstring を扱う際にコミュニティで欠けていたもの、または出現したものもカプセル化しています。私は完全に満足することなくこれらのライブラリの改善に個人的に貢献してきました: そのため特に <code>bstr</code> が生まれました。これらのライブラリのドキュメントとテストには相当の努力が注がれています。<code>bin</code> に関する特定のアサーション（同型性など）を検証するためのファジャーも利用可能です。
+</p>
+
+<p>
+これらのライブラリは現在使用中であり、このバージョンが最終版ではありません。特に OCaml でのプロトコルとフォーマットの実装に関連して、引き続き改善を続けていく予定です。
+</p>
+
+<p>
+私たちの仕事を評価いただける方は、<a href="https://github.com/sponsors/robur-coop">GitHub 経由</a>または<a href="https://robur.coop/#donate">私たちのチャリティ</a>に直接寄付をお願いします。楽しいハッキングを！
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="7">OCaml 5.5.1 リリース</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ocaml-5-5-1-released/18510/1">https://discuss.ocaml.org/t/ocaml-5-5-1-released/18510/1</a>
+</p>
+</div>
+
+<div id="outline-container-org10526a6" class="outline-3">
+<h3 id="org10526a6">octachron が発表しました</h3>
+<div class="outline-text-3" id="text-org10526a6">
+<p>
+Giovanni Girolamo Saccheri の誕生日を祝して、OCaml バージョン 5.5.1 のリリースをお知らせできることを嬉しく思います。
+</p>
+
+<p>
+このパッチレベルリリースは、モジュール依存関数に関する主要な型システムのバグを修正し、ランタイムの2つのセキュリティ修正も含んでいます: 1つは Marshal モジュールに関するもの、もう1つはバイトコードの読み込みに関するものです。
+</p>
+
+<p>
+より深刻度の低い修正として、並行プログラムのランタイムバグが2件、musl ユーザー向けのランタイムバグが1件、そしてその他いくつかのバグも修正されています。
+</p>
+
+<p>
+このリリースでは、macOS 上でコンパイラをクローンするサポートも復元されています。
+</p>
+
+<p>
+すでに OCaml 5.5.0 を使用している場合は、OCaml 5.5.1 への移行を強くお勧めします。
+</p>
+
+
+<p>
+バグ修正の完全なリストは以下にあります。
+</p>
+
+<p>
+ハッピーハッキング、
+&#x2013; Florian Angeletti（OCaml チームを代表して）
+</p>
+</div>
+
+<div id="outline-container-orgab855aa" class="outline-4">
+<h4 id="orgab855aa">インストール手順</h4>
+<div class="outline-text-4" id="text-orgab855aa">
+<p>
+ベースコンパイラは opam switch として以下のコマンドでインストールできます。
+</p>
+
+<pre class="example" id="org048f175">
+opam update
+opam switch create 5.5.1
+</pre>
+
+<p>
+リリースのソースコードは以下から直接入手できます。
+</p>
+
+<ul class="org-ul">
+<li>GitHub: <a href="https://github.com/ocaml/ocaml/archive/5.5.1.tar.gz">https://github.com/ocaml/ocaml/archive/5.5.1.tar.gz</a>)</li>
+<li>Inria アーカイブ: <a href="https://caml.inria.fr/pub/distrib/ocaml-5.5/ocaml-5.5.1.tar.gz">https://caml.inria.fr/pub/distrib/ocaml-5.5/ocaml-5.5.1.tar.gz</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgace99e0" class="outline-4">
+<h4 id="orgace99e0">OCaml 5.5.0 からの変更点</h4>
+<div class="outline-text-4" id="text-orgace99e0">
+</div>
+<ul class="org-ul">
+<li><a id="org70b6c97"></a>型システム<br />
+<div class="outline-text-5" id="text-org70b6c97">
+<ul class="org-ul">
+<li><p>
+<a href="https://github.com/ocaml/ocaml/issues/14891">14891</a>、<a href="https://github.com/ocaml/ocaml/issues/14982">14982</a>: 依存ファーストクラスモジュール型が存在する場合のモジュール依存関数の非依存適用において、誤った型チェックにつながるスコープエラーを修正:
+</p>
+<div class="org-src-container">
+<pre class="src src-ocaml">module type T = sig module type S end
+let f (module M:T) (m: (module M.S)) = m
+module type P = sig type 'a t end
+let error =
+  f (module struct module type S = P end) (module List)
+</pre>
+</div>
+<p>
+(Florian Angeletti、Hazem ElMasry による報告、Gabriel Scherer によるレビュー)
+</p></li>
+</ul>
+</div>
+</li>
+
+<li><a id="org541670b"></a>ランタイム<br />
+<div class="outline-text-5" id="text-org541670b">
+<ul class="org-ul">
+<li><a href="https://github.com/ocaml/ocaml/issues/14872">14872</a>: 2^29 個以上の TOC エントリを持つ破損または悪意あるバイトコード実行ファイルの読み込みに対して強化。
+(Xavier Leroy、Nicolás Ojeda Bär によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/15019">15019</a>: <code>Marshal.from_{string,bytes}</code>: 全データ長の計算におけるオーバーフローを防御。
+(Xavier Leroy、Akshay Singh による報告、Nicolás Ojeda Bär と Antonin Décimo によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/14933">14933</a>: 代替シグナルスタックのサイズを選択する際に <code>sysconf(_SC_SIGSTKSZ)</code> を尊重し、一部の Intel CPU で musl libc にリンクした場合の致命的エラーを回避。
+(Nat Mote、Florian Angeletti と Miod Vallat によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/14940">14940</a>: スタックの内部キャッシュサイズを制限することで OCaml ランタイムのメモリリークを修正。
+(Vesa Karvonen、Florian Angeletti、Gabriel Scherer によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/15029">15029</a>: 一度も yield しない OCaml スレッドがランタイムロックを永久に保持し、そのドメインの他のスレッドが実行されなくなる Windows 上の回帰を修正。スレッド間のプリエンプティブ切り替えに効果がなく、<code>Thread.yield</code> の明示的な呼び出しかブロッキングセクションのみが他のスレッドの実行を許可していた。
+(Nicolás Ojeda Bär、Daniel Larraz による報告、Antonin Décimo によるレビュー)</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org5a3cf5f"></a>ビルドシステム<br />
+<div class="outline-text-5" id="text-org5a3cf5f">
+<ul class="org-ul">
+<li><a href="https://github.com/ocaml/ocaml/issues/14883">14883</a>、<a href="https://github.com/ocaml/ocaml/issues/14884">14884</a>: 古い mingw32-gcc バージョンでの Windows クロスコンパイルを修正。
+(Brian Ward、Antonin Décimo と Stefan Muenzel によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/14871">14871</a>、<a href="https://github.com/ocaml/ocaml/issues/14914">14914</a>: ビルド中に OCAMLTOP_INCLUDE_PATH を無視。
+(David Allsopp、Andreas Rossberg による報告、Florian Angeletti によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/14901">14901</a>、<a href="https://github.com/ocaml/ocaml/issues/14923">14923</a>: opam のサンドボックスで実行する際に macOS の古い bash バージョンに対応するよう生成されたインストールスクリプトを修正。
+(David Allsopp、Julian Fondren と Sacha-Élie Ayoun による報告、Kate Deplaix による調査と初期修正、Florian Angeletti によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/14989">14989</a>: otherlibs/{str,unix} のみが独自の .cmi と .cmx をビルドするようにすることでビルドの再現性を向上。ルート Makefile の汎用 %.cmi/%.cmx ルールが make -j 時にそれらと競合し、異なるソースパスを記録していた。これによりインターフェースダイジェスト（およびそれを通じて他のほとんどのコンパイル成果物）が変更され、str.a と unix.a にパックされたデバッグ情報も変更されていた。
+(Bernhard M. Wiedemann、David Allsopp と Stefan Muenzel によるレビュー)</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org89201ad"></a>ユーザーインターフェース<br />
+<div class="outline-text-5" id="text-org89201ad">
+<ul class="org-ul">
+<li><a href="https://github.com/ocaml/ocaml/issues/14881">14881</a>、<a href="https://github.com/ocaml/ocaml/issues/14882">14882</a>: モジュール制約の対象となる外部型の表示を修正。
+(Stefan Muenzel、Florian Angeletti によるレビュー)</li>
+</ul>
+</div>
+</li>
+
+<li><a id="orgda47f24"></a>Runtime events ライブラリ<br />
+<div class="outline-text-5" id="text-orgda47f24">
+<ul class="org-ul">
+<li><a href="https://github.com/ocaml/ocaml/issues/14966">14966</a>: <a href="https://github.com/ocaml/ocaml/issues/13643">13643</a> で導入された EV_MINOR_EPHE_CLEAN コンストラクタを Runtime_events.runtime_phase に追加。ランタイムは 5.4 以降、マイナーコレクションがロックされた ephemeron をクリーンアップする必要がある場合にこのフェーズを発行していたが、OCaml 型にそのためのコンストラクタがなかったため、コンシューマーに範囲外の値が渡され、マッチング時にクラッシュしていた。
+(Tim McGilchrist、Florian Angeletti によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/14969">14969</a>: ランタイムイベントカウンター EV_C_MINOR_ALLOCATED_WORDS の単位を修正し、ヘッダーを含むマイナーヒープ消費語数として報告するように。
+(Tim McGilchrist、Nicolás Ojeda Bär によるレビュー)</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="8">Slipshow!</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-slipshow/16337/29">https://discuss.ocaml.org/t/ann-slipshow/16337/29</a>
+</p>
+</div>
+
+<div id="outline-container-org01ce69e" class="outline-3">
+<h3 id="org01ce69e">このスレッドを続けて、Paul-Elliot が発表しました</h3>
+<div class="outline-text-3" id="text-org01ce69e">
+<p>
+別のリリースが opam に<a href="https://github.com/ocaml/opam-repository/pull/30652">マージ</a>されました！
+</p>
+
+<p>
+揺れる水のグラスに気づきましたか？それが発表する Slipshow の次のリリースです:
+</p>
+</div>
+
+<div id="outline-container-orgc6dd4b3" class="outline-4">
+<h4 id="orgc6dd4b3">Slipshow 0.13.0: Juraslip Park</h4>
+<div class="outline-text-4" id="text-orgc6dd4b3">
+<p>
+数十年前のソフトウェアを掘り起こしていたところ、今は絶滅した Keynoplodocus、Googloslideraptor、そして最後に Powerpointaurus Rex の DNA を含むバグを発見しました。
+</p>
+
+<p>
+それを Slipshow 自身の DNA にマージすることで、現代のあらゆるソフトウェア（Slipshow も含む）が忘れていた機能、つまりマウスを使ってプレゼンテーション内の要素を配置する機能を復活させることができました。
+</p>
+
+<p width="80%">
+<a href="https://github.com/user-attachments/assets/2330aab5-ee28-4248-b215-66920cb1c7ff" width="80%">https://github.com/user-attachments/assets/2330aab5-ee28-4248-b215-66920cb1c7ff</a>
+</p>
+
+<p>
+このリリースの主な新機能は「GUI モード」です。
+</p>
+
+<p>
+これまで Slipshow は、CSS をエスケープハッチとして使いながら、要素の種類（タイトル、段落、ブロック）に基づいてすべての要素を自動配置していました。これが「What You See Is What You Mean」モデルです。「What You See Is What You Get」では対照的に、レンダリングされたコンテンツを直接編集し、通常マウスで要素を配置します。
+</p>
+
+<p>
+両方の（ジュラシック）世界の最良の部分は「What You See Is What You Want」: 要素ごとにどちらのモードを使うか選択できます。
+</p>
+
+<p>
+一部のカエルが単性別環境で性別を変えられるように、Slipshow の要素も <code>gui</code> 属性1つで WYSIWYM から WYSIWYG に変わり、マウスで配置できるようになりました:
+</p>
+
+<pre class="example" id="org316a142">
+{gui}
+Drag me, resize me.
+</pre>
+
+<p>
+その他の主な改善点として、レンダリングされたコンテンツを Ctrl+クリックしてソースに移動する機能、<a href="https://tachyons.io/">Tachyons</a> CSS フレームワークの追加、より一貫したショートカット、描画エディタのユーザビリティ改善などがあります。
+</p>
+
+<p>
+いつものように、すべての<a href="https://github.com/panglesd/slipshow/graphs/contributors?from=5%2F30%2F2026">コントリビューター</a> 💚、<a href="https://github.com/sponsors/panglesd/">スポンサー</a> ❤️、そしてこの作業を可能にしてくれた<a href="https://nlnet.nl/project/Slipshow/">NLnet の寛大な助成金</a> 💝 に感謝します！
+</p>
+
+<p>
+完全な変更履歴はこちらです:
+</p>
+</div>
+</div>
+
+<div id="outline-container-org882f23c" class="outline-4">
+<h4 id="org882f23c">追加</h4>
+<div class="outline-text-4" id="text-org882f23c">
+<ul class="org-ul">
+<li>「What You See Is What You Want」: 「GUI」要素をプレビューでドラッグして絶対位置に配置！移動、サイズ変更、スケーリングをサポート。(#270)</li>
+<li>プレビューの任意の場所を ~Ctrl~+クリック（Mac では ~Cmd~+クリック）で「ソースへ移動」。(#270)</li>
+<li><a href="https://tachyons.io/">tachyons</a> サポートを追加。(#278)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org71629a3" class="outline-4">
+<h4 id="org71629a3">変更</h4>
+<div class="outline-text-4" id="text-org71629a3">
+<ul class="org-ul">
+<li>ツールバーとショートカットの一貫性を改善。特に録音マネージャーモードでは <code>Shift+R</code> が録音マネージャーを閉じるようになりました（以前は録音を開始していました）。<code>Shift+S</code> が録音の開始に使用されます。(#270)</li>
+<li><code>slipshow compile</code> の診断がロケーション順にソートされるように。(#277)</li>
+<li>「Wrong Type」診断のロケーションを改善。(#277)</li>
+<li>ステップカウンターと toc エントリがクリック可能であることをヒント表示。(#278)</li>
+<li>描画エディタで録音の末尾にカーソルがある状態でPlay を押すと最初から再生するように。(#278)</li>
+<li>描画エディタでミリ秒以下の時間精度を丸める。(#278)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf3d16e2" class="outline-4">
+<h4 id="orgf3d16e2">修正</h4>
+<div class="outline-text-4" id="text-orgf3d16e2">
+<ul class="org-ul">
+<li>LSP:
+<ul class="org-ul">
+<li>エディタが UTF-16 位置エンコーディングのみをサポートしている場合にそれを尊重するように。(#270)</li>
+<li>カーソル位置の要素検出のバグと、「glued」属性のロケーションのバグを修正し、ホバーとハイライトの信頼性を向上。(#270)</li>
+<li>「refresh on save」モードで <code>go_next</code> / <code>go_previous</code> が何もしない問題を修正。(#270)</li>
+<li>frontmatter のエラーが時々報告されない問題を修正。(#277)</li>
+</ul></li>
+<li>frontmatter <code>attributes:</code> のロケーション報告を修正。(#271)</li>
+<li>描画が配置済み要素の背後に描かれる問題を修正。(#270)</li>
+<li>モノフォントを埋め込むことで HTML の自己完結性を修正。(#272)</li>
+<li>frontmatter の css と js ファイルの解決がそれらが含まれるファイルからの相対パスになるように（ルートファイルからではなく）。(#271)</li>
+<li>LSP: frontmatter で言及されたファイル（css や js ファイルなど）の変更時に正しく更新するように。(#271)</li>
+<li>URI とローカルパスの検出を改善。(#271)</li>
+<li><code>css:</code> と <code>js:</code> frontmatter フィールドのエラーロケーションを改善。(#271)</li>
+<li>frontmatter 区切り文字の後のスペースとタブを許可。(#275)</li>
+<li>エディタでの描画再生がポーズで止まる問題を修正。(#278)</li>
+<li>録音がその時点で終了する場合にストロークの最後の点が表示されない問題を修正。(#278)</li>
+<li>スライドの入場を目次内の見出しとグループ化。(#273)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3e97405" class="outline-4">
+<h4 id="org3e97405">ドキュメント</h4>
+<div class="outline-text-4" id="text-org3e97405">
+<ul class="org-ul">
+<li>新しい GUI モードに関するドキュメントを追加。(#270)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="9">ocp-indent 1.10.0</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ocp-indent-1-10-0/18513/1">https://discuss.ocaml.org/t/ann-ocp-indent-1-10-0/18513/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgb687987" class="outline-3">
+<h3 id="orgb687987">Nathan Rebours が発表しました</h3>
+<div class="outline-text-3" id="text-orgb687987">
+<p>
+OCamlPro では <code>ocp-indent.1.10.0</code> のリリースをお知らせできることを嬉しく思います。
+</p>
+
+<p>
+詳細版をご希望の方は<a href="https://github.com/OCamlPro/ocp-indent/releases/tag/1.10.0">こちら</a>で完全なリリースノートをご確認いただけます。
+</p>
+
+<p>
+このリリースの主な機能は、5.3 の effect パターンから 5.5 の <code>let type</code> や <code>let class</code> まで、新しい OCaml 言語機能のサポートです。直近3つのマイナーコンパイラリリースで導入されたすべての新しい構文が適切にサポートされるようになりました。
+</p>
+
+<p>
+また、入力ファイルが正しくインデントされているかを単純に検証する <code>--check</code> モード、そして <code>ocp-indent</code> の警告を致命的にする補完的な <code>--strict</code> フラグという、待望の新機能も搭載されました。どちらも CI での使用を想定しています。
+</p>
+
+<p>
+例によってバグ修正もあります: <code>-</code> が <code>&lt;stdin&gt;</code> 入力の位置引数として正しく受け付けられるようになり、<code>strict_with</code> の動作が型と型拡張全体で一貫したものに改善され、スターコメントが正しくインデントされるようになりました。
+</p>
+
+<p>
+<a href="https://discuss.ocaml.org/t/ahrefs-grant-program-for-ocaml/17604">助成金プログラム</a>を通じてこのリリースに資金提供してくれた Ahrefs に感謝します！
+</p>
+
+<p>
+.ml ファイルが適切にインデントされますように :pray:
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="10">Intel ISA 仕様のインタープリタ/コンパイラが OCaml で書かれている</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/intel-isa-specification-interpreter-compiler-is-written-in-ocaml/18515/1">https://discuss.ocaml.org/t/intel-isa-specification-interpreter-compiler-is-written-in-ocaml/18515/1</a>
+</p>
+</div>
+
+<div id="outline-container-org02e5bde" class="outline-3">
+<h3 id="org02e5bde">Edwin Török が発表しました</h3>
+<div class="outline-text-3" id="text-org02e5bde">
+<p>
+Intel は最近、ISA の実行可能仕様のベータ版を公開しました: <a href="https://intel.github.io/SDM/announcement/2026/08/20/announce-preview.html">https://intel.github.io/SDM/announcement/2026/08/20/announce-preview.html</a> 。ISA 仕様の近似はこれまでにも存在していましたが（例えば <a href="https://github.com/rems-project/sail-x86-from-acl2">ACL2 や SAIL</a> による）、それらは散文形式のマニュアルに基づいて構築されていました（<a href="https://github.com/zwegner/x86-sat">過去にバグがありました</a>）。ベンダー自身が実行可能言語で仕様を公開し（そして願わくばテストされていること！）、これは歓迎すべき改善です。
+</p>
+
+<p>
+さらに良いことに、その仕様言語の<a href="https://github.com/IntelLabs/isa-tools">インタープリタ/コンパイラ</a>が OCaml で書かれていることに気づきました！
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="11">TyXML 5.0.0</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-tyxml-5-0-0/18516/1">https://discuss.ocaml.org/t/ann-tyxml-5-0-0/18516/1</a>
+</p>
+</div>
+
+<div id="outline-container-org3363a06" class="outline-3">
+<h3 id="org3363a06">Vincent Balat が発表しました</h3>
+<div class="outline-text-3" id="text-org3363a06">
+<p>
+<b><b>TyXML 5.0.0</b></b> のメジャーリリースをお知らせできることを嬉しく思います。TyXML は HTML および SVG ドキュメントを構築するライブラリで、その正当性が OCaml 型システムによって検証されます: 仕様が特定の位置で許可していない要素は型検査を通過しません。このライブラリは現在の仕様、HTML については WHATWG living standard、SVG については Filter Effects モジュールを含む SVG 2 に準拠するようになりました（SVG サポートは SVG 1.1 以来更新されていませんでした）。
+</p>
+
+<p>
+主なハイライト:
+</p>
+
+<ul class="org-ul">
+<li><b><b>HTML</b></b>: popover、invoker commands、microdata、declarative shadow DOM と CSS shadow parts、<code>loading~/~decoding~/~fetchpriority</code>、<code>blocking</code>、新要素 <code>s</code>、<code>bdi</code>、<code>search</code>、<code>data</code>、<code>slot</code>、<code>track</code>、不足していたイベントハンドラ属性（pointer ファミリー、クリップボード、<code>ontoggle</code>、<code>onscrollend</code> など）、標準に合わせたコンテントモデル。</li>
+<li><b><b>SVG</b></b>: <code>mask</code> は <code>Svg_types</code> で宣言されていたが要素自体がなかった、<code>feMerge</code> に <code>feMergeNode</code> が存在しなかったため子要素を持てなかった、約30個のプレゼンテーション属性に型タグはあったが生成する関数がなかった、これらすべてが追加され、SVG 2 の追加、ARIA サポート、SVG 2 のリンク属性、SVG 2 に拡張されたコンテントモデルも含まれています。</li>
+<li><b><b>PPX と JSX 構文</b></b>: camelCase の SVG 属性が認識されなかったため、<code>viewBox</code>、<code>stdDeviation</code>、<code>preserveAspectRatio</code> などほとんどのものが拒否され、PPX では実際の SVG をほとんど書けなかった。コンテントモデルがテキストを受け付けない場所では SVG タグ間の空白が無視されるようになり、インデントされた SVG が型検査を通るようになりました。</li>
+<li><b><b>実際には使用できなかった構造体の修正</b></b>: <code>area</code> に <code>href</code> がなく、コンテントモデルにそのタグがなかったため、area を含む <code>map</code> はどこにも収まらなかった；<code>symbol</code> がコア属性（つまり <code>id</code> もなく参照もできなかった）を受け付けなかった；<code>menu</code> の <code>li</code> 子要素が構築できなかった。いくつかの属性名もスペルミスで出力されており、これはコンパイルエラーよりも悪かった（出力が正常に見えるため）。知っておくべき破壊的変更: <code>hidden</code> と <code>contenteditable</code> は列挙引数を取るようになった、URL 値の属性は <code>Xml.uri</code> を通る、SVG ドキュメントは SVG 1.1 doctype なしで印刷される、ファンクタインターフェースの実装者向けに <code>Wrapped_functions</code> に4つの新しい関数が追加された、ビルドには OCaml 4.08、dune 3.18、ppxlib 0.36 が必要。</li>
+</ul>
+
+<pre class="example" id="org53df4f4">
+opam install tyxml
+</pre>
+
+<ul class="org-ul">
+<li>詳細なブログ記事: <a href="https://ocsigen.org/blog/posts/tyxml-5.0.0.html">https://ocsigen.org/blog/posts/tyxml-5.0.0.html</a></li>
+<li>変更履歴: <a href="https://github.com/ocsigen/tyxml/blob/master/CHANGES.md">https://github.com/ocsigen/tyxml/blob/master/CHANGES.md</a></li>
+<li>マニュアルと API: <a href="https://ocsigen.org/tyxml/latest/">https://ocsigen.org/tyxml/latest/</a></li>
+</ul>
+
+<p>
+このリリースに貢献してくれたすべての方々、特に Hugo Heuzard、Martin Bodin、toastal、Sylvain Boilard、rand00、Sora Morimoto、Patrick Ferris、Gabriel Radanne に感謝します。バグ報告とプルリクエストは <a href="https://github.com/ocsigen/tyxml">https://github.com/ocsigen/tyxml</a> までお願いします。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org5844e52" class="outline-2">
+<h2 id="org5844e52">過去の CWN</h2>
+<div class="outline-text-2" id="text-org5844e52">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://ocaml.jp/cwn-ja/">アーカイブ</a>や<a href="https://ocaml.jp/cwn-ja/cwn.rss">RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> を購読してください。
+</p>
+
+<div class="authorname" id="orgbd3c39b">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
