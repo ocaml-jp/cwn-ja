@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.10.06.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.10.20.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年10月6日から13日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">betacalendars 1.0.0 — 決定論的な日付・カレンダーユーティリティ</a></li>
+<li><a href="#2">Sedlex 3.8.1</a></li>
+<li><a href="#3">opam 2.6.1</a></li>
+<li><a href="#4">shakuhachi v0.4.0</a></li>
+<li><a href="#5">Docfd: TUI マルチライン fuzzy ドキュメントファインダー - 13.1.3 + 本格的なユーザーガイド</a></li>
+<li><a href="#6">OUPS ミートアップ 2026年10月</a></li>
+<li><a href="#7">faker 0.1.1: faker-js とシード互換のフェイク（しかしリアルな）データ</a></li>
+<li><a href="#org5844e52">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">betacalendars 1.0.0 — 決定論的な日付・カレンダーユーティリティ</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-betacalendars-1-0-0-deterministic-date-and-calendar-utilities/18593/1">https://discuss.ocaml.org/t/ann-betacalendars-1-0-0-deterministic-date-and-calendar-utilities/18593/1</a>
+</p>
+</div>
+
+<div id="outline-container-org1057dc6" class="outline-3">
+<h3 id="org1057dc6">Beta Calendars が発表しました</h3>
+<div class="outline-text-3" id="text-org1057dc6">
+<p>
+<b>betacalendars</b> の最初の安定版リリースを発表できて嬉しいです。これはタイムゾーンに依存しない市民日付演算と決定論的なカレンダー生成のための OCaml ライブラリです。
+</p>
+
+<p>
+このライブラリは、グレゴリオ暦の日付演算、設定可能な月・年グリッド、有界な繰り返しルール、日付範囲およびカレンダー境界ユーティリティを提供します。ローカルタイムゾーンに依存せず、日付のみを扱う予測可能な処理向けに設計されています。
+</p>
+
+<p>
+opam でインストールできます：
+</p>
+
+<pre class="example" id="org0ccf6ed">
+opam update
+opam install betacalendars
+</pre>
+
+<ul class="org-ul">
+<li>ソース: <a href="https://github.com/mateopedersen/betacalendars-ocaml">https://github.com/mateopedersen/betacalendars-ocaml</a></li>
+<li>リリース: <a href="https://github.com/mateopedersen/betacalendars-ocaml/releases/tag/v1.0.0">https://github.com/mateopedersen/betacalendars-ocaml/releases/tag/v1.0.0</a></li>
+<li>API ドキュメント: <a href="https://mateopedersen.github.io/betacalendars-ocaml/">https://mateopedersen.github.io/betacalendars-ocaml/</a></li>
+<li>opam パッケージメタデータ: <a href="https://github.com/ocaml/opam-repository/blob/master/packages/betacalendars/betacalendars.1.0.0/opam">https://github.com/ocaml/opam-repository/blob/master/packages/betacalendars/betacalendars.1.0.0/opam</a></li>
+</ul>
+
+<p>
+このパッケージは OCaml 4.14 および 5.5 でテストスイートと生成ドキュメントを含めてテスト済みです。フィードバックやご質問をお待ちしています。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">Sedlex 3.8.1</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-sedlex-3-8-1/18595/1">https://discuss.ocaml.org/t/ann-sedlex-3-8-1/18595/1</a>
+</p>
+</div>
+
+<div id="outline-container-org82a3551" class="outline-3">
+<h3 id="org82a3551">Hhugo が発表しました</h3>
+<div class="outline-text-3" id="text-org82a3551">
+<p>
+Sedlex 3.8.1 がリリースされました！ 🎉
+</p>
+
+<p>
+Sedlex は OCaml 向けの Unicode 対応レキサージェネレータで、もともと LexiFi の Alain Frisch によって書かれ、現在は <a href="https://github.com/ocaml-community">ocaml-community</a> の傘下でメンテナンスされています。
+</p>
+
+<p>
+目玉機能は <b>名前付きキャプチャグループ</b> です。サブパターンを OCaml の <code>as</code> 構文で束縛し、アクション内で読み返すことができます：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">match%sedlex buf with
+| (Plus ('0'..'9') as num), '.', (Plus ('0'..'9') as frac) -&gt;
+    let n = Sedlexing.Utf8.of_submatch num in
+    let f = Sedlexing.Utf8.of_submatch frac in
+    Printf.printf "integer=%s fractional=%s\n" n f
+| _ -&gt; ()
+</pre>
+</div>
+
+<p>
+キャプチャはタグ付き DFA で実装されているため、生成されるレキサーはバックトラックなしの単一パスのままです。<code>as</code> を使用しないレキサーは以前と同じコードを生成します。サブマッチは最長マッチ内で左端優先の貪欲マッチです。<code>as</code> は <code>Star</code>、<code>Plus</code>、<code>Opt</code>、<code>Rep</code>、<code>Compl</code>、<code>Sub</code>、<code>Intersect</code> の下では使用できません。
+</p>
+
+<p>
+このリリースには他にも以下の変更が含まれています：
+</p>
+
+<ul class="org-ul">
+<li>Unicode 18.0.0 への対応</li>
+<li>Latin1、UTF-8、UTF-16 における <code>lexeme</code>、<code>sub_lexeme</code>、<code>of_submatch</code> の高速化</li>
+</ul>
+
+<p>
+リリースノートは
+<a href="https://github.com/ocaml-community/sedlex/releases/tag/v3.8">https://github.com/ocaml-community/sedlex/releases/tag/v3.8</a> （未リリース）および
+<a href="https://github.com/ocaml-community/sedlex/releases/tag/v3.8.1">https://github.com/ocaml-community/sedlex/releases/tag/v3.8.1</a> でご覧いただけます。
+</p>
+
+<p>
+まもなく opam でも利用可能になる予定です。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">opam 2.6.1</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-opam-2-6-1/18597/1">https://discuss.ocaml.org/t/ann-opam-2-6-1/18597/1</a>
+</p>
+</div>
+
+<div id="outline-container-org1925932" class="outline-3">
+<h3 id="org1925932">Kate が発表しました</h3>
+<div class="outline-text-3" id="text-org1925932">
+<p>
+皆さん、こんにちは。
+</p>
+
+<p>
+<b>opam 2.6.1</b> が公開されました。
+</p>
+
+<p>
+このリリースでは、2.6.0 からの<b><b>リグレッション</b></b>を<b><b>修正</b></b>しています。具体的には、<code>opam install --deps-only</code> がリクエストされた<b><b>パッケージ</b></b>の <code>depexts</code> フィールドを<b><b>インストール</b></b>しない問題です。
+</p>
+
+<p>
+また、<b><b>docker</b></b> コンテナなどにおける Git リポジトリの処理が改善され、Git-for-Windows 2.56.0.windows.1（例：<b><b>GitHub Actions</b></b> で同梱されているもの）のバグへの回避策も追加されています。
+</p>
+
+<p>
+:open_book: 詳細については<a href="https://opam.ocaml.org/blog/opam-2-6-1/">ブログ記事</a>をご覧ください。
+</p>
+</div>
+
+
+<div id="outline-container-orge184bee" class="outline-4">
+<h4 id="orge184bee">お試しください！</h4>
+<div class="outline-text-4" id="text-orge184bee">
+<p>
+アップグレードの手順は変わりません：
+</p>
+
+<p>
+Unix システムの場合
+</p>
+<pre class="example" id="org929f474">
+bash -c "sh &lt;(curl -fsSL https://opam.ocaml.org/install.sh) --version 2.6.1"
+</pre>
+<p>
+Windows システムで PowerShell から実行する場合
+</p>
+<pre class="example" id="org411e243">
+Invoke-Expression "&amp; { $(Invoke-RestMethod https://opam.ocaml.org/install.ps1) } -Version 2.6.1"
+</pre>
+<p>
+問題があれば<a href="https://github.com/ocaml/opam/issues">バグトラッカー</a>にご報告ください。
+</p>
+
+<p>
+Happy hacking,
+&lt;&gt; &lt;&gt; The opam team &lt;&gt; &lt;&gt; :camel:
+</p>
+
+<p>
+<i>太字のテキストは、読みやすく素早く内容を把握できるようにする実験として散りばめています</i>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">shakuhachi v0.4.0</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-shakuhachi-v0-4-0/18599/1">https://discuss.ocaml.org/t/ann-shakuhachi-v0-4-0/18599/1</a>
+</p>
+</div>
+
+<div id="outline-container-org10526a6" class="outline-3">
+<h3 id="org10526a6">EruEri が発表しました</h3>
+<div class="outline-text-3" id="text-org10526a6">
+<p>
+皆さん、
+</p>
+
+<p>
+shakuhachi v0.4.0 のリリースを発表できて嬉しいです。
+</p>
+
+<p>
+Shakuhachi は引き続き音楽コレクションマネージャーです。
+</p>
+
+<p>
+このリリースでは、主な未実装の 2 つの機能が実装されました：
+</p>
+<ul class="org-ul">
+<li><p>
+コマンドラインから float/date プロパティをクエリできるようになりました
+</p>
+<pre class="example" id="org1a26558">
+# 例: 過去 24 時間以内に再生された *Googoosh* の全楽曲を一覧表示
+$ skhc list %played_at:1dago..now %artist:Googoosh
+# または S 式構文で
+$ skhc list -Q "(and %played_at:1dago..now %artist:Googoosh)"
+</pre></li>
+<li><p>
+アーティストのクエリ時に複雑な統計がようやく計算されるようになりました
+</p>
+<pre class="example" id="orgc80f778">
+# 例: アルバムが 2 枚以上あるすべてのアーティストを一覧表示
+$ skhc list -Iartist %album_count:2..
+</pre></li>
+</ul>
+
+<p>
+このリリースではより合理的なタグ付け/プロパティ書き込みもサポートされています。
+</p>
+<ul class="org-ul">
+<li>楽曲を追加する際、プロパティ <i>ALBUMARTISTS</i>（それぞれ <i>ARTISTS</i>）が最初に参照され、<i>*ALBUMARTIST</i>（それぞれ <i>*ARTIST</i>）にフォールバックします。</li>
+<li>タグ付け時に、アーティスト名とアルバムアーティスト名の間の結合フレーズを設定する 2 つの新しいオプション <i>-j</i> と <i>-J</i> が追加されました</li>
+</ul>
+<pre class="example" id="org82134d2">
+$ skhc tag -a "Sona Jobarteh" -j '&amp;' -a "Youssou N'Dour" Kambengwo.flac
+# ARTIST を単一の値として、ARTISTS を 2 つの値を含む値として設定します
+# ARTIST = Sona Jobarteh &amp; Youssou N'Dour
+# ARTISTS = Sona Jobarteh | Youssou N'Dour
+</pre>
+
+<p>
+<a href="https://codeberg.org/EruEri/shakuhachi">https://codeberg.org/EruEri/shakuhachi</a>
+</p>
+
+<p>
+お時間をいただきありがとうございます。
+どうぞよろしくお願いいたします。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="5">Docfd: TUI マルチライン fuzzy ドキュメントファインダー - 13.1.3 + 本格的なユーザーガイド</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-docfd-tui-multiline-fuzzy-document-finder-13-1-3-proper-user-guide/18601/1">https://discuss.ocaml.org/t/ann-docfd-tui-multiline-fuzzy-document-finder-13-1-3-proper-user-guide/18601/1</a>
+</p>
+</div>
+
+<div id="outline-container-org048f175" class="outline-3">
+<h3 id="org048f175">Darren が発表しました</h3>
+<div class="outline-text-3" id="text-org048f175">
+<p>
+皆さん、こんにちは。
+</p>
+
+<p>
+Docfd 13.1.3 のリリースを発表できて嬉しいです。少し時間ができたので（大規模な組織再編でレイオフされました）、散らばっていたすべての説明を本格的な（ただし基本的な）ユーザーガイドにまとめました。Docfd の優れた部分をわかりやすく紹介できていれば幸いです。
+</p>
+
+<p>
+<a href="https://darrenldl.github.io/docfd/guide/index.html">ユーザーガイド</a> - <a href="https://github.com/darrenldl/docfd">リポジトリ</a>
+</p>
+</div>
+
+<div id="outline-container-org70b6c97" class="outline-4">
+<h4 id="org70b6c97">Docfd とは</h4>
+<div class="outline-text-4" id="text-org70b6c97">
+<p>
+テキストファイル、PDF、DOCX などに対するインタラクティブな grep のようなものですが、正規表現や行ベースではなく単語/トークンベースなので、行をまたいだ検索が簡単にできます。
+</p>
+
+<p>
+Docfd は一般的なテキストエディタや PDF ビューアとの統合によって優れた UX を提供することを目指しており、キー一つで検索結果に直接ジャンプできます。
+</p>
+
+
+<div id="orgab855aa" class="figure">
+<p><img src="https://github.com/darrenldl/docfd/raw/main/demo-vhs-gifs/repo.gif" alt="repo.gif" width="80%" />
+</p>
+</div>
+
+<p>
+よろしくお願いします。
+Darren
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="6">OUPS ミートアップ 2026年10月</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/oups-meetup-november-2026/18610/1">https://discuss.ocaml.org/t/oups-meetup-november-2026/18610/1</a>
+</p>
+</div>
+
+<div id="outline-container-org541670b" class="outline-3">
+<h3 id="org541670b">ancolie が発表しました</h3>
+<div class="outline-text-3" id="text-org541670b">
+<p>
+次の OUPS ミートアップは <b><b>2026年11月3日（火曜日）</b></b> に開催されます。パリの <b><b>4 place Jussieu</b></b> にて <b><b>午後6時30分</b></b> から始まります。会場は <b><b>45A 講堂</b></b> です。<a href="https://sciences.sorbonne-universite.fr/vie-de-campus-sciences/accueil-vie-pratique/plan-du-campus">建物マップ</a>もご参照ください。
+</p>
+
+<p>
+ピザの注文数を把握するため、できるだけ早く <b><b><a href="https://www.meetup.com/fr-FR/ocaml-paris/events/316945503">meetup で登録</a></b></b> してください。
+</p>
+
+<p>
+詳細については <a href="https://oups.frama.io">OUPS のウェブサイト</a> をご確認ください。
+</p>
+
+<p>
+また、運営チームが <a href="https://ocaml.zulipchat.com">OCaml Zulip</a> に移行したことをお知らせします。トークを提案したい方はそちらからご連絡ください。
+</p>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+今回は以下のトークが予定されています：
+</p>
+
+<p>
+<b><b>FFI を多用した OCaml の WebAssembly へのコンパイル：MOPSA に関するエクスペリエンスレポート &#x2013; Réda Boudrouss</b></b>
+</p>
+
+<p>
+大規模な OCaml アプリケーションは OCaml FFI を通じてネイティブの C/C++ ライブラリに依存することが多く、ブラウザ上での実行が困難です。既存のブラウザバックエンドは OCaml を JavaScript や WebAssembly にコンパイルしますが、ネイティブ依存関係のスタックは残したままです。
+</p>
+
+<p>
+本発表では、別のアプローチを探ります：Emscripten を使用して OCaml ランタイムと完全なネイティブ依存関係スタックを WebAssembly にコンパイルし、その上でオリジナルの OCaml バイトコードを実行する方法です。FFI 呼び出しは既存の FFI コードや CamlIDL が生成したバインディングを変更せずに、静的なプリミティブテーブルを通じて解決されます。
+</p>
+
+<p>
+このアプローチを LLVM/Clang、GMP、MPFR、Apron、CamlIDL を組み合わせた静的アナライザー MOPSA で実証し、完全なアプリケーションがウェブブラウザ上で直接動作できることを示します。
+</p>
+
+<p>
+<b><b>OCaml における集合論的型ライブラリの設計 &#x2013; Mickaël Laurent</b></b>
+</p>
+
+<p>
+このトークでは、集合論的型のライブラリを設計するために OCaml を使用した経験を共有します。集合論的型はいくつかの再帰的なコンポーネントとレイヤーで構成されているため、定義が難しいです。さらに、再帰型に対する特定の操作の停止性は、さまざまなレベルで動作する hash-consing システムに依存しています。一部の再帰モジュールの型検査を通過させることの難しさや、hash-consing システムの実装に algebraic effects をどのように活用したかなど、OCaml を使用することの課題と利点について議論します。
+</p>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+トークの後は <a href="https://ocaml-sf.org">OCaml Software Foundation</a> のご支援によるピザが提供され、その後はいつものように近くのパブに移動する予定です。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="7">faker 0.1.1: faker-js とシード互換のフェイク（しかしリアルな）データ</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-faker-0-1-1-fake-but-realistic-data-seed-compatible-with-faker-js/18611/1">https://discuss.ocaml.org/t/ann-faker-0-1-1-fake-but-realistic-data-seed-compatible-with-faker-js/18611/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgda47f24" class="outline-3">
+<h3 id="orgda47f24">Bartek Teodorczyk が発表しました</h3>
+<div class="outline-text-3" id="text-orgda47f24">
+<p>
+<a href="https://ocaml.org/p/faker">faker</a> を発表できて嬉しいです。これは名前、住所、メールアドレス、電話番号、会社名、日付、金融データ、lorem ipsum などのフェイクだがリアルなデータを 77 のロケールで生成するライブラリです。
+</p>
+
+<pre class="example" id="org5a3cf5f">
+opam install faker
+</pre>
+
+<p>
+私が調べた限り、OCaml には faker スタイルのライブラリがありませんでした。QCheck のようなプロパティテストジェネレータはランダムな値を生成しますが、デモ、開発用データベースのシード、スナップショットテストのためのもっともらしくローカライズされたフィクスチャは生成しません。
+</p>
+
+<p>
+faker は <a href="https://github.com/faker-js/faker">@faker-js/faker</a> 10.6.0 のポートで、<b><b>シード単位のパリティ</b></b>を持ちます：同じシードに対して、すべてのメソッドが faker-js と全く同じ値を返します。同じ MersenneTwister19937 ジェネレータと同じアルゴリズムを使用しているため、OCaml サービスと JS/TS サービスでフィクスチャを共有できます。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">let () =
+  let f = Faker.create ~seed:42 () in
+  print_endline (Faker.Person.full_name f);
+  print_endline (Faker.Internet.email f);
+  print_endline (Faker.Location.city f);
+  print_endline
+    (Faker.Helpers.fake "{{person.firstName}} works as a {{person.jobTitle}}" f);
+  let de = Faker.Locales.De.faker () in
+  Faker.seed de 42;
+  print_endline (Faker.Person.full_name de);
+  let ja = Faker.Locales.Ja.faker () in
+  Faker.seed ja 42;
+  print_endline (Faker.Person.full_name ja)
+</pre>
+</div>
+
+<pre class="example" id="org89201ad">
+Nikita Crist
+Moises.Sipes-Effertz18@gmail.com
+Lolaville
+Jeannette works as a Forward Implementation Analyst
+Melinda Dragu
+吉川 結衣
+</pre>
+
+<p>
+同等の faker-js コードは同じ 6 行を出力します。
+</p>
+
+<p>
+<b><b>含まれる機能</b></b>
+</p>
+
+<ul class="org-ul">
+<li>faker-js のすべての 26 モジュール（<code>Faker.Person</code>、<code>Faker.Internet</code>、<code>Faker.Location</code>、<code>Faker.Date</code>、<code>Faker.Finance</code>、<code>Faker.Commerce</code> など）とすべての 77 ロケール。</li>
+<li>API は faker-js を踏襲しているため、<a href="https://fakerjs.dev/api/">faker-js API リファレンス</a>がすべてのメソッドを説明しています。faker インスタンスは常に最後の引数で、オプションはオプショナルなラベル付き引数です：`faker.number.int({ min: 1, max: 10 })` は `Faker.Number.int ~min:1 ~max:10 f` になります。</li>
+<li>stdlib と <code>unix</code> 以外の依存関係なし。ロケールはオンデマンドでリンクされるため、英語のみのプログラムは他の 76 ロケールを持ち込みません。</li>
+</ul>
+
+<p>
+<b><b>パリティの検証方法</b></b>
+</p>
+
+<p>
+<code>dune test</code> は OCaml の出力を faker-js 自体を実行して生成したフィクスチャと比較します：すべてのケースで 3 つのシード、さらにすべてのロケールのすべてのメソッドのスイープ（約 72,000 チェック）。これらすべてをパスさせるには、ここで興味深いいくつかの問題を解決する必要がありました：
+</p>
+
+<ul class="org-ul">
+<li><b><b>FMA 縮約。</b></b> arm64 では、OCaml コンパイラが <code>a *. b +. c</code> を単一の融合積和演算に縮約し、V8 と異なる丸めが行われます。このポートでは必要な箇所で明示的な乗算を使用しています。</li>
+<li><b><b>評価順序。</b></b> OCaml は関数の引数とレコードフィールドを右から左へ評価するため、すべてのランダムドローは faker-js の順序で <code>let</code> で束縛されています。</li>
+<li><b><b>UTF-16 セマンティクス。</b></b> JS の文字列長、大文字小文字マッピング、NFKD 正規化が UTF-8 文字列上でエミュレートされ、テーブルは Node から生成されています。</li>
+<li><b><b>浮動小数点演算。</b></b> `location.nearbyGPSCoordinate` は V8 の fdlibm <code>sin~/~cos</code> のポートを使用しています。既知のプラットフォーム依存性の一つは指数分布器における <code>Math.pow</code> です：Node はシステムの libm を呼び出すため、faker-js 自体が FreeBSD で最後のビットを異なる丸めで処理します。opam-repo-ci がこれを発見し、0.1.1 がその修正です。</li>
+</ul>
+
+<p>
+ポーティングノートは <a href="https://github.com/barteo/faker-ocaml/blob/main/docs/PORTING.md">docs/PORTING.md</a> にあり、残りの違いは <a href="https://github.com/barteo/faker-ocaml#readme">README</a> の "Known differences" に記載されています。
+</p>
+
+<p>
+<b><b>リンク</b></b>
+</p>
+
+<ul class="org-ul">
+<li>パッケージと API ドキュメント: <a href="https://ocaml.org/p/faker">https://ocaml.org/p/faker</a></li>
+<li>ソース: <a href="https://github.com/barteo/faker-ocaml">https://github.com/barteo/faker-ocaml</a></li>
+<li>Issues: <a href="https://github.com/barteo/faker-ocaml/issues">https://github.com/barteo/faker-ocaml/issues</a></li>
+</ul>
+
+<p>
+すべてのデータとアルゴリズムは faker-js に由来するため、faker-js チームとコントリビューターに深く感謝します。フィードバックやバグ報告、特に faker-js と出力が異なるケースはぜひお知らせください。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org5844e52" class="outline-2">
+<h2 id="org5844e52">過去の CWN</h2>
+<div class="outline-text-2" id="text-org5844e52">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://ocaml.jp/cwn-ja/">アーカイブ</a>や<a href="https://ocaml.jp/cwn-ja/cwn.rss">RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> を購読してください。
+</p>
+
+<div class="authorname" id="orgace99e0">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
