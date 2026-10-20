@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.05.26.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.06.09.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年5月26日から6月2日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">Caml In The Capital: 今すぐ登録！6月3日開催</a></li>
+<li><a href="#2">Slipshow!</a></li>
+<li><a href="#3">doctor 0.3.0: 読み取り専用の OCaml 環境診断ツール</a></li>
+<li><a href="#4">Solo5: ユニカーネル向けサンドボックス実行環境</a></li>
+<li><a href="#5">OCaml コンパイラ オフィスアワー</a></li>
+<li><a href="#6">OCaml Workshop 2026 トーク提案募集</a></li>
+<li><a href="#org5844e52">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">Caml In The Capital: 今すぐ登録！6月3日開催</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/london-caml-in-the-capital-register-now-june-3rd/18183/1">https://discuss.ocaml.org/t/london-caml-in-the-capital-register-now-june-3rd/18183/1</a>
+</p>
+</div>
+
+<div id="outline-container-org0ccf6ed" class="outline-3">
+<h3 id="org0ccf6ed">Sacha Ayoun が発表しました</h3>
+<div class="outline-text-3" id="text-org0ccf6ed">
+<p>
+皆さん、こんにちは！
+</p>
+
+<p>
+来週6月3日に開催される Caml In The Capital への参加登録を<a href="https://www.eventbrite.sg/e/caml-in-the-capital-june-tickets-1990385560792">こちらのリンク</a>からお願いします。JaneStreet が会場を提供してくださるため、登録していただくと運営がスムーズになります。
+</p>
+
+<p>
+<b>重要事項</b>: 当日は写真付き身分証明書をお持ちください！🪪
+イベントの詳細は<a href="https://caml-in-the-capital.github.io">公式サイト</a>でご確認いただけます。
+</p>
+</div>
+
+<div id="outline-container-org1057dc6" class="outline-4">
+<h4 id="org1057dc6">開催情報</h4>
+<div class="outline-text-4" id="text-org1057dc6">
+<p>
+イベントは <b>Jane Street のロンドンオフィス</b>（2 &amp; A Half Devonshire Square, Premier Place, London, EC2M 4UJ）で開催されます。
+受付はビルのロビーで行われます。<b>当日は必ず写真付き身分証明書をご持参ください</b>。
+⌛ イベントは17:30に開始し、トークは18:30頃から始まります。
+🍕 軽食と飲み物をご用意しています。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org929f474" class="outline-4">
+<h4 id="org929f474">トーク内容</h4>
+<div class="outline-text-4" id="text-org929f474">
+</div>
+<ul class="org-ul">
+<li><a id="org82a3551"></a>Dune Package Management<br />
+<div class="outline-text-5" id="text-org82a3551">
+<p>
+<b>発表者:</b> Ali Caglayan
+<b>概要:</b> Dune package management は、dune が opam パッケージをビルド・使用できるようにすることを目標としたプロジェクトです。2023年から活発に開発が進められており、より洗練された実用的な形に育ってきています。現時点ではまだ実験的とされていますが、本トークでは現在できること（リロケータブルコンパイラ、ロックレスビルド、OxCaml サポート）、現在取り組んでいる機能（in-and-out、dev-tools）、そして安定化への道筋について紹介します。
+</p>
+</div>
+</li>
+
+<li><a id="org1925932"></a>Opam の Nix システム依存関係メカニズム<br />
+<div class="outline-text-5" id="text-org1925932">
+<p>
+<b>発表者:</b> Ryan Gibb
+<b>概要:</b> OCaml 言語のパッケージマネージャである Opam は、言語外部の依存関係を提供するためにシステムパッケージマネージャと連携する仕組みを持っています。Nix に対応するにあたり、従来のパッケージマネージャとのインターフェースに用いていた抽象化を見直す必要がありましたが、その結果、Nix の再現性のあるシステム依存関係を活かしながら Opam を開発環境として手軽に利用できるようになりました。これは、Nix が他のソフトウェア開発・デプロイ技術とどのように連携するかの一例です。
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">Slipshow!</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-slipshow/16337/23">https://discuss.ocaml.org/t/ann-slipshow/16337/23</a>
+</p>
+</div>
+
+<div id="outline-container-orge184bee" class="outline-3">
+<h3 id="orge184bee">このスレッドを継続して、Paul-Elliot が発表しました</h3>
+<div class="outline-text-3" id="text-orge184bee">
+<p>
+まず小さなお知らせです：Slipshow に<a href="https://slipshow.zulipchat.com/">専用の Zulip</a> ができました！プレゼンテーションを準備しながら質問したり、素晴らしい作品を披露したりするためにぜひご活用ください！
+</p>
+
+<p>
+すべての手続きを終えた上で、opam への Slipshow 次期リリースを正式にアナウンスします：
+</p>
+
+<p>
+<b>Slipshow 0.11.0: Brazlip</b>
+</p>
+
+<p>
+タイポが <i>劇的な</i> 結果をもたらしかねないことは皆さんもご存知の通りです。そのため、私たちはタイポを <b>何としても</b> 避けたいと思っています。
+</p>
+
+<p>
+このリリースにより、Slipshow はエラーをエディタ上に直接表示できるようになりました。Slipshow はあなたが書いている内容をリアルタイムで把握し、警告・タイポ・その他の問題を即座に報告します。
+</p>
+
+<p>
+以下は、プレゼンテーション中のタイポをリアルタイムで修正した様子の録画です：
+</p>
+
+<p width="80%">
+<a href="https://github.com/user-attachments/assets/ac675cdf-1d08-41e4-b384-25a3bfd764ef" width="80%">https://github.com/user-attachments/assets/ac675cdf-1d08-41e4-b384-25a3bfd764ef</a>
+</p>
+
+<p>
+LSP サーバーがサポートする機能：
+</p>
+<ul class="org-ul">
+<li>開いているバッファへのエラー表示</li>
+<li>ID を引数として使用するアクション向けの ID 補完</li>
+<li>アクションのホバー時のドキュメント表示</li>
+<li>ID の出現箇所のハイライト</li>
+<li>指定した ID への定義ジャンプ</li>
+<li>マルチファイルプレゼンテーション</li>
+<li>同期プレビューサーバー</li>
+<li>保存時のコンパイル</li>
+</ul>
+
+<p>
+毎リリース、素晴らしい OCaml ライブラリを新たに発見することに驚かされます。今回は @c-cbue による <a href="https://github.com/c-cube/linol">linlol</a> です。作成・メンテナンスしてくださって本当にありがとうございます！
+</p>
+
+<p>
+いつものように、NNLet の惜しみない多大なるサポートに感謝します。そして&#x2026;❤️ <a href="https://github.com/sponsors/panglesd">スポンサー</a>の皆様にも感謝を！
+</p>
+
+<pre class="example" id="org411e243">
+$ opam update
+$ opam upgrade slipshow
+</pre>
+
+<p>
+今回のリリースの完全な変更履歴もご確認ください。LSP サーバー以外にも改善点があります！
+</p>
+</div>
+
+<div id="outline-container-org1a26558" class="outline-4">
+<h4 id="org1a26558">追加</h4>
+<div class="outline-text-4" id="text-org1a26558">
+<ul class="org-ul">
+<li>プレビュアーの状態（切断、更新中など）を示す視覚的インジケーターを追加 (#220, #222)</li>
+<li>インクルードされたファイルでのフロントマターに対応 (#228)</li>
+<li>(#229) エディタと連携するための LSP サーバーを追加。<code>slipshow lsp</code> コマンドで利用可能。サポート機能：
+<ul class="org-ul">
+<li>診断（Diagnostics）</li>
+<li>ホバー時のアクションドキュメント表示</li>
+<li>定義へジャンプ（アクション内の ID から対応する要素へ）</li>
+<li>ID の出現箇所</li>
+<li>アクション内 ID の補完</li>
+</ul></li>
+<li>LSP サーバーへのプレビューサーバー機能を追加 (#233)</li>
+<li>生の HTML をファイル内または外部ファイルとしてインクルードするための構文を追加 (#236)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc80f778" class="outline-4">
+<h4 id="orgc80f778">変更</h4>
+<div class="outline-text-4" id="text-orgc80f778">
+<ul class="org-ul">
+<li>フロントマターにおいて、<code>attributes</code>（ファイル全体の属性）と <code>toplevel-attributes</code>（プレゼンテーション全体の属性）を区別するように変更。この破壊的変更に対応するには、プレゼンテーション内の <code>toplevel-attributes</code> を <code>attributes</code> に変更してください。(#229)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org82134d2" class="outline-4">
+<h4 id="org82134d2">修正</h4>
+<div class="outline-text-4" id="text-org82134d2">
+<ul class="org-ul">
+<li>切断後にホットリロードが再開しない問題を修正 (#220)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">doctor 0.3.0: 読み取り専用の OCaml 環境診断ツール</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-doctor-0-3-0-read-only-ocaml-environment-diagnostics/18186/1">https://discuss.ocaml.org/t/ann-doctor-0-3-0-read-only-ocaml-environment-diagnostics/18186/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgab855aa" class="outline-3">
+<h3 id="orgab855aa">Funwithcthulhu が発表しました</h3>
+<div class="outline-text-3" id="text-orgab855aa">
+<p>
+こんにちは、
+</p>
+
+<p>
+<code>doctor</code> 0.3.0 をリリースしました。
+</p>
+
+<p>
+<code>doctor</code> は、ローカルの OCaml 開発環境をチェックするための小さな読み取り専用 CLI ツールです。opam、スイッチ、PATH、dune、ocaml-lsp-server、ocamlformat、VS Code OCaml Platform 拡張機能に関するよくあるセットアップの問題を報告します。
+</p>
+
+<p>
+インストール方法：
+</p>
+
+<pre class="example" id="org10526a6">
+opam update
+opam install doctor
+</pre>
+
+<p>
+基本的な使い方：
+</p>
+
+<pre class="example" id="org048f175">
+doctor check
+doctor check --json
+</pre>
+
+<p>
+バージョン 0.3.0 では opam スイッチ環境の診断に重点を置いています。特に、ツールが見つからないケースと、opam にアクティブなスイッチはあるものの現在のシェルがそのスイッチ環境を読み込んでいないケースを区別しようとしています。
+</p>
+
+<p>
+たとえば、<code>ocaml</code> がアクティブなスイッチ外で解決されている場合や、<code>dune</code>・<code>ocamllsp</code>・<code>ocamlformat</code> などのスイッチにインストール済みのツールが <code>PATH</code> に存在しない場合に報告できます。
+</p>
+
+<p>
+このコマンドは <code>opam init</code> の実行、スイッチの作成、パッケージのインストール、シェルやエディタのファイル編集は一切行いません。確認した内容を報告し、手動で実行すべきコマンドを提案するだけです。
+</p>
+
+<p>
+JSON 出力は、安定した診断名とエラーコードマッピングを必要とするエディタ統合や小規模スクリプト向けに設計されています。
+</p>
+
+<p>
+リポジトリ：
+</p>
+
+<p>
+<a href="https://github.com/funwithcthulhu/doctor">https://github.com/funwithcthulhu/doctor</a>
+</p>
+
+<p>
+opam パッケージ：
+</p>
+
+<p>
+<a href="https://opam.ocaml.org/packages/doctor/">https://opam.ocaml.org/packages/doctor/</a>
+</p>
+
+<p>
+わかりにくい診断内容や、一般的なセットアップのケースで漏れているものがあればフィードバックをお寄せください。
+</p>
+
+<p>
+ありがとうございました！
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">Solo5: ユニカーネル向けサンドボックス実行環境</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-solo5-a-sandboxed-execution-environment-for-unikernels/18191/1">https://discuss.ocaml.org/t/ann-solo5-a-sandboxed-execution-environment-for-unikernels/18191/1</a>
+</p>
+</div>
+
+<div id="outline-container-org70b6c97" class="outline-3">
+<h3 id="org70b6c97">Calascibetta Romain が発表しました</h3>
+<div class="outline-text-3" id="text-org70b6c97">
+<p>
+<a href="https://github.com/solo5/solo5">Solo5 0.11.0</a> のリリースをお知らせできることを大変嬉しく思います。このリリースは、OCaml によるユニカーネルのパフォーマンス改善への取り組みが始まったという点で重要な意味を持ちます。
+</p>
+
+<p>
+プロジェクト自体は C で書かれていますが、ユニカーネル開発の礎となるものです。OCaml サポートは <a href="https://github.com/mirage/ocaml-solo5"><code>ocaml-solo5</code></a>（OCaml コンパイラのバージョンを追跡）を通じて提供されています。以下は OCaml による Solo5 (hvt) ユニカーネルの簡単な例です：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">$ opam install ocaml-solo5
+$ eval $(opam env)
+$ cat &gt;startup.c&lt;&lt;EOF
+#include "solo5.h"
+#include &lt;caml/callback.h&gt;
+
+static char *argv[] = { "unikernel", NULL };
+
+void _nolibc_init(uintptr_t, size_t);
+
+int solo5_app_main(const struct solo5_start_info *si) {
+  _nolibc_init(si-&gt;heap_start, si-&gt;heap_size);
+  caml_startup(argv);
+  return (0);
+}
+EOF
+$ cat &gt;manifest.json&lt;&lt;EOF
+{
+  "type": "solo5.manifest",
+  "version": 1,
+  "devices": []
+}
+EOF
+$ cat &gt;main.ml&lt;&lt;EOF
+let () = print_endline "Hello World!"
+EOF
+$ solo5-elftool gen-manifest manifest.json manifest.c
+$ ocamlfind -toolchain solo5 opt \
+  manifest.c startup.c main.ml \
+  -cclib "-z solo5-abi=hvt" -o main.hvt
+$ solo5-hvt -- main.hvt
+            |      ___|
+  __|  _ \  |  _ \ __ \
+\__ \ (   | | (   |  ) |
+____/\___/ _|\___/____/
+Solo5: Bindings version v0.11.0
+Solo5: Memory map: 512 MB addressable:
+Solo5:   reserved @ (0x0 - 0xfffff)
+Solo5:       text @ (0x100000 - 0x14efff)
+Solo5:     rodata @ (0x14f000 - 0x166fff)
+Solo5:       data @ (0x167000 - 0x371fff)
+Solo5:       heap &gt;= 0x372000 &lt; stack &lt; 0x20000000
+Hello World!
+Solo5: solo5_exit(0) called
+</pre>
+</div>
+
+<p>
+OCaml でのユニカーネル開発についてさらに詳しく知りたい方は、<a href="https://github.com/robur-coop/mkernel/blob/main/slides/retreat.md">スライド</a>（最後の MirageOS リトリートで発表）や <a href="https://github.com/robur-coop/mnet"><code>mnet</code></a> の<a href="https://robur-coop.github.io/mnet/">チュートリアル</a>をご覧ください。
+</p>
+</div>
+
+<div id="outline-container-org541670b" class="outline-4">
+<h4 id="org541670b">Solo5 とは？</h4>
+<div class="outline-text-4" id="text-org541670b">
+<p>
+Solo5 は、サンドボックス内でプログラムを作成・実行するための C フレームワークとツールセットです。このサンドボックスは当初、外部との相互作用を以下の5つのみに制限しています：
+</p>
+<ol class="org-ol">
+<li><span class="underline">net</span> デバイスへの Ethernet フレームの読み書き</li>
+<li><span class="underline">block</span> デバイスへのページの読み書き</li>
+<li>終了</li>
+</ol>
+
+<p>
+サンドボックス環境で利用可能な関数はすべてこの<a href="https://github.com/Solo5/solo5/blob/main/include/solo5.h">ヘッダー</a>に記述されています。
+</p>
+
+<p>
+Solo5 の注目すべき点は、この API が <a href="https://lwn.net/Articles/239238/">VirtIO</a>、<a href="https://www.xenserver.com/">Xen</a>（および <a href="https://www.qubes-os.org/">QubesOS</a>）、そして私たちのミニマリストなハイパーバイザー <code>hvt</code>（KVM、<a href="https://bhyve.org/">BHyve</a>、<a href="https://man.openbsd.org/vmm">VMM</a> 上で動作）と連携できる点です。これにより、Solo5 アプリケーションを幅広いプラットフォームにデプロイできます。Ubuntu では以下の手順で Solo5 をインストールできます：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ curl -fsSL https://apt.robur.coop/gpg.pub | \
+  gpg --dearmor &gt; /etc/apt/trusted.gpg.d/apt.robur.coop.gpg
+$ echo "deb [signed-by=/etc/apt/trusted.gpg.d/apt.robur.coop.gpg] https://apt.robur.coop ubuntu-24.04 main" &gt; /etc/apt/sources.list.d/robur.list
+$ apt update
+$ apt install solo5
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a3cf5f" class="outline-4">
+<h4 id="org5a3cf5f"><code>hvt</code> ユニカーネル</h4>
+<div class="outline-text-4" id="text-org5a3cf5f">
+<p>
+<a href="https://robur.coop/">Robur</a> では <code>hvt</code> ユニカーネルの構築を好んでいます。これらのユニカーネルの実行には <code>solo5-hvt</code> 「テンダー」（約200KB）のみが必要で、Linux・FreeBSD・OpenBSD で利用可能です（WSL は <span class="underline">ネスト仮想化</span> をサポートしているため、WSL 上でもユニカーネルを実行できます！）。
+</p>
+
+<p>
+<code>hvt</code> の利点はそのミニマリズム（Solo5 全般の特徴でもあります）にあります。今回のリリースでは、<code>libseccomp</code> を使用してユニカーネルの実行に必要な権限のみを保持するようにすることで、Linux 上でのサンドボックス化が完成しました（合計18のシステムコール）。このサンドボックス化はすでに FreeBSD では <a href="https://wiki.freebsd.org/Capsicum">Capsicum</a>、OpenBSD では <a href="https://man.openbsd.org/pledge.2">pledge(2)</a> を通じて利用可能でした。
+</p>
+
+<p>
+また今回のリリースでは、<a href="https://man7.org/linux/man-pages/man2/eventfd.2.html">eventfd(2)</a> と tap インターフェースに直接書き込む並列スレッドを使用することで、Linux 上の tap インターフェースへの Ethernet フレーム書き込みスループットの向上も実現しました。これにより、コストのかかる VM 退出の回数を減らすことができます。
+</p>
+
+<p>
+この目的のために、<a href="https://iperf.fr/iperf-download.php"><code>iperf3</code></a>（および <a href="https://github.com/robur-coop/mnet"><code>mnet</code></a> を使用してこのプロトコルを実装した<a href="https://git.robur.coop/robur/iperf3">ユニカーネル</a>）を使ってベンチマークを実施し、スループットの改善を実証しました。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">solo5.0.10.1</th>
+<th scope="col" class="org-left">solo5.0.11.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">~700 Mbits/sec</td>
+<td class="org-left">~2.15 Gbits/sec</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org89201ad" class="outline-4">
+<h4 id="org89201ad">ユニカーネルのデプロイ</h4>
+<div class="outline-text-4" id="text-org89201ad">
+<p>
+<a href="https://robur.coop/">Robur</a> では、ユニカーネルのデプロイをできる限り簡単にすることを目指しています。そのために、様々なサービスをデプロイするためのソフトウェアとユニカーネルのスイートを開発しました：
+</p>
+<ol class="org-ol">
+<li><a href="https://github.com/robur-coop/albatross">Albatross</a> は（<code>apt</code> 経由でもインストール可能な）プロジェクトで、<code>hvt</code> ユニカーネルの起動と監視が可能なデーモンを実行できます。このサービスは特に <code>hvt</code> ユニカーネル向けに設計されています（ただし最近はシステムのデプロイにも対応できるようになっています）。</li>
+<li><a href="https://github.com/robur-coop/dnsvizor">dnsvizor</a> は IP アドレス割り当てと DNS 解決の問題を解決するユニカーネルです。このユニカーネルを起動することで、後続のユニカーネルがそれを基準にネットワーク設定を行えるようになります。</li>
+<li>最後に、<a href="https://github.com/robur-coop/mollymawk">mollymawk</a> を積極的に開発しています。これは新しいユニカーネルのデプロイを（できるだけ簡単な方法で）可能にする Albatross 向け Web インターフェースを提供するユニカーネルです。</li>
+</ol>
+
+<p>
+また <a href="https://github.com/robur-coop/aussi"><code>aussi</code></a>（まだ<b><b>実験的</b></b>段階）も開発しています。これはユニカーネル向けの <a href="https://opencontainers.org/">OCI</a> ランタイムで、中でも <a href="https://www.docker.com/">Docker</a> を使ってユニカーネルをビルド・デプロイできます。<a href="https://github.com/dinosaure/annuaire"><code>annuaire</code></a> ユニカーネルを使用した例が<a href="https://github.com/robur-coop/aussi#with-docker">こちら</a>で公開されています。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgda47f24" class="outline-4">
+<h4 id="orgda47f24">ユニカーネルの開発</h4>
+<div class="outline-text-4" id="text-orgda47f24">
+<p>
+最後に、ユニカーネルとその開発というもう一つの側面があります。Robur では、潜在的な新規ユーザーが自身でユニカーネルを開発できるよう（オーナーシップを感じてもらえるよう）、標準的なユニカーネル開発を可能にするライブラリ（特にプロトコルとフォーマット）を開発しています。
+</p>
+
+<p>
+この件に関してご質問があれば、遠慮なくお聞かせください！
+</p>
+
+<p>
+この取り組みの一環として、私たちは以下のような標準的なユニカーネル開発を可能にするライブラリを長年にわたって開発してきました：
+</p>
+<ul class="org-ul">
+<li>ユニカーネル（およびサービス）向けのスケジューラとして <a href="https://github.com/robur-coop/miou">Miou</a> を引き続き開発中</li>
+<li>ユニカーネル向け新しい TCP/IP スタックである <a href="https://github.com/robur-coop/mnet"><code>mnet</code></a> と <a href="https://github.com/robur-coop/utcp"><code>utcp</code></a> を開発中</li>
+<li>ユニカーネル向け FAT32 ファイルシステム <a href="https://github.com/robur-coop/mfat"><code>mfat</code></a> も利用可能</li>
+<li>ウェブサイトをユニカーネルとして開発するための Web フレームワーク <a href="https://github.com/robur-coop/vif"><code>vifu</code></a> も利用可能</li>
+<li>その他、長年にわたってメンテナンスしてきた多くのプロジェクト！</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgace99e0" class="outline-4">
+<h4 id="orgace99e0">まとめ</h4>
+<div class="outline-text-4" id="text-orgace99e0">
+<p>
+このリリースは、私たちの協同組合の取り組みを包括的（かつわかりやすく）に紹介する機会を与えてくれました。この取り組みの本質は、OCaml によるユニカーネルの開発・デプロイに必要なコンポーネントを構築しながら、通信と生産手段の自己管理というアイデアを推進することにあります。
+</p>
+
+<p>
+Happy hacking!
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="5">OCaml コンパイラ オフィスアワー</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ocaml-compiler-office-hours/17230/38">https://discuss.ocaml.org/t/ocaml-compiler-office-hours/17230/38</a>
+</p>
+</div>
+
+<div id="outline-container-org01ce69e" class="outline-3">
+<h3 id="org01ce69e">このスレッドを継続して、gasche が発表しました</h3>
+<div class="outline-text-3" id="text-org01ce69e">
+<p>
+皆さん、
+</p>
+
+<p>
+来週、6月5日（金）11:00〜12:00 UTC（現地時間は [date-range from=2026-06-05T11:00:00 to=2026-06-05T12:00:00 timezone=UTC]）に OCaml Compiler Office Hours が再び開催されることをお知らせします。
+</p>
+
+<p>
+今回のミーティングの共同メモは <a href="https://notes.irif.fr/UGGkT7aqTpmOCsqvW2VFZQ">https://notes.irif.fr/UGGkT7aqTpmOCsqvW2VFZQ</a> で公開されています。
+現時点ではほぼ空白の状態ですので、ミーティングで取り上げてほしいトピックをご自由に追加してください。（ご参加できない場合でも質問を書いていただいて構いません。いずれにせよ回答しますし、良い議論につながります。）
+</p>
+
+<p>
+ビデオリンクも記載されています（変更になる場合があります）。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="6">OCaml Workshop 2026 トーク提案募集</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/call-for-talk-proposals-ocaml-workshop-2026/18192/1">https://discuss.ocaml.org/t/call-for-talk-proposals-ocaml-workshop-2026/18192/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgc6dd4b3" class="outline-3">
+<h3 id="orgc6dd4b3">Sudha Parimala が発表しました</h3>
+<div class="outline-text-3" id="text-orgc6dd4b3">
+<p>
+皆さん、こんにちは！今年の OCaml Workshop はパリで開催されます。ワークショップへの発表提案を募集しますので、ぜひご応募ください。
+</p>
+
+
+<div id="org316a142" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/d/df969f0f9bb4c84623413a5805111b147b822ed7.jpeg" alt="df969f0f9bb4c84623413a5805111b147b822ed7.jpeg" width="80%" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org882f23c" class="outline-4">
+<h4 id="org882f23c">重要情報</h4>
+<div class="outline-text-4" id="text-org882f23c">
+<ul class="org-ul">
+<li><b>開催地:</b> パリ（<a href="https://www.irif.fr/~scherer/events/fpw-2026/announce.html">FPW 2026</a> と併催）</li>
+<li><b>日程:</b> 8月27日（<b>変更の可能性あり！</b> 代替日：8月31日）</li>
+<li><b>提出締め切り:</b> 7月1日（AoE）</li>
+<li><b>採択通知:</b> 7月27日</li>
+<li><b>提出サイト:</b> <a href="https://types-hotcrp.paris.inria.fr/ocaml26/">https://types-hotcrp.paris.inria.fr/ocaml26/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org71629a3" class="outline-4">
+<h4 id="org71629a3">対象範囲</h4>
+<div class="outline-text-4" id="text-org71629a3">
+<p>
+OCaml Workshop は、OCaml の魔法を初めて発見する入門者から、unsafe なスペルの詠唱に熟達した魔術師まで、幅広い OCaml ユーザーを歓迎します。彼らに共通するのは OCaml への情熱と、より深く学びたい・仲間の OCaml ユーザーとつながりたい・言語を改善する方法を共に探りたいという思いです。
+</p>
+
+<p>
+トーク提案についても同様に幅広く受け付けます：<b><b>OCaml に関連するものであれば何でも歓迎</b></b>です！
+</p>
+
+<p>
+テーマは以下に限りませんが、過去の例を挙げると、OCaml 編集ツール、検証済み OCaml 成果物、OCaml と他言語との相互運用性、OCaml 行動規範、コンパイラ最適化、OS 移植性、OCaml テストフレームワーク、OCaml における並行性パッケージなどがあります。
+</p>
+
+<p>
+過去の全カタログは以下のリンクからご覧いただけます：
+</p>
+
+<ul class="org-ul">
+<li>2025: <a href="https://ocaml.org/conferences/ocaml-workshop-2025">https://ocaml.org/conferences/ocaml-workshop-2025</a></li>
+<li>2024: <a href="https://ocaml.org/conferences/ocaml-workshop-2024">https://ocaml.org/conferences/ocaml-workshop-2024</a></li>
+<li>2023: <a href="https://ocaml.org/conferences/ocaml-workshop-2023">https://ocaml.org/conferences/ocaml-workshop-2023</a></li>
+<li>2022: <a href="https://ocaml.org/conferences/ocaml-workshop-2022">https://ocaml.org/conferences/ocaml-workshop-2022</a></li>
+<li>2021: <a href="https://ocaml.org/conferences/ocaml-workshop-2021">https://ocaml.org/conferences/ocaml-workshop-2021</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf3d16e2" class="outline-4">
+<h4 id="orgf3d16e2">発表形式</h4>
+<div class="outline-text-4" id="text-orgf3d16e2">
+<p>
+20分の<b><b>標準トーク</b></b>形式に加え、以下の形式も受け付けます：
+</p>
+
+<ul class="org-ul">
+<li><b><b>デモ。</b></b> ツールのチュートリアル形式によるデモンストレーション（30分）。</li>
+<li><b><b>意見発表。</b></b> OCaml の設計空間（機能の追加・削除など）に関するトピックの発表（20分）。</li>
+<li><b><b>事例報告。</b></b> OCaml またはツールの使用に関する報告（20分）。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3e97405" class="outline-4">
+<h4 id="org3e97405">提出方法</h4>
+<div class="outline-text-4" id="text-org3e97405">
+<p>
+提出サイトはこちら：<a href="https://types-hotcrp.paris.inria.fr/ocaml26/">https://types-hotcrp.paris.inria.fr/ocaml26/</a>
+</p>
+
+<p>
+トークの説明（通常2〜3ページ程度、それより短くても長くても構いません）として、取り上げる問題と提案する解決策・手法を提出してください。発表方法そのものがトークの独自の特徴であると考える場合は、発表方法の説明も含めていただいて構いません。
+</p>
+
+<p>
+LaTeX で作成した PDF が一般的ですが必須ではありません。
+</p>
+
+<p>
+昨年採択されたプレゼンテーションはオンラインで公開されています：<a href="https://icfp25.sigplan.org/home/ocaml-2025#event-overview">https://icfp25.sigplan.org/home/ocaml-2025#event-overview</a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li><a id="orgb687987"></a>評価基準<br />
+<div class="outline-text-5" id="text-orgb687987">
+<p>
+提出物は以下の基準で評価されます：
+</p>
+
+<ul class="org-ul">
+<li>OCaml コミュニティへの関連性</li>
+<li>厳密さと妥当性</li>
+<li>新規性</li>
+<li>明確さ</li>
+<li>魅力的で有益なプレゼンテーションを行う可能性</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-org02e5bde" class="outline-4">
+<h4 id="org02e5bde">LLM 使用に関する推奨事項</h4>
+<div class="outline-text-4" id="text-org02e5bde">
+<p>
+LLM が主体となって書かれた提案は受け付けられず、即座に不採択となります。文法の修正やスタイルの改善に LLM を使用することは問題ありません（特に英語が母国語でない方には有益です）が、内容を直接生成させることは危険かつ非専門的であり、著者性とレビュアーの労力を損なうものです。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org53df4f4" class="outline-4">
+<h4 id="org53df4f4">開催地情報</h4>
+<div class="outline-text-4" id="text-org53df4f4">
+<p>
+今回の Caml Workshop はパリで開催され、8月末に行われる<a href="https://www.irif.fr/~scherer/events/fpw-2026/announce.html">Functional Programming Workshops (FPW) 2026</a> の一環として、他のワークショップやイベントとともに開催されます。これは、OCaml Workshop が通常 ICFP と併催されてきた慣例からの変更です。FPW'26 の一部のイベントは ICFP とも共催されるため、開催日程はほぼ同時期となります。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3363a06" class="outline-4">
+<h4 id="org3363a06">ML Workshop との連携</h4>
+<div class="outline-text-4" id="text-org3363a06">
+<p>
+<a href="https://icfp26.sigplan.org/home/mlfamilyworkshop-2026#About">ML Family Workshop</a> も今年 FPW'26 と共催されており、参加者にとって関心のある内容かもしれません。OCaml Workshop が OCaml エコシステムの発展に焦点を当てているのに対し、ML Workshop は言語を問わず、よりリサーチ指向の内容となっています。両会場に適した提出物をお持ちの著者は、提出時にその旨を記載するか、プログラム委員長にご連絡ください。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbd3c39b" class="outline-4">
+<h4 id="orgbd3c39b">プログラム委員会</h4>
+<div class="outline-text-4" id="text-orgbd3c39b">
+<ul class="org-ul">
+<li>Clément Allain</li>
+<li>Pedro Carrott</li>
+<li>Simon Cruanes</li>
+<li>Marko Doko</li>
+<li>Patrick Ferris</li>
+<li>Jean-Christophe Filliâtre</li>
+<li>Sadiq Jaffer</li>
+<li>Robbert Krebbers</li>
+<li>Vincent Laviron</li>
+<li>Tim McGilchrist</li>
+<li>António Monteiro</li>
+<li>Carine Morel</li>
+<li>Andreas Rossberg</li>
+<li>Vimala Soundarapandian</li>
+<li>Jérôme Vouillon</li>
+<li>John Whitington</li>
+<li>Paulo de Vilhena（委員長）</li>
+<li>Sudha Parimala（委員長）</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org5844e52" class="outline-2">
+<h2 id="org5844e52">過去の CWN</h2>
+<div class="outline-text-2" id="text-org5844e52">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://ocaml.jp/cwn-ja/">アーカイブ</a>や<a href="https://ocaml.jp/cwn-ja/cwn.rss">RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> を購読してください。
+</p>
+
+<div class="authorname" id="orgfd3edc9">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

