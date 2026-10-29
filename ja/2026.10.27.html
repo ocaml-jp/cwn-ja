@@ -1,0 +1,2096 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.10.20.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.11.03.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年10月20日から27日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">uniker.nl - OCaml によるユニカーネル</a></li>
+<li><a href="#2">segmap の発表：リネーミングのための高速データ構造</a></li>
+<li><a href="#3">hexen.0.1</a></li>
+<li><a href="#4">intel_hex.1.0</a></li>
+<li><a href="#5">Js_of_ocaml / Wasm_of_ocaml 6.5</a></li>
+<li><a href="#6">TIFF Inspector: ocaml-tiff ベースのインスペクタ（ブラウザ内 OCaml プレイグラウンド付き）</a></li>
+<li><a href="#7">OCaml 5.5.2 リリース</a></li>
+<li><a href="#8">bytream.0.4</a></li>
+<li><a href="#9">spvec の最初のリリース</a></li>
+<li><a href="#10">ocaml-emcc: OCaml プログラムと C スタブを WebAssembly にコンパイルする</a></li>
+<li><a href="#11">snkv-ocaml 0.3.0 新リリース — HNSW ベクタ検索付き SNKV の OCaml バインディング</a></li>
+<li><a href="#12">TIFF Inspector の構築：OCaml、TIFF 内部、ブラウザ内プレイグラウンドの探求</a></li>
+<li><a href="#13">stele 0.1.0: Menhir 文法の構文エラーメッセージ生成ツール</a></li>
+<li><a href="#14">OSEC-2026-21: Str partial-match によるキャプチャレジスタの古い値によるアンダーフロー</a></li>
+<li><a href="#15">OSEC-2026-22: Unix.map_file における整数オーバーフロー</a></li>
+<li><a href="#16">OSEC-2026-23: Marshal における複数の問題</a></li>
+<li><a href="#17">OSEC-2026-24: Windows でのコマンドクォートにおける複数の問題</a></li>
+<li><a href="#18">OSEC-2026-25: OCaml <code>runtime_events</code> コンシューマにおけるサイズ超過カスタムユーザーイベント解析時のヒープバッファオーバーフロー</a></li>
+<li><a href="#19">OSEC-2026-26: runtime_events ユーザーイベントの名前ベースの型混乱</a></li>
+<li><a href="#org5844e52">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">uniker.nl - OCaml によるユニカーネル</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-uniker-nl-unikernels-in-ocaml/18625/1">https://discuss.ocaml.org/t/ann-uniker-nl-unikernels-in-ocaml/18625/1</a>
+</p>
+</div>
+
+<div id="outline-container-org0ccf6ed" class="outline-3">
+<h3 id="org0ccf6ed">Calascibetta Romain が発表しました</h3>
+<div class="outline-text-3" id="text-org0ccf6ed">
+<p>
+新しいウェブサイト <a href="https://uniker.nl/">uniker.nl</a> の公開をお知らせできることを嬉しく思います。このウェブサイトは、OCaml 5 を用いたユニカーネル開発への新しいアプローチを体現しています。ユニカーネルの開発に新しい方法を提供するとともに、ユニカーネルのデプロイと利用にも同等の重点を置いています。このサイトには包括的な<a href="https://uniker.nl/introduction/">チュートリアル</a>とリソースが掲載されており、OCaml におけるユニカーネルに興味を持つ方への_最初の入口_として、新しいエコシステムを理解するための手助けをします。
+</p>
+
+<p>
+このサイトのコンテンツは<a href="https://github.com/robur-coop/uniker.nl">こちら</a>で公開されており、優れた <a href="https://yocaml.github.io/tutorial/index.html">YOCaml</a> プロジェクトによって動作し、私たちの <a href="https://github.com/dinosaure/immuable">immuable</a> ユニカーネルを用いてデプロイされています。
+</p>
+</div>
+
+<div id="outline-container-org1057dc6" class="outline-4">
+<h4 id="org1057dc6">新しいエコシステム</h4>
+<div class="outline-text-4" id="text-org1057dc6">
+<p>
+<a href="https://ocaml.org/ocaml-workshop-2026">OCaml Workshop 2026</a>（<a href="https://docs.google.com/presentation/d/1bOXJAPEEjPBx_8i0frThKhLpHd8C7-EPRczEQjvz6JU/edit?slide=id.g3f7268904c5_0_1#slide=id.g3f7268904c5_0_1">スライド</a>）にて新しいワークフローを発表しました。私たちのアプローチは主に2点に要約できます：
+</p>
+<ul class="org-ul">
+<li>ユニカーネルの開発</li>
+<li>ユニカーネルのデプロイとその利用</li>
+</ul>
+</div>
+
+<ul class="org-ul">
+<li><a id="org82a3551"></a>ユニカーネルを開発するために<br />
+<div class="outline-text-5" id="text-org82a3551">
+<p>
+私たちの協同組合はかなり長い間ユニカーネルの開発を続けてきました。<a href="https://blog.robur.coop/">私たちのブログ</a>では、インフラに使用しているいくつかのユニカーネルを紹介しています。経験を通じて、ユニカーネルという形でアプリケーションを開発する際の制約や限界を十分に認識しています。最もよく知られた制約として、プロトコルやフォーマットに関してPOSIXインターフェースを必要としない（またはそれを模倣しようとしない）ことを受け入れています。今日でも守り続けているルールの一つは、実装を提供する際に<a href="https://discuss.ocaml.org/t/on-concurrency-models/15899/13">I/O やスケジューラに依存しない</a><a href="https://discuss.ocaml.org/t/why-ocsigen-is-staying-on-lwt-for-now/18318/27">1</a>ことです。
+</p>
+
+<p>
+この経験から、ユニカーネル以外のコンテキストでも他の人々が使用しているプロトコルやフォーマットを開発することができました。
+</p>
+
+<p>
+一方で、特に MirageOS が現在提供しているものに関して、達成できることの限界も見えてきました。これを念頭に置き、ユニカーネル開発における制約（特にクロスコンパイルに関して）をさらに検討した結果、2つのツールを用いてユニカーネルの開発を構造化することにしました：[~unic~](依存関係を推論して_vendor_する方法)と[~mfetch~](依存関係を vendor する方法)です。
+</p>
+</div>
+</li>
+
+<li><a id="org1925932"></a><a href="https://github.com/robur-coop/unic"><code>unic</code></a>: 依存関係を推論して_vendor_する方法<br />
+<div class="outline-text-5" id="text-org1925932">
+<p>
+ユニカーネルにおける制約の一つは、Cファイルをホストシステムに既存のものに依存しないよう特定のオプションで再コンパイルする必要があることです。MirageOS 3 が取ったアプローチは、このような特定のコンパイル結果をCスタブを含むライブラリ（<a href="https://github.com/mirage/digestif"><code>digestif</code></a>や<a href="https://github.com/mirage/mirage-crypto"><code>mirage-crypto</code></a>など）の中に配布することでした。問題は、ユニカーネルの中核コンポーネントである <a href="https://github.com/solo5/solo5">Solo5</a> 向けのCファイル固有のコンパイル環境を得るために、これらのライブラリのユーザーに <a href="https://github.com/mirage/ocaml-solo5"><code>ocaml-solo5</code></a> のインストールを強いていたことです。
+</p>
+
+<p>
+MirageOS 4 では <code>dune</code> とそのコンテキストが導入され、Cファイルに対して一貫したコンパイル環境を実現できるようになりました。しかしこのアプローチは新たな制約をもたらしました：ユニカーネルのすべての依存関係が <code>dune</code> を使用しなければならなくなったのですが、OCaml エコシステムではそうでないケースも<b>正当に</b>存在します。
+</p>
+
+<p>
+そこで私たちは、一部のライブラリを再コンパイルする必要性をさらに精査し、最終的に <a href="https://github.com/mirage/ocaml-solo5"><code>ocaml-solo5</code></a> の重要な利点を活かすことにしました。それは、このコンパイラでOCamlファイルをコンパイルしても、ホストのOCamlコンパイラを使った場合とまったく同じ結果が得られるという点です。つまり、最初からそうであったように、厳密にCファイルのみをクロスコンパイルすればよいのです。
+</p>
+
+<p>
+この2つの特性（Cファイルのみをクロスコンパイルすればよいこと、ホストコンパイラでコンパイルした純粋なOCamlで書かれたライブラリを再利用できること）の交点において、<code>dune</code> を使用していないライブラリのメンテナンス作業を一切行わずに、また必ずしもすべてを再コンパイルしなくても、次のようなコードを書く機能をユーザーに提供できます：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">$ opam install unic
+$ cat &gt;main.ml&lt;&lt;EOF
+&gt; open Digestif
+
+&gt; let () = Mkernel.run [] @@ fun () -&gt;
+&gt;   Fmt.pr "%a\n%!" SHA1.pp (SHA1.digest_string "Hello World!")
+&gt; EOF
+$ unic infer -r .
+Module Digestif is provided by several ocamlfind packages:
+  [0] digestif.c
+  [1] digestif.ocaml
+Pick one [0-1]: 0
+digestif
+mkernel
+$ opam source digestif
+$ opam source mkernel
+$ dune build
+$ solo5-hvt -- _build/solo5/main.exe --solo5:quiet
+2ef7bde608ce5404e97d5f042f95f89f1c232871Solo5
+</pre>
+</div>
+
+<p>
+<code>unic</code> は、特定のビルドシステムを使わずにOCamlプロジェクトの依存関係を推論し、ユニカーネルを生成するためにクロスコンパイルが必要なもの（この場合 <code>digestif</code> と <code>mkernel</code> ですが <code>fmt</code> は不要）を計算できるツールです。このプロジェクトはまず私たちの目的のために作られていますが、静的リンクされた実行ファイルをコンパイルする際にも有用である点は注目に値します。
+</p>
+
+<p>
+このツールはMETAファイルの解析、成果物を様々な観点（モジュール名、<code>ocamlfind</code> パッケージ名、OPAMパッケージ名）から閲覧、OCaml成果物（<code>*.cmxa</code> ファイルなど）の解析など、多岐にわたるサブツールを提供しています。
+</p>
+
+<p>
+特に @Octachron の <a href="https://github.com/Octachron/codept"><code>codept</code></a> プロジェクト（<code>unic</code> はこれをベースにしています）と、それを改善するために協力していただいたことに深く感謝します。
+</p>
+</div>
+</li>
+
+<li><a id="org929f474"></a><a href="https://github.com/robur-coop/mfetch"><code>mfetch</code></a>: 依存関係を vendor する方法<br />
+<div class="outline-text-5" id="text-org929f474">
+<p>
+クロスコンパイルが必要な依存関係をより正確に特定できたので、次はそれらをダウンロードする必要があります。<code>opam source</code> は十分に機能しますが、以下のような様々なソースタイプからソースコードをダウンロードできるツールが欲しいと考えました：
+</p>
+<ul class="org-ul">
+<li>通常の場合と同様に <span class="underline">tarball</span> から</li>
+<li>Gitリポジトリから</li>
+<li>またはファイルシステム上の特定の場所から</li>
+</ul>
+
+<p>
+そこで <code>mfetch</code> を開発しました。OPAMまたはユーザーが提供する情報を元にソフトウェアのソースをダウンロードし、すべてのソースを含む <code>vendors</code> フォルダを作成することができます。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">$ unic infer -r . -o _mfetch
+$ mfetch --with-dune-file
+ digestif                 │██████████████████│    3.1 MiB /    3.1 MiB    5.9 MiB/s 
+ mkernel                  │██████████████████│   37.3 KiB /   37.3 KiB    3.4 MiB/s 
+
+digestif                         ok
+mkernel                          ok
+$ dune build
+</pre>
+</div>
+
+<p>
+<code>mfetch</code> では、ソースファイルを変更したかどうかの確認（バグ修正のため）や、<code>*.locked</code> ファイルの生成も可能で、別のツール <a href="https://github.com/robur-coop/orb"><code>orb</code></a> を使ってユニカーネルの再現性を検証することができます。このツール自体は革新的なものではありませんが、ワークフローを合理化するのに役立ちます。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">$ mfetch status
+digestif                         ok
+mkernel                          ok
+$ mfetch lock
+2 sources locked into _mfetch.locked
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org411e243"></a>OCaml 5 向けライブラリ<br />
+<div class="outline-text-5" id="text-org411e243">
+<p>
+新しいワークフローでは OCaml 5 を使用します。OCaml 5 でユニカーネルを生成するために必要な基本的な構成要素を更新するとともに、主にエフェクトを活用できるライブラリ群も開発しました。さらに、過去数年間で以下を開発しました：
+</p>
+<ul class="org-ul">
+<li><a href="https://discuss.ocaml.org/t/ann-miou-a-simple-scheduler-for-ocaml-5/12963">Miou</a>：OCaml 5 向けスケジューラ</li>
+<li><a href="https://github.com/robur-coop/mkernel"><code>mkernel</code></a>：Solo5 が提供するI/Oを扱うために設計した Miou スケジューラの派生版</li>
+<li><a href="https://discuss.ocaml.org/t/ann-mnet-a-new-tcp-ip-stack-for-unikernels-in-ocaml/17851"><code>mnet</code></a>：エフェクトを用いたOCamlによるTCP/IPスタックの再実装（<a href="https://github.com/robur-coop/utcp"><code>utcp</code></a> を使用）</li>
+<li><a href="https://github.com/robur-coop/mhttp"><code>mhttp</code></a>、<a href="https://github.com/robur-coop/colombe"><code>msendmail</code></a>、<a href="https://github.com/robur-coop/mfat"><code>mfat</code></a>、<a href="https://github.com/robur-coop/vif"><code>vifu</code></a> などのその他多数のライブラリ</li>
+</ul>
+
+<p>
+現在デプロイ済みのいくつかのユニカーネルで使用されているこれらのライブラリにより、開発者に対してユニカーネルを実装するための_ダイレクトスタイル_アプローチを提供できます。
+</p>
+
+<p>
+しかしこの新興エコシステムで重要なのは、過去のプロジェクトに対する回顧的な分析を行い、同じ過ちを繰り返さないようにすることです。<a href="https://github.com/ocsigen/lwt"><code>lwt</code></a>（MirageOS スケジューラ）を使用した既存のライブラリを Miou（またはエフェクトを使用する他のスケジューラ）に移行することが非常に難しいことに私たちはすぐに気づきました。そこで、Miou を使ったダイレクトスタイルアプローチを提案するだけでなく、MirageOS でユニカーネルをデプロイして得た教訓を踏まえてライブラリの実装を見直す機会としました。メモリ使用量、過去の実装での既知のCVEの回避（私たちはOCamlセキュリティチームの一員でもあります）、そしてfunctorに系統的に依存しない代替APIの提供に特に注意を払いました。
+</p>
+
+<p>
+このアプローチはまだ実験的です。複数のレイヤーにわたってこの新しいエコシステムを統合する必要がありますが、デプロイ済みのユニカーネルで観察したことに基づき、これらの新しい実装が過去のものよりも大幅に優れているという確信があります。
+</p>
+</div>
+</li>
+
+<li><a id="orge184bee"></a>ユニカーネルをデプロイするために<br />
+<div class="outline-text-5" id="text-orge184bee">
+<p>
+ユニカーネルのもう一つの側面はデプロイです。ユニカーネルを開発する（そして開発を容易にする）だけでなく、デプロイして使用することも重要です。私たちの主な目標は既存のサービスをユニカーネルに置き換えること（ネームサーバー、ウェブサイト、タイムサーバーなど）であり、既存のインフラと競合する方法は積極的にユニカーネルをデプロイして使用することです。
+</p>
+
+<p>
+そのため、以下の2つのプロジェクトを開発しました：
+</p>
+<ul class="org-ul">
+<li><a href="https://github.com/robur-coop/albatross">Albatross</a>：ユニカーネルを起動するOCamlサービス</li>
+<li><a href="https://github.com/robur-coop/aussi">Aussi</a>：Solo5 向けOCIランタイム</li>
+</ul>
+
+<p>
+Albatross は主に、ユニカーネルの再現性を検証するインフラ <a href="https://builds.robur.coop">builds.robur.coop</a> と組み合わせて使用しています。これにより、ユニカーネルの依存関係（特にCVE）を追跡し、サプライチェーンのセキュリティを確保できます。
+</p>
+
+<p>
+次はデプロイです。ユニカーネルを既存のインフラに統合し、特に <a href="https://www.influxdata.com/">InfluxDB</a>、<a href="https://www.influxdata.com/time-series-platform/telegraf/">Telegraf</a>、<a href="https://grafana.com/">Grafana</a> を使ったモニタリング手段を提供することを目指しています。
+</p>
+
+<p>
+このようにして、以下のようなサービスを提供できています（一部はまだ <code>mkernel~/~mnet</code> に移植されていませんが、まもなく行われます）：
+</p>
+<ul class="org-ul">
+<li><a href="https://github.com/robur-coop/unipi"><code>unipi</code></a> や <a href="https://github.com/dinosaure/immuable"><code>immuable</code></a> を使った <a href="https://blog.robur.coop/">https://blog.robur.coop/</a> などのシンプルなウェブサイト</li>
+<li><a href="https://github.com/robur-coop/dns-primary-git/">プライマリ</a> DNSサーバーと<a href="https://git.robur.coop/robur/dns-secondary/">セカンダリ</a>サーバーを通じた <code>robur.coop</code>、<code>reyn.ir</code>、<code>din.osau.re</code> などのドメインのDNS管理</li>
+<li><a href="https://github.com/robur-coop/miragevpn">MirageVPN</a> または <a href="https://github.com/robur-coop/zostera">Zostera</a> を使ったVPNサービス</li>
+<li>タイムサーバー（<a href="https://github.com/robur-coop/chaos">Chaos</a> を使用）：<a href="https://chaos.osau.re/">https://chaos.osau.re/</a></li>
+<li><a href="https://github.com/robur-coop/caldav">CalDAV</a> カレンダーシステム</li>
+<li><a href="https://github.com/robur-coop/ptt"><code>ptt</code></a> プロジェクトを使った<a href="https://mailingl.st">メーリングリスト</a></li>
+<li><a href="https://github.com/robur-coop/tlstunnel"><code>tlstunnel</code></a> や <a href="https://github.com/robur-coop/contruno"><code>contruno</code></a> などのTLS終端プロキシ（sherlocode.com で使用）</li>
+<li>その他多数！</li>
+</ul>
+
+<p>
+実際の使用を通じてユニカーネルとそれに依存するライブラリを改善しています。そのため、チュートリアルの一部ではユニカーネルのデプロイにも焦点を当てており、使用してフィードバックで協力していただけるようにしています。
+</p>
+
+<p>
+最後に、<a href="https://mollymawk.robur.coop/">Mollymawk</a> というプロジェクトも提案しています。これはウェブインターフェースを通じたユニカーネルのデプロイを簡素化するために設計されており、将来的には使用を希望する誰もが私たちのインフラへのアクセスを提供できるようにしたいと考えています（様々な試みをしてくれた @kit-ty-kate に感謝します）。
+</p>
+</div>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-org1a26558" class="outline-4">
+<h4 id="org1a26558">私たちについて</h4>
+<div class="outline-text-4" id="text-org1a26558">
+<p>
+最後に、これらはすべて私たちの協同組合とその業務組織なしには実現できませんでした。財務の詳細は<a href="https://blog.robur.coop/articles/finances.html">こちら</a>でご覧いただけます。寄付を受け付けており、最近 NLnet からの資金調達も確保しました。<a href="https://ahrefs.com/">Ahrefs</a> や <a href="https://tarides.com/">Tarides</a> などの民間企業も私たちの活動をスポンサーしています。また、<a href="https://ocamlpro.com">OCamlPro</a> および <a href="https://ocaml-sf.org/">OCaml Foundation</a> とのパートナーシップも持っています。そして個人や企業と協力することで、OCaml エコシステムに毎日貢献しています。
+</p>
+
+<p>
+詳細は<a href="https://robur.coop/">私たちのウェブサイト</a>でご覧ください。この活動が可能なのは私たちの組織形態（協会という形態）のおかげであり、スポンサーの方々に感謝します。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc80f778" class="outline-4">
+<h4 id="orgc80f778">ユニカーネルと MirageOS</h4>
+<div class="outline-text-4" id="text-orgc80f778">
+<p>
+熱心な方々は、私たちのアプローチが私たちのメンテナンス作業によって現役を保つ MirageOS と比べてどのような利点があるのか疑問に思うかもしれません。私たちのアプローチは、ユニカーネルの普及を妨げるガラスの天井として特定した5つの点によって特徴づけられています：
+</p>
+<ul class="org-ul">
+<li>最初の点は <a href="https://github.com/mirage/ocaml-cstruct"><code>ocaml-cstruct</code></a> の使用に関するものです。根本的な問題は、_バッファ_として <code>bytes~/~string</code> の代わりに <code>bigarray</code> を使用していることです。<a href="https://github.com/robur-coop/miragevpn">MirageVPN</a> の開発経験から、エコシステム全体で <span class="underline">バッファ</span> の概念として <code>cstruct</code> を系統的に使用することが、ユニカーネルのスループットにおける最大の<b>ペナルティ</b>であることがわかりました。そこで、<a href="https://github.com/robur-coop/bstr"><code>bstr</code></a>と<a href="https://github.com/robur-coop/bstr"><code>slice</code></a>を開発するだけでなく、<code>cstruct</code> を <code>bytes~/~string</code> に置き換えてほとんどのライブラリを書き直すことにしました（<a href="https://github.com/mirleft/ocaml-tls/pull/497"><code>ocaml-tls</code></a>、<a href="https://github.com/mirage/mirage-crypto/pull/214"><code>mirage-crypto</code></a>、<a href="https://github.com/mirage/ocaml-dns/pull/351"><code>ocaml-dns</code></a>、最近では <a href="https://github.com/mirage/awa-ssh/pull/85"><code>awa-ssh</code></a> と <a href="https://github.com/robur-coop/utcp/pull/55"><code>utcp</code></a> がその例です）。結論は単純です：bigarray の使用をやめるのではなく、APIでその使用を系統的にしないことです。</li>
+<li>2点目は、ユニカーネルが必要とするデバイスを表現するためのfunctorの使用に関するものです。これらのデバイスを具体化する特定の実装をfunctorを通じてインターフェースを再利用して注入するアプローチは魅力的に見えますが、最新の概念に対応していないインターフェースによって制約されたエコシステムのメンテナンスコストが、より特定のユニカーネルを開発する必要があるたびに<a href="https://github.com/robur-coop/dnsvizor/blob/83b32596c4a08c080067e1cd36fe5788b90cdd78/unikernel.ml#L610-L631">不合理な状況</a>を招きました。再び言いますが、functorの使用をやめるのではなく、系統的にしないことがルールです。</li>
+<li><p>
+3点目はユニカーネルのコンパイルに関するものです。MirageOS は今日でも <code>dune</code> とうまく統合されていない回避策に依存しています。これは「マルチステージコンパイル」として定義でき、望むターゲットに応じてコード生成フェーズが必要になります。このようにツールによって指定される依存関係のセットでワークフローを構造化する方法は、開発者が何を、どのようにしたいかを明示的に制限します。ユニカーネルのコンパイルには制約（<code>Unix</code> モジュールを使用しないことなど）がありますが、私たちの協同組合は、ユニカーネルの設計においてユーザーを支援する（しかし強制しない）<b><b>情報提供的</b></b>（規範的でない）ツールを提供することにしました（さらに、<a href="https://github.com/robur-coop/unic"><code>unic</code></a>と<a href="https://github.com/robur-coop/mfetch"><code>mfetch</code></a>を紹介できることも嬉しく思います）。新しいアプローチのポイントは、ユニカーネルの開発においてツール（<code>mirage</code>）ではなくユーザーが最終決定権を持つことを確保することです。
+</p>
+
+<p>
+<code>mirage</code> ツールが行うことは非常に複雑で、functor適用の生成や初期化スタブ、opamバージョン制約（functorや初期化関数が新しいopamパッケージで変更される可能性があるため）などが含まれます。<code>mirage</code> ツールはクローズドワールド仮定を持ち、<code>mirage</code> が認識していないパッケージの使用は非常に困難であり、<code>mirage</code> ユニカーネルで <code>js_of_ocaml</code> を使用することも非常に難しいです。
+</p></li>
+<li>4点目はこのエコシステムのメンテナンス、特に MirageOS が依存するツールとライブラリのメンテナンスに関するものです。さらに、<code>opam-monorepo</code> に失望する経験をし、OCaml 5 に合わせて <code>mirage-tcpip</code> を更新することが日々ますます困難になっていることがわかります。OCaml セキュリティチームへの関与から、メンテナンスの欠如により特定のライブラリを廃止したいという気持ちにもなっています。そこで、エコシステムを私たちの協同組合が生産・メンテナンスするものに再集中させています。</li>
+<li>最後に、AIの台頭にもかかわらず変わらないコミュニティとの活動があります。ユニカーネルに関する存在しない問題を解決するためにAIが乱用されており、それがセキュリティ、メンテナンス、ソフトウェアの品質に関する私たちの信頼性を損なっていると考えています。この点において、デプロイよりも <span class="underline">バイブコーディング</span> を好む人々から距離を置こうとしています。このアプローチはライセンスとして <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPL</a> を使用すること（デュアルライセンスの選択肢も提供しつつ）と、AIの使用に関する <a href="https://github.com/Solo5/solo5/blob/main/AI.md">POLICY</a> に反映されています。</li>
+</ul>
+
+<p>
+これらすべてが、MirageOS 4（私がリリースマネージャーを務めた）の失敗を特徴づけた要因から根本的に離れる MirageOS 5 を提案するに至りました。この敗北を認め（そして分析した上で）、ユニカーネルの作成とデプロイへの新しいアプローチを提案します：<a href="https://uniker.nl/">uniker.nl</a>。
+</p>
+
+<p>
+MirageOS プロジェクトに関連するプロジェクトについては、もちろんいくつかは引き続きメンテナンスしつつ、私たちのいくつかのライブラリを使用している方々に、より最新のソリューションを提供していきます。また、新しいライブラリとツールへの移行を希望する方を喜んでお手伝いします。私たちは常にそうであったように、サポートのために利用可能です。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">segmap の発表：リネーミングのための高速データ構造</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-announcing-segmap-a-fast-data-structure-for-renamings/18626/1">https://discuss.ocaml.org/t/ann-announcing-segmap-a-fast-data-structure-for-renamings/18626/1</a>
+</p>
+</div>
+
+<div id="outline-container-org10526a6" class="outline-3">
+<h3 id="org10526a6">François Pottier が発表しました</h3>
+<div class="outline-text-3" id="text-org10526a6">
+<p>
+こんにちは！<code>segmap</code> を発表できることを嬉しく思います。この OCaml ライブラリは <b><b>segment maps</b></b> を実装しています。これは自然数から自然数への単調増加関数を表す純粋関数型データ構造です。このデータ構造は、ルックアップ、逆ルックアップ、水平および垂直の変位、先頭への挿入、合成、meet、join など多くの操作を効率的にサポートします。このデータ構造は、変数が de Bruijn インデックスまたは co-de Bruijn インデックスとしてエンコードされる証明支援系、コンパイラ、シンボリック計算システムに役立つ可能性があります。
+</p>
+
+<p>
+このデータ構造は<a href="https://cambium.inria.fr/~fpottier/publis/fpottier-segmap.pdf">こちらの論文</a>で説明されており、<a href="https://cambium.inria.fr/~fpottier/segmap/doc/segmap/Segmap/">ライブラリのドキュメント</a>もオンラインで公開されています。
+</p>
+
+<pre class="example" id="org82134d2">
+opam update
+opam install segmap
+</pre>
+
+<p>
+Happy hacking,
+FP.
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">hexen.0.1</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-hexen-0-1/18627/1">https://discuss.ocaml.org/t/ann-hexen-0-1/18627/1</a>
+</p>
+</div>
+
+<div id="outline-container-org048f175" class="outline-3">
+<h3 id="org048f175">Mikhail が発表しました</h3>
+<div class="outline-text-3" id="text-org048f175">
+<p>
+やあ！
+</p>
+
+<p>
+16進数の部分文字列をデコードする必要があったので、<a href="https://github.com/dx3mod/hexen">Hexen</a> を書きました。これは16進数バイトシーケンスのエンコードとデコードを行うまた別のライブラリです。
+</p>
+
+<p>
+このライブラリの主な目標は、任意の出力先（bytes またはバッファ）への部分文字列のエンコードとデコードのための柔軟なAPIを提供することです。
+</p>
+</div>
+
+<div id="outline-container-orgab855aa" class="outline-4">
+<h4 id="orgab855aa">使い方</h4>
+<div class="outline-text-4" id="text-orgab855aa">
+<p>
+Hexen は、文字列や部分文字列のエンコードとデコードのための高レベル関数 <code>encode</code> と <code>decode</code> を提供します。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">Hexen.encode "Hello World";;
+(* - : string = "48656c6c6f20576f726c64" *)
+
+Hexen.decode "48656c6c6f20576f726c64";;
+(* - : string = "Hello World" *)
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">Hexen.encode_substring "Hello World" 0 5;;
+(* - : string = "48656c6c6f" *)
+
+Hexen.decode_substring "48656c6c6f20576f726c64" 0 10;;
+(* - : string = "Hello" *)
+</pre>
+</div>
+
+<p>
+また、Hexen は文字列や部分文字列を既存のバッファや bytes に直接エンコード・デコードする関数も提供しています。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">let buffer = Buffer.create 16 in
+
+Hexen.encode_to_buffer "Hello" buffer;
+Hexen.encode_substring_to_buffer "Hello World" 5 6 buffer;
+
+let bytes = Bytes.create 12 in 
+Hexen.decode_into (Buffer.contents buffer) 0 bytes 0 22;
+Bytes.set bytes 11 '!';
+
+bytes
+(* - : bytes = Bytes.of_string "Hello World!" *)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">intel_hex.1.0</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-intel-hex-1-0/18628/1">https://discuss.ocaml.org/t/ann-intel-hex-1-0/18628/1</a>
+</p>
+</div>
+
+<div id="outline-container-org70b6c97" class="outline-3">
+<h3 id="org70b6c97">Mikhail が発表しました</h3>
+<div class="outline-text-3" id="text-org70b6c97">
+<p>
+やあ！
+</p>
+
+<p>
+<a href="https://github.com/dx3mod/intel_hex">Intel HEX 操作ライブラリ</a>の最初のメジャーリリースをお知らせできることを嬉しく思います。
+</p>
+
+<p>
+Intel HEX フォーマットは、組み込みシステムプログラミングにおいてマイクロコントローラ、フラッシュメモリ、ROMに読み込まれるコンパイル済みプログラムコードとデータを表現するために一般的に使用されます。
+</p>
+
+<p>
+これで、純粋な OCaml でそれを扱えるようになりました！
+</p>
+</div>
+
+<div id="outline-container-org541670b" class="outline-4">
+<h4 id="org541670b">変更点</h4>
+<div class="outline-text-4" id="text-org541670b">
+<ul class="org-ul">
+<li>APIを再設計；</li>
+<li>ファームウェアのメモリイメージを処理するための <code>Memory</code> モジュールを追加；</li>
+<li>16進数のエンコードとデコードに <code>ohex</code> パッケージの代わりに <a href="https://discuss.ocaml.org/t/ann-hexen-0-1/18627/1">hexen</a> を使用するように変更；</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org89201ad" class="outline-4">
+<h4 id="org89201ad">使用例</h4>
+<div class="outline-text-4" id="text-org89201ad">
+<p>
+このライブラリはIntel HEXファイルの解析と作成のためのシンプルなAPIを提供します。Intel HEXファイルを作成するには、以下のコードを使用できます：
+</p>
+<div class="org-src-container">
+<pre class="src src-ocaml">Intel_hex.Record.
+[
+  Extended_linear_address 0x0F;
+  Data (0x0000, "Hello ");
+  Data (0x0007, "World!");
+  End_of_file;
+]
+|&gt; Intel_hex.Object.to_string
+|&gt; print_endline
+</pre>
+</div>
+<pre class="example" id="org5a3cf5f">
+:02000004000FEB
+:0600000048656C6C6F20E6
+:06000700576F726C6421CA
+:00000001FF
+</pre>
+
+<p>
+Intel HEXファイルを含む文字列を解析するには：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">":0600000048656C6C6F20E6\n:06000700576F726C6421CA"
+|&gt; Intel_hex.Object.of_string
+(* - : Intel_hex.Object.t =
+  [ Intel_hex.Record.Data (0, "Hello "); 
+    Intel_hex.Record.Data (7, "World!") ] *)
+</pre>
+</div>
+
+<p>
+また、このライブラリはIntel HEXファイルやその他のソースから構築されたメモリイメージを扱うためのモジュールも提供しています。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">Intel_hex.Memory.of_string ~block_size:6 "Hello World!"
+(* - : Intel_hex.Memory.t =
+ [ Intel_hex.Memory.Segment(0x0000, "Hello ");
+   Intel_hex.Memory.Segment(0x0006, "World!") ] *)
+</pre>
+</div>
+
+<p>
+詳細については<a href="https://ocaml.org/p/intel_hex/latest/doc/index.html">APIリファレンス</a>をご覧ください。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="5">Js_of_ocaml / Wasm_of_ocaml 6.5</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-js-of-ocaml-wasm-of-ocaml-6-5/18632/1">https://discuss.ocaml.org/t/ann-js-of-ocaml-wasm-of-ocaml-6-5/18632/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgda47f24" class="outline-3">
+<h3 id="orgda47f24">Hhugo が発表しました</h3>
+<div class="outline-text-3" id="text-orgda47f24">
+<p>
+OCaml バイトコードから JavaScript および WebAssembly へのコンパイラである js_of_ocaml と wasm_of_ocaml 6.5.0 の同時リリースをお知らせできることを嬉しく思います。
+</p>
+
+<p>
+このリリースは 6.4.0 以降、7名のコントリビューターから寄せられた130以上のプルリクエスト（約400コミット）をまとめたものです。主なハイライト：
+</p>
+
+<ul class="org-ul">
+<li><b><b>OCaml 5.6</b></b> サポート。</li>
+<li><b><b>OxCaml</b></b>: サポートの改善。</li>
+<li><b><b>Introcaml</b></b>: <a href="https://discuss.ocaml.org/t/ann-introcaml-alpha-polymorphic-printing-and-introspection-for-ocaml/18407">Introcaml</a> の実験的サポート（Chrome DevTools で OCaml の値が OCaml 構文で表示されます）。</li>
+<li><b><b>コンパイル高速化</b></b>: 大規模プログラムで約25〜30%高速化。</li>
+<li><b><b>出力サイズの縮小</b></b>: バイナリ定数が base64 で出力され、生成される JavaScript がよりコンパクトになりました（トップレベルの例が13.6 MBから9.0 MBに）。</li>
+<li><b><b>wasm_of_ocaml</b></b>: BLAKE2 と zstd（<code>Digest.BLAKE2*</code>、圧縮されたマーシャル値）がマルチメモリサポートを必要としなくなり、Safari でも動作するようになりました。さらにランタイムプリミティブの高速化とソースマップの改善。</li>
+<li><b><b>エフェクト</b></b>: <code>--effects=cps</code> と <code>--effects=double-translation</code> でのコードが改善。</li>
+<li><b><b>新しいWeb APIバインディング</b></b>: WebGL2、Web Crypto、Service Workers、Clipboard、Notification、FontFace など。トップレベルが Web Worker で動作可能に。</li>
+<li>多数のバグ修正…</li>
+</ul>
+
+<p>
+破壊的変更：<code>js_of_ocaml-lwt.logger</code> が削除されました（<code>lwt_log</code> は非推奨）、<code>Typed_array.float{32,64}Array_fromArray</code> のシグネチャが変更されました。
+</p>
+
+<p>
+このリリースへのコントリビューター：Vincent Balat、Frédéric Bour、Shon Feder、habakan、Hugo Heuzard、Robin Ricard、Jérôme Vouillon。皆さんありがとうございました！
+</p>
+
+<p>
+<a href="https://ocsigen.org/js_of_ocaml/">ドキュメント</a>と<a href="https://github.com/ocsigen/js_of_ocaml/blob/master/CHANGES.md">完全な変更履歴</a>をご覧ください。問題は<a href="https://github.com/ocsigen/js_of_ocaml/issues">GitHub</a>でご報告ください。
+</p>
+
+<p>
+まもなく opam でも利用可能になる予定です（<a href="https://github.com/ocaml/opam-repository/pull/30987">https://github.com/ocaml/opam-repository/pull/30987</a>）。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="6">TIFF Inspector: ocaml-tiff ベースのインスペクタ（ブラウザ内 OCaml プレイグラウンド付き）</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/tiff-inspector-an-ocaml-tiff-based-inspector-with-an-in-browser-ocaml-playground/18634/1">https://discuss.ocaml.org/t/tiff-inspector-an-ocaml-tiff-based-inspector-with-an-in-browser-ocaml-playground/18634/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgace99e0" class="outline-3">
+<h3 id="orgace99e0">Ridwan Adebosin が発表しました</h3>
+<div class="outline-text-3" id="text-orgace99e0">
+<p>
+こんにちは、皆さん！
+</p>
+
+<p>
+<a href="https://github.com/geocaml/ocaml-tiff">geocaml/ocaml-tiff</a> を使って構築した、TIFFファイルの内部（ディレクトリ、タグ、ストレージレイアウト、サンプル、プレーン）を調べるためのツール <b><b>TIFF Inspector</b></b> を開発しています。
+</p>
+
+<ul class="org-ul">
+<li>ライブ: <a href="https://tiff-inspector.onrender.com/">https://tiff-inspector.onrender.com/</a></li>
+<li>コード: <a href="https://github.com/RidwanAdebosin/tiff-inspect">https://github.com/RidwanAdebosin/tiff-inspect</a> (MIT)</li>
+</ul>
+
+<p>
+CLI、HTTP API、ウェブUIとして提供されます。報告された各値はその出所（ファイルから読み取られたもの、仕様のデフォルト値、または不在）を明示します。推測は一切行いません。
+</p>
+</div>
+
+<div id="outline-container-org01ce69e" class="outline-4">
+<h4 id="org01ce69e">OCaml の方々に興味深い点</h4>
+<div class="outline-text-4" id="text-org01ce69e">
+<p>
+<b><b>ocaml-tiff の修正。</b></b> 珍しいファイルでのテスト中にいくつかの問題が見つかり、vendor コピーで修正しました：
+</p>
+
+<ul class="org-ul">
+<li>インラインに保存された複数の小さい値を持つBigTIFFエントリ（例えばGDALが書き込む BitsPerSample=[8,8,8]）が読めない問題。</li>
+<li>2 GiB以上のクラシックTIFFオフセットが符号拡張される問題。</li>
+<li>インラインではなくオフセットに保存された SampleFormat が読めない問題。</li>
+<li>ツールがフィールドの型と数を確認できるエントリのイントロスペクション。</li>
+</ul>
+
+<p>
+<b><b>独立したテストフィクスチャ。</b></b> パーサーとコードを共有しない別個のPythonライターが生成した21個の小さなTIFFと、ゴールデン出力があります。メンテナーが希望すれば、ocaml-tiff の適合性テストセットとして有用かもしれません。
+</p>
+
+<p>
+<b><b>ブラウザ内プレイグラウンド。</b></b> <code>/playground</code> では、インストールなしに、サンプルファイルに対して ocaml-tiff とインスペクタコアを使って OCaml を書いて実行できます。js_of_ocaml でコンパイルされたトップレベル（gzip圧縮で約1.3 MB）がウェブワーカーで動作します。<code>;;</code> はオプションで、コンパイルエラーはエディタに下線で表示されます。
+</p>
+
+<p>
+これを実現するために、<code>bstr</code> と <code>checkseum</code> が使用するCプリミティブのJavaScript実装を書きました。有用であればアップストリームに提供したいと思います。
+</p>
+
+<p>
+<b><b>サーバー。</b></b> Eio と cohttp-eio を使った OCaml 5 で動作します。各アップロードは時間とメモリ制限を持つ独立したプロセスで検査され、レート制限とグレースフルシャットダウンもあります。無料の Render インスタンスのDockerで動作しています。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org316a142" class="outline-4">
+<h4 id="org316a142">フィードバック歓迎</h4>
+<div class="outline-text-4" id="text-org316a142">
+<ul class="org-ul">
+<li>JSONレポートの形式は他の地理空間ツールでも機能しますか？</li>
+<li>geocaml のメンテナー：修正は1つのPRで行うべきですか、それとも複数の小さなPRがよいですか？</li>
+<li>正しく検査されないTIFF。サンプルファイル付きのIssueは非常に有用です。</li>
+</ul>
+
+<p>
+お読みいただきありがとうございました！
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="7">OCaml 5.5.2 リリース</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ocaml-5-5-2-released/18638/1">https://discuss.ocaml.org/t/ocaml-5-5-2-released/18638/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgc6dd4b3" class="outline-3">
+<h3 id="orgc6dd4b3">octachron が発表しました</h3>
+<div class="outline-text-3" id="text-orgc6dd4b3">
+<p>
+ヨーロッパで初の動力飛行の記念日を祝い、OCaml 5.5.2 のリリースをお知らせできることを光栄に思います。
+</p>
+
+<p>
+OCaml 5.5.2 では、様々な軽微なセキュリティ問題、2つの稀なコンパイル誤り、macOS の将来バージョンとの設定問題、および1つのランタイムイベントライブラリの問題が修正されています。
+</p>
+
+<p>
+全体として、OCaml 5.5 のいずれかのバージョンをすでに使用している場合は、OCaml 5.5.2 への切り替えをお勧めします。
+</p>
+
+<p>
+バグ修正の完全なリストは以下に詳細を記載しています。
+</p>
+
+<p>
+Happy hacking,
+&#x2013; Florian Angeletti（OCaml チームを代表して）。
+</p>
+</div>
+
+<div id="outline-container-org71629a3" class="outline-4">
+<h4 id="org71629a3">インストール手順</h4>
+<div class="outline-text-4" id="text-org71629a3">
+<p>
+ベースコンパイラは以下のコマンドで opam スイッチとしてインストールできます：
+</p>
+
+<pre class="example" id="org882f23c">
+opam update
+opam switch create 5.5.2
+</pre>
+
+<p>
+リリースのソースコードも直接入手可能です：
+</p>
+
+<ul class="org-ul">
+<li>GitHub: <a href="https://github.com/ocaml/ocaml/archive/5.5.2.tar.gz">https://github.com/ocaml/ocaml/archive/5.5.2.tar.gz</a></li>
+<li>Inria アーカイブ: <a href="https://caml.inria.fr/pub/distrib/ocaml-5.5/ocaml-5.5.2.tar.gz">https://caml.inria.fr/pub/distrib/ocaml-5.5/ocaml-5.5.2.tar.gz</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf3d16e2" class="outline-4">
+<h4 id="orgf3d16e2">バグ修正</h4>
+<div class="outline-text-4" id="text-orgf3d16e2">
+<ul class="org-ul">
+<li><a href="https://github.com/ocaml/ocaml/issues/15045">#15045</a>: 結果が使用されない atomic ロードは
+デッドコード除去で削除されないようにしました。
+(Xavier Clerc、Steven Dolan と KC Sivaramakrishnan によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/15067">#15067</a>, <a href="https://github.com/ocaml/ocaml/issues/15071">#15071</a>: macOS の将来バージョンで利用可能な関数の検出を修正しました。
+(Antonin Décimo、Nicolás Ojeda Bär と Damien Doligez によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/15112">#15112</a>, OSEC-2026-22: <code>Unix.map_file</code>: データサイズ計算時のオーバーフローを防止しました。
+(Xavier Leroy と Nicolás Ojeda Bär、Nicolás Ojeda Bär
+と Edwin Török によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/15113">#15113</a>, OSEC-2026-21: <code>Str.string_partial_match</code>: キャプチャされたグループが
+有効であることを確認するようにしました。
+(Xavier Leroy、Nicolás Ojeda Bär と Edwin Török によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/15115">#15115</a>, OSEC-2026-23: デマーシャリング
+(<code>Marshal.from_{channel,string,bytes}</code>) の複数の問題を修正しました。
+(Xavier Leroy、Nicolás Ojeda Bär によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/15133">#15133</a>, OSEC 2026-24: Windows でのコマンドクォートにおける複数の問題
+(Xavier Leroy と Nicolás Ojeda Bär、Nicolás Ojeda Bär によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/15119">#15119</a>, OSEC-2026-25: リングバッファからのランタイムイベントメッセージの
+デコードを強化しました。
+(Sadiq Jaffer、Hannes Mehnert による報告、Olivier Nicole と
+Edwin Török によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/15177">#15177</a>, OSEC-2026-26: カスタムイベントキャッシュの整合性を維持するようにしました。
+(Sadiq Jaffer、Hannes Mehnert による報告、Edwin Török によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/15043">#15043</a>, <a href="https://github.com/ocaml/ocaml/issues/15076">#15076</a>: ランタイムイベントライブラリ、ユーザーイベントが
+リングバッファの半分より大きい場合の無限ループを修正しました。
+(Tim McGilchrist、Sadiq Jaffer によるレビュー)</li>
+
+<li><a href="https://github.com/ocaml/ocaml/issues/15185">#15185</a>, <a href="https://github.com/ocaml/ocaml/issues/15187">#15187</a>: 即値範囲と冗長なパターンの特定の組み合わせに対する
+パターンマッチングのコンパイル誤りを修正しました。
+(Gabriel Scherer、Alperer Keleş による報告、
+ Vincent Laviron と Florian Angeletti によるレビュー)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="8">bytream.0.4</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-bytream-0-4/18639/1">https://discuss.ocaml.org/t/ann-bytream-0-4/18639/1</a>
+</p>
+</div>
+
+<div id="outline-container-org3e97405" class="outline-3">
+<h3 id="org3e97405">Mikhail が発表しました</h3>
+<div class="outline-text-3" id="text-org3e97405">
+<p>
+やあ！
+</p>
+
+<p>
+低メモリアロケーションでバイトをストリーミングして処理できる <a href="https://github.com/dx3mod/bytream">Bytream</a> ライブラリの次バージョンをお知らせできることを嬉しく思います。このリリースには多くの重要な更新が含まれています。
+</p>
+</div>
+
+<div id="outline-container-orgb687987" class="outline-4">
+<h4 id="orgb687987">変更点</h4>
+<div class="outline-text-4" id="text-orgb687987">
+<ul class="org-ul">
+<li><p>
+<code>Bytream</code> のスライスに、OCaml バージョン 5.2 以降が必要な独自の <code>~buffer、~offset、~length</code> ラベル付きタプルの代わりに、<a href="https://ocaml.org/p/bstr/latest">Bstr</a> プロジェクトの <a href="https://ocaml.org/p/slice/latest">Slice</a> ライブラリを使用するようになりました；
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">let of_channel ?(io_buffer_size = 4096) ic =
+  let buffer = Bstr.create io_buffer_size in
+
+  let reader () =
+    match In_channel.input_bigarray ic buffer 0 io_buffer_size with
+    | 0 -&gt; raise End_of_file
+    | len -&gt; Slice_bstr.make ~len buffer
+  in
+
+  make reader
+</pre>
+</div></li>
+
+<li><p>
+<a href="https://github.com/dx3mod/ozstd">ozstd</a> ライブラリを通じた Zstandard 圧縮・伸張のための <code>bytream.ozstd</code> を追加；
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">let output_compressed_string out_stream = 
+  let out_stream = Bytream_ozstd.Out.make ~compression_level:3 out_stream in 
+  Bytream.Out.output_string out_stream "Cras pulvinar sollicitudin nulla quis tempor.";
+  Bytream.Out.flush out_stream
+
+let input_decompressed_line in_stream = 
+  let in_stream = Bytream_ozstd.In.make in_stream in 
+  Bytream.In.input_line in_stream
+</pre>
+</div></li>
+
+<li><p>
+<a href="https://ocaml.org/p/bin/latest">Bin</a> ライブラリを通じた宣言的なバイトのエンコード・デコードのための <code>bytream.bin</code> を追加；
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">type point = { x : int; y : int }
+
+let point = 
+  let open Bin in 
+  record (fun x y -&gt; { x; y })
+  |+ field neint16 (fun t -&gt; t.x)
+  |+ field neint16 (fun t -&gt; t.y)
+  |&gt; sealr
+
+let _ = 
+  (* ... *)
+  let p = Bytream_bin.In.input in_stream point in 
+  Bytream_bin.Out.output out_stream point { p with y = p.y * 2 }
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org02e5bde" class="outline-4">
+<h4 id="org02e5bde">クレジット</h4>
+<div class="outline-text-4" id="text-org02e5bde">
+<p>
+<a href="https://robur.coop">Robur Coop</a> の<a href="https://ocaml.org/p/bstr/latest">Bstr</a>、<a href="https://ocaml.org/p/slice/latest">Slice</a>、<a href="https://ocaml.org/p/bin/latest">Bin</a> などのライブラリに特別な感謝を申し上げます。これらは <a href="https://github.com/dx3mod/bytream">Bytream</a>、<a href="https://github.com/dx3mod/ozstd">ozstd</a> などの私のプロジェクトに非常に密接に統合されています。ありがとうございます！
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="9">spvec の最初のリリース</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-first-release-of-spvec/18641/1">https://discuss.ocaml.org/t/ann-first-release-of-spvec/18641/1</a>
+</p>
+</div>
+
+<div id="outline-container-org3363a06" class="outline-3">
+<h3 id="org3363a06">François Pottier が発表しました</h3>
+<div class="outline-text-3" id="text-org3363a06">
+<p>
+<code>spvec</code> の最初のリリースをお知らせできることを嬉しく思います。この小さな OCaml ライブラリは<b>セミ永続ベクタ</b>を実装しています。つまり、<code>push</code> と <code>get</code> の2つの操作のみをサポートし、永続的（イミュータブル）に見えるが、制限されたルールに従って使用しなければならないベクタを提供します。この制限により、ミュータブルベクタを基にした効率的な実装が可能です。このライブラリは、シンプルで安全なAPIを持つ、永続ベクタに偽装したミュータブルベクタを提供すると言えるかもしれません。
+</p>
+
+<p>
+2つのサブモジュールが提供されています：<code>Spvec.Safe</code> と <code>Spvec.Unsafe</code>。<b>安全</b>バリアントはライブラリの誤用をランタイムで検出します。<b>アンセーフ</b>バリアントは高速ですが誤用を検出しません；ユーザーのコードが正しいと確信できる場合にのみ使用すべきです。
+</p>
+
+<p>
+詳細については<a href="https://cambium.inria.fr/~fpottier/spvec/doc/spvec/">ドキュメント</a>をご覧ください。
+</p>
+
+<pre class="example" id="org53df4f4">
+opam update
+opam install spvec
+</pre>
+
+<p>
+Happy hacking,
+FP.
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="10">ocaml-emcc: OCaml プログラムと C スタブを WebAssembly にコンパイルする</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ocaml-emcc-compile-ocaml-programs-with-their-c-stubs-to-webassembly/18649/1">https://discuss.ocaml.org/t/ann-ocaml-emcc-compile-ocaml-programs-with-their-c-stubs-to-webassembly/18649/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgfd3edc9" class="outline-3">
+<h3 id="orgfd3edc9">rboud が発表しました</h3>
+<div class="outline-text-3" id="text-orgfd3edc9">
+<p>
+こんにちは、皆さん！
+</p>
+
+<p>
+ocaml-emcc というツールに取り組んでいて、他の人たちが試せる状態になりました：<a href="https://github.com/rboudrouss/ocaml-emcc">https://github.com/rboudrouss/ocaml-emcc</a>
+</p>
+
+<p>
+アイデアは非常にシンプルです。OCaml を JS や wasm にコンパイルする代わりに、<code>ocamlrun</code> を emscripten でコンパイルし、プログラムとその依存関係のすべてのCスタブを emcc でコンパイルして、全体を1つのモジュールにリンクします。JavaScript で書き直す必要があるものは何もありません。zarith、sqlite3、camlzip、cryptokit、mirage-crypto、ctypes バインディングなどが「そのまま」動作し、独自のCコードも同様です。
+</p>
+
+<p>
+明らかな欠点は、インタープリタで動作するバイトコードなので、js_of_ocaml や wasm_of_ocaml と比べてかなり遅いことです。コードが純粋な OCaml であるか、そのCスタブにすでにJavaScript実装がある場合は、それらを使用してください。これはFFI部分が問題となるケース向けです。
+</p>
+
+<p>
+ぜひ試してみてください！
+</p>
+
+<pre class="example" id="orgbd3c39b">
+opam pin add ocaml-emcc git+https://github.com/rboudrouss/ocaml-emcc.git
+source /path/to/emsdk/emsdk_env.sh  # emcc を PATH に（emscripten のインストールが必要）
+ocaml-emcc build main.js     # dune プロジェクト内で
+node main.js                 # または main.js をウェブページに読み込む
+</pre>
+
+<p>
+出力ファイルの拡張子によって得られるものが決まります（詳細はREADMEとemscriptenのドキュメントを参照）：
+</p>
+
+<ul class="org-ul">
+<li><code>main.js</code>: Node.js とブラウザ</li>
+<li><code>main.html</code>: 同上、加えて最小限のページ</li>
+<li><code>main.wasm</code>: スタンドアロンモジュール、ただし一部の emscripten 関数をインポート</li>
+<li><code>main.wasm --wasi</code>: WASI関数のみをインポートするため、wasmtime や Node.jsのWASIで動作</li>
+</ul>
+
+<p>
+まだプロトタイプなので荒削りな部分もあります。試してみて問題が発生した場合はぜひ教えてください。ビルドできないパッケージこそが今私が求めているものです。新しいレシピの提案・要望も歓迎します。
+</p>
+
+<p>
+これは、OCaml で書かれた静的アナライザ <a href="https://gitlab.com/mopsa/mopsa-analyzer">MOPSA</a> を wasm にコンパイルする試みから始まりました。依存しているFFI（apron、gmp、clangのフロントエンドなど）の量が多く非常に困難でした。最終的にOCamlとMOPSAの両方のソースにパッチを当てて<a href="https://mopsawasm.rboud.com">動作</a>させ、<a href="https://ocaml.org/ocaml-workshop-2026/schedule">OCaml Workshop 2026</a> でそれについて発表しました。その後、その作業を汎用ツールに変えてきて、かなりうまく一般化できることがわかったので、ここに公開します。
+</p>
+
+<p>
+C依存関係のためにブラウザに持ち込めなかったOCamlプロジェクトがある場合は特に、どのような用途に使いたいかをぜひ聞かせてください。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="11">snkv-ocaml 0.3.0 新リリース — HNSW ベクタ検索付き SNKV の OCaml バインディング</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-new-release-of-snkv-ocaml-0-3-0-ocaml-bindings-for-snkv-with-hnsw-vector-search/18650/1">https://discuss.ocaml.org/t/ann-new-release-of-snkv-ocaml-0-3-0-ocaml-bindings-for-snkv-with-hnsw-vector-search/18650/1</a>
+</p>
+</div>
+
+<div id="outline-container-org5a6e8ff" class="outline-3">
+<h3 id="org5a6e8ff">Tomasz Barański が発表しました</h3>
+<div class="outline-text-3" id="text-org5a6e8ff">
+<p>
+こんにちは、皆さん！
+</p>
+
+<p>
+snkv-ocaml 0.3.0 をお知らせします。これは SQLite の B-tree エンジン上に構築された永続的でACIDなキー・バリューストア SNKV の OCaml バインディングです。SNKV はキー・バリューストレージ、カラムファミリー、TTL、認証済み暗号化、トランザクション、イテレータ、ランタイム統計を提供します。
+</p>
+
+<p>
+snkv-ocaml 0.3.0 は opam で利用可能です。このリリースはアップストリームの SNKV v0.8.2 に対応し、同じデータベースに保存されたベクタに対する HNSWベースのベクタ検索をサポートしています。
+</p>
+
+<p>
+リンク：
+</p>
+
+<ul class="org-ul">
+<li>リポジトリ: <a href="https://codeberg.org/tomaszb/snkv-ocaml">https://codeberg.org/tomaszb/snkv-ocaml</a></li>
+<li>OPAM: <a href="https://opam.ocaml.org/packages/snkv/">https://opam.ocaml.org/packages/snkv/</a></li>
+<li>変更履歴: <a href="https://codeberg.org/tomaszb/snkv-ocaml/src/branch/main/CHANGELOG.md">https://codeberg.org/tomaszb/snkv-ocaml/src/branch/main/CHANGELOG.md</a></li>
+<li>アップストリーム SNKV: <a href="https://github.com/hash-anu/snkv">https://github.com/hash-anu/snkv</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-12" class="outline-2">
+<h2 id="12">TIFF Inspector の構築：OCaml、TIFF 内部、ブラウザ内プレイグラウンドの探求</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/building-tiff-inspector-exploring-ocaml-tiff-internals-and-an-in-browser-playground/18655/1">https://discuss.ocaml.org/t/building-tiff-inspector-exploring-ocaml-tiff-internals-and-an-in-browser-playground/18655/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgf3530f5" class="outline-3">
+<h3 id="orgf3530f5">RidwanAdebsoin が発表しました</h3>
+<div class="outline-text-3" id="text-orgf3530f5">
+<p>
+こんにちは、皆さん！
+</p>
+
+<p>
+<a href="https://github.com/geocaml/ocaml-tiff">geocaml/ocaml-tiff</a> を使って構築した、TIFFファイルの内部（ディレクトリ、タグ、ストレージレイアウト、サンプル、プレーン）を調べるためのツール <b><b>TIFF Inspector</b></b> を開発しています。
+</p>
+
+<ul class="org-ul">
+<li><b><b>ライブ:</b></b> <a href="https://tiff-inspector.onrender.com/">TIFF Inspector</a></li>
+<li><b><b>コード:</b></b> <a href="https://github.com/RidwanAdebosin/tiff-inspect">GitHub リポジトリ</a> (MIT)</li>
+</ul>
+
+<p>
+CLI、HTTP API、ウェブUIとして提供されます。報告された各値はその出所（ファイルから読み取られたもの、仕様のデフォルト値、または不在）を明示します。推測は一切行いません。
+</p>
+</div>
+
+<div id="outline-container-orgc347680" class="outline-4">
+<h4 id="orgc347680">OCaml の方々に興味深い点</h4>
+<div class="outline-text-4" id="text-orgc347680">
+<p>
+<b><b>ocaml-tiff の修正。</b></b> 珍しいファイルでのテスト中にいくつかの問題が見つかり、vendor コピーで修正しました：
+</p>
+
+<ul class="org-ul">
+<li>インラインに保存された複数の小さい値を持つBigTIFFエントリ（例えばGDALが書き込む <code>BitsPerSample=[8,8,8]</code>）が読めない問題。</li>
+<li>2 GiB以上のクラシックTIFFオフセットが符号拡張される問題。</li>
+<li>インラインではなくオフセットに保存された <code>SampleFormat</code> が読めない問題。</li>
+<li>ツールがフィールドの型と数を確認できるエントリのイントロスペクション。</li>
+</ul>
+
+<p>
+<b><b>独立したテストフィクスチャ。</b></b> パーサーとコードを共有しない別個のPythonライターが生成した21個の小さなTIFFと、ゴールデン出力があります。メンテナーが希望すれば、<code>ocaml-tiff</code> の適合性テストセットとして有用かもしれません。
+</p>
+
+<p>
+<b><b>ブラウザ内プレイグラウンド。</b></b> <code>/playground</code> では、インストールなしに、サンプルファイルに対して <code>ocaml-tiff</code> とインスペクタコアを使って OCaml を書いて実行できます。<code>js_of_ocaml</code> でコンパイルされたトップレベル（gzip圧縮で約1.3 MB）がウェブワーカーで動作します。<code>;;</code> はオプションで、コンパイルエラーはエディタに下線で表示されます。
+</p>
+
+<p>
+これを実現するために、<code>bstr</code> と <code>checkseum</code> が使用するCプリミティブのJavaScript実装を書きました。有用であればアップストリームに提供したいと思います。
+</p>
+
+<p>
+<b><b>サーバー。</b></b> Eio と cohttp-eio を使った OCaml 5 で動作します。各アップロードは時間とメモリ制限を持つ独立したプロセスで検査され、レート制限とグレースフルシャットダウンもあります。無料の Render インスタンスのDockerで動作しています。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0061c5f" class="outline-4">
+<h4 id="org0061c5f">フィードバック歓迎</h4>
+<div class="outline-text-4" id="text-org0061c5f">
+<ul class="org-ul">
+<li>JSONレポートの形式は他の地理空間ツールでも機能しますか？</li>
+<li><code>geocaml</code> のメンテナー：修正は1つのPRで行うべきですか、それとも複数の小さなPRがよいですか？</li>
+<li>正しく検査されないTIFFがあれば教えてください。サンプルファイル付きのIssueは非常に有用です。</li>
+</ul>
+
+<p>
+お読みいただきありがとうございました！
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-13" class="outline-2">
+<h2 id="13">stele 0.1.0: Menhir 文法の構文エラーメッセージ生成ツール</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-stele-0-1-0-syntax-error-messages-for-menhir-grammars/18657/1">https://discuss.ocaml.org/t/ann-stele-0-1-0-syntax-error-messages-for-menhir-grammars/18657/1</a>
+</p>
+</div>
+
+<div id="outline-container-org60ec34c" class="outline-3">
+<h3 id="org60ec34c">Jérôme Vouillon が発表しました</h3>
+<div class="outline-text-3" id="text-org60ec34c">
+<p>
+Menhir 文法の構文エラーメッセージを自動生成するツール <a href="https://github.com/vouillon/stele">stele</a> の最初のリリースをお知らせできることを嬉しく思います。
+</p>
+
+<p>
+不正な入力に出会った Menhir パーサーは <code>Error</code> を発生させますが、これはパースが失敗した場所は示しますが、理由は示しません。Menhir はすべてのエラー状態（パースが詰まる可能性のある全ての時点）に対してメッセージを記述すれば、実際のメッセージを表示できますが、現実的な文法にはそれが数百もあり、文法が変わるたびに古くなります。
+</p>
+
+<p>
+stele は、<code>menhir --list-errors</code> と文法の <code>.cmly</code> から、ビルド時にメッセージを生成します。いくつかのエイリアスと1つの <code>%on_error_reduce</code> アノテーションがあれば、チュートリアルの計算機は次のように報告します：
+</p>
+
+<pre class="example" id="org9e5eee2">
+Error: Assuming that the statements are complete, expecting '}'.
+ --&gt; stray.calc:1:6
+1 | { 1; ) }
+  ·      ^
+  ·   ^^ these statements
+  · ^ This '{' opens the enclosing construct.
+</pre>
+
+<p>
+得られるもの：
+</p>
+
+<ul class="org-ul">
+<li><b><b>すべてのエラー状態に対するメッセージ</b></b>：次に何が来られるかを示します。各リストはパーサーのテーブルと照合されるため、そのメッセージがパーサーがその状態で拒否するトークンを提示することはありません。</li>
+<li><b><b>位置のヒント</b></b>：入力がまだその中にある開きデリミタと、パーサーが完結したと仮定した構文要素。小さなランタイムライブラリ <code>stele.runtime</code> は、パーサーが失敗したときにこれらをソーススパンに変換します。<code>menhirLib</code> にのみ依存しているため、js_of_ocaml と wasm_of_ocaml でも動作します。レンダリングはユーザーに任されており、<a href="https://github.com/johnyob/grace">Grace</a> と組み合わせるとうまく機能します。</li>
+<li><b><b>必要なときのより良い表現</b></b>：小さな設定ファイルで読みやすい名前とトークングループ（「演算子」など）を指定でき、オーバーライドファイルには手書きのメッセージが必要な少数の状態のものを保持できます。どちらにも古いエントリがあるとビルドが失敗します。</li>
+</ul>
+
+<p>
+stele は François Pottier の<a href="https://dl.acm.org/doi/10.1145/2892208.2892224"><b>Reachability and Error Diagnosis in LR(1) Parsers</b></a>（CC 2016）——<code>--list-errors</code> の背景にある論文——に基づいています。この論文が CompCert のパーサーに対して手作業で行ったことを自動化します。<a href="https://github.com/ocsigen/wax">Wax</a> ツールチェーンの内部で始まり、そこでは2つの文法のエラーメッセージを生成しています。
+</p>
+
+<p>
+試すには：
+</p>
+
+<pre class="example" id="org4306aa3">
+opam install stele
+</pre>
+
+<p>
+OCaml ≥ 4.14 と menhir ≥ 20260122 が必要です。<a href="https://github.com/vouillon/stele/blob/main/TUTORIAL.md">チュートリアル</a>では、小さな計算機の文法を「構文エラー」からフルセットアップまで10段階で説明しています。その最終状態はコピーして実行できるサンプルです。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-14" class="outline-2">
+<h2 id="14">OSEC-2026-21: Str partial-match によるキャプチャレジスタの古い値によるアンダーフロー</h2>
+<div class="outline-text-2" id="text-14">
+</div>
+<div id="outline-container-orga0bb4bc" class="outline-3">
+<h3 id="orga0bb4bc">Hannes Mehnert が発表しました</h3>
+<div class="outline-text-3" id="text-orga0bb4bc">
+<p>
+皆さん、こんにちは、
+</p>
+
+<p>
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+<a href="https://github.com/ocaml/security-advisories">https://github.com/ocaml/security-advisories</a> および
+<a href="https://osv.dev/list?q=&amp;ecosystem=opam">https://osv.dev/list?q=&amp;ecosystem=opam</a> でもご確認いただけます。
+</p>
+
+<p>
+よろしくお願いします。
+</p>
+
+<p>
+Hannes
+</p>
+
+<pre class="example" id="orgae0f293">
+id: OSEC-2026-21
+modified: "2026-10-26T15:15:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: 
+"CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:N/VI:L/VA:H/SC:N/SI:N/SA:N/E:P/AU:Y/R:U"
+severity_score: "5.5 (Medium)"
+affected: "ocaml" {&lt; "5.5.2"}
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "824dadcbde77aea27d84b8d70a72442b8fcb344a"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "feccd4744ebe25b90208e569d03efd514b964dce"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer "Nicolás Ojeda Bär"]
+   [remediation_reviewer "Edwin Török"]
+   [remediation_developer "Xavier Leroy"]
+]
+cwe: [ CWE-122 ]
+affected_bindings: ["Str.string_partial_match" "Str.replace_matched" 
+"Str.global_replace" "Str.replace_first" ]
+</pre>
+
+<p>
+<b><b>Str partial-match によるキャプチャレジスタの古い値によるアンダーフロー</b></b>
+</p>
+
+<p>
+ANT-2026-KKC4QS4S Str partial-match stale capture registers underflow
+</p>
+
+<p>
+<code>Str.string_partial_match</code> はキャプチャされたグループの開始と終了を記録します。
+<code>beginning &lt;= end</code> という暗黙の前提がありました。
+しかし、マッチされた文字列の終端に達したが正規表現の終端には達していない場合、
+グループの開始がスター演算子のN回目の繰り返しでマッチし、
+グループの終了がN-1回目の繰り返しでマッチすることが可能で、
+<code>beginning &gt; end</code> になる可能性がありました。
+<code>Str.matched_group</code> は安全で、<code>beginning &gt; end</code> のグループに対して
+<code>Invalid_argument</code> で失敗しますが、<code>Str.replace_matched</code> はクラッシュする可能性があり、
+<code>end - beginning</code> バイトを memcpy しようとします。
+</p>
+
+<p>
+ANT の例は、<code>\(\(a\)b\)+</code> に対して <code>ab</code> を部分マッチさせるケースです。
+グループ2は <code>beginning = 2</code>、<code>end = 1</code> となります。
+</p>
+</div>
+
+<div id="outline-container-org8c3b797" class="outline-4">
+<h4 id="org8c3b797">修正</h4>
+<div class="outline-text-4" id="text-org8c3b797">
+<p>
+修正は <code>beginning &gt; end</code> のグループをマッチしなかったものとして記録することです。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd16fead" class="outline-4">
+<h4 id="orgd16fead">影響を受けるか？</h4>
+<div class="outline-text-4" id="text-orgd16fead">
+<p>
+以下の条件をすべて満たす必要があります：
+</p>
+<ul class="org-ul">
+<li><code>Str.string_partial_match</code> を使用している必要があります
+<ul class="org-ul">
+<li>この関数を使用していない場合は影響を受けません</li>
+</ul></li>
+<li><code>Str.string_partial_match</code> の呼び出し後に同じ正規表現で <code>Str.{replace_matched,global_replace,replace_first}</code> のいずれかを使用する必要があります
+<ul class="org-ul">
+<li><code>Str.group_beginning</code> と <code>Str.group_end</code> を使用して独自の文字列操作を行う場合は安全です（String モジュールが境界外アクセスで例外を発生させるため）。同様に <code>Str.matched_group</code> も安全です（OCaml 実装で <code>String</code> 関数を使用しています）</li>
+</ul></li>
+<li>マッチの置換が0より大きいグループを参照する必要があります
+<ul class="org-ul">
+<li>置換文字列引数が固定されていてグループを参照しないか、グループ0のみを参照する場合は影響を受けません</li>
+</ul></li>
+<li>参照される置換グループが元の正規表現の繰り返し演算子の下にある必要があります
+<ul class="org-ul">
+<li>正規表現に繰り返し演算子がない場合、または繰り返し演算子の下にグループがない場合は影響を受けません</li>
+</ul></li>
+</ul>
+
+<p>
+例えば、<code>{|\(\(a\)b\)+|}</code> を <code>Str.string_partial_match</code> の呼び出しの正規表現として使用し、
+その後 <code>Str.replace_matched</code> の引数で <code>\2</code> を参照している場合に影響を受ける可能性があります。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6559a17" class="outline-4">
+<h4 id="org6559a17">タイムライン</h4>
+<div class="outline-text-4" id="text-org6559a17">
+<ul class="org-ul">
+<li>2026-08-24: 脆弱性が発見される</li>
+<li>2026-08-27: security@ocaml.org に報告が転送される</li>
+<li>2026-09-29: trunk にマージされる</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-15" class="outline-2">
+<h2 id="15">OSEC-2026-22: Unix.map_file における整数オーバーフロー</h2>
+<div class="outline-text-2" id="text-15">
+</div>
+<div id="outline-container-org3cc7574" class="outline-3">
+<h3 id="org3cc7574">Hannes Mehnert が発表しました</h3>
+<div class="outline-text-3" id="text-org3cc7574">
+<p>
+皆さん、こんにちは、
+</p>
+
+<p>
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+<a href="https://github.com/ocaml/security-advisories">https://github.com/ocaml/security-advisories</a> および
+<a href="https://osv.dev/list?q=&amp;ecosystem=opam">https://osv.dev/list?q=&amp;ecosystem=opam</a> でもご確認いただけます。
+</p>
+
+<p>
+よろしくお願いします。
+</p>
+
+<p>
+Hannes
+</p>
+
+<pre class="example" id="org98d0091">
+id: OSEC-2026-22
+modified: "2026-10-23T22:30:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: 
+"CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:L/VI:L/VA:H/SC:N/SI:N/SA:N/E:P"
+severity_score: "5.5 (Medium)"
+affected: "ocaml" {&lt; "5.5.2"}
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "de57bb4f59c3302260aaeaaa4dfee12695597d25"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "ff978d2139ba638886c2565f2d86c0ee265840a5"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer "Nicolás Ojeda Bär"]
+   [remediation_reviewer "Edwin Török"]
+   [remediation_developer "Xavier Leroy"]
+]
+cwe: [ CWE-190 ]
+affected_bindings: ["Unix.map_file"]
+</pre>
+
+<p>
+<b><b>Unix.map_file における整数オーバーフロー</b></b>
+</p>
+
+<p>
+ANT-2026-6W9NPC2Q mmap の次元積における整数オーバーフロー
+</p>
+</div>
+
+<div id="outline-container-org7ea3919" class="outline-4">
+<h4 id="org7ea3919">修正</h4>
+<div class="outline-text-4" id="text-org7ea3919">
+<p>
+bigarray の次元を掛け合わせる際に <code>*</code> の代わりに <code>caml_umul_overflow</code> を使用し、
+整数オーバーフローを検出して <code>Failure</code> を発生させるようにしました。
+負の位置も <code>Invalid_argument</code> を発生させて拒否されます。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc968566" class="outline-4">
+<h4 id="orgc968566">影響を受けるか？</h4>
+<div class="outline-text-4" id="text-orgc968566">
+<p>
+<code>Unix.map_file</code> の呼び出しにおいて、次元またはファイルサイズのいずれかがユーザーによって制御可能な場合、影響を受ける可能性があります。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6851760" class="outline-4">
+<h4 id="org6851760">スコアに関する注記</h4>
+<div class="outline-text-4" id="text-org6851760">
+<p>
+この脆弱性はライブラリにあり、CVSSスコアは
+<a href="https://www.first.org/cvss/v4.0/user-guide#Assessing-Vulnerabilities-in-Software-Libraries-and-Similar">最悪のケースの前提</a>
+で計算されています。
+実際のアプリケーションでのスコアは、攻撃者がこの関数への入力をどの程度制御できるかによって異なります。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdd4e02d" class="outline-4">
+<h4 id="orgdd4e02d">タイムライン</h4>
+<div class="outline-text-4" id="text-orgdd4e02d">
+<ul class="org-ul">
+<li>2026-08-24: 脆弱性が発見される</li>
+<li>2026-08-27: security@ocaml.org に報告が転送される</li>
+<li>2026-09-29: trunk にマージされる</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-16" class="outline-2">
+<h2 id="16">OSEC-2026-23: Marshal における複数の問題</h2>
+<div class="outline-text-2" id="text-16">
+</div>
+<div id="outline-container-org8e5492e" class="outline-3">
+<h3 id="org8e5492e">Hannes Mehnert が発表しました</h3>
+<div class="outline-text-3" id="text-org8e5492e">
+<p>
+皆さん、こんにちは、
+</p>
+
+<p>
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+<a href="https://github.com/ocaml/security-advisories">https://github.com/ocaml/security-advisories</a> および
+<a href="https://osv.dev/list?q=&amp;ecosystem=opam">https://osv.dev/list?q=&amp;ecosystem=opam</a> でもご確認いただけます。
+</p>
+
+<p>
+よろしくお願いします。
+</p>
+
+<p>
+Hannes
+</p>
+
+<pre class="example" id="orgba5b912">
+id: OSEC-2026-23
+modified: "2026-10-23T22:30:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N"
+severity_score: "6.8"
+affected: "ocaml" {&lt; "5.5.2"}
+aliases: [ CVE-2026-28364 ]
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "7da997d28b1ac57dd3a7108a865b327493fd4239"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "709b0ab93e53d54297b42d897d74dced1e9c75a5"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer "Nicolás Ojeda Bär"]
+   [remediation_developer "Xavier Leroy"]
+]
+cwe: [ CWE-126 CWE-502 CWE-754]
+affected_bindings: ["Marshal.from_channel" "Marshal.from_bytes" 
+"Marshal.from_string" "input_value" ]
+</pre>
+
+<p>
+<b><b>Marshal における複数の問題</b></b>
+</p>
+
+<p>
+Marshal モジュールでいくつかの問題が発見されました：
+</p>
+
+<p>
+ANT-2026-K7NTK0FT アンマーシャル呼び出し間での obj_counter の古い値による null/解放済み intern_obj_table インデックスアクセス
+</p>
+
+<p>
+ANT-2026-2NJYQWEX CODE_CUSTOM_LEN でのカスタムブロックサイズのラップアラウンドによる割り当て問題
+</p>
+
+<p>
+ANT-2026-PJC00M7X アンマーシャラーが検証なしに偽造された Closure_tag メタデータを受け入れる
+</p>
+
+<p>
+これは <a href="https://osv.dev/vulnerability/OSEC-2026-01">OSEC-2026-01</a> のフォローアップです。
+</p>
+
+<p>
+アンマーシャル時にランタイムシステムに未定義の動作を引き起こす、破損または悪意のあるマーシャルデータ。input_value は、ランタイムシステムを破壊することなく、クリーンに失敗するか、適切に形成された OCaml オブジェクトを生成すべきです。
+</p>
+
+<p>
+したがって、OCaml コードがクラッシュまたは誤動作する原因となる予期しない型の OCaml オブジェクトを生成する、適切に形成されたマーシャルデータは除外されます。
+</p>
+</div>
+
+<div id="outline-container-orgbae0c57" class="outline-4">
+<h4 id="orgbae0c57">影響を受けるか？</h4>
+<div class="outline-text-4" id="text-orgbae0c57">
+<p>
+影響を受けるバインディング <code>Marshal.from_channel</code>、<code>Marshal.from_bytes</code>、<code>Marshal.from_string</code>、<code>Stdlib.input_value</code>（または <code>Lwt_io.read_value</code> などのライブラリのラッパー）のいずれかを使用している場合。
+</p>
+
+<p>
+Marshal は型安全ではないため、信頼できない入力でデシリアライゼーションを使用する場合は注意が必要です（型の混乱やリモートコード実行のリスクがあります——コードに Marshal を使用できます）。
+</p>
+
+<p>
+Marshal は信頼できるプロセス間の通信にのみ使用することをお勧めします。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org03ad7ca" class="outline-4">
+<h4 id="org03ad7ca">タイムライン</h4>
+<div class="outline-text-4" id="text-org03ad7ca">
+<ul class="org-ul">
+<li>2026-08-24: 脆弱性が発見される</li>
+<li>2026-08-27: security@ocaml.org に報告が転送される</li>
+<li>2026-09-29: trunk にマージされる</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-17" class="outline-2">
+<h2 id="17">OSEC-2026-24: Windows でのコマンドクォートにおける複数の問題</h2>
+<div class="outline-text-2" id="text-17">
+</div>
+<div id="outline-container-orgc9585f3" class="outline-3">
+<h3 id="orgc9585f3">Hannes Mehnert が発表しました</h3>
+<div class="outline-text-3" id="text-orgc9585f3">
+<p>
+皆さん、こんにちは、
+</p>
+
+<p>
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+<a href="https://github.com/ocaml/security-advisories">https://github.com/ocaml/security-advisories</a> および
+<a href="https://osv.dev/list?q=&amp;ecosystem=opam">https://osv.dev/list?q=&amp;ecosystem=opam</a> でもご確認いただけます。
+</p>
+
+<p>
+よろしくお願いします。
+</p>
+
+<p>
+Hannes
+</p>
+
+<pre class="example" id="orgec9530d">
+id: OSEC-2026-24
+modified: "2026-10-23T22:30:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: 
+"CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P"
+severity_score: "7.3 (High)"
+aliases : [ CVE-2026-41083 ]
+affected: "ocaml" {&lt; "5.5.2"}
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "70a3a75c0bfb23d67ad5fe3e9c1ba9800d61feae"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "0bbf8e5af985feb03a11a5ffe57d068373d09fd0"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer "Nicolás Ojeda Bär"]
+   [remediation_developer "Xavier Leroy"]
+]
+cwe: [ CWE-78 ]
+affected_bindings: ["Filename.quote_command"  "Unix.create_process" 
+"Unix.create_process_env" "Unix.open_process_args_in" 
+"Unix.open_process_args_out" "Unix.open_process_args_full"]
+</pre>
+
+<p>
+<b><b>Windows でのコマンドクォートにおける複数の問題</b></b>
+</p>
+
+<p>
+ANT-2026-R7FKP7RG Win32 の quote_cmd_filename がパイプ/リダイレクトのメタ文字を見逃す
+</p>
+
+<p>
+ANT-2026-SRZZ62SD maybe_quote/make_cmdline を通じた Windows バッチファイルの引数インジェクション
+</p>
+
+<p>
+ANT-2026-JPEWMPAB Win32 の引数クォートで埋め込まれた CR/LF がエスケープされない
+</p>
+
+<p>
+<a href="https://osv.dev/vulnerability/OSEC-2026-05">OSEC-2026-05</a> の修正も含まれています。
+</p>
+
+<p>
+<code>Filename.quote_command</code> は <code>Sys.command</code>、<code>Unix.system</code>、<code>Unix.open_process</code> 関数の引数として適切なクォートされたコマンドラインを返します。
+しかし Windows では特定の文字が正しくエスケープされていませんでした。
+</p>
+
+<p>
+<code>Unix.create_process</code> は Windows で <code>.bat</code> または <code>.cmd</code> プログラムを起動でき、
+安全にクォートできない特定の文字が受け入れられていました。
+</p>
+</div>
+
+<div id="outline-container-org043a331" class="outline-4">
+<h4 id="org043a331">修正</h4>
+<div class="outline-text-4" id="text-org043a331">
+<p>
+<code>Filename.quote_command</code> が引数を正しくクォートするように更新されました。
+<code>Unix.create_process*</code> が <code>Failure</code> を発生させて安全にクォートできない引数を拒否するように更新されました：
+</p>
+<blockquote>
+<p>
+プログラム [prog] が [.bat] または [.cmd] スクリプトであり、
+[prog] または [args] のいずれかに [" | &amp; , ; &lt; = &gt; ^ % "] などの
+スクリプトに安全に渡すことのできない文字が含まれている場合。
+本当にこれらの文字をスクリプトに渡す必要がある場合は、
+代わりに {!Unix.system} の使用を検討してください。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org48a609b" class="outline-4">
+<h4 id="org48a609b">影響を受けるか？</h4>
+<div class="outline-text-4" id="text-org48a609b">
+<p>
+Windows でユーザーが提供する引数を使って <code>Filename.quote_command</code> を使用している場合。
+Windows で <code>.bat</code> または <code>.cmd</code> プログラムとユーザーが提供する引数を使って <code>Unix.create_process*</code> または <code>Unix.open_process*</code> を使用している場合。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd1bb1a5" class="outline-4">
+<h4 id="orgd1bb1a5">タイムライン</h4>
+<div class="outline-text-4" id="text-orgd1bb1a5">
+<ul class="org-ul">
+<li>2026-08-24: 脆弱性が発見される</li>
+<li>2026-08-27: security@ocaml.org に報告が転送される</li>
+<li>2029-09-05: trunk にマージされる</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-18" class="outline-2">
+<h2 id="18">OSEC-2026-25: OCaml <code>runtime_events</code> コンシューマにおけるサイズ超過カスタムユーザーイベント解析時のヒープバッファオーバーフロー</h2>
+<div class="outline-text-2" id="text-18">
+</div>
+<div id="outline-container-org52dfb8a" class="outline-3">
+<h3 id="org52dfb8a">Hannes Mehnert が発表しました</h3>
+<div class="outline-text-3" id="text-org52dfb8a">
+<p>
+皆さん、こんにちは、
+</p>
+
+<p>
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+<a href="https://github.com/ocaml/security-advisories">https://github.com/ocaml/security-advisories</a> および
+<a href="https://osv.dev/list?q=&amp;ecosystem=opam">https://osv.dev/list?q=&amp;ecosystem=opam</a> でもご確認いただけます。
+</p>
+
+<p>
+よろしくお願いします。
+</p>
+
+<p>
+Hannes
+</p>
+
+<pre class="example" id="org95446ff">
+id: OSEC-2026-25
+modified: "2026-10-23T22:30:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: 
+"CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P"
+severity_score: "4.5 (Medium)"
+affected: "ocaml" {&lt; "5.5.2"}
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "2247294d06464df0273479f41b0418655918da27"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "9dcf0c86201cf5e8ece56c6bb5f61fc4d92fb74a"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer "Olivier Nicole"]
+   [remediation_reviewer  "Edwin Török"]
+   [remediation_developer "Sadiq Jaffer"]
+]
+cwe: [ CWE-20 CWE-122 ]
+affected_bindings: ["Runtime_events.read_poll" ]
+</pre>
+
+<p>
+<b><b>OCaml <code>runtime_events</code> コンシューマにおけるサイズ超過カスタムユーザーイベント解析時のヒープバッファオーバーフロー</b></b>
+</p>
+
+<p>
+ANT-2026-0JXJVEVY
+</p>
+
+<p>
+カスタムイベントはユーザーイベントのキャッシュを管理しています。1つのメッセージタイプ（custom/unit/span/int のいずれか）で有効なメッセージを持ち、その後同じイベントが異なるメッセージタイプで含まれる破損したストリームが存在する可能性があります。
+</p>
+
+<p>
+これは実際のプログラムでは遭遇しないはずですが、クラッシュにつながる可能性があります。
+</p>
+</div>
+
+<div id="outline-container-org251b3d1" class="outline-4">
+<h4 id="org251b3d1">修正</h4>
+<div class="outline-text-4" id="text-org251b3d1">
+<p>
+すべてのランタイムイベントタイプのメッセージ長を確認し、不一致の場合は破損したストリームとして報告します。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org17941dc" class="outline-4">
+<h4 id="org17941dc">影響を受けるか？</h4>
+<div class="outline-text-4" id="text-org17941dc">
+<p>
+ランタイムイベントのプロデューサーとコンシューマーが別々のプロセスで動作しており、プロデューサーが不正なデータを生成するよう誘導される可能性がある場合。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb4b6cc7" class="outline-4">
+<h4 id="orgb4b6cc7">タイムライン</h4>
+<div class="outline-text-4" id="text-orgb4b6cc7">
+<ul class="org-ul">
+<li>2026-08-24: 脆弱性が発見される</li>
+<li>2026-08-27: security@ocaml.org に報告が転送される</li>
+<li>2027-09-05: trunk にマージされる</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-19" class="outline-2">
+<h2 id="19">OSEC-2026-26: runtime_events ユーザーイベントの名前ベースの型混乱</h2>
+<div class="outline-text-2" id="text-19">
+</div>
+<div id="outline-container-orga53bd1d" class="outline-3">
+<h3 id="orga53bd1d">Hannes Mehnert が発表しました</h3>
+<div class="outline-text-3" id="text-orga53bd1d">
+<p>
+皆さん、こんにちは、
+</p>
+
+<p>
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+<a href="https://github.com/ocaml/security-advisories">https://github.com/ocaml/security-advisories</a> および
+<a href="https://osv.dev/list?q=&amp;ecosystem=opam">https://osv.dev/list?q=&amp;ecosystem=opam</a> でもご確認いただけます。
+</p>
+
+<p>
+よろしくお願いします。
+</p>
+
+<p>
+Hannes
+</p>
+
+<pre class="example" id="orgbe9dbdb">
+id: OSEC-2026-26
+modified: "2026-10-23T22:30:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: 
+"CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P"
+severity_score: "4.5 (Medium)"
+affected: "ocaml" {&lt; "5.5.2"}
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "ac2fae847a9c2c35ae3bba90a19adbe5d0cc6f59"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+         [fixed "de10a6b03a471821cb0b868223e5331b919f48c0"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer  "Edwin Török"]
+   [remediation_developer "Sadiq Jaffer"]
+]
+cwe: [ CWE-20 CWE-122 ]
+affected_bindings: ["Runtime_events.read_poll"]
+</pre>
+
+<p>
+<b><b>runtime_events ユーザーイベントの名前ベースの型混乱</b></b>
+</p>
+
+<p>
+ANT-2026-DTBY2HWS
+</p>
+
+<p>
+カスタムイベントはユーザーイベントのキャッシュを管理しています。1つのメッセージタイプ（custom/unit/span/int のいずれか）で有効なメッセージを持ち、その後同じイベントが異なるメッセージタイプで含まれる破損したストリームが存在する可能性があります。
+</p>
+
+<p>
+これは実際のプログラムでは遭遇しないはずですが、クラッシュにつながる可能性があります。
+</p>
+</div>
+
+<div id="outline-container-org2f1f8e2" class="outline-4">
+<h4 id="org2f1f8e2">修正</h4>
+<div class="outline-text-4" id="text-org2f1f8e2">
+<p>
+イベントタイプを期待される型と照合して検証し、不一致の場合は破損したストリームとして報告します。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgab77808" class="outline-4">
+<h4 id="orgab77808">影響を受けるか？</h4>
+<div class="outline-text-4" id="text-orgab77808">
+<p>
+ランタイムイベントのプロデューサーとコンシューマーが別々のプロセスで動作しており、プロデューサーが不正なデータを生成するよう誘導される可能性がある場合。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc844fca" class="outline-4">
+<h4 id="orgc844fca">タイムライン</h4>
+<div class="outline-text-4" id="text-orgc844fca">
+<ul class="org-ul">
+<li>2026-08-24: 脆弱性が発見される</li>
+<li>2026-08-27: security@ocaml.org に報告が転送される</li>
+<li>2027-10-20: trunk にマージされる</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org5844e52" class="outline-2">
+<h2 id="org5844e52">過去の CWN</h2>
+<div class="outline-text-2" id="text-org5844e52">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://ocaml.jp/cwn-ja/">アーカイブ</a>や<a href="https://ocaml.jp/cwn-ja/cwn.rss">RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> を購読してください。
+</p>
+
+<div class="authorname" id="orgf7a90da">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
