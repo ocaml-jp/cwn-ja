@@ -1,0 +1,1238 @@
+#+OPTIONS: ^:nil
+#+OPTIONS: html-postamble:nil
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: author:nil
+#+HTML_HEAD: <style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+#+HTML_HEAD: <style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+#+TITLE: OCaml Weekly News
+[[file:2026.10.20.html][先週号]] [[file:index.html][上へ]] [[file:2026.11.03.html][次週号]]
+
+こんにちは
+
+2026年10月20日から27日までの週の OCaml Weekly News をお届けします。
+
+#+TOC: headlines 1
+
+
+* uniker.nl - OCaml によるユニカーネル
+:PROPERTIES:
+:CUSTOM_ID: 1
+:END:
+Archive: https://discuss.ocaml.org/t/ann-uniker-nl-unikernels-in-ocaml/18625/1
+
+** Calascibetta Romain が発表しました
+
+
+新しいウェブサイト [[https://uniker.nl/][uniker.nl]] の公開をお知らせできることを嬉しく思います。このウェブサイトは、OCaml 5 を用いたユニカーネル開発への新しいアプローチを体現しています。ユニカーネルの開発に新しい方法を提供するとともに、ユニカーネルのデプロイと利用にも同等の重点を置いています。このサイトには包括的な[[https://uniker.nl/introduction/][チュートリアル]]とリソースが掲載されており、OCaml におけるユニカーネルに興味を持つ方への_最初の入口_として、新しいエコシステムを理解するための手助けをします。
+
+このサイトのコンテンツは[[https://github.com/robur-coop/uniker.nl][こちら]]で公開されており、優れた [[https://yocaml.github.io/tutorial/index.html][YOCaml]] プロジェクトによって動作し、私たちの [[https://github.com/dinosaure/immuable][immuable]] ユニカーネルを用いてデプロイされています。
+
+*** 新しいエコシステム
+
+[[https://ocaml.org/ocaml-workshop-2026][OCaml Workshop 2026]]（[[https://docs.google.com/presentation/d/1bOXJAPEEjPBx_8i0frThKhLpHd8C7-EPRczEQjvz6JU/edit?slide=id.g3f7268904c5_0_1#slide=id.g3f7268904c5_0_1][スライド]]）にて新しいワークフローを発表しました。私たちのアプローチは主に2点に要約できます：
+- ユニカーネルの開発
+- ユニカーネルのデプロイとその利用
+
+**** ユニカーネルを開発するために
+
+私たちの協同組合はかなり長い間ユニカーネルの開発を続けてきました。[[https://blog.robur.coop/][私たちのブログ]]では、インフラに使用しているいくつかのユニカーネルを紹介しています。経験を通じて、ユニカーネルという形でアプリケーションを開発する際の制約や限界を十分に認識しています。最もよく知られた制約として、プロトコルやフォーマットに関してPOSIXインターフェースを必要としない（またはそれを模倣しようとしない）ことを受け入れています。今日でも守り続けているルールの一つは、実装を提供する際に[[https://discuss.ocaml.org/t/on-concurrency-models/15899/13][I/O やスケジューラに依存しない]][[https://discuss.ocaml.org/t/why-ocsigen-is-staying-on-lwt-for-now/18318/27][1]]ことです。
+
+この経験から、ユニカーネル以外のコンテキストでも他の人々が使用しているプロトコルやフォーマットを開発することができました。
+
+一方で、特に MirageOS が現在提供しているものに関して、達成できることの限界も見えてきました。これを念頭に置き、ユニカーネル開発における制約（特にクロスコンパイルに関して）をさらに検討した結果、2つのツールを用いてユニカーネルの開発を構造化することにしました：[~unic~](依存関係を推論して_vendor_する方法)と[~mfetch~](依存関係を vendor する方法)です。
+
+**** [[https://github.com/robur-coop/unic][~unic~]]: 依存関係を推論して_vendor_する方法
+
+ユニカーネルにおける制約の一つは、Cファイルをホストシステムに既存のものに依存しないよう特定のオプションで再コンパイルする必要があることです。MirageOS 3 が取ったアプローチは、このような特定のコンパイル結果をCスタブを含むライブラリ（[[https://github.com/mirage/digestif][~digestif~]]や[[https://github.com/mirage/mirage-crypto][~mirage-crypto~]]など）の中に配布することでした。問題は、ユニカーネルの中核コンポーネントである [[https://github.com/solo5/solo5][Solo5]] 向けのCファイル固有のコンパイル環境を得るために、これらのライブラリのユーザーに [[https://github.com/mirage/ocaml-solo5][~ocaml-solo5~]] のインストールを強いていたことです。
+
+MirageOS 4 では ~dune~ とそのコンテキストが導入され、Cファイルに対して一貫したコンパイル環境を実現できるようになりました。しかしこのアプローチは新たな制約をもたらしました：ユニカーネルのすべての依存関係が ~dune~ を使用しなければならなくなったのですが、OCaml エコシステムではそうでないケースも*正当に*存在します。
+
+そこで私たちは、一部のライブラリを再コンパイルする必要性をさらに精査し、最終的に [[https://github.com/mirage/ocaml-solo5][~ocaml-solo5~]] の重要な利点を活かすことにしました。それは、このコンパイラでOCamlファイルをコンパイルしても、ホストのOCamlコンパイラを使った場合とまったく同じ結果が得られるという点です。つまり、最初からそうであったように、厳密にCファイルのみをクロスコンパイルすればよいのです。
+
+この2つの特性（Cファイルのみをクロスコンパイルすればよいこと、ホストコンパイラでコンパイルした純粋なOCamlで書かれたライブラリを再利用できること）の交点において、~dune~ を使用していないライブラリのメンテナンス作業を一切行わずに、また必ずしもすべてを再コンパイルしなくても、次のようなコードを書く機能をユーザーに提供できます：
+
+#+begin_src shell
+$ opam install unic
+$ cat >main.ml<<EOF
+> open Digestif
+
+> let () = Mkernel.run [] @@ fun () ->
+>   Fmt.pr "%a\n%!" SHA1.pp (SHA1.digest_string "Hello World!")
+> EOF
+$ unic infer -r .
+Module Digestif is provided by several ocamlfind packages:
+  [0] digestif.c
+  [1] digestif.ocaml
+Pick one [0-1]: 0
+digestif
+mkernel
+$ opam source digestif
+$ opam source mkernel
+$ dune build
+$ solo5-hvt -- _build/solo5/main.exe --solo5:quiet
+2ef7bde608ce5404e97d5f042f95f89f1c232871Solo5
+#+end_src
+
+~unic~ は、特定のビルドシステムを使わずにOCamlプロジェクトの依存関係を推論し、ユニカーネルを生成するためにクロスコンパイルが必要なもの（この場合 ~digestif~ と ~mkernel~ ですが ~fmt~ は不要）を計算できるツールです。このプロジェクトはまず私たちの目的のために作られていますが、静的リンクされた実行ファイルをコンパイルする際にも有用である点は注目に値します。
+
+このツールはMETAファイルの解析、成果物を様々な観点（モジュール名、~ocamlfind~ パッケージ名、OPAMパッケージ名）から閲覧、OCaml成果物（~*.cmxa~ ファイルなど）の解析など、多岐にわたるサブツールを提供しています。
+
+特に @Octachron の [[https://github.com/Octachron/codept][~codept~]] プロジェクト（~unic~ はこれをベースにしています）と、それを改善するために協力していただいたことに深く感謝します。
+
+**** [[https://github.com/robur-coop/mfetch][~mfetch~]]: 依存関係を vendor する方法
+
+クロスコンパイルが必要な依存関係をより正確に特定できたので、次はそれらをダウンロードする必要があります。~opam source~ は十分に機能しますが、以下のような様々なソースタイプからソースコードをダウンロードできるツールが欲しいと考えました：
+- 通常の場合と同様に _tarball_ から
+- Gitリポジトリから
+- またはファイルシステム上の特定の場所から
+
+そこで ~mfetch~ を開発しました。OPAMまたはユーザーが提供する情報を元にソフトウェアのソースをダウンロードし、すべてのソースを含む ~vendors~ フォルダを作成することができます。
+
+#+begin_src shell
+$ unic infer -r . -o _mfetch
+$ mfetch --with-dune-file
+ digestif                 │██████████████████│    3.1 MiB /    3.1 MiB    5.9 MiB/s 
+ mkernel                  │██████████████████│   37.3 KiB /   37.3 KiB    3.4 MiB/s 
+
+digestif                         ok
+mkernel                          ok
+$ dune build
+#+end_src
+
+~mfetch~ では、ソースファイルを変更したかどうかの確認（バグ修正のため）や、~*.locked~ ファイルの生成も可能で、別のツール [[https://github.com/robur-coop/orb][~orb~]] を使ってユニカーネルの再現性を検証することができます。このツール自体は革新的なものではありませんが、ワークフローを合理化するのに役立ちます。
+
+#+begin_src shell
+$ mfetch status
+digestif                         ok
+mkernel                          ok
+$ mfetch lock
+2 sources locked into _mfetch.locked
+#+end_src
+
+**** OCaml 5 向けライブラリ
+
+新しいワークフローでは OCaml 5 を使用します。OCaml 5 でユニカーネルを生成するために必要な基本的な構成要素を更新するとともに、主にエフェクトを活用できるライブラリ群も開発しました。さらに、過去数年間で以下を開発しました：
+- [[https://discuss.ocaml.org/t/ann-miou-a-simple-scheduler-for-ocaml-5/12963][Miou]]：OCaml 5 向けスケジューラ
+- [[https://github.com/robur-coop/mkernel][~mkernel~]]：Solo5 が提供するI/Oを扱うために設計した Miou スケジューラの派生版
+- [[https://discuss.ocaml.org/t/ann-mnet-a-new-tcp-ip-stack-for-unikernels-in-ocaml/17851][~mnet~]]：エフェクトを用いたOCamlによるTCP/IPスタックの再実装（[[https://github.com/robur-coop/utcp][~utcp~]] を使用）
+- [[https://github.com/robur-coop/mhttp][~mhttp~]]、[[https://github.com/robur-coop/colombe][~msendmail~]]、[[https://github.com/robur-coop/mfat][~mfat~]]、[[https://github.com/robur-coop/vif][~vifu~]] などのその他多数のライブラリ
+
+現在デプロイ済みのいくつかのユニカーネルで使用されているこれらのライブラリにより、開発者に対してユニカーネルを実装するための_ダイレクトスタイル_アプローチを提供できます。
+
+しかしこの新興エコシステムで重要なのは、過去のプロジェクトに対する回顧的な分析を行い、同じ過ちを繰り返さないようにすることです。[[https://github.com/ocsigen/lwt][~lwt~]]（MirageOS スケジューラ）を使用した既存のライブラリを Miou（またはエフェクトを使用する他のスケジューラ）に移行することが非常に難しいことに私たちはすぐに気づきました。そこで、Miou を使ったダイレクトスタイルアプローチを提案するだけでなく、MirageOS でユニカーネルをデプロイして得た教訓を踏まえてライブラリの実装を見直す機会としました。メモリ使用量、過去の実装での既知のCVEの回避（私たちはOCamlセキュリティチームの一員でもあります）、そしてfunctorに系統的に依存しない代替APIの提供に特に注意を払いました。
+
+このアプローチはまだ実験的です。複数のレイヤーにわたってこの新しいエコシステムを統合する必要がありますが、デプロイ済みのユニカーネルで観察したことに基づき、これらの新しい実装が過去のものよりも大幅に優れているという確信があります。
+
+**** ユニカーネルをデプロイするために
+
+ユニカーネルのもう一つの側面はデプロイです。ユニカーネルを開発する（そして開発を容易にする）だけでなく、デプロイして使用することも重要です。私たちの主な目標は既存のサービスをユニカーネルに置き換えること（ネームサーバー、ウェブサイト、タイムサーバーなど）であり、既存のインフラと競合する方法は積極的にユニカーネルをデプロイして使用することです。
+
+そのため、以下の2つのプロジェクトを開発しました：
+- [[https://github.com/robur-coop/albatross][Albatross]]：ユニカーネルを起動するOCamlサービス
+- [[https://github.com/robur-coop/aussi][Aussi]]：Solo5 向けOCIランタイム
+
+Albatross は主に、ユニカーネルの再現性を検証するインフラ [[https://builds.robur.coop][builds.robur.coop]] と組み合わせて使用しています。これにより、ユニカーネルの依存関係（特にCVE）を追跡し、サプライチェーンのセキュリティを確保できます。
+
+次はデプロイです。ユニカーネルを既存のインフラに統合し、特に [[https://www.influxdata.com/][InfluxDB]]、[[https://www.influxdata.com/time-series-platform/telegraf/][Telegraf]]、[[https://grafana.com/][Grafana]] を使ったモニタリング手段を提供することを目指しています。
+
+このようにして、以下のようなサービスを提供できています（一部はまだ ~mkernel~/~mnet~ に移植されていませんが、まもなく行われます）：
+- [[https://github.com/robur-coop/unipi][~unipi~]] や [[https://github.com/dinosaure/immuable][~immuable~]] を使った https://blog.robur.coop/ などのシンプルなウェブサイト
+- [[https://github.com/robur-coop/dns-primary-git/][プライマリ]] DNSサーバーと[[https://git.robur.coop/robur/dns-secondary/][セカンダリ]]サーバーを通じた ~robur.coop~、~reyn.ir~、~din.osau.re~ などのドメインのDNS管理
+- [[https://github.com/robur-coop/miragevpn][MirageVPN]] または [[https://github.com/robur-coop/zostera][Zostera]] を使ったVPNサービス
+- タイムサーバー（[[https://github.com/robur-coop/chaos][Chaos]] を使用）：https://chaos.osau.re/
+- [[https://github.com/robur-coop/caldav][CalDAV]] カレンダーシステム
+- [[https://github.com/robur-coop/ptt][~ptt~]] プロジェクトを使った[[https://mailingl.st][メーリングリスト]]
+- [[https://github.com/robur-coop/tlstunnel][~tlstunnel~]] や [[https://github.com/robur-coop/contruno][~contruno~]] などのTLS終端プロキシ（sherlocode.com で使用）
+- その他多数！
+
+実際の使用を通じてユニカーネルとそれに依存するライブラリを改善しています。そのため、チュートリアルの一部ではユニカーネルのデプロイにも焦点を当てており、使用してフィードバックで協力していただけるようにしています。
+
+最後に、[[https://mollymawk.robur.coop/][Mollymawk]] というプロジェクトも提案しています。これはウェブインターフェースを通じたユニカーネルのデプロイを簡素化するために設計されており、将来的には使用を希望する誰もが私たちのインフラへのアクセスを提供できるようにしたいと考えています（様々な試みをしてくれた @kit-ty-kate に感謝します）。
+
+*** 私たちについて
+
+最後に、これらはすべて私たちの協同組合とその業務組織なしには実現できませんでした。財務の詳細は[[https://blog.robur.coop/articles/finances.html][こちら]]でご覧いただけます。寄付を受け付けており、最近 NLnet からの資金調達も確保しました。[[https://ahrefs.com/][Ahrefs]] や [[https://tarides.com/][Tarides]] などの民間企業も私たちの活動をスポンサーしています。また、[[https://ocamlpro.com][OCamlPro]] および [[https://ocaml-sf.org/][OCaml Foundation]] とのパートナーシップも持っています。そして個人や企業と協力することで、OCaml エコシステムに毎日貢献しています。
+
+詳細は[[https://robur.coop/][私たちのウェブサイト]]でご覧ください。この活動が可能なのは私たちの組織形態（協会という形態）のおかげであり、スポンサーの方々に感謝します。
+
+*** ユニカーネルと MirageOS
+
+熱心な方々は、私たちのアプローチが私たちのメンテナンス作業によって現役を保つ MirageOS と比べてどのような利点があるのか疑問に思うかもしれません。私たちのアプローチは、ユニカーネルの普及を妨げるガラスの天井として特定した5つの点によって特徴づけられています：
+- 最初の点は [[https://github.com/mirage/ocaml-cstruct][~ocaml-cstruct~]] の使用に関するものです。根本的な問題は、_バッファ_として ~bytes~/~string~ の代わりに ~bigarray~ を使用していることです。[[https://github.com/robur-coop/miragevpn][MirageVPN]] の開発経験から、エコシステム全体で _バッファ_ の概念として ~cstruct~ を系統的に使用することが、ユニカーネルのスループットにおける最大の*ペナルティ*であることがわかりました。そこで、[[https://github.com/robur-coop/bstr][~bstr~]]と[[https://github.com/robur-coop/bstr][~slice~]]を開発するだけでなく、~cstruct~ を ~bytes~/~string~ に置き換えてほとんどのライブラリを書き直すことにしました（[[https://github.com/mirleft/ocaml-tls/pull/497][~ocaml-tls~]]、[[https://github.com/mirage/mirage-crypto/pull/214][~mirage-crypto~]]、[[https://github.com/mirage/ocaml-dns/pull/351][~ocaml-dns~]]、最近では [[https://github.com/mirage/awa-ssh/pull/85][~awa-ssh~]] と [[https://github.com/robur-coop/utcp/pull/55][~utcp~]] がその例です）。結論は単純です：bigarray の使用をやめるのではなく、APIでその使用を系統的にしないことです。
+- 2点目は、ユニカーネルが必要とするデバイスを表現するためのfunctorの使用に関するものです。これらのデバイスを具体化する特定の実装をfunctorを通じてインターフェースを再利用して注入するアプローチは魅力的に見えますが、最新の概念に対応していないインターフェースによって制約されたエコシステムのメンテナンスコストが、より特定のユニカーネルを開発する必要があるたびに[[https://github.com/robur-coop/dnsvizor/blob/83b32596c4a08c080067e1cd36fe5788b90cdd78/unikernel.ml#L610-L631][不合理な状況]]を招きました。再び言いますが、functorの使用をやめるのではなく、系統的にしないことがルールです。
+- 3点目はユニカーネルのコンパイルに関するものです。MirageOS は今日でも ~dune~ とうまく統合されていない回避策に依存しています。これは「マルチステージコンパイル」として定義でき、望むターゲットに応じてコード生成フェーズが必要になります。このようにツールによって指定される依存関係のセットでワークフローを構造化する方法は、開発者が何を、どのようにしたいかを明示的に制限します。ユニカーネルのコンパイルには制約（~Unix~ モジュールを使用しないことなど）がありますが、私たちの協同組合は、ユニカーネルの設計においてユーザーを支援する（しかし強制しない）**情報提供的**（規範的でない）ツールを提供することにしました（さらに、[[https://github.com/robur-coop/unic][~unic~]]と[[https://github.com/robur-coop/mfetch][~mfetch~]]を紹介できることも嬉しく思います）。新しいアプローチのポイントは、ユニカーネルの開発においてツール（~mirage~）ではなくユーザーが最終決定権を持つことを確保することです。
+
+  ~mirage~ ツールが行うことは非常に複雑で、functor適用の生成や初期化スタブ、opamバージョン制約（functorや初期化関数が新しいopamパッケージで変更される可能性があるため）などが含まれます。~mirage~ ツールはクローズドワールド仮定を持ち、~mirage~ が認識していないパッケージの使用は非常に困難であり、~mirage~ ユニカーネルで ~js_of_ocaml~ を使用することも非常に難しいです。
+- 4点目はこのエコシステムのメンテナンス、特に MirageOS が依存するツールとライブラリのメンテナンスに関するものです。さらに、~opam-monorepo~ に失望する経験をし、OCaml 5 に合わせて ~mirage-tcpip~ を更新することが日々ますます困難になっていることがわかります。OCaml セキュリティチームへの関与から、メンテナンスの欠如により特定のライブラリを廃止したいという気持ちにもなっています。そこで、エコシステムを私たちの協同組合が生産・メンテナンスするものに再集中させています。
+- 最後に、AIの台頭にもかかわらず変わらないコミュニティとの活動があります。ユニカーネルに関する存在しない問題を解決するためにAIが乱用されており、それがセキュリティ、メンテナンス、ソフトウェアの品質に関する私たちの信頼性を損なっていると考えています。この点において、デプロイよりも _バイブコーディング_ を好む人々から距離を置こうとしています。このアプローチはライセンスとして [[https://www.gnu.org/licenses/agpl-3.0.en.html][AGPL]] を使用すること（デュアルライセンスの選択肢も提供しつつ）と、AIの使用に関する [[https://github.com/Solo5/solo5/blob/main/AI.md][POLICY]] に反映されています。
+
+これらすべてが、MirageOS 4（私がリリースマネージャーを務めた）の失敗を特徴づけた要因から根本的に離れる MirageOS 5 を提案するに至りました。この敗北を認め（そして分析した上で）、ユニカーネルの作成とデプロイへの新しいアプローチを提案します：[[https://uniker.nl/][uniker.nl]]。
+
+MirageOS プロジェクトに関連するプロジェクトについては、もちろんいくつかは引き続きメンテナンスしつつ、私たちのいくつかのライブラリを使用している方々に、より最新のソリューションを提供していきます。また、新しいライブラリとツールへの移行を希望する方を喜んでお手伝いします。私たちは常にそうであったように、サポートのために利用可能です。
+      
+
+
+
+* segmap の発表：リネーミングのための高速データ構造
+:PROPERTIES:
+:CUSTOM_ID: 2
+:END:
+Archive: https://discuss.ocaml.org/t/ann-announcing-segmap-a-fast-data-structure-for-renamings/18626/1
+
+** François Pottier が発表しました
+
+
+こんにちは！~segmap~ を発表できることを嬉しく思います。この OCaml ライブラリは **segment maps** を実装しています。これは自然数から自然数への単調増加関数を表す純粋関数型データ構造です。このデータ構造は、ルックアップ、逆ルックアップ、水平および垂直の変位、先頭への挿入、合成、meet、join など多くの操作を効率的にサポートします。このデータ構造は、変数が de Bruijn インデックスまたは co-de Bruijn インデックスとしてエンコードされる証明支援系、コンパイラ、シンボリック計算システムに役立つ可能性があります。
+
+このデータ構造は[[https://cambium.inria.fr/~fpottier/publis/fpottier-segmap.pdf][こちらの論文]]で説明されており、[[https://cambium.inria.fr/~fpottier/segmap/doc/segmap/Segmap/][ライブラリのドキュメント]]もオンラインで公開されています。
+
+#+begin_example
+  opam update
+  opam install segmap
+#+end_example
+
+Happy hacking,
+FP.
+      
+
+
+
+* hexen.0.1
+:PROPERTIES:
+:CUSTOM_ID: 3
+:END:
+Archive: https://discuss.ocaml.org/t/ann-hexen-0-1/18627/1
+
+** Mikhail が発表しました
+
+
+やあ！
+
+16進数の部分文字列をデコードする必要があったので、[[https://github.com/dx3mod/hexen][Hexen]] を書きました。これは16進数バイトシーケンスのエンコードとデコードを行うまた別のライブラリです。
+
+このライブラリの主な目標は、任意の出力先（bytes またはバッファ）への部分文字列のエンコードとデコードのための柔軟なAPIを提供することです。
+
+*** 使い方
+
+Hexen は、文字列や部分文字列のエンコードとデコードのための高レベル関数 ~encode~ と ~decode~ を提供します。
+
+#+begin_src ocaml
+Hexen.encode "Hello World";;
+(* - : string = "48656c6c6f20576f726c64" *)
+
+Hexen.decode "48656c6c6f20576f726c64";;
+(* - : string = "Hello World" *)
+#+end_src
+
+#+begin_src ocaml
+Hexen.encode_substring "Hello World" 0 5;;
+(* - : string = "48656c6c6f" *)
+
+Hexen.decode_substring "48656c6c6f20576f726c64" 0 10;;
+(* - : string = "Hello" *)
+#+end_src
+
+また、Hexen は文字列や部分文字列を既存のバッファや bytes に直接エンコード・デコードする関数も提供しています。
+
+#+begin_src ocaml
+let buffer = Buffer.create 16 in
+
+Hexen.encode_to_buffer "Hello" buffer;
+Hexen.encode_substring_to_buffer "Hello World" 5 6 buffer;
+
+let bytes = Bytes.create 12 in 
+Hexen.decode_into (Buffer.contents buffer) 0 bytes 0 22;
+Bytes.set bytes 11 '!';
+
+bytes
+(* - : bytes = Bytes.of_string "Hello World!" *)
+#+end_src
+      
+
+
+
+* intel_hex.1.0
+:PROPERTIES:
+:CUSTOM_ID: 4
+:END:
+Archive: https://discuss.ocaml.org/t/ann-intel-hex-1-0/18628/1
+
+** Mikhail が発表しました
+
+
+やあ！
+
+[[https://github.com/dx3mod/intel_hex][Intel HEX 操作ライブラリ]]の最初のメジャーリリースをお知らせできることを嬉しく思います。
+
+Intel HEX フォーマットは、組み込みシステムプログラミングにおいてマイクロコントローラ、フラッシュメモリ、ROMに読み込まれるコンパイル済みプログラムコードとデータを表現するために一般的に使用されます。
+
+これで、純粋な OCaml でそれを扱えるようになりました！
+
+*** 変更点
+
+- APIを再設計；
+- ファームウェアのメモリイメージを処理するための ~Memory~ モジュールを追加；
+- 16進数のエンコードとデコードに ~ohex~ パッケージの代わりに [[https://discuss.ocaml.org/t/ann-hexen-0-1/18627/1][hexen]] を使用するように変更；
+
+*** 使用例
+
+このライブラリはIntel HEXファイルの解析と作成のためのシンプルなAPIを提供します。Intel HEXファイルを作成するには、以下のコードを使用できます：
+#+begin_src ocaml
+Intel_hex.Record.
+[
+  Extended_linear_address 0x0F;
+  Data (0x0000, "Hello ");
+  Data (0x0007, "World!");
+  End_of_file;
+]
+|> Intel_hex.Object.to_string
+|> print_endline
+#+end_src
+#+begin_example
+:02000004000FEB
+:0600000048656C6C6F20E6
+:06000700576F726C6421CA
+:00000001FF
+#+end_example
+
+Intel HEXファイルを含む文字列を解析するには：
+
+#+begin_src ocaml
+":0600000048656C6C6F20E6\n:06000700576F726C6421CA"
+|> Intel_hex.Object.of_string
+(* - : Intel_hex.Object.t =
+  [ Intel_hex.Record.Data (0, "Hello "); 
+    Intel_hex.Record.Data (7, "World!") ] *)
+#+end_src
+
+また、このライブラリはIntel HEXファイルやその他のソースから構築されたメモリイメージを扱うためのモジュールも提供しています。
+
+#+begin_src ocaml
+Intel_hex.Memory.of_string ~block_size:6 "Hello World!"
+(* - : Intel_hex.Memory.t =
+ [ Intel_hex.Memory.Segment(0x0000, "Hello ");
+   Intel_hex.Memory.Segment(0x0006, "World!") ] *)
+#+end_src
+
+詳細については[[https://ocaml.org/p/intel_hex/latest/doc/index.html][APIリファレンス]]をご覧ください。
+      
+
+
+
+* Js_of_ocaml / Wasm_of_ocaml 6.5
+:PROPERTIES:
+:CUSTOM_ID: 5
+:END:
+Archive: https://discuss.ocaml.org/t/ann-js-of-ocaml-wasm-of-ocaml-6-5/18632/1
+
+** Hhugo が発表しました
+
+
+OCaml バイトコードから JavaScript および WebAssembly へのコンパイラである js_of_ocaml と wasm_of_ocaml 6.5.0 の同時リリースをお知らせできることを嬉しく思います。
+
+このリリースは 6.4.0 以降、7名のコントリビューターから寄せられた130以上のプルリクエスト（約400コミット）をまとめたものです。主なハイライト：
+
+- **OCaml 5.6** サポート。
+- **OxCaml**: サポートの改善。
+- **Introcaml**: [[https://discuss.ocaml.org/t/ann-introcaml-alpha-polymorphic-printing-and-introspection-for-ocaml/18407][Introcaml]] の実験的サポート（Chrome DevTools で OCaml の値が OCaml 構文で表示されます）。
+- **コンパイル高速化**: 大規模プログラムで約25〜30%高速化。
+- **出力サイズの縮小**: バイナリ定数が base64 で出力され、生成される JavaScript がよりコンパクトになりました（トップレベルの例が13.6 MBから9.0 MBに）。
+- **wasm_of_ocaml**: BLAKE2 と zstd（~Digest.BLAKE2*~、圧縮されたマーシャル値）がマルチメモリサポートを必要としなくなり、Safari でも動作するようになりました。さらにランタイムプリミティブの高速化とソースマップの改善。
+- **エフェクト**: ~--effects=cps~ と ~--effects=double-translation~ でのコードが改善。
+- **新しいWeb APIバインディング**: WebGL2、Web Crypto、Service Workers、Clipboard、Notification、FontFace など。トップレベルが Web Worker で動作可能に。
+- 多数のバグ修正…
+
+破壊的変更：~js_of_ocaml-lwt.logger~ が削除されました（~lwt_log~ は非推奨）、~Typed_array.float{32,64}Array_fromArray~ のシグネチャが変更されました。
+
+このリリースへのコントリビューター：Vincent Balat、Frédéric Bour、Shon Feder、habakan、Hugo Heuzard、Robin Ricard、Jérôme Vouillon。皆さんありがとうございました！
+
+[[https://ocsigen.org/js_of_ocaml/][ドキュメント]]と[[https://github.com/ocsigen/js_of_ocaml/blob/master/CHANGES.md][完全な変更履歴]]をご覧ください。問題は[[https://github.com/ocsigen/js_of_ocaml/issues][GitHub]]でご報告ください。
+
+まもなく opam でも利用可能になる予定です（https://github.com/ocaml/opam-repository/pull/30987）。
+      
+
+
+
+* TIFF Inspector: ocaml-tiff ベースのインスペクタ（ブラウザ内 OCaml プレイグラウンド付き）
+:PROPERTIES:
+:CUSTOM_ID: 6
+:END:
+Archive: https://discuss.ocaml.org/t/tiff-inspector-an-ocaml-tiff-based-inspector-with-an-in-browser-ocaml-playground/18634/1
+
+** Ridwan Adebosin が発表しました
+
+
+こんにちは、皆さん！
+
+[[https://github.com/geocaml/ocaml-tiff][geocaml/ocaml-tiff]] を使って構築した、TIFFファイルの内部（ディレクトリ、タグ、ストレージレイアウト、サンプル、プレーン）を調べるためのツール **TIFF Inspector** を開発しています。
+
+- ライブ: https://tiff-inspector.onrender.com/
+- コード: https://github.com/RidwanAdebosin/tiff-inspect (MIT)
+
+CLI、HTTP API、ウェブUIとして提供されます。報告された各値はその出所（ファイルから読み取られたもの、仕様のデフォルト値、または不在）を明示します。推測は一切行いません。
+
+*** OCaml の方々に興味深い点
+
+**ocaml-tiff の修正。** 珍しいファイルでのテスト中にいくつかの問題が見つかり、vendor コピーで修正しました：
+
+- インラインに保存された複数の小さい値を持つBigTIFFエントリ（例えばGDALが書き込む BitsPerSample=[8,8,8]）が読めない問題。
+- 2 GiB以上のクラシックTIFFオフセットが符号拡張される問題。
+- インラインではなくオフセットに保存された SampleFormat が読めない問題。
+- ツールがフィールドの型と数を確認できるエントリのイントロスペクション。
+
+**独立したテストフィクスチャ。** パーサーとコードを共有しない別個のPythonライターが生成した21個の小さなTIFFと、ゴールデン出力があります。メンテナーが希望すれば、ocaml-tiff の適合性テストセットとして有用かもしれません。
+
+**ブラウザ内プレイグラウンド。** ~/playground~ では、インストールなしに、サンプルファイルに対して ocaml-tiff とインスペクタコアを使って OCaml を書いて実行できます。js_of_ocaml でコンパイルされたトップレベル（gzip圧縮で約1.3 MB）がウェブワーカーで動作します。~;;~ はオプションで、コンパイルエラーはエディタに下線で表示されます。
+
+これを実現するために、~bstr~ と ~checkseum~ が使用するCプリミティブのJavaScript実装を書きました。有用であればアップストリームに提供したいと思います。
+
+**サーバー。** Eio と cohttp-eio を使った OCaml 5 で動作します。各アップロードは時間とメモリ制限を持つ独立したプロセスで検査され、レート制限とグレースフルシャットダウンもあります。無料の Render インスタンスのDockerで動作しています。
+
+*** フィードバック歓迎
+
+- JSONレポートの形式は他の地理空間ツールでも機能しますか？
+- geocaml のメンテナー：修正は1つのPRで行うべきですか、それとも複数の小さなPRがよいですか？
+- 正しく検査されないTIFF。サンプルファイル付きのIssueは非常に有用です。
+
+お読みいただきありがとうございました！
+      
+
+
+
+* OCaml 5.5.2 リリース
+:PROPERTIES:
+:CUSTOM_ID: 7
+:END:
+Archive: https://discuss.ocaml.org/t/ocaml-5-5-2-released/18638/1
+
+** octachron が発表しました
+
+
+ヨーロッパで初の動力飛行の記念日を祝い、OCaml 5.5.2 のリリースをお知らせできることを光栄に思います。
+
+OCaml 5.5.2 では、様々な軽微なセキュリティ問題、2つの稀なコンパイル誤り、macOS の将来バージョンとの設定問題、および1つのランタイムイベントライブラリの問題が修正されています。
+
+全体として、OCaml 5.5 のいずれかのバージョンをすでに使用している場合は、OCaml 5.5.2 への切り替えをお勧めします。
+
+バグ修正の完全なリストは以下に詳細を記載しています。
+
+Happy hacking,
+-- Florian Angeletti（OCaml チームを代表して）。
+
+*** インストール手順
+
+ベースコンパイラは以下のコマンドで opam スイッチとしてインストールできます：
+
+#+begin_example
+    opam update
+    opam switch create 5.5.2
+#+end_example
+
+リリースのソースコードも直接入手可能です：
+
+- GitHub: https://github.com/ocaml/ocaml/archive/5.5.2.tar.gz
+- Inria アーカイブ: https://caml.inria.fr/pub/distrib/ocaml-5.5/ocaml-5.5.2.tar.gz
+
+*** バグ修正
+
+- [[https://github.com/ocaml/ocaml/issues/15045][#15045]]: 結果が使用されない atomic ロードは
+  デッドコード除去で削除されないようにしました。
+  (Xavier Clerc、Steven Dolan と KC Sivaramakrishnan によるレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/15067][#15067]], [[https://github.com/ocaml/ocaml/issues/15071][#15071]]: macOS の将来バージョンで利用可能な関数の検出を修正しました。
+  (Antonin Décimo、Nicolás Ojeda Bär と Damien Doligez によるレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/15112][#15112]], OSEC-2026-22: ~Unix.map_file~: データサイズ計算時のオーバーフローを防止しました。
+  (Xavier Leroy と Nicolás Ojeda Bär、Nicolás Ojeda Bär
+  と Edwin Török によるレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/15113][#15113]], OSEC-2026-21: ~Str.string_partial_match~: キャプチャされたグループが
+  有効であることを確認するようにしました。
+  (Xavier Leroy、Nicolás Ojeda Bär と Edwin Török によるレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/15115][#15115]], OSEC-2026-23: デマーシャリング
+  (~Marshal.from_{channel,string,bytes}~) の複数の問題を修正しました。
+  (Xavier Leroy、Nicolás Ojeda Bär によるレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/15133][#15133]], OSEC 2026-24: Windows でのコマンドクォートにおける複数の問題
+  (Xavier Leroy と Nicolás Ojeda Bär、Nicolás Ojeda Bär によるレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/15119][#15119]], OSEC-2026-25: リングバッファからのランタイムイベントメッセージの
+  デコードを強化しました。
+  (Sadiq Jaffer、Hannes Mehnert による報告、Olivier Nicole と
+  Edwin Török によるレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/15177][#15177]], OSEC-2026-26: カスタムイベントキャッシュの整合性を維持するようにしました。
+  (Sadiq Jaffer、Hannes Mehnert による報告、Edwin Török によるレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/15043][#15043]], [[https://github.com/ocaml/ocaml/issues/15076][#15076]]: ランタイムイベントライブラリ、ユーザーイベントが
+  リングバッファの半分より大きい場合の無限ループを修正しました。
+  (Tim McGilchrist、Sadiq Jaffer によるレビュー)
+
+- [[https://github.com/ocaml/ocaml/issues/15185][#15185]], [[https://github.com/ocaml/ocaml/issues/15187][#15187]]: 即値範囲と冗長なパターンの特定の組み合わせに対する
+  パターンマッチングのコンパイル誤りを修正しました。
+  (Gabriel Scherer、Alperer Keleş による報告、
+   Vincent Laviron と Florian Angeletti によるレビュー)
+      
+
+
+
+* bytream.0.4
+:PROPERTIES:
+:CUSTOM_ID: 8
+:END:
+Archive: https://discuss.ocaml.org/t/ann-bytream-0-4/18639/1
+
+** Mikhail が発表しました
+
+
+やあ！
+
+低メモリアロケーションでバイトをストリーミングして処理できる [[https://github.com/dx3mod/bytream][Bytream]] ライブラリの次バージョンをお知らせできることを嬉しく思います。このリリースには多くの重要な更新が含まれています。
+
+*** 変更点
+
+- ~Bytream~ のスライスに、OCaml バージョン 5.2 以降が必要な独自の ~~buffer、~offset、~length~ ラベル付きタプルの代わりに、[[https://ocaml.org/p/bstr/latest][Bstr]] プロジェクトの [[https://ocaml.org/p/slice/latest][Slice]] ライブラリを使用するようになりました；
+
+  #+begin_src ocaml
+  let of_channel ?(io_buffer_size = 4096) ic =
+    let buffer = Bstr.create io_buffer_size in
+  
+    let reader () =
+      match In_channel.input_bigarray ic buffer 0 io_buffer_size with
+      | 0 -> raise End_of_file
+      | len -> Slice_bstr.make ~len buffer
+    in
+  
+    make reader
+  #+end_src
+
+- [[https://github.com/dx3mod/ozstd][ozstd]] ライブラリを通じた Zstandard 圧縮・伸張のための ~bytream.ozstd~ を追加；
+
+  #+begin_src ocaml
+  let output_compressed_string out_stream = 
+    let out_stream = Bytream_ozstd.Out.make ~compression_level:3 out_stream in 
+    Bytream.Out.output_string out_stream "Cras pulvinar sollicitudin nulla quis tempor.";
+    Bytream.Out.flush out_stream
+  
+  let input_decompressed_line in_stream = 
+    let in_stream = Bytream_ozstd.In.make in_stream in 
+    Bytream.In.input_line in_stream
+  #+end_src
+
+- [[https://ocaml.org/p/bin/latest][Bin]] ライブラリを通じた宣言的なバイトのエンコード・デコードのための ~bytream.bin~ を追加；
+
+  #+begin_src ocaml
+  type point = { x : int; y : int }
+  
+  let point = 
+    let open Bin in 
+    record (fun x y -> { x; y })
+    |+ field neint16 (fun t -> t.x)
+    |+ field neint16 (fun t -> t.y)
+    |> sealr
+  
+  let _ = 
+    (* ... *)
+    let p = Bytream_bin.In.input in_stream point in 
+    Bytream_bin.Out.output out_stream point { p with y = p.y * 2 }
+  #+end_src
+
+*** クレジット
+
+[[https://robur.coop][Robur Coop]] の[[https://ocaml.org/p/bstr/latest][Bstr]]、[[https://ocaml.org/p/slice/latest][Slice]]、[[https://ocaml.org/p/bin/latest][Bin]] などのライブラリに特別な感謝を申し上げます。これらは [[https://github.com/dx3mod/bytream][Bytream]]、[[https://github.com/dx3mod/ozstd][ozstd]] などの私のプロジェクトに非常に密接に統合されています。ありがとうございます！
+      
+
+
+
+* spvec の最初のリリース
+:PROPERTIES:
+:CUSTOM_ID: 9
+:END:
+Archive: https://discuss.ocaml.org/t/ann-first-release-of-spvec/18641/1
+
+** François Pottier が発表しました
+
+
+~spvec~ の最初のリリースをお知らせできることを嬉しく思います。この小さな OCaml ライブラリは*セミ永続ベクタ*を実装しています。つまり、~push~ と ~get~ の2つの操作のみをサポートし、永続的（イミュータブル）に見えるが、制限されたルールに従って使用しなければならないベクタを提供します。この制限により、ミュータブルベクタを基にした効率的な実装が可能です。このライブラリは、シンプルで安全なAPIを持つ、永続ベクタに偽装したミュータブルベクタを提供すると言えるかもしれません。
+
+2つのサブモジュールが提供されています：~Spvec.Safe~ と ~Spvec.Unsafe~。*安全*バリアントはライブラリの誤用をランタイムで検出します。*アンセーフ*バリアントは高速ですが誤用を検出しません；ユーザーのコードが正しいと確信できる場合にのみ使用すべきです。
+
+詳細については[[https://cambium.inria.fr/~fpottier/spvec/doc/spvec/][ドキュメント]]をご覧ください。
+
+#+begin_example
+  opam update
+  opam install spvec
+#+end_example
+
+Happy hacking,
+FP.
+      
+
+
+
+* ocaml-emcc: OCaml プログラムと C スタブを WebAssembly にコンパイルする
+:PROPERTIES:
+:CUSTOM_ID: 10
+:END:
+Archive: https://discuss.ocaml.org/t/ann-ocaml-emcc-compile-ocaml-programs-with-their-c-stubs-to-webassembly/18649/1
+
+** rboud が発表しました
+
+
+こんにちは、皆さん！
+
+ocaml-emcc というツールに取り組んでいて、他の人たちが試せる状態になりました：https://github.com/rboudrouss/ocaml-emcc
+
+アイデアは非常にシンプルです。OCaml を JS や wasm にコンパイルする代わりに、~ocamlrun~ を emscripten でコンパイルし、プログラムとその依存関係のすべてのCスタブを emcc でコンパイルして、全体を1つのモジュールにリンクします。JavaScript で書き直す必要があるものは何もありません。zarith、sqlite3、camlzip、cryptokit、mirage-crypto、ctypes バインディングなどが「そのまま」動作し、独自のCコードも同様です。
+
+明らかな欠点は、インタープリタで動作するバイトコードなので、js_of_ocaml や wasm_of_ocaml と比べてかなり遅いことです。コードが純粋な OCaml であるか、そのCスタブにすでにJavaScript実装がある場合は、それらを使用してください。これはFFI部分が問題となるケース向けです。
+
+ぜひ試してみてください！
+
+#+begin_example
+opam pin add ocaml-emcc git+https://github.com/rboudrouss/ocaml-emcc.git
+source /path/to/emsdk/emsdk_env.sh  # emcc を PATH に（emscripten のインストールが必要）
+ocaml-emcc build main.js     # dune プロジェクト内で
+node main.js                 # または main.js をウェブページに読み込む
+#+end_example
+
+出力ファイルの拡張子によって得られるものが決まります（詳細はREADMEとemscriptenのドキュメントを参照）：
+
+- ~main.js~: Node.js とブラウザ
+- ~main.html~: 同上、加えて最小限のページ
+- ~main.wasm~: スタンドアロンモジュール、ただし一部の emscripten 関数をインポート
+- ~main.wasm --wasi~: WASI関数のみをインポートするため、wasmtime や Node.jsのWASIで動作
+
+まだプロトタイプなので荒削りな部分もあります。試してみて問題が発生した場合はぜひ教えてください。ビルドできないパッケージこそが今私が求めているものです。新しいレシピの提案・要望も歓迎します。
+
+これは、OCaml で書かれた静的アナライザ [[https://gitlab.com/mopsa/mopsa-analyzer][MOPSA]] を wasm にコンパイルする試みから始まりました。依存しているFFI（apron、gmp、clangのフロントエンドなど）の量が多く非常に困難でした。最終的にOCamlとMOPSAの両方のソースにパッチを当てて[[https://mopsawasm.rboud.com][動作]]させ、[[https://ocaml.org/ocaml-workshop-2026/schedule][OCaml Workshop 2026]] でそれについて発表しました。その後、その作業を汎用ツールに変えてきて、かなりうまく一般化できることがわかったので、ここに公開します。
+
+C依存関係のためにブラウザに持ち込めなかったOCamlプロジェクトがある場合は特に、どのような用途に使いたいかをぜひ聞かせてください。
+      
+
+
+
+* snkv-ocaml 0.3.0 新リリース — HNSW ベクタ検索付き SNKV の OCaml バインディング
+:PROPERTIES:
+:CUSTOM_ID: 11
+:END:
+Archive: https://discuss.ocaml.org/t/ann-new-release-of-snkv-ocaml-0-3-0-ocaml-bindings-for-snkv-with-hnsw-vector-search/18650/1
+
+** Tomasz Barański が発表しました
+
+
+こんにちは、皆さん！
+
+snkv-ocaml 0.3.0 をお知らせします。これは SQLite の B-tree エンジン上に構築された永続的でACIDなキー・バリューストア SNKV の OCaml バインディングです。SNKV はキー・バリューストレージ、カラムファミリー、TTL、認証済み暗号化、トランザクション、イテレータ、ランタイム統計を提供します。
+
+snkv-ocaml 0.3.0 は opam で利用可能です。このリリースはアップストリームの SNKV v0.8.2 に対応し、同じデータベースに保存されたベクタに対する HNSWベースのベクタ検索をサポートしています。
+
+リンク：
+
+- リポジトリ: https://codeberg.org/tomaszb/snkv-ocaml
+- OPAM: https://opam.ocaml.org/packages/snkv/
+- 変更履歴: https://codeberg.org/tomaszb/snkv-ocaml/src/branch/main/CHANGELOG.md
+- アップストリーム SNKV: https://github.com/hash-anu/snkv
+      
+
+
+
+* TIFF Inspector の構築：OCaml、TIFF 内部、ブラウザ内プレイグラウンドの探求
+:PROPERTIES:
+:CUSTOM_ID: 12
+:END:
+Archive: https://discuss.ocaml.org/t/building-tiff-inspector-exploring-ocaml-tiff-internals-and-an-in-browser-playground/18655/1
+
+** RidwanAdebsoin が発表しました
+
+
+こんにちは、皆さん！
+
+[[https://github.com/geocaml/ocaml-tiff][geocaml/ocaml-tiff]] を使って構築した、TIFFファイルの内部（ディレクトリ、タグ、ストレージレイアウト、サンプル、プレーン）を調べるためのツール **TIFF Inspector** を開発しています。
+
+- **ライブ:** [[https://tiff-inspector.onrender.com/][TIFF Inspector]]
+- **コード:** [[https://github.com/RidwanAdebosin/tiff-inspect][GitHub リポジトリ]] (MIT)
+
+CLI、HTTP API、ウェブUIとして提供されます。報告された各値はその出所（ファイルから読み取られたもの、仕様のデフォルト値、または不在）を明示します。推測は一切行いません。
+
+*** OCaml の方々に興味深い点
+
+**ocaml-tiff の修正。** 珍しいファイルでのテスト中にいくつかの問題が見つかり、vendor コピーで修正しました：
+
+- インラインに保存された複数の小さい値を持つBigTIFFエントリ（例えばGDALが書き込む ~BitsPerSample=[8,8,8]~）が読めない問題。
+- 2 GiB以上のクラシックTIFFオフセットが符号拡張される問題。
+- インラインではなくオフセットに保存された ~SampleFormat~ が読めない問題。
+- ツールがフィールドの型と数を確認できるエントリのイントロスペクション。
+
+**独立したテストフィクスチャ。** パーサーとコードを共有しない別個のPythonライターが生成した21個の小さなTIFFと、ゴールデン出力があります。メンテナーが希望すれば、~ocaml-tiff~ の適合性テストセットとして有用かもしれません。
+
+**ブラウザ内プレイグラウンド。** ~/playground~ では、インストールなしに、サンプルファイルに対して ~ocaml-tiff~ とインスペクタコアを使って OCaml を書いて実行できます。~js_of_ocaml~ でコンパイルされたトップレベル（gzip圧縮で約1.3 MB）がウェブワーカーで動作します。~;;~ はオプションで、コンパイルエラーはエディタに下線で表示されます。
+
+これを実現するために、~bstr~ と ~checkseum~ が使用するCプリミティブのJavaScript実装を書きました。有用であればアップストリームに提供したいと思います。
+
+**サーバー。** Eio と cohttp-eio を使った OCaml 5 で動作します。各アップロードは時間とメモリ制限を持つ独立したプロセスで検査され、レート制限とグレースフルシャットダウンもあります。無料の Render インスタンスのDockerで動作しています。
+
+*** フィードバック歓迎
+
+- JSONレポートの形式は他の地理空間ツールでも機能しますか？
+- ~geocaml~ のメンテナー：修正は1つのPRで行うべきですか、それとも複数の小さなPRがよいですか？
+- 正しく検査されないTIFFがあれば教えてください。サンプルファイル付きのIssueは非常に有用です。
+
+お読みいただきありがとうございました！
+      
+
+
+
+* stele 0.1.0: Menhir 文法の構文エラーメッセージ生成ツール
+:PROPERTIES:
+:CUSTOM_ID: 13
+:END:
+Archive: https://discuss.ocaml.org/t/ann-stele-0-1-0-syntax-error-messages-for-menhir-grammars/18657/1
+
+** Jérôme Vouillon が発表しました
+
+
+Menhir 文法の構文エラーメッセージを自動生成するツール [[https://github.com/vouillon/stele][stele]] の最初のリリースをお知らせできることを嬉しく思います。
+
+不正な入力に出会った Menhir パーサーは ~Error~ を発生させますが、これはパースが失敗した場所は示しますが、理由は示しません。Menhir はすべてのエラー状態（パースが詰まる可能性のある全ての時点）に対してメッセージを記述すれば、実際のメッセージを表示できますが、現実的な文法にはそれが数百もあり、文法が変わるたびに古くなります。
+
+stele は、~menhir --list-errors~ と文法の ~.cmly~ から、ビルド時にメッセージを生成します。いくつかのエイリアスと1つの ~%on_error_reduce~ アノテーションがあれば、チュートリアルの計算機は次のように報告します：
+
+#+begin_example
+Error: Assuming that the statements are complete, expecting '}'.
+ --> stray.calc:1:6
+1 | { 1; ) }
+  ·      ^
+  ·   ^^ these statements
+  · ^ This '{' opens the enclosing construct.
+#+end_example
+
+得られるもの：
+
+- **すべてのエラー状態に対するメッセージ**：次に何が来られるかを示します。各リストはパーサーのテーブルと照合されるため、そのメッセージがパーサーがその状態で拒否するトークンを提示することはありません。
+- **位置のヒント**：入力がまだその中にある開きデリミタと、パーサーが完結したと仮定した構文要素。小さなランタイムライブラリ ~stele.runtime~ は、パーサーが失敗したときにこれらをソーススパンに変換します。~menhirLib~ にのみ依存しているため、js_of_ocaml と wasm_of_ocaml でも動作します。レンダリングはユーザーに任されており、[[https://github.com/johnyob/grace][Grace]] と組み合わせるとうまく機能します。
+- **必要なときのより良い表現**：小さな設定ファイルで読みやすい名前とトークングループ（「演算子」など）を指定でき、オーバーライドファイルには手書きのメッセージが必要な少数の状態のものを保持できます。どちらにも古いエントリがあるとビルドが失敗します。
+
+stele は François Pottier の[[https://dl.acm.org/doi/10.1145/2892208.2892224][*Reachability and Error Diagnosis in LR(1) Parsers*]]（CC 2016）——~--list-errors~ の背景にある論文——に基づいています。この論文が CompCert のパーサーに対して手作業で行ったことを自動化します。[[https://github.com/ocsigen/wax][Wax]] ツールチェーンの内部で始まり、そこでは2つの文法のエラーメッセージを生成しています。
+
+試すには：
+
+#+begin_example
+opam install stele
+#+end_example
+
+OCaml ≥ 4.14 と menhir ≥ 20260122 が必要です。[[https://github.com/vouillon/stele/blob/main/TUTORIAL.md][チュートリアル]]では、小さな計算機の文法を「構文エラー」からフルセットアップまで10段階で説明しています。その最終状態はコピーして実行できるサンプルです。
+      
+
+
+
+* OSEC-2026-21: Str partial-match によるキャプチャレジスタの古い値によるアンダーフロー
+:PROPERTIES:
+:CUSTOM_ID: 14
+:END:
+** Hannes Mehnert が発表しました
+
+
+皆さん、こんにちは、
+
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+https://github.com/ocaml/security-advisories および
+https://osv.dev/list?q=&ecosystem=opam でもご確認いただけます。
+
+よろしくお願いします。
+
+Hannes
+
+#+begin_example
+id: OSEC-2026-21
+modified: "2026-10-26T15:15:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: 
+"CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:N/VI:L/VA:H/SC:N/SI:N/SA:N/E:P/AU:Y/R:U"
+severity_score: "5.5 (Medium)"
+affected: "ocaml" {< "5.5.2"}
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "824dadcbde77aea27d84b8d70a72442b8fcb344a"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "feccd4744ebe25b90208e569d03efd514b964dce"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer "Nicolás Ojeda Bär"]
+   [remediation_reviewer "Edwin Török"]
+   [remediation_developer "Xavier Leroy"]
+]
+cwe: [ CWE-122 ]
+affected_bindings: ["Str.string_partial_match" "Str.replace_matched" 
+"Str.global_replace" "Str.replace_first" ]
+#+end_example
+
+**Str partial-match によるキャプチャレジスタの古い値によるアンダーフロー**
+
+ANT-2026-KKC4QS4S Str partial-match stale capture registers underflow
+
+~Str.string_partial_match~ はキャプチャされたグループの開始と終了を記録します。
+~beginning <= end~ という暗黙の前提がありました。
+しかし、マッチされた文字列の終端に達したが正規表現の終端には達していない場合、
+グループの開始がスター演算子のN回目の繰り返しでマッチし、
+グループの終了がN-1回目の繰り返しでマッチすることが可能で、
+~beginning > end~ になる可能性がありました。
+~Str.matched_group~ は安全で、~beginning > end~ のグループに対して
+~Invalid_argument~ で失敗しますが、~Str.replace_matched~ はクラッシュする可能性があり、
+~end - beginning~ バイトを memcpy しようとします。
+
+ANT の例は、~\(\(a\)b\)+~ に対して ~ab~ を部分マッチさせるケースです。
+グループ2は ~beginning = 2~、~end = 1~ となります。
+
+*** 修正
+
+修正は ~beginning > end~ のグループをマッチしなかったものとして記録することです。
+
+*** 影響を受けるか？
+
+以下の条件をすべて満たす必要があります：
+   * ~Str.string_partial_match~ を使用している必要があります
+     * この関数を使用していない場合は影響を受けません
+   * ~Str.string_partial_match~ の呼び出し後に同じ正規表現で ~Str.{replace_matched,global_replace,replace_first}~ のいずれかを使用する必要があります
+     * ~Str.group_beginning~ と ~Str.group_end~ を使用して独自の文字列操作を行う場合は安全です（String モジュールが境界外アクセスで例外を発生させるため）。同様に ~Str.matched_group~ も安全です（OCaml 実装で ~String~ 関数を使用しています）
+   * マッチの置換が0より大きいグループを参照する必要があります
+     * 置換文字列引数が固定されていてグループを参照しないか、グループ0のみを参照する場合は影響を受けません
+   * 参照される置換グループが元の正規表現の繰り返し演算子の下にある必要があります
+     * 正規表現に繰り返し演算子がない場合、または繰り返し演算子の下にグループがない場合は影響を受けません
+
+例えば、~{|\(\(a\)b\)+|}~ を ~Str.string_partial_match~ の呼び出しの正規表現として使用し、
+その後 ~Str.replace_matched~ の引数で ~\2~ を参照している場合に影響を受ける可能性があります。
+
+*** タイムライン
+
+- 2026-08-24: 脆弱性が発見される
+- 2026-08-27: security@ocaml.org に報告が転送される
+- 2026-09-29: trunk にマージされる
+      
+
+
+
+* OSEC-2026-22: Unix.map_file における整数オーバーフロー
+:PROPERTIES:
+:CUSTOM_ID: 15
+:END:
+** Hannes Mehnert が発表しました
+
+
+皆さん、こんにちは、
+
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+https://github.com/ocaml/security-advisories および
+https://osv.dev/list?q=&ecosystem=opam でもご確認いただけます。
+
+よろしくお願いします。
+
+Hannes
+
+#+begin_example
+id: OSEC-2026-22
+modified: "2026-10-23T22:30:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: 
+"CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:L/VI:L/VA:H/SC:N/SI:N/SA:N/E:P"
+severity_score: "5.5 (Medium)"
+affected: "ocaml" {< "5.5.2"}
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "de57bb4f59c3302260aaeaaa4dfee12695597d25"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "ff978d2139ba638886c2565f2d86c0ee265840a5"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer "Nicolás Ojeda Bär"]
+   [remediation_reviewer "Edwin Török"]
+   [remediation_developer "Xavier Leroy"]
+]
+cwe: [ CWE-190 ]
+affected_bindings: ["Unix.map_file"]
+#+end_example
+
+**Unix.map_file における整数オーバーフロー**
+
+ANT-2026-6W9NPC2Q mmap の次元積における整数オーバーフロー
+
+*** 修正
+
+bigarray の次元を掛け合わせる際に ~*~ の代わりに ~caml_umul_overflow~ を使用し、
+整数オーバーフローを検出して ~Failure~ を発生させるようにしました。
+負の位置も ~Invalid_argument~ を発生させて拒否されます。
+
+*** 影響を受けるか？
+
+~Unix.map_file~ の呼び出しにおいて、次元またはファイルサイズのいずれかがユーザーによって制御可能な場合、影響を受ける可能性があります。
+
+*** スコアに関する注記
+
+この脆弱性はライブラリにあり、CVSSスコアは
+[[https://www.first.org/cvss/v4.0/user-guide#Assessing-Vulnerabilities-in-Software-Libraries-and-Similar][最悪のケースの前提]]
+で計算されています。
+実際のアプリケーションでのスコアは、攻撃者がこの関数への入力をどの程度制御できるかによって異なります。
+
+*** タイムライン
+
+- 2026-08-24: 脆弱性が発見される
+- 2026-08-27: security@ocaml.org に報告が転送される
+- 2026-09-29: trunk にマージされる
+      
+
+
+
+* OSEC-2026-23: Marshal における複数の問題
+:PROPERTIES:
+:CUSTOM_ID: 16
+:END:
+** Hannes Mehnert が発表しました
+
+
+皆さん、こんにちは、
+
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+https://github.com/ocaml/security-advisories および
+https://osv.dev/list?q=&ecosystem=opam でもご確認いただけます。
+
+よろしくお願いします。
+
+Hannes
+
+#+begin_example
+id: OSEC-2026-23
+modified: "2026-10-23T22:30:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N"
+severity_score: "6.8"
+affected: "ocaml" {< "5.5.2"}
+aliases: [ CVE-2026-28364 ]
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "7da997d28b1ac57dd3a7108a865b327493fd4239"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "709b0ab93e53d54297b42d897d74dced1e9c75a5"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer "Nicolás Ojeda Bär"]
+   [remediation_developer "Xavier Leroy"]
+]
+cwe: [ CWE-126 CWE-502 CWE-754]
+affected_bindings: ["Marshal.from_channel" "Marshal.from_bytes" 
+"Marshal.from_string" "input_value" ]
+#+end_example
+
+**Marshal における複数の問題**
+
+Marshal モジュールでいくつかの問題が発見されました：
+
+ANT-2026-K7NTK0FT アンマーシャル呼び出し間での obj_counter の古い値による null/解放済み intern_obj_table インデックスアクセス
+
+ANT-2026-2NJYQWEX CODE_CUSTOM_LEN でのカスタムブロックサイズのラップアラウンドによる割り当て問題
+
+ANT-2026-PJC00M7X アンマーシャラーが検証なしに偽造された Closure_tag メタデータを受け入れる
+
+これは [[https://osv.dev/vulnerability/OSEC-2026-01][OSEC-2026-01]] のフォローアップです。
+
+アンマーシャル時にランタイムシステムに未定義の動作を引き起こす、破損または悪意のあるマーシャルデータ。input_value は、ランタイムシステムを破壊することなく、クリーンに失敗するか、適切に形成された OCaml オブジェクトを生成すべきです。
+
+したがって、OCaml コードがクラッシュまたは誤動作する原因となる予期しない型の OCaml オブジェクトを生成する、適切に形成されたマーシャルデータは除外されます。
+
+*** 影響を受けるか？
+
+影響を受けるバインディング ~Marshal.from_channel~、~Marshal.from_bytes~、~Marshal.from_string~、~Stdlib.input_value~（または ~Lwt_io.read_value~ などのライブラリのラッパー）のいずれかを使用している場合。
+
+Marshal は型安全ではないため、信頼できない入力でデシリアライゼーションを使用する場合は注意が必要です（型の混乱やリモートコード実行のリスクがあります——コードに Marshal を使用できます）。
+
+Marshal は信頼できるプロセス間の通信にのみ使用することをお勧めします。
+
+*** タイムライン
+
+- 2026-08-24: 脆弱性が発見される
+- 2026-08-27: security@ocaml.org に報告が転送される
+- 2026-09-29: trunk にマージされる
+      
+
+
+
+* OSEC-2026-24: Windows でのコマンドクォートにおける複数の問題
+:PROPERTIES:
+:CUSTOM_ID: 17
+:END:
+** Hannes Mehnert が発表しました
+
+
+  皆さん、こんにちは、
+
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+https://github.com/ocaml/security-advisories および
+https://osv.dev/list?q=&ecosystem=opam でもご確認いただけます。
+
+よろしくお願いします。
+
+Hannes
+
+#+begin_example
+id: OSEC-2026-24
+modified: "2026-10-23T22:30:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: 
+"CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P"
+severity_score: "7.3 (High)"
+aliases : [ CVE-2026-41083 ]
+affected: "ocaml" {< "5.5.2"}
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "70a3a75c0bfb23d67ad5fe3e9c1ba9800d61feae"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "0bbf8e5af985feb03a11a5ffe57d068373d09fd0"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer "Nicolás Ojeda Bär"]
+   [remediation_developer "Xavier Leroy"]
+]
+cwe: [ CWE-78 ]
+affected_bindings: ["Filename.quote_command"  "Unix.create_process" 
+"Unix.create_process_env" "Unix.open_process_args_in" 
+"Unix.open_process_args_out" "Unix.open_process_args_full"]
+#+end_example
+
+**Windows でのコマンドクォートにおける複数の問題**
+
+ANT-2026-R7FKP7RG Win32 の quote_cmd_filename がパイプ/リダイレクトのメタ文字を見逃す
+
+ANT-2026-SRZZ62SD maybe_quote/make_cmdline を通じた Windows バッチファイルの引数インジェクション
+
+ANT-2026-JPEWMPAB Win32 の引数クォートで埋め込まれた CR/LF がエスケープされない
+
+[[https://osv.dev/vulnerability/OSEC-2026-05][OSEC-2026-05]] の修正も含まれています。
+
+~Filename.quote_command~ は ~Sys.command~、~Unix.system~、~Unix.open_process~ 関数の引数として適切なクォートされたコマンドラインを返します。
+しかし Windows では特定の文字が正しくエスケープされていませんでした。
+
+~Unix.create_process~ は Windows で ~.bat~ または ~.cmd~ プログラムを起動でき、
+安全にクォートできない特定の文字が受け入れられていました。
+
+*** 修正
+
+~Filename.quote_command~ が引数を正しくクォートするように更新されました。
+~Unix.create_process*~ が ~Failure~ を発生させて安全にクォートできない引数を拒否するように更新されました：
+#+begin_quote
+ プログラム [prog] が [.bat] または [.cmd] スクリプトであり、
+ [prog] または [args] のいずれかに [" | & , ; < = > ^ % "] などの
+ スクリプトに安全に渡すことのできない文字が含まれている場合。
+ 本当にこれらの文字をスクリプトに渡す必要がある場合は、
+ 代わりに {!Unix.system} の使用を検討してください。
+#+end_quote
+
+*** 影響を受けるか？
+
+Windows でユーザーが提供する引数を使って ~Filename.quote_command~ を使用している場合。
+Windows で ~.bat~ または ~.cmd~ プログラムとユーザーが提供する引数を使って ~Unix.create_process*~ または ~Unix.open_process*~ を使用している場合。
+
+*** タイムライン
+
+- 2026-08-24: 脆弱性が発見される
+- 2026-08-27: security@ocaml.org に報告が転送される
+- 2029-09-05: trunk にマージされる
+      
+
+
+
+* OSEC-2026-25: OCaml ~runtime_events~ コンシューマにおけるサイズ超過カスタムユーザーイベント解析時のヒープバッファオーバーフロー
+:PROPERTIES:
+:CUSTOM_ID: 18
+:END:
+** Hannes Mehnert が発表しました
+
+
+皆さん、こんにちは、
+
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+https://github.com/ocaml/security-advisories および
+https://osv.dev/list?q=&ecosystem=opam でもご確認いただけます。
+
+よろしくお願いします。
+
+Hannes
+
+#+begin_example
+id: OSEC-2026-25
+modified: "2026-10-23T22:30:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: 
+"CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P"
+severity_score: "4.5 (Medium)"
+affected: "ocaml" {< "5.5.2"}
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "2247294d06464df0273479f41b0418655918da27"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "9dcf0c86201cf5e8ece56c6bb5f61fc4d92fb74a"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer "Olivier Nicole"]
+   [remediation_reviewer  "Edwin Török"]
+   [remediation_developer "Sadiq Jaffer"]
+]
+cwe: [ CWE-20 CWE-122 ]
+affected_bindings: ["Runtime_events.read_poll" ]
+#+end_example
+
+**OCaml ~runtime_events~ コンシューマにおけるサイズ超過カスタムユーザーイベント解析時のヒープバッファオーバーフロー**
+
+ANT-2026-0JXJVEVY
+
+カスタムイベントはユーザーイベントのキャッシュを管理しています。1つのメッセージタイプ（custom/unit/span/int のいずれか）で有効なメッセージを持ち、その後同じイベントが異なるメッセージタイプで含まれる破損したストリームが存在する可能性があります。
+
+これは実際のプログラムでは遭遇しないはずですが、クラッシュにつながる可能性があります。
+
+*** 修正
+
+すべてのランタイムイベントタイプのメッセージ長を確認し、不一致の場合は破損したストリームとして報告します。
+
+*** 影響を受けるか？
+
+ランタイムイベントのプロデューサーとコンシューマーが別々のプロセスで動作しており、プロデューサーが不正なデータを生成するよう誘導される可能性がある場合。
+
+*** タイムライン
+
+- 2026-08-24: 脆弱性が発見される
+- 2026-08-27: security@ocaml.org に報告が転送される
+- 2027-09-05: trunk にマージされる
+      
+
+
+
+* OSEC-2026-26: runtime_events ユーザーイベントの名前ベースの型混乱
+:PROPERTIES:
+:CUSTOM_ID: 19
+:END:
+** Hannes Mehnert が発表しました
+
+
+皆さん、こんにちは、
+
+OCaml ランタイムに関する新しいアドバイザリが公開されました。以下にアドバイザリの内容を記載します。また、
+https://github.com/ocaml/security-advisories および
+https://osv.dev/list?q=&ecosystem=opam でもご確認いただけます。
+
+よろしくお願いします。
+
+Hannes
+
+#+begin_example
+id: OSEC-2026-26
+modified: "2026-10-23T22:30:00+01:00"
+published: "2026-10-23T22:30:00+01:00"
+severity: 
+"CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N/E:P"
+severity_score: "4.5 (Medium)"
+affected: "ocaml" {< "5.5.2"}
+events: [
+   [
+     git "https://github.com/ocaml/ocaml" [
+       [fixed "ac2fae847a9c2c35ae3bba90a19adbe5d0cc6f59"]
+     ]
+   ]
+   [
+     git "https://github.com/ocaml/ocaml" [
+         [fixed "de10a6b03a471821cb0b868223e5331b919f48c0"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Anthropic"]
+   [coordinator "Hannes Mehnert"]
+   [coordinator "Edwin Török"]
+   [remediation_reviewer  "Edwin Török"]
+   [remediation_developer "Sadiq Jaffer"]
+]
+cwe: [ CWE-20 CWE-122 ]
+affected_bindings: ["Runtime_events.read_poll"]
+#+end_example
+
+**runtime_events ユーザーイベントの名前ベースの型混乱**
+
+ANT-2026-DTBY2HWS
+
+カスタムイベントはユーザーイベントのキャッシュを管理しています。1つのメッセージタイプ（custom/unit/span/int のいずれか）で有効なメッセージを持ち、その後同じイベントが異なるメッセージタイプで含まれる破損したストリームが存在する可能性があります。
+
+これは実際のプログラムでは遭遇しないはずですが、クラッシュにつながる可能性があります。
+
+*** 修正
+
+イベントタイプを期待される型と照合して検証し、不一致の場合は破損したストリームとして報告します。
+
+*** 影響を受けるか？
+
+ランタイムイベントのプロデューサーとコンシューマーが別々のプロセスで動作しており、プロデューサーが不正なデータを生成するよう誘導される可能性がある場合。
+
+*** タイムライン
+
+- 2026-08-24: 脆弱性が発見される
+- 2026-08-27: security@ocaml.org に報告が転送される
+- 2027-10-20: trunk にマージされる
+      
+
+
+
+* 過去の CWN
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+CWN を見逃した場合は、[[mailto:alan.schmitt@polytechnique.org][メッセージを送っていただければ]]メールでお送りします。また、[[https://ocaml.jp/cwn-ja/][アーカイブ]]や[[https://ocaml.jp/cwn-ja/cwn.rss][RSS フィード]]もご覧いただけます。
+
+毎週メールで受け取りたい場合は、[[https://sympa.inria.fr/sympa/info/caml-list][caml-list]] を購読してください。
+
+#+BEGIN_authorname
+[[https://alan.petitepomme.net/][Alan Schmitt]]
+#+END_authorname
