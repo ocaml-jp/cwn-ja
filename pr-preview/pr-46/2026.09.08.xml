@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cwn>
+  <cwn_head>
+    <cwn_date>2026.09.08</cwn_date>
+    <cwn_prev>2026.09.01</cwn_prev>
+    <cwn_next>2026.09.15</cwn_next>
+    <cwn_date_text>2026年9月1日から8日まで</cwn_date_text>
+  </cwn_head>
+  <cwn_body>
+    <cwn_entry>
+      <cwn_title>OCaml コンパイラバックエンドでの取り組み</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/working-in-the-ocaml-compilers-backend/18499/1</cwn_url>
+      <cwn_who>Zane Hambly が発表しました</cwn_who>
+      <cwn_what>
+こんにちは！長年の閲覧者で、初めて投稿します。
+
+私は主に OCaml バックエンドのネイティブエミッションと ~asmcomp~ において、コンパイラがサポートする各アーキテクチャ向けに C 呼び出しを命令へ置き換える作業をしてきました。一部の作業は OCSF の支援を受けましたが、他のプロジェクトでも貢献しようとしています。
+
+詳しい内容は[私のウェブサイト](https://zanehambly.com/ocaml)にまとめています。
+
+ネイティブアトミックの追加にも取り組んでいたため、OCaml のメモリモデルに関する litmus testing も行っています。結果に興味があれば、[こちら](https://zanehambly.com/reference/ocaml-atomics)にもページを用意しています。今後も定期的に更新していく予定で、他にも計画しているテストをいくつか追加する予定です。多数のマシンにアクセスできるので、せっかくなら活用しようと思っています！
+
+私は主にホビーストおよびヒストリカルコンピューティングの背景を持ち、OCaml をそれらの取り組みに広く活用してきました。コンパイラへの貢献を続けていく予定なので、プルリクエストのレビューや自分でのプルリクエスト送信などでお目にかかることがあるかもしれません。ご質問があればお気軽にどうぞ！
+
+よろしくお願いします。
+
+Zane
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>forcamla 0.4.0 - シンプルな Functional Reactive Programming</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-forcamla-0-4-0-simple-functional-reactive-programming/18501/1</cwn_url>
+      <cwn_who>Christopher Sumnicht が発表しました</cwn_who>
+      <cwn_what>
+みなさん、こんにちは。
+
+少し前に [forcamla](https://github.com/rxdt-labs/forcamla)（[opam](https://opam.ocaml.org/packages/forcamla/)）というパッケージを作りました（昨日まで discuss.ocaml.org の存在を知りませんでした）。非常に強力なスプレッドシートエディタのようなものだと考えていただければわかりやすいと思います。特に forcamla では、変数を「代入」するのではなく「等値化」します。また、forcamla はスプレッドシートの機能とイベントリスナーを組み合わせて、プログラムの実行を整理します。
+
+*** 小さな例
+
+#+begin_src ocaml
+open Formula (* To use formula *)
+
+let x = v 2 (* Create an integer term called x *)
+let y = v 2 (* Create an integer term called y *)
+let z = x + y
+let () = x =: 3 (* Set x to 3, and z now is 5 *)
+#+end_src
+
+~z~ を再代入する必要がないことに注目してください。~z~ は ~x + y~ に「等値化」されており、~x~ や ~y~ が変化するたびに常に更新されます。
+
+*** イベントリスナー
+
+このフレームワークを使ってイベントリスナーを構築することもできます。以下にゲームの小さな例を示します。
+
+#+begin_src ocaml
+open Formula
+
+type hero =
+{
+  (* A bunuch of fields *)
+  health: int formula
+}
+
+let player =
+{
+  (* Assign the fields *)
+  health = v 3; (* Give health a value of something, say 3 in this case. *)
+}
+
+let game_over () = print_endline "Game Over!"
+let () = when_satisfied (player.health =? 0) game_over
+#+end_src
+
+そして次のように使えます。
+
+#+begin_src ocaml
+let () = player.health =: !(player.health - c 1) (* Nothing happens yet! player.health is 2 now. *)
+let () = player.health =: !(player.health - c 1) (* Nothing happens yet! player health is 1 now. *)
+let () = player.health =: !(player.health - c 1) (* Now something happens! player.health is 0 and "Game Over!" is printed to the screen! *)
+#+end_src
+
+*** なぜ作ったのか
+
+もともと forcamla はゲーム向けに設計しましたが、汎用的な整理ツールとしても有用だと気づきました。Jane Street の [Incremental](https://github.com/janestreet/incremental) に似ていますが、forcamla は効率よりも使いやすさを優先しています。
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>Typegist 0.0.0</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-typegist-0-0-0/18503/1</cwn_url>
+      <cwn_who>Daniel Bünzli が発表しました</cwn_who>
+      <cwn_what>
+こんにちは。
+
+~typegist~ の最初のリリースをお知らせできることを嬉しく思います。
+
+#+begin_quote
+Typegist は OCaml の型の本質を値として表現します。
+この動的な型表現は、汎用的な型インデックス付き関数、すなわち値のシリアライザ、プリンタ、パーサ、差分ツール、乱数ジェネレータ、エディタ、FFI グルーなどを構築するために使用できます。アクセス可能な型であれば、そのパブリックインターフェースが定める限界まで記述できます。
+Typegist は OCaml の型言語を完全にモデル化するのではなく、プロデューサーとプロセッサの両方にとって使いやすいインターフェースを提供するために、型インデックスメタデータで装飾されたコアな構造的サブセットに焦点を当てています。
+Typegist は ISC ライセンスで配布されています。依存関係はありません。
+#+end_quote
+
+上述のとおり、これらの値は OCaml の型定義言語を部分的にしかモデル化していません。そのため、これらは ~Type.Repr.t~ 値ではなく ~Type.Gist.t~ 値となっています。typegist は型の忠実または正規の表現というよりも、型のためのデータインターフェース言語として捉えていただければと思います（実際にはその方が有用だと感じています）。
+
+この表現は ~Stdlib~ の一部の型を特別扱いし、注釈を付けています。あまりに汎用的になり、他のシステムとのインターフェース時にすべてのセマンティクスが失われてしまうのは望ましくありません。例えば、JSON では ~list~ 値は配列として現れてほしいのであって、入れ子になった cons case オブジェクトとしてではありません。~None~ は ~null~ にマッピングされてほしく、定数 case オブジェクトではありません。テキストデータを保持する ~string~ 値は、16進数や base64 ではなく、プレーンな JSON 文字列として現れてほしいのです。
+
+これは[表現](https://erratique.ch/software/typegist/doc/Typegist/Type/Gist/Expr/index.html)の一部が意図的にアドホックであることを意味します。OCaml の型式言語の無意味な詳細に煩わされることなく、自分自身の gist プロセッサを[合理的に簡単に](https://erratique.ch/software/typegist/doc/cookbook.html#generic_funs_template)構築できるよう、精度と汎用性のバランスを取っています。
+
+次回 ~M.pp : t Fmt.t~ 関数を書く機会があれば、代わりに ~M.gist : t Type.Gist.t~ を書いてみてください。プリンタとそれ[以上のもの](https://erratique.ch/software/typegist/doc/Typegist/Fun/Generic/index.html)が手に入ります。また、~jsont~ のコンパニオンリリースとして、型の gist を ~jsont~ の JSON 型に[変換する](https://erratique.ch/software/jsont/doc/Jsont_typegist/index.html) 新しいオプションの ~jsont.typegist~ ライブラリも用意しました（JSON シリアライゼーションをお楽しみいただけます）。
+
+typegist はあまり変更されないと思いますが、まだ実際の使用での試練を受けていません—でもすぐに始めるつもりです。これはリポジトリで長すぎる時間を過ごしてきた設計です。フィードバックに基づいて、より精度が必要な場合や、より良い表現が見つかった場合には、表現の変更が行われる可能性があります。ただし、そのような変更は主に gist プロセッサに影響するものになると予想されます。問題や改善点があれば、issue トラッカーでお知らせください。
+
+型定義から gist を自動導出する手段を提案する予定はありませんが、過去に何人かがそれに興味を示してくれました。
+
+楽しい型インデックスプログラミングを！
+
+この最初のリリースは [OCaml Software Foundation](https://ocaml-sf.org/) からの助成金により実現できました。また、[ドナー](https://github.com/sponsors/dbuenzli)の皆さんにもサポートに感謝します。
+
+- ホームページ: https://erratique.ch/software/typegist
+- ドキュメント: https://erratique.ch/software/typegist/doc または ~odig doc typegist~  
+- インストール: ~opam install typegist~（[opam PR]）
+
+よろしくお願いします。
+
+Daniel
+
+---
+追記: API では OCaml 5.5 で導入されたすべての新しい型機能を活用しています :–)
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>依存型なしでの依存 if 式</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/dependent-if-expressions-without-dependent-types/18506/1</cwn_url>
+      <cwn_who>Didier Wenzek が発表しました</cwn_who>
+      <cwn_what>
+[Haskell for all のこの投稿](https://haskellforall.com/2026/09/dependent-if-expressions)では、Church エンコーディングを使って依存型なしで依存 if 式を実装する洞察に富んだ活用法が示されています。
+
+以下の OCaml コードは型検査が通り、動作します。
+
+#+begin_src ocaml
+# let example bool = if_then_else bool 5 "hi!";;
+
+# example t;;
+ - : int = 5
+# example f;;
+- : string = "hi!"
+# example (f &amp;&amp; t);;
+- : string = "hi!"
+# example (f || t);;
+- : int = 5
+# example (not t);;
+- : string = "hi!"
+#+end_src
+
+これは単純に Hindley-Milner 型推論に基づいており、Church エンコードされたブール型の型をあまり制限しないという単一のトリックを使っています。
+
+ブール型を Church エンコードする最初のアイデアは、~then~ ケースと ~else~ ケースを同じ型に制限することでしょう
+（forall 型をエンコードするためにレコードを使って）。
+
+#+begin_src ocaml
+type bool = { check : 'a. 'a -> 'a -> 'a; }
+#+end_src
+
+依存 if 式にはよりリベラルな定義が必要です。
+
+#+begin_src ocaml
+type bool = { check : 'a 'b 'c. 'a -> 'b -> 'c; }
+#+end_src
+
+そして、型を強制しない場合に推論されるのはこうなります
+（forall 型の代わりに弱多相型が得られるという事実は無視して）。
+
+#+begin_src ocaml
+let t if_branch else_branch = if_branch
+let f if_branch else_branch = else_branch
+
+let if_then_else bool if_branch else_branch = bool if_branch else_branch
+
+let (&amp;&amp;) a b if_branch else_branch = a (b if_branch else_branch) else_branch
+let (||) a b if_branch else_branch = a if_branch (b if_branch else_branch)
+let not a if_branch else_branch = a else_branch if_branch
+#+end_src
+
+ぜひ全文をお読みください。本当に素晴らしい読み物です。
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>Caps 0.1.0、OCaml 向けケイパビリティ型システムおよびライブラリ</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-caps-0-1-0-a-capability-type-system-and-library-for-ocaml/18507/1</cwn_url>
+      <cwn_who>Yoann Padioleau が発表しました</cwn_who>
+      <cwn_what>
+みなさん、こんにちは。
+
+caps ライブラリの最初のリリースをお知らせできることを嬉しく思います。このライブラリを使用すると、OCaml プログラム（およびライブラリ）で「ケイパビリティ型」を使用できるようになります。
+
+主なアイデアは、このライブラリを使用した後、関数が次のようなシグネチャを持てるということです。
+
+#+begin_src ocaml
+val foo: &lt; Cap.network; Cap.stdout; Cap.random; .. &gt; -&gt;
+  int -&gt; float
+#+end_src
+
+これは、この関数が動作するために network、stdout、random の各ケイパビリティを必要とすることを意味します。シグネチャはこの関数が内部的に持つ副作用の種類と、内部的に行うシステムコール（またはその呼び出し先）を明らかにします。
+
+このライブラリは Semgrep のコードベースで作業中に設計しました。コードベースの特定の部分を「サンドボックス化」または制御するのに有用で、若いエンジニアが特定の部分で危険な関数を呼び出せないようにするためです。新しいコーディングエージェント時代において、シグネチャで AI が生成するコードを制御するためにさらに有用だと思います。
+
+詳細については、OCaml 2026 ワークショップでの発表をご覧ください: https://www.youtube.com/watch?v=4t_2wLz9EOo および対応するスライド https://aryx.github.io/ocaml-caps/caps.html（ここで何度か紹介された超クールな Slipshow プレゼンテーションツールを使用）。プロジェクトページ https://github.com/aryx/ocaml-caps もご参照ください。
+
+opam 経由で簡単に試せます。
+
+#+begin_example
+$ opam update
+$ opam install caps
+#+end_example
+
+質問があればお気軽にどうぞ。
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>bstr、slice、bin（bigstring、バイナリフォーマット向けエンコーダとデコーダ）</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-bstr-slice-bin-bigstring-encoders-decoders-for-binary-formats/18509/1</cwn_url>
+      <cwn_who>Calascibetta Romain が発表しました</cwn_who>
+      <cwn_what>
+[~bstr.0.1.0~](https://github.com/robur-coop/bstr) のリリース、および ~bin.0.1.0~ と ~slice.0.1.0~ のリリースをお知らせできることを嬉しく思います。これらのリリースは複数のライブラリを統合した作業の成果であり、[私たちのコoperative](https://robur.coop) 内でのフォーマットとプロトコルの実装に役立つものをまとめることを目指しています。特に、これらのライブラリは以下を提供します。
+- _bigstring_ として知られるものを操作するための包括的なモジュール（[bigstringaf](https://github.com/inhabitedtype/bigstringaf) の代替 — あのライブラリの名前は長すぎるので）
+- bigstring と bytes へのアクセスを提供するライブラリ（簡潔に言えば、[ocaml-cstruct](https://github.com/mirage/ocaml-cstruct) の[抽象化](https://github.com/robur-coop/bstr/blob/b427711671c1654df37550849efe5265c866ebcc/lib/slice.mli#L1)）
+- 最後に、バイナリフォーマットを記述するためのライブラリ。エンコーダとデコーダを導出できます（[repr](https://github.com/mirage/repr) が提供するものの精神に倣って）
+
+bigstring の利点を理解したい方のために、以前[こちら](https://discuss.ocaml.org/t/buffered-io-bytes-vs-bigstring/8978/3?u=dinosaure)で考えを共有しました。パフォーマンス上の理由（[この記事](https://blog.robur.coop/articles/miragevpn-performance.html)を参照）から ~ocaml-cstruct~ の使用を後退させましたが、bigstring は特定のケースでは依然として有用です: 根本的には、慎重に使用すべきです。
+
+[~bechamel~](https://github.com/mirage/bechamel)（マイクロベンチマーク用）を使ったパフォーマンスには特に注意を払い、以下の結論が得られました。
+- ~bstr~ は ~bigstringaf~ よりも優れたパフォーマンスを発揮します。~bigstringaf~ が開発された当時は存在しなかったタグを使用しているためです。
+  |      | bstr   | bigstringaf |
+  |------|--------|-------------|
+  | blit | 4.4ns  | 4.8ns       |
+  | sub  | 15.4ns | 18.9ns      |
+- ~slice.bstr~ は ~ocaml-cstruct~ と同等のパフォーマンスを発揮します（予想通り）
+- ~bin~ はデコードにおいて手書きコードに匹敵します
+  |      | bin    | 手書き（~ocaml-cstruct~） | ~repr~ | ~angstrom~ |
+  |------|--------|--------------------------------|-|-|
+  | ipv4 | 11.9ns | 11.9ns                         | 93.9ns | 136ns |
+  #+begin_src ocaml
+let bin =
+  let fn vihl tos total_length id ff ttl protocol checksum src dst =
+    { version= vihl lsr 4; ihl= vihl land 0x0f; tos; total_length; id
+    ; flags= ff lsr 13; frag_offset= ff land 0x1fff; ttl; protocol; checksum
+    ; src; dst }
+  in
+  let open Bin in
+  record ~name:"ipv4" fn
+  |+ field ~name:"vihl" uint8 (fun t -> (t.version lsl 4) lor t.ihl)
+  |+ field ~name:"tos" uint8 (fun t -> t.tos)
+  |+ field ~name:"total_length" beuint16 (fun t -> t.total_length)
+  |+ field ~name:"id" beuint16 (fun t -> t.id)
+  |+ field ~name:"flags_frag" beuint16 (fun t ->
+      (t.flags lsl 13) lor t.frag_offset)
+  |+ field ~name:"ttl" uint8 (fun t -> t.ttl)
+  |+ field ~name:"protocol" uint8 (fun t -> t.protocol)
+  |+ field ~name:"checksum" beuint16 (fun t -> t.checksum)
+  |+ field ~name:"src" beint32 (fun t -> t.src)
+  |+ field ~name:"dst" beint32 (fun t -> t.dst)
+  |> sealr
+
+let cstruct cs =
+  let vihl = Cstruct.get_uint8 cs 0 in
+  let tos = Cstruct.get_uint8 cs 1 in
+  let total_length = Cstruct.BE.get_uint16 cs 2 in
+  let id = Cstruct.BE.get_uint16 cs 4 in
+  let ff = Cstruct.BE.get_uint16 cs 6 in
+  let ttl = Cstruct.get_uint8 cs 8 in
+  let protocol = Cstruct.get_uint8 cs 9 in
+  let checksum = Cstruct.BE.get_uint16 cs 10 in
+  let src = Cstruct.BE.get_uint32 cs 12 in
+  let dst = Cstruct.BE.get_uint32 cs 16 in
+  { version= vihl lsr 4; ihl= vihl land 0x0f; tos; total_length; id
+  ; flags= ff lsr 13; frag_offset= ff land 0x1fff; ttl; protocol; checksum
+  ; src; dst }
+  #+end_src
+
+これらのライブラリは、bigarrays を扱うための一貫したライブラリセットを提供しつつ、パフォーマンスにおけるトレードオフをほとんど設けないという野心のもとに作られました。functor、GADT、ADT、さらには高階多相（ケイパビリティでさえも）を試すために[いくつかの試み](https://github.com/dinosaure/buffet)が行われました...
+
+その結果、「貧者の functor」が十分であり、いくつかの調整（特に ~caml_apply2~ 呼び出しを避けるため）を加えることで、手書きコードと比較してかなり競争力のあるものが実現できました。
+
+これらのライブラリは、bigstring を扱う際にコミュニティで欠けていたもの、または出現したものもカプセル化しています。私は完全に満足することなくこれらのライブラリの改善に個人的に貢献してきました: そのため特に ~bstr~ が生まれました。これらのライブラリのドキュメントとテストには相当の努力が注がれています。~bin~ に関する特定のアサーション（同型性など）を検証するためのファジャーも利用可能です。
+
+これらのライブラリは現在使用中であり、このバージョンが最終版ではありません。特に OCaml でのプロトコルとフォーマットの実装に関連して、引き続き改善を続けていく予定です。
+
+私たちの仕事を評価いただける方は、[GitHub 経由](https://github.com/sponsors/robur-coop)または[私たちのチャリティ](https://robur.coop/#donate)に直接寄付をお願いします。楽しいハッキングを！
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>OCaml 5.5.1 リリース</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ocaml-5-5-1-released/18510/1</cwn_url>
+      <cwn_who>octachron が発表しました</cwn_who>
+      <cwn_what>
+Giovanni Girolamo Saccheri の誕生日を祝して、OCaml バージョン 5.5.1 のリリースをお知らせできることを嬉しく思います。
+
+このパッチレベルリリースは、モジュール依存関数に関する主要な型システムのバグを修正し、ランタイムの2つのセキュリティ修正も含んでいます: 1つは Marshal モジュールに関するもの、もう1つはバイトコードの読み込みに関するものです。
+
+より深刻度の低い修正として、並行プログラムのランタイムバグが2件、musl ユーザー向けのランタイムバグが1件、そしてその他いくつかのバグも修正されています。
+
+このリリースでは、macOS 上でコンパイラをクローンするサポートも復元されています。
+
+すでに OCaml 5.5.0 を使用している場合は、OCaml 5.5.1 への移行を強くお勧めします。
+
+
+バグ修正の完全なリストは以下にあります。
+
+ハッピーハッキング、
+-- Florian Angeletti（OCaml チームを代表して）
+
+*** インストール手順
+
+ベースコンパイラは opam switch として以下のコマンドでインストールできます。
+
+#+begin_example
+    opam update
+    opam switch create 5.5.1
+#+end_example
+
+リリースのソースコードは以下から直接入手できます。
+
+- GitHub: https://github.com/ocaml/ocaml/archive/5.5.1.tar.gz)
+- Inria アーカイブ: https://caml.inria.fr/pub/distrib/ocaml-5.5/ocaml-5.5.1.tar.gz
+
+*** OCaml 5.5.0 からの変更点
+
+**** 型システム
+
+- [14891](https://github.com/ocaml/ocaml/issues/14891)、[14982](https://github.com/ocaml/ocaml/issues/14982): 依存ファーストクラスモジュール型が存在する場合のモジュール依存関数の非依存適用において、誤った型チェックにつながるスコープエラーを修正:
+  #+begin_src ocaml
+  module type T = sig module type S end
+  let f (module M:T) (m: (module M.S)) = m
+  module type P = sig type 'a t end
+  let error =
+    f (module struct module type S = P end) (module List)
+  #+end_src
+  (Florian Angeletti、Hazem ElMasry による報告、Gabriel Scherer によるレビュー)
+
+**** ランタイム
+
+- [14872](https://github.com/ocaml/ocaml/issues/14872): 2^29 個以上の TOC エントリを持つ破損または悪意あるバイトコード実行ファイルの読み込みに対して強化。
+  (Xavier Leroy、Nicolás Ojeda Bär によるレビュー)
+
+- [15019](https://github.com/ocaml/ocaml/issues/15019): ~Marshal.from_{string,bytes}~: 全データ長の計算におけるオーバーフローを防御。
+  (Xavier Leroy、Akshay Singh による報告、Nicolás Ojeda Bär と Antonin Décimo によるレビュー)
+
+- [14933](https://github.com/ocaml/ocaml/issues/14933): 代替シグナルスタックのサイズを選択する際に ~sysconf(_SC_SIGSTKSZ)~ を尊重し、一部の Intel CPU で musl libc にリンクした場合の致命的エラーを回避。
+  (Nat Mote、Florian Angeletti と Miod Vallat によるレビュー)
+
+- [14940](https://github.com/ocaml/ocaml/issues/14940): スタックの内部キャッシュサイズを制限することで OCaml ランタイムのメモリリークを修正。
+  (Vesa Karvonen、Florian Angeletti、Gabriel Scherer によるレビュー)
+
+- [15029](https://github.com/ocaml/ocaml/issues/15029): 一度も yield しない OCaml スレッドがランタイムロックを永久に保持し、そのドメインの他のスレッドが実行されなくなる Windows 上の回帰を修正。スレッド間のプリエンプティブ切り替えに効果がなく、~Thread.yield~ の明示的な呼び出しかブロッキングセクションのみが他のスレッドの実行を許可していた。
+  (Nicolás Ojeda Bär、Daniel Larraz による報告、Antonin Décimo によるレビュー)
+
+**** ビルドシステム
+
+- [14883](https://github.com/ocaml/ocaml/issues/14883)、[14884](https://github.com/ocaml/ocaml/issues/14884): 古い mingw32-gcc バージョンでの Windows クロスコンパイルを修正。
+  (Brian Ward、Antonin Décimo と Stefan Muenzel によるレビュー)
+
+- [14871](https://github.com/ocaml/ocaml/issues/14871)、[14914](https://github.com/ocaml/ocaml/issues/14914): ビルド中に OCAMLTOP_INCLUDE_PATH を無視。
+  (David Allsopp、Andreas Rossberg による報告、Florian Angeletti によるレビュー)
+
+- [14901](https://github.com/ocaml/ocaml/issues/14901)、[14923](https://github.com/ocaml/ocaml/issues/14923): opam のサンドボックスで実行する際に macOS の古い bash バージョンに対応するよう生成されたインストールスクリプトを修正。
+  (David Allsopp、Julian Fondren と Sacha-Élie Ayoun による報告、Kate Deplaix による調査と初期修正、Florian Angeletti によるレビュー)
+
+- [14989](https://github.com/ocaml/ocaml/issues/14989): otherlibs/{str,unix} のみが独自の .cmi と .cmx をビルドするようにすることでビルドの再現性を向上。ルート Makefile の汎用 %.cmi/%.cmx ルールが make -j 時にそれらと競合し、異なるソースパスを記録していた。これによりインターフェースダイジェスト（およびそれを通じて他のほとんどのコンパイル成果物）が変更され、str.a と unix.a にパックされたデバッグ情報も変更されていた。
+  (Bernhard M. Wiedemann、David Allsopp と Stefan Muenzel によるレビュー)
+
+**** ユーザーインターフェース
+
+- [14881](https://github.com/ocaml/ocaml/issues/14881)、[14882](https://github.com/ocaml/ocaml/issues/14882): モジュール制約の対象となる外部型の表示を修正。
+  (Stefan Muenzel、Florian Angeletti によるレビュー)
+
+**** Runtime events ライブラリ
+
+- [14966](https://github.com/ocaml/ocaml/issues/14966): [13643](https://github.com/ocaml/ocaml/issues/13643) で導入された EV_MINOR_EPHE_CLEAN コンストラクタを Runtime_events.runtime_phase に追加。ランタイムは 5.4 以降、マイナーコレクションがロックされた ephemeron をクリーンアップする必要がある場合にこのフェーズを発行していたが、OCaml 型にそのためのコンストラクタがなかったため、コンシューマーに範囲外の値が渡され、マッチング時にクラッシュしていた。
+  (Tim McGilchrist、Florian Angeletti によるレビュー)
+
+- [14969](https://github.com/ocaml/ocaml/issues/14969): ランタイムイベントカウンター EV_C_MINOR_ALLOCATED_WORDS の単位を修正し、ヘッダーを含むマイナーヒープ消費語数として報告するように。
+  (Tim McGilchrist、Nicolás Ojeda Bär によるレビュー)
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>Slipshow!</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-slipshow/16337/29</cwn_url>
+      <cwn_who>このスレッドを続けて、Paul-Elliot が発表しました</cwn_who>
+      <cwn_what>
+別のリリースが opam に[マージ](https://github.com/ocaml/opam-repository/pull/30652)されました！
+
+揺れる水のグラスに気づきましたか？それが発表する Slipshow の次のリリースです:
+
+*** Slipshow 0.13.0: Juraslip Park
+
+数十年前のソフトウェアを掘り起こしていたところ、今は絶滅した Keynoplodocus、Googloslideraptor、そして最後に Powerpointaurus Rex の DNA を含むバグを発見しました。
+
+それを Slipshow 自身の DNA にマージすることで、現代のあらゆるソフトウェア（Slipshow も含む）が忘れていた機能、つまりマウスを使ってプレゼンテーション内の要素を配置する機能を復活させることができました。
+
+#+attr_html: :width 80%
+https://github.com/user-attachments/assets/2330aab5-ee28-4248-b215-66920cb1c7ff
+
+このリリースの主な新機能は「GUI モード」です。
+
+これまで Slipshow は、CSS をエスケープハッチとして使いながら、要素の種類（タイトル、段落、ブロック）に基づいてすべての要素を自動配置していました。これが「What You See Is What You Mean」モデルです。「What You See Is What You Get」では対照的に、レンダリングされたコンテンツを直接編集し、通常マウスで要素を配置します。
+
+両方の（ジュラシック）世界の最良の部分は「What You See Is What You Want」: 要素ごとにどちらのモードを使うか選択できます。
+
+一部のカエルが単性別環境で性別を変えられるように、Slipshow の要素も ~gui~ 属性1つで WYSIWYM から WYSIWYG に変わり、マウスで配置できるようになりました:
+
+#+begin_example
+    {gui}
+    Drag me, resize me.
+#+end_example
+
+その他の主な改善点として、レンダリングされたコンテンツを Ctrl+クリックしてソースに移動する機能、[Tachyons](https://tachyons.io/) CSS フレームワークの追加、より一貫したショートカット、描画エディタのユーザビリティ改善などがあります。
+
+いつものように、すべての[コントリビューター](https://github.com/panglesd/slipshow/graphs/contributors?from=5%2F30%2F2026) 💚、[スポンサー](https://github.com/sponsors/panglesd/) ❤️、そしてこの作業を可能にしてくれた[NLnet の寛大な助成金](https://nlnet.nl/project/Slipshow/) 💝 に感謝します！
+
+完全な変更履歴はこちらです:
+
+*** 追加
+
+- 「What You See Is What You Want」: 「GUI」要素をプレビューでドラッグして絶対位置に配置！移動、サイズ変更、スケーリングをサポート。(#270)
+- プレビューの任意の場所を ~Ctrl~+クリック（Mac では ~Cmd~+クリック）で「ソースへ移動」。(#270)
+- [tachyons](https://tachyons.io/) サポートを追加。(#278)
+
+*** 変更
+
+- ツールバーとショートカットの一貫性を改善。特に録音マネージャーモードでは ~Shift+R~ が録音マネージャーを閉じるようになりました（以前は録音を開始していました）。~Shift+S~ が録音の開始に使用されます。(#270)
+- ~slipshow compile~ の診断がロケーション順にソートされるように。(#277)
+- 「Wrong Type」診断のロケーションを改善。(#277)
+- ステップカウンターと toc エントリがクリック可能であることをヒント表示。(#278)
+- 描画エディタで録音の末尾にカーソルがある状態でPlay を押すと最初から再生するように。(#278)
+- 描画エディタでミリ秒以下の時間精度を丸める。(#278)
+
+*** 修正
+
+- LSP:
+  - エディタが UTF-16 位置エンコーディングのみをサポートしている場合にそれを尊重するように。(#270)
+  - カーソル位置の要素検出のバグと、「glued」属性のロケーションのバグを修正し、ホバーとハイライトの信頼性を向上。(#270)
+  - 「refresh on save」モードで ~go_next~ / ~go_previous~ が何もしない問題を修正。(#270)
+  - frontmatter のエラーが時々報告されない問題を修正。(#277)
+- frontmatter ~attributes:~ のロケーション報告を修正。(#271)
+- 描画が配置済み要素の背後に描かれる問題を修正。(#270)
+- モノフォントを埋め込むことで HTML の自己完結性を修正。(#272)
+- frontmatter の css と js ファイルの解決がそれらが含まれるファイルからの相対パスになるように（ルートファイルからではなく）。(#271)
+- LSP: frontmatter で言及されたファイル（css や js ファイルなど）の変更時に正しく更新するように。(#271)
+- URI とローカルパスの検出を改善。(#271)
+- ~css:~ と ~js:~ frontmatter フィールドのエラーロケーションを改善。(#271)
+- frontmatter 区切り文字の後のスペースとタブを許可。(#275)
+- エディタでの描画再生がポーズで止まる問題を修正。(#278)
+- 録音がその時点で終了する場合にストロークの最後の点が表示されない問題を修正。(#278)
+- スライドの入場を目次内の見出しとグループ化。(#273)
+
+*** ドキュメント
+
+- 新しい GUI モードに関するドキュメントを追加。(#270)
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>ocp-indent 1.10.0</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-ocp-indent-1-10-0/18513/1</cwn_url>
+      <cwn_who>Nathan Rebours が発表しました</cwn_who>
+      <cwn_what>
+OCamlPro では ~ocp-indent.1.10.0~ のリリースをお知らせできることを嬉しく思います。
+
+詳細版をご希望の方は[こちら](https://github.com/OCamlPro/ocp-indent/releases/tag/1.10.0)で完全なリリースノートをご確認いただけます。
+
+このリリースの主な機能は、5.3 の effect パターンから 5.5 の ~let type~ や ~let class~ まで、新しい OCaml 言語機能のサポートです。直近3つのマイナーコンパイラリリースで導入されたすべての新しい構文が適切にサポートされるようになりました。
+
+また、入力ファイルが正しくインデントされているかを単純に検証する ~--check~ モード、そして ~ocp-indent~ の警告を致命的にする補完的な ~--strict~ フラグという、待望の新機能も搭載されました。どちらも CI での使用を想定しています。
+
+例によってバグ修正もあります: ~-~ が ~&lt;stdin&gt;~ 入力の位置引数として正しく受け付けられるようになり、~strict_with~ の動作が型と型拡張全体で一貫したものに改善され、スターコメントが正しくインデントされるようになりました。
+
+[助成金プログラム](https://discuss.ocaml.org/t/ahrefs-grant-program-for-ocaml/17604)を通じてこのリリースに資金提供してくれた Ahrefs に感謝します！
+
+.ml ファイルが適切にインデントされますように :pray:
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>Intel ISA 仕様のインタープリタ/コンパイラが OCaml で書かれている</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/intel-isa-specification-interpreter-compiler-is-written-in-ocaml/18515/1</cwn_url>
+      <cwn_who>Edwin Török が発表しました</cwn_who>
+      <cwn_what>
+Intel は最近、ISA の実行可能仕様のベータ版を公開しました: https://intel.github.io/SDM/announcement/2026/08/20/announce-preview.html 。ISA 仕様の近似はこれまでにも存在していましたが（例えば [ACL2 や SAIL](https://github.com/rems-project/sail-x86-from-acl2) による）、それらは散文形式のマニュアルに基づいて構築されていました（[過去にバグがありました](https://github.com/zwegner/x86-sat)）。ベンダー自身が実行可能言語で仕様を公開し（そして願わくばテストされていること！）、これは歓迎すべき改善です。
+
+さらに良いことに、その仕様言語の[インタープリタ/コンパイラ](https://github.com/IntelLabs/isa-tools)が OCaml で書かれていることに気づきました！
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>TyXML 5.0.0</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-tyxml-5-0-0/18516/1</cwn_url>
+      <cwn_who>Vincent Balat が発表しました</cwn_who>
+      <cwn_what>
+**TyXML 5.0.0** のメジャーリリースをお知らせできることを嬉しく思います。TyXML は HTML および SVG ドキュメントを構築するライブラリで、その正当性が OCaml 型システムによって検証されます: 仕様が特定の位置で許可していない要素は型検査を通過しません。このライブラリは現在の仕様、HTML については WHATWG living standard、SVG については Filter Effects モジュールを含む SVG 2 に準拠するようになりました（SVG サポートは SVG 1.1 以来更新されていませんでした）。
+
+主なハイライト:
+
+- **HTML**: popover、invoker commands、microdata、declarative shadow DOM と CSS shadow parts、~loading~/~decoding~/~fetchpriority~、~blocking~、新要素 ~s~、~bdi~、~search~、~data~、~slot~、~track~、不足していたイベントハンドラ属性（pointer ファミリー、クリップボード、~ontoggle~、~onscrollend~ など）、標準に合わせたコンテントモデル。
+- **SVG**: ~mask~ は ~Svg_types~ で宣言されていたが要素自体がなかった、~feMerge~ に ~feMergeNode~ が存在しなかったため子要素を持てなかった、約30個のプレゼンテーション属性に型タグはあったが生成する関数がなかった、これらすべてが追加され、SVG 2 の追加、ARIA サポート、SVG 2 のリンク属性、SVG 2 に拡張されたコンテントモデルも含まれています。
+- **PPX と JSX 構文**: camelCase の SVG 属性が認識されなかったため、~viewBox~、~stdDeviation~、~preserveAspectRatio~ などほとんどのものが拒否され、PPX では実際の SVG をほとんど書けなかった。コンテントモデルがテキストを受け付けない場所では SVG タグ間の空白が無視されるようになり、インデントされた SVG が型検査を通るようになりました。
+- **実際には使用できなかった構造体の修正**: ~area~ に ~href~ がなく、コンテントモデルにそのタグがなかったため、area を含む ~map~ はどこにも収まらなかった；~symbol~ がコア属性（つまり ~id~ もなく参照もできなかった）を受け付けなかった；~menu~ の ~li~ 子要素が構築できなかった。いくつかの属性名もスペルミスで出力されており、これはコンパイルエラーよりも悪かった（出力が正常に見えるため）。知っておくべき破壊的変更: ~hidden~ と ~contenteditable~ は列挙引数を取るようになった、URL 値の属性は ~Xml.uri~ を通る、SVG ドキュメントは SVG 1.1 doctype なしで印刷される、ファンクタインターフェースの実装者向けに ~Wrapped_functions~ に4つの新しい関数が追加された、ビルドには OCaml 4.08、dune 3.18、ppxlib 0.36 が必要。
+
+#+begin_example
+opam install tyxml
+#+end_example
+
+- 詳細なブログ記事: https://ocsigen.org/blog/posts/tyxml-5.0.0.html
+- 変更履歴: https://github.com/ocsigen/tyxml/blob/master/CHANGES.md
+- マニュアルと API: https://ocsigen.org/tyxml/latest/
+
+このリリースに貢献してくれたすべての方々、特に Hugo Heuzard、Martin Bodin、toastal、Sylvain Boilard、rand00、Sora Morimoto、Patrick Ferris、Gabriel Radanne に感謝します。バグ報告とプルリクエストは https://github.com/ocsigen/tyxml までお願いします。
+      </cwn_what>
+    </cwn_entry>
+  </cwn_body>
+</cwn>

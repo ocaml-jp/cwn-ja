@@ -1,0 +1,174 @@
+#+OPTIONS: ^:nil
+#+OPTIONS: html-postamble:nil
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: author:nil
+#+HTML_HEAD: <style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+#+HTML_HEAD: <style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+#+TITLE: OCaml Weekly News
+[[file:2026.07.07.html][先週号]] [[file:index.html][上へ]] [[file:2026.07.21.html][次週号]]
+
+こんにちは
+
+2026年7月7日から14日までの週の OCaml Weekly News をお届けします。
+
+#+TOC: headlines 1
+
+
+* opam 2.5.2
+:PROPERTIES:
+:CUSTOM_ID: 1
+:END:
+Archive: https://discuss.ocaml.org/t/ann-opam-2-5-2/18338/1
+
+** Kate が発表しました
+
+
+皆さん、こんにちは。
+
+opam 2.5.2 が公開されました。このリリースでは以下の問題が修正されています：
+- セキュリティ上の問題（[[https://github.com/ocaml/security-advisories/blob/main/advisories/2026/OSEC-2026-10.md][OSEC-2026-10]]）
+- dune を使用するクロスコンパイルパッケージが正しくインストールできない 2.5.1 からのリグレッション（[[https://github.com/ocaml/dune/issues/14393][ocaml/dune#14393]]）
+
+できるだけ早く 2.5.2 へのアップグレードをお勧めします。
+
+お使いのディストリビューションの古い opam パッケージに依存している場合、Debian Stable などのディストリビューションのメンテナーには既に通知済みであり、関連する修正のバックポートが近いうちに提供される予定です。
+
+詳細とリンクについては、[[https://opam.ocaml.org/blog/opam-2-5-2/][ブログ記事]]をご覧ください。
+
+*** お試しください！
+
+アップグレードの手順は変わりません：
+
+Unix システムの場合：
+#+begin_example
+bash -c "sh <(curl -fsSL https://opam.ocaml.org/install.sh) --version 2.5.2"
+#+end_example
+または Windows の PowerShell から：
+#+begin_example
+Invoke-Expression "& { $(Invoke-RestMethod https://opam.ocaml.org/install.ps1) } -Version 2.5.2"
+#+end_example
+問題が発生した場合は、[[https://github.com/ocaml/opam/issues][バグトラッカー]]にご報告ください。
+
+Happy hacking,
+<> <> The opam team <> <> :camel:
+      
+
+
+
+* ocaml-wire: EverParse 3D 出力を持つバイナリワイヤーフォーマット DSL
+:PROPERTIES:
+:CUSTOM_ID: 2
+:END:
+Archive: https://discuss.ocaml.org/t/ann-ocaml-wire-a-binary-wire-format-dsl-with-everparse-3d-output/18009/4
+
+** このスレッドの続きとして、Thomas Gazagnaire が発表しました
+
+
+~ocaml-wire~ 1.0.0 が opam に登録され、~opam install wire~ でインストールできるようになりましたことをお知らせします。
+
+このリリースでは、前バージョンからの堅牢性の修正と API のクリーンアップが行われています（そのため 1.0.0 というタグが付いています）。また、OCaml のパーサー/シリアライザーと生成された検証済み C パーサーの間での差分テストが大幅に追加されました。両者はランダムに生成されたスキーマとランダムな入力バイト列に対して実行され、テストでは受け入れるまたは拒否する内容、およびデコードした値が一致するかどうかを確認します。不一致が見つかった場所にはすべてバグがあり、現在はすべて修正されているようです。
+
+#+begin_quote
+しかし、これらを符号付き整数や浮動小数点数としてどのように解釈するのでしょうか？それは上位レイヤーに任されているのでしょうか？
+#+end_quote
+
+EverParse 3D には符号付きや浮動小数点型はなく、符号なし整数のみです。したがって C バリデーターにとって int8 は UINT8 であり、float64 は UINT64 です。OCaml デコーダーが再解釈を行います。符号付き型には 2 の補数、浮動小数点には IEEE 754 を使用し、プレーンなフィールドに対しては両側があらゆるビットパターンを受け入れます。フィールドへの制約（ユーザーが DSL 経由で追加したもの）は、その投影を経ても有効でなければなりません。符号付きの順序制約は、C バリデーターに到達する前に 2 の補数の等価式に書き換える必要があります。なぜなら、符号ビットが立っているバイトに対して素朴な符号なし比較を行うと結果が異なるからです（バイト 200 は符号付きの値 -56 であり、OCaml では受け入れられますが、素朴な C の境界では拒否されます）。浮動小数点の有限性（~is_finite~、~is_nan~）は指数ビットへのテストにコンパイルされ、忠実な符号なし表現を持たない浮動小数点の順序制約は事前に拒否されます。この差分ファジングによって符号ビットの不一致が明らかになり、0.9 から 1.0 の間でこれらすべてが強化されました。
+
+ゼロコピー読み取りも安全になりました。~Codec.validate~ は ~Codec.decode~ が行うすべてのチェック（enum のメンバーシップ、境界、パディング、~where~ 節）を強制するようになったため、信頼できない入力を検証してからゼロコピーの ~Codec.get~ 呼び出しのバッチを行う場合、デコーダーが拒否したであろうバイトを信頼することがなくなりました（こちらも差分テストで検出されました）。
+
+生成された ~.3d~ ファイルもプロトコルの仕様書として非常に読みやすいことが判明しました。ひとつの codec ファミリー全体が単一の .3d ファイルに射影され、その .3d ファイルは仕様書としても機能し、FFI なしのスタンドアロンな検証済み C パーサーにコンパイルされます。TCP/IP スタックはよい比較例です：[[https://github.com/parsimoni-labs/ocaml-wire/blob/main/examples/net/net.ml][OCaml の定義]]と[[https://github.com/parsimoni-labs/ocaml-wire/blob/main/examples/net/Net.3d][生成された 3d ファイル]]をご覧ください。
+      
+
+
+
+* Caqti 3.0.0
+:PROPERTIES:
+:CUSTOM_ID: 3
+:END:
+Archive: https://discuss.ocaml.org/t/ann-caqti-3-0-0/18335/1
+
+** Petter A. Urkedal が発表しました
+
+
+[[https://github.com/paurkedal/ocaml-caqti/][Caqti]] 3.0.0 のリリースをお知らせします。このリリースでは、階層的モジュールへの移行を含むいくつかの破壊的変更が含まれています。Caqti 3 の API は主に ~caqti.template~ プレビューライブラリと Caqti 2 API の残りのモジュールの再編成です。
+
+リリースノート：
+
+  - ~caqti~ ライブラリには Caqti 3 API が含まれ、~caqti.classic~
+    には Caqti 2 互換ラッパーが含まれます。Caqti 2 API のユーザーは、
+    リンク行に ~caqti.classic~ を追加する必要があります。Caqti 3 API
+    の早期採用者は ~caqti.template~ を ~caqti~ に置き換え、一部の
+    モジュールパスを調整する必要があります。新しい API への移行が推奨されますが、
+    既存アプリケーションに対しては段階的に行うことができます。
+
+  - 行のフォーマット時の先頭のカンマを修正しました。
+    ~Caqti_type.pp_value~（Caqti 2）および ~Caqti.Template.Row.pp~（Caqti 3）に影響します。
+
+  - [[https://github.com/paurkedal/ocaml-caqti/issues/140][issue #140]] により、
+    ~caqti-dynload~ パッケージの非推奨化を保留しました。
+
+  - SQLite では外部キー制約がデフォルトで有効になりました。
+
+opam でリリースしているプロジェクトは、次回リリース前にリンク行に ~caqti.classic~ を追加する（または API を移行する）こと、および必要に応じて caqti の下限を 2.3.0 に引き上げること（[[https://discuss.ocaml.org/t/ann-caqti-2-3-0/17985][前回のお知らせ]]を参照）をお勧めします。
+      
+
+
+
+* ocgtk 0.1: GTK 4 向け OCaml バインディング（プレビューリリース）
+:PROPERTIES:
+:CUSTOM_ID: 4
+:END:
+Archive: https://discuss.ocaml.org/t/ann-ocgtk-0-1-ocaml-bindings-for-gtk-4-preview-release/17944/6
+
+** このスレッドの続きとして、Chris Armstrong が発表しました
+
+
+**ocgtk 0.1-preview2 が opam で公開されました**
+
+このリリースでは生成される機能の量が大幅に増加し、生成ライブラリ（GTK、Gio、Pango、Cairo、GDK、GDKpixbuf、Graphene）で利用可能なクラスとメソッドの大部分をカバーしています。
+
+*** 主な変更点
+
+**** シグナルサポートの拡張
+
+複数のパラメーターを持つシグナルと boolean 以外の戻り値パラメーターをもつシグナルがサポートされるようになり、サポートされるシグナル型の約 2/3 をカバーします。
+
+**** GValue サポート
+
+GValue が適切なシグナルサポートの前提条件として正しくサポートされるようになりました。
+
+**** プリミティブサポートの拡張
+
+整数型の完全なカバレッジ、リスト型、配列処理の改善、GError から result 型へのマッピング、GObject の等価性とハッシュの改善。これらにより、生成可能なサポート対象メソッドのカバレッジが拡張されます。
+
+**** メモリ管理
+
+メモリ管理のバグ、特に boxed レコード型に関するバグの修正に多大な労力が注がれました。boxed レコード型では、参照を扱うための一貫した GLib メカニズムが使用されるようになりました。
+
+**** 対応 OS およびコンパイラーバージョンの拡張
+
+コード生成にのみ必要だった ocgtk の依存関係のほとんどが削除されたことで、Windows（MSYS2 のみ）および OCaml 4.14 までのバージョンへのサポートが拡張されました。
+
+**** その他の改善
+
+- 内部モジュール名を短縮することで、相互に依存するクラスとインターフェースをより適切に処理
+- クラスのコンストラクター生成：これにより、トップレベルでのクラスのエイリアス定義が不要になり、クラス型とコンストラクターのみを公開できるようになります。また、使用されないコードの除去が改善され、コンパイルのボトルネックが削減されます。
+
+次のリリースでは、API ドキュメント生成の改善、レコードサポートのギャップや他のプリミティブ（定数、関数、コールバックなど）の対応に注力する予定です。
+      
+
+
+
+* 過去の CWN
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+CWN を見逃した場合は、[[mailto:alan.schmitt@polytechnique.org][メッセージを送っていただければ]]メールでお送りします。また、[[https://ocaml.jp/cwn-ja/][アーカイブ]]や[[https://ocaml.jp/cwn-ja/cwn.rss][RSS フィード]]もご覧いただけます。
+
+毎週メールで受け取りたい場合は、[[https://sympa.inria.fr/sympa/info/caml-list][caml-list]] を購読してください。
+
+#+BEGIN_authorname
+[[https://alan.petitepomme.net/][Alan Schmitt]]
+#+END_authorname

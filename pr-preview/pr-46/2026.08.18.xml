@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cwn>
+  <cwn_head>
+    <cwn_date>2026.08.18</cwn_date>
+    <cwn_prev>2026.08.11</cwn_prev>
+    <cwn_next>2026.08.25</cwn_next>
+    <cwn_date_text>2026年8月11日から18日まで</cwn_date_text>
+  </cwn_head>
+  <cwn_body>
+    <cwn_entry>
+      <cwn_title>Affect 0.0.0 – OCaml 向けの洗練された自然な並行モデル</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-affect-0-0-0-a-streamlined-and-natural-concurrency-model-for-ocaml/18451/1</cwn_url>
+      <cwn_who>Daniel Bünzli が発表しました</cwn_who>
+      <cwn_what>
+こんにちは、
+
+~affect~ の最初のリリースを発表できることを嬉しく思います：
+
+#+begin_quote
+Affect は OCaml 向けの洗練された自然な並行モデルです。
+
+並列非同期関数と、それらを調整するための第一級の同期アクションを提供します。その結果として得られる並行モデルは、構造化された協調並行性・構造化されたキャンセル・構造化されたエフェクト処理を備えています。
+
+Affect は ISC ライセンスの下で配布されています。依存関係はありません。オプションで ~cmdliner~ ライブラリおよび OCaml の ~unix~ ライブラリに依存します。
+#+end_quote
+
+~affect~ の目標は、OCaml で並列・並行システムをプログラムするための、簡潔でエルゴノミックな[並行モデル]と、コンポーザブルな同期プリミティブを提供することです。その特徴は：
+
+- **洗練されている（Streamlined）**：公開する抽象、用語、概念的なオーバーヘッドを最小化するよう努めています。
+
+- **自然（Natural）**：OCaml 言語の基盤である「関数」を中心的な並行計算抽象として採用しています。
+
+もし今からほぼ40年前の [CML events] が何かを意味するなら、affect を一言で表すと「CML イベント（affect ではアクション）で結果を同期できる、構造化されたキャンセル可能な並列非同期関数呼び出し」となります。
+
+CML events が何も意味しないが Go のチャネルはわかるという方には、affect の第一級同期アクションを使えばそれが実装できることを伝えておきます。ただし、アクションはそれ以上のものを提供します。次のように理解できる汎用コンポーザブル同期メカニズムです：
+
+*** 拡張可能な ~select~
+
+affect では例えば、[非同期関数の結果](https://erratique.ch/software/affect/doc/Affect/Fun/Async/index.html#get_actions)の待機、[別の関数のキャンセル](https://erratique.ch/software/affect/doc/Affect/Fun/Async/index.html#cancellation_actions)、[タイムアウト](https://erratique.ch/software/affect/doc/Affect_unix/Mtime/index.html#val-wait_for')、[シグナル配送](https://erratique.ch/software/affect/doc/Affect_unix/Unix/Signal/index.html#val-wait')、一度だけセットされるセルが[セットされること](https://erratique.ch/software/affect/doc/Affect/Cell/Once/index.html#actions)、ファイルディスクリプタが[読み取り可能になること](https://erratique.ch/software/affect/doc/Affect_unix/Unix/index.html#action)、そして独自の[ファニーなプリミティブ](https://erratique.ch/software/affect/doc/Affect/Action/Private/Action/Primitive/index.html)アクションを select で待ち合わせることができます。
+
+アクションのロックフリー実装は2009年の[論文](https://doi.org/10.1145/1596550.1596588)に従っており、一部のアイデアは CML の [Guile 実装](https://wingolog.org/archives/2017/06/29/a-new-concurrent-ml)から採用しています。後者と同様に、affect では CML の用語を変更しています。イベントベースの用語はこれらのメカニズムを考える上で*非常に*混乱を招くと感じています。OCaml を完全に Milner 化するために [CCS](https://en.wikipedia.org/wiki/Calculus_of_communicating_systems) からインスピレーションを得て、event を /action/、channel を /port/ に置き換えました。これらの命名変更の詳細については[設計ノート](https://erratique.ch/software/affect/doc/design.html)をご覧ください。
+
+明確でアクセスしやすい並行モデルを提供しようとする点に加え、affect が第一世代の OCaml 5 並行ライブラリと異なる点は：
+
+1. OCaml ランタイムシステムの新しい並列的性質を完全に受け入れ、並行性と並列性を区別しません。
+
+2. 第一級の同期アクションや非同期関数という高レベルの抽象を、他から処理できるよう公開しています。これらのメカニズムは並列安全でロックフリーであるため、統合に多くの作業は不要で、使用するコンテキストへの制約も少なくなっています。
+
+これは特に以下を意味します：
+
+- プログラムの main で[組み込みスケジューラ](https://erratique.ch/software/affect/doc/Affect/Fun/Async/index.html#running)を呼び出すことに不満があったり、そもそも使いたくない場合でも、これらの抽象を使用するエコシステムライブラリを引き続き使いながら、アプリケーションの並行・並列アーキテクチャを合理的に制御できます。
+
+  例えば[このテスト](https://github.com/dbuenzli/affect/blob/056f05931e54321b41f220afa756c7f77a18a2fc/test/test_thread.ml)には、アクションを処理したり、ルートとなる非同期関数をスレッドで自前で実行する方法を示すコードとサンプルが含まれています。それらは組み込みスケジューラの並列起動とも連携できます。[別のテスト](https://github.com/dbuenzli/affect/blob/cfc33ce71f1ec022e9ab1acf06cfa26f5766412e/test/test_multi_scheduler.ml#L36)では、2つのスケジューラインスタンスが並列に実行できること（独立した領域でも、ポートを介した通信でも）が示されています。
+
+- バイト列以上のものに合意できるとよいことを考えると、既存のスケジューラが affect の高レベル抽象（またはそのサブセット）を処理できることが必要です。例えばアクションを処理するには、アクション呼び出し処理時にスケジューラでブロック解除の作業をスケジュールするための並列安全なクロージャを提供するだけで済みます。
+
+TL;DR：素敵でエルゴノミックな並行モデル *および* 柔軟性が得られます。
+
+リリースについては、affect は今ついに概念的にしっかりと根付いたと思っていますが、まだ初期段階であり、あまり使われていません。この最初のリリースの目的は、2年間リポジトリと思考の中で熟成してきた設計の、完全に動作し使用可能な実装を公開することでした。現状では：
+
+- おそらく本番環境での使用はお勧めしません[^1]。
+
+- 変更は引き続き想定されます。特にプライベート API をいじっている場合は。早期採用者やこのフォーラムでの質問は歓迎します。試していて問題が発生した場合は issue tracker でご連絡ください。
+
+- このライブラリはしばらくの間、最新バージョンの OCaml を必要とします。
+
+- リリースに間に合わなかった点として、協調的な [~Unix~ 互換モジュール]での ~select(2)~ の使用を置き換えることがあります。当初の計画では epoll/kqueue を使用する予定で、その計画は変わっていません。
+
+- 現在の実装は明確さと正確さを優先しており、ある意味では素朴です。パフォーマンスが光り輝いていなくても、改善できる次元はいくつかあります。構造の特殊化、より命令的なデータ構造の使用（ただし必ずしも有利とは限りません）、一部の atomic の削除、単純なスケジューリング戦略の高度化などです。もちろん BYOS（前述のモデル全体のモノスレッド実装は[約100行](https://github.com/dbuenzli/affect/blob/cfc33ce71f1ec022e9ab1acf06cfa26f5766412e/test/test_thread.ml#L88-L201)）も可能です。
+
+  コードベースはほどよく読みやすいはずです。アクションと非同期関数のコアモジュールだけなら690行、並列ワークスティーリングスケジューラが380行加わります。しかし、悪魔は実行の割り込みタイミングに潜んでいます :–)
+
+Happarapyllecomputling!
+
+この最初のリリースは [OCaml Software Foundation](https://ocaml-sf.org/) からの助成によって実現しました。また、[ドナーの皆さん](https://github.com/sponsors/dbuenzli)のご支援にも感謝します。これらの成果物が作業・配布されるためには、皆さんのサポートが不可欠です。
+
+- ホームページ: https://erratique.ch/software/affect
+- ドキュメント: https://erratique.ch/software/affect/doc または ~odig doc affect~
+- インストール: ~opam install affect~ ([opam PR])
+
+よろしくお願いします。
+
+Daniel
+
+[^1]: 自分の IO 非依存の [HTTP ライブラリ]用の affect ベースのコネクタを本番システムにデプロイしたときに、安心してそうお伝えできるようになります :-)
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>Slipshow!</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-slipshow/16337/26</cwn_url>
+      <cwn_who>このスレッドを続けて、Paul-Elliot が発表しました</cwn_who>
+      <cwn_what>
+老いた吟遊詩人の壮大な声で、Slipshow の次のリリースをお知らせします：
+
+*** Slipshow 0.12.0: The Lord of the Slips: The Two Editors
+
+髭を蓄えた Emacs ユーザーと尖った耳の VS Code ユーザーの間の争いは、長年にわたって無益に燃え続けてきました。両陣営は Slipshow エディタとしての優位性を証明し、最高のタイポキルカウントを主張しようとしていました。
+
+尖った耳の VS Code ユーザーには公式の Slipshow 拡張機能があり、Slipshow バイナリを必要としないライブプレビューを持っていました。しかし、その組み込みライブプレビューにはマルチファイルプレゼンテーションなどの制限があり、さらに重要なことに LSP サポートがありませんでした。
+
+髭の Emacs ユーザーは組み込みの LSP クライアントである ~eglot~ を使用できましたが、公式モードがなければ、厳密な LSP を超えた機能セットの拡張は不可能でした。
+
+そこで、今回の Slipshow リリースには2つのコンパニオンが付属します：
+
+- Slipshow の VS Code 拡張機能（[VS Code の](https://marketplace.visualstudio.com/items?itemName=Slipshow.slipshow)[マーケットプレイス](https://open-vsx.org/extension/Slipshow/slipshow)で入手可能、現在は Slipshow バイナリが必要）
+- Slipshow の Emacs [メジャーモード](https://github.com/panglesd/slipshow-emacs-mode)（~(use-package slipshow-mode :vc (:url "https://github.com/panglesd/slipshow-emacs-mode" :rev :newest))~ でインストール可能）
+
+これらにより、エディタとプレビューサーバー間のより多くの連携が可能になります。例えば、各キーストロークで更新するか保存時に更新するかを選択するシンプルな設定が追加されました。プレゼンテーションをエディタから直接制御する2つの新コマンドも利用できるようになりました。
+
+#+begin_quote
+One LSP to rule them all, one server to sync them,
+
+One keystroke to step through slips, and in the editor bind them.
+#+end_quote
+
+もう一つ言及に値する改善点は、描画の保存ワークフローが大幅に改善されたことです：~Save~ ボタンをクリックするだけで描画を保存できるようになり、描画は挿入された場所に固定されます（テキストコンテンツが変更されても、描画は適切に移動します）。
+
+#+begin_quote
+You shall not desynchronize text and drawing content!
+#+end_quote
+
+両エディタが優れていることを示す証拠として、描画が記録・保存され、その前にコンテンツが追加される様子をご覧ください：
+
+#+attr_html: :width 80%
+https://github.com/user-attachments/assets/c4f0131d-7eda-4bdd-874e-50c1872580eb
+
+#+attr_html: :width 80%
+https://github.com/user-attachments/assets/d4164c3f-f63a-40fb-b03b-add4f0f32435
+
+
+いつもながら、NLNet のサポートに心より感謝します。Emacs Lisp を習得するのにかかった膨大な時間は、彼らの寛大なサポートなしには割に合わなかったでしょう！
+
+（もし毛深い足を持つ第三の、同じく素晴らしいエディタのユーザーで、Fellowslip に加わりたい方がいれば、ぜひご連絡ください。喜んでお手伝いします！）
+
+完全な変更履歴はこちら：
+
+*** 追加
+
+- ~auto-continue~ 属性：次のアクションへ自動的に進む機能 (#240)
+- ~step~ アクションへの ~~duration:FLOAT~ 引数 (#241)
+- LSP:
+  - エディタからプレゼンテーションプレビューを前後に進める2つのコマンド (#242)
+  - ~.slp~ を入力ファイルとして認識 (#244)
+  - 各キーストロークまたは保存時にプレビューを更新する設定 (#248)
+  - 依存関係の変更を監視してプレビューを更新 (#252)
+
+*** 変更
+
+- 描画をプレビューサーバー経由で保存するように (#249, #254)
+- 描画が追加されたポイントに固定されるように (#262)
+- Slipshow サーバーの URL を知らせる通知のスパムをなくした (#265)
+
+*** 修正
+
+- マルチファイル設定での LSP アクション検出の修正 (#243)
+- serve モードでの外部テーマの修正 (#245)
+- 一部のファイルが開かれていない場合のマルチファイル LSP プレビューの修正 (#250)
+
+*** ドキュメント
+
+- ドキュメントの英語品質を大幅に改善 (#255, @Synchro)
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>intel_hex.0.4</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/ann-intel-hex-0-4/18456/1</cwn_url>
+      <cwn_who>Mikhail が発表しました</cwn_who>
+      <cwn_what>
+#+attr_html: :width 80%
+https://camo.githubusercontent.com/c5d56dc1ed218120c9829bb9551857f4308de541f20f6d21a12959bf0abe1dde/68747470733a2f2f692e6962622e636f2f6b7668375034702f6c617374696865786c6f68676f2d3030312e706e67
+/新しい素敵なロゴです.../
+
+やあ！
+
+[Intel_hex](https://github.com/dx3mod/intel_hex) ライブラリの新しいリリースを発表できて嬉しいです。これは Intel HEX オブジェクトのパースと生成のための Intel HEX 操作ライブラリです。このフォーマットは、組み込みシステムプログラミングにおいてマイクロコントローラ、フラッシュメモリ、または ROM にロードされるコンパイル済みプログラムコードとデータを表現するために一般的に使用されています（IHEX とも呼ばれます）。
+
+このライブラリの新バージョンは完全に書き直され、再設計され、テストされました。
+
+*** 使用例
+
+テストデータを含む Intel HEX ファイルを作成して出力する例：
+
+#+begin_src ocaml
+Intel_hex.Record.
+[
+  Extended_linear_address 0x0F;
+  Data (0x0000, "Hello ");
+  Data (0x0007, "World!");
+  End_of_file;
+]
+|&gt; Intel_hex.Encode.into_string 
+|&gt; print_endline
+#+end_src
+#+begin_example
+:02000004000FEB
+:0600000048656C6C6F20E6
+:06000700576F726C6421CA
+:00000001FF
+#+end_example
+もちろん、任意のソースから Intel HEX オブジェクトを読み込むこともできます。
+#+begin_src ocaml
+In_channel.with_open_text "data.hex" Intel_hex.Decode.from_channel
+#+end_src
+#+begin_src ocaml
+- : Intel_hex.Object.t =
+[Intel_hex.Record.Extended_linear_address(0x000F);
+ Intel_hex.Record.Data(0x0000, "Hello ");
+ Intel_hex.Record.Data(0x0007, "World!");
+ Intel_hex.Record.End_of_file]
+#+end_src
+
+*** 新機能
+
+[*Into/from blobs*](https://ocaml.org/p/intel_hex/latest/doc/intel_hex/Intel_hex/Object/index.html#from/into-to-linear-blob-memory)
+
+#+begin_src ocaml
+Intel_hex.Object.from_string ~block_size:6 "Hello World! I love it!"
+#+end_src
+#+begin_src ocaml
+- : Intel_hex.Object.t =
+[Intel_hex.Record.Data(0x0000, "Hello ");
+ Intel_hex.Record.Data(0x0006, "World!");
+ Intel_hex.Record.Data(0x000C, " I lov");
+ Intel_hex.Record.Data(0x0012, "e it!");
+ Intel_hex.Record.End_of_file]
+#+end_src
+
+*** インストール
+
+[OPAM](https://opam.ocaml.org/) パッケージマネージャやその他の方法で ~intel_hex~ ライブラリをインストールできます。
+
+#+begin_example
+$ opam install intel_hex.0.4
+#+end_example
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>Bisect_ppx_ng 3 -- bisect_ppx のフォーク</cwn_title>
+      <cwn_url>https://discuss.ocaml.org/t/bisect-ppx-ng-3-fork-of-bisect-ppx/18459/1</cwn_url>
+      <cwn_who>Kakadu が発表しました</cwn_who>
+      <cwn_what>
+Bisect_ppx_ng 3.0.0 が opam に[登録されました](https://github.com/ocaml/opam-repository/pull/30463)。オリジナルの [bisect_ppx](https://discuss.ocaml.org/t/bisect-ppx-ocaml-code-coverage-with-nice-html-reports/728) が OCaml 5.5 向けにアップデートされていないため、カバレッジ計算には自分のフォークを使用する予定です。
+
+ぜひテストして、https://github.com/Kakadu/bisect_ppx_ng に PR を送ってください。
+- 4.14、5.3〜5.5 で動作するはずです
+- ReasonML サポートは壊れている可能性があります
+      </cwn_what>
+    </cwn_entry>
+    <cwn_entry>
+      <cwn_title>OSEC-2026-17: mirage-crypto-ec: NIST 楕円曲線スカラー乗算におけるタイミングリーク</cwn_title>
+      <cwn_who>Hannes Mehnert が発表しました</cwn_who>
+      <cwn_what>
+新しいセキュリティアドバイザリが公開されました。通常通り、以下から確認できます：
+https://github.com/ocaml/security-advisories および
+https://osv.dev/list?q=&amp;ecosystem=opam
+
+よろしくお願いします。
+
+Hannes
+
+#+begin_example
+id: OSEC-2026-17
+modified: "2026-08-17T09:45:00Z"
+published: "2026-08-17T09:45:00Z"
+severity: "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N"
+severity_score: "5.9 (Medium)"
+affected: "mirage-crypto-ec" {&gt;= "0.11.3" &amp; &lt; "2.4.0"}
+events: [
+   [
+     git "https://github.com/mirage/mirage-crypto" [
+       [fixed "1a61aeee7f593ec067612df1739ec905eab0450f"]
+     ]
+   ]
+]
+credits: [
+   [reporter "Eric Ebinger"]
+   [coordinator "Hannes Mehnert"]
+   [remediation_reviewer "Virgile Robles"]
+   [remediation_developer "Eric Ebinger"]
+]
+cwe: [ CWE-208 ]
+affected_bindings: [
+   "Mirage_crypto_ec.P256.Dh.share"
+   "Mirage_crypto_ec.P256.Dsa.generate"
+   "Mirage_crypto_ec.P256.Dsa.sign"
+   "Mirage_crypto_ec.P256.Dsa.pub_of_priv"
+   "Mirage_crypto_ec.P384.Dh.share"
+   "Mirage_crypto_ec.P384.Dsa.generate"
+   "Mirage_crypto_ec.P384.Dsa.sign"
+   "Mirage_crypto_ec.P384.Dsa.pub_of_priv"
+   "Mirage_crypto_ec.P521.Dh.share"
+   "Mirage_crypto_ec.P521.Dsa.generate"
+   "Mirage_crypto_ec.P521.Dsa.sign"
+   "Mirage_crypto_ec.P521.Dsa.pub_of_priv"
+  ]
+#+end_example
+
+*** NIST 楕円曲線スカラー乗算におけるタイミングリーク
+
+スカラー乗算には高速化のための事前計算テーブルが含まれています（mirage-crypto-ec 0.11.3 で導入）。これらのテーブルのルックアップアルゴリズムは、テーブル全体をスキャンする代わりに、秘密情報に依存した読み取りを行います。
+
+**** 解決策
+
+秘密情報に依存する ~n - 1~（~n~ は秘密情報に依存）というインデックスの代わりに、Go のリファレンス実装と同様に ~i - 1~ を使用します。パッチ適用前は、~n~ が 0 の場合に境界外読み取りが発生していました。
+
+**** タイムライン
+- 2026-08-12: Eric Ebinger から security@ocaml.org への報告
+- 2026-08-17: mirage-crypto-ec 2.4.0 およびこのアドバイザリのリリース
+      </cwn_what>
+    </cwn_entry>
+  </cwn_body>
+</cwn>

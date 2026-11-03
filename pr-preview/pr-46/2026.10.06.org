@@ -1,0 +1,410 @@
+#+OPTIONS: ^:nil
+#+OPTIONS: html-postamble:nil
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: author:nil
+#+HTML_HEAD: <style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+#+HTML_HEAD: <style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+#+TITLE: OCaml Weekly News
+[[file:2026.09.29.html][先週号]] [[file:index.html][上へ]] [[file:2026.10.13.html][次週号]]
+
+こんにちは
+
+2026年9月29日から10月6日までの週の OCaml Weekly News をお届けします。
+
+#+TOC: headlines 1
+
+
+* tinybox: 150本のクラシックゲーム（Pong から Quake まで）とアプリ、OCaml で実装
+:PROPERTIES:
+:CUSTOM_ID: 1
+:END:
+Archive: https://discuss.ocaml.org/t/ann-tinybox-150-classic-games-pong-to-quake-and-apps-in-ocaml-and-more/18569/1
+
+** Yoann Padioleau が発表しました
+
+
+こんにちは、
+
+何か作りました。いや正確には Claude が作ったものです。私の初めての vibe coding プロジェクトです :slight_smile: コードへの賛歌として、150本のクラシックビデオゲーム（Pong から Quake まで）、50本のクラシックアプリ（VisiCalc や TurboPascal から Office や Chrome まで）がすべてオンラインでプレイ可能で、それらの小さな OCaml コードも鑑賞できます。リポジトリ: https://github.com/aryx/ocaml-elm-playground
+
+プレイできる tinybox ウェブアプリ: https://aryx.github.io/ocaml-elm-playground/tinybox.html
+      
+
+
+
+* IX：OCaml で書かれた完全な OS（カーネル、ツールチェーン、vcs など）
+:PROPERTIES:
+:CUSTOM_ID: 2
+:END:
+Archive: https://discuss.ocaml.org/t/ann-ix-a-full-os-kernel-toolchain-vcs-in-ocaml/18570/1
+
+** Yoann Padioleau が発表しました
+
+
+こんにちは、
+
+OCaml で書かれた完全なオペレーティングシステム IX（Claude Code による）を発表できることを嬉しく思います。これは私の過去の2つのプロジェクト、principia softwarica と XiX の継続です。
+
+リポジトリ: https://github.com/aryx/IX
+
+ウェブサイト: https://aryx.github.io/IX/
+
+codemapv2 という優れたビジュアライザーでコードベースを探索することもできます（これ自体が、Facebook 在籍時に行った過去の2つのプロジェクト codemap と codegraph を Claude を使って書き直したものです）: https://aryx.github.io/IX/codemap.html
+コードを詳しく説明するリテラシー形式の書籍も近日公開予定です。
+お楽しみください！
+      
+
+
+
+* Michel Mauny、1959〜2026
+:PROPERTIES:
+:CUSTOM_ID: 3
+:END:
+Archive: https://discuss.ocaml.org/t/michel-mauny-1959-2026/18571/1
+
+** gasche が発表しました
+
+
+皆さんへ、
+
+OCaml Software Foundation として、OCaml コミュニティの長年のメンバーである Michel Mauny の逝去をお知らせすることを深い悲しみとともに伝えます。Michel は2026年9月17日に逝去されました（[[https://www.pfloic.net/P1230.aspx?IdPer=eynJZ8ADn&IdAN=Auto][詳細情報、フランス語]]）。
+
+INRIA の研究員、ENSTA の教授、Nomadic Labs の CEO としてのキャリアを通じて、Michel は多くの貢献をされました：
+
+- 1985年に Caml の始まりとなった論文「The Categorical Abstract Machine」を共著（Cousineau, Curien, Mauny）（[[https://www.irif.fr/~scherer/doc/others/CAM-1985.pdf][PDF]]）；
+- 1980年代後半に Caml Light と OCaml に先行した「Heavy Caml」実装に積極的に貢献（詳細は https://ocaml.org/history を参照）；
+- Daniel de Rauglaudre とともにストリームパーサーを導入し（[[https://inria.hal.science/inria-00074898/][1992年技術報告書]]）、camlp4 プリプロセッサを設計・共同メンテナンス；
+- Guy Cousineau と共著で OCaml に関する英語の最初の書籍「The functional approach to programming」（1998年）を執筆；
+- キャリアを通じてフランスの大学や工科大学で (O)Caml を教授（Paris 7、Polytechnique、ENSTA）；
+- 複数の博士課程学生を指導し、そのうち数名は現在も OCaml コミュニティで活躍中：Grégoire Henry、Çağdaş Bozman、Benoît Vaugon、Pierrick Couderc；
+- 2001年に Caml Consortium を設立し、産業界のユーザーが INRIA での OCaml 開発に参加・資金提供できる初期の仕組みを構築；
+- 2018年に OCaml Foundation を設立し、より幅広い OCaml ソフトウェアエコシステムを支援するためにより多くの資金を集めるという野心的な目標を掲げた。Michel は INRIA から Nomadic Labs に移籍した際に OCaml Foundation を離れましたが、私たちは彼のビジョンに従うよう最善を尽くしています。
+
+この厳粛な瞬間は、個人の貢献の積み重ねによって成長してきた OCaml エコシステムの豊かな歴史を振り返る機会でもあります。Michel の逝去を悼みながら、彼を称えるとともに、プログラミングの共有財産を構築するために何十年にもわたって時間と労力を捧げてきた多くの方々にも感謝を申し上げます。
+      
+
+
+
+* dream-html 4.0.0
+:PROPERTIES:
+:CUSTOM_ID: 4
+:END:
+Archive: https://discuss.ocaml.org/t/ann-dream-html-4-0-0/18573/1
+
+** Yawar Amin が発表しました
+
+
+こんにちは、dream-html 4.0.0 が opam にリリースされました: https://ocaml.org/p/dream-html/4.0.0
+
+リポジトリ: https://github.com/yawaramin/dream-html
+API ドキュメント: https://yawaramin.github.io/dream-html/dream-html/Dream_html/index.html
+
+dream-html は HTML を生成するためのライブラリで、Dream と緊密に統合されています。Dream の組み込み Embedded ML テンプレート言語の代替として使用でき、すべての現行 htmx 属性がデフォルトで定義されています。
+
+このリリースでは、いくつかの破壊的変更を行いました（そのためメジャーバージョンをバンプしました）：
+
+- パスパラメーターのパースエラー時に例外を発生させる：400 Bad Request で応答する代わりに、パース例外をキャッチすることで独自のカスタムレスポンスをフックできます。
+- 未使用のフォームデコーダーエラーキーを削除：具体的には、~error_expected_int~ でカバーされている ~error_expected_int32~ と ~error_expected_int64~ を削除しました。
+- 最後に、HTML 生成の以前のスタイルに戻しました。インデントで HTML を整形表示する代わりに、各属性の先頭で改行します。これはパフォーマンス上の理由によるものです。
+
+修正：
+
+- エンコードされた値に対するルーターマッチング。例えば ~/accounts/%F0%9F%91%8D/versions/1~ は第2セグメント ~👍~ を正しく抽出できるようになりました。
+
+新機能：
+
+- Invoker API 属性
+- いくつかの追加の SVG 要素
+
+最後に、ppxlib の関係で OCaml の最低サポートバージョンを 5.3.0 に引き上げました。
+
+お楽しみください！
+      
+
+
+
+* hegel-ocaml 0.25.0 - 並行ステートフルプロパティベーステスト
+:PROPERTIES:
+:CUSTOM_ID: 5
+:END:
+Archive: https://discuss.ocaml.org/t/ann-hegel-ocaml-0-25-0-concurrent-stateful-property-based-testing/18575/1
+
+** Ethan Chou が発表しました
+
+
+こんにちは、hegel-ocaml 0.25.0 を発表できることを嬉しく思います！
+
+前回の hegel-ocaml 0.14.1 の発表以来、Hegel に並行ステートフルプロパティベーステストと非決定性ハンドリングを追加しました。ステートフルプロパティベーステストでは、あるモデルとテスト対象システムの状態を変化させるアクション（rules と呼びます）を順番に実行します。並行部分は rules を並行して実行することから来ています。Hegel は一定数のワーカーを起動し、各ワーカーに一定数の rules を分配します。ワーカー内の rules は順次実行されますが、異なるワーカーの rules は並行して実行される場合があります。もちろん、ワーカーは任意の順序で実行したり一時停止したりするため、非決定性が生じます。これに対処するため、Hegel は失敗を繰り返し再生し、失敗が再現された回数を出力します。非決定性ハンドリングをオフにすることもでき、その場合は非決定的な失敗はフレーキーテストエラーになります。もちろん、[[https://antithesis.com][Antithesis]] 内で Hegel を実行すると再現可能な失敗が得られます。
+
+並行ステートフルテストの例については、[[https://hegel.dev/ocaml/hegel/Hegel/Stateful#concurrent-stateful-testing][ドキュメント]]をご覧ください。
+
+Hegel の並行ステートフルテストのユニークな機能は、異なる並行処理能力を渡せることです。ワーカーはスレッド、ドメイン、または [[https://hegel.dev/ocaml/hegel/Hegel/Concurrency#type-t.spawn_join_n][~Concurrency.t~ 型]]の何でも使えます。便宜上、スレッド capability とドメイン capability を同梱しています。Hegel はデフォルトでスレッドを使用します。
+
+[[https://hegel.dev/ocaml/hegel/hegel_jane_async][~hegel_jane_async~]] サブライブラリを使うと、Jane Street エコシステムのユーザーも async（~unit Deferred.t~ を返す）の rules を持つ順次ステートフルテストを実行できます。
+
+OxCaml ユーザーにとって、hegel-ocaml は OxCaml 5.2.0-minus39 と完全に互換性があります。[[https://hegel.dev/ocaml/hegel/hegel_jane_concurrent][~hegel_jane_concurrent~]] サブライブラリを使うと、OxCaml ユーザーは ~Concurrent~ ライブラリの並行処理 capability を渡したり、~hegel_jane_async~ で並行非同期ステートフルテストを実行したりすることもできます。
+
+ハッピーテスティング、そしてぜひコントリビューションを！
+      
+
+
+
+* GADT のチュートリアル
+:PROPERTIES:
+:CUSTOM_ID: 6
+:END:
+Archive: https://discuss.ocaml.org/t/tutorial-on-gadts/14040/33
+
+** このスレッドを続けて、Raphaël Proust が発表しました
+
+
+チュートリアルへの補足を書きました：
+
+https://raphael-proust.gitlab.io/code/gadt-what-about-phantom-types.html
+
+GADT と Phantom Types を比較しています。Phantom Types の議論では Tyxml への言及（必須でしょうか？）も含まれています。他に良い例があれば追加するかもしれません。
+      
+
+
+
+* C++ で実装された OCaml コンパイラ：速いだけでなく、信頼性も向上する
+:PROPERTIES:
+:CUSTOM_ID: 7
+:END:
+Archive: https://discuss.ocaml.org/t/ocaml-compiler-implemented-in-c-its-not-just-faster-it-also-increases-trust/18576/1
+
+** Michael Bacarella が発表しました
+
+
+コンパイラバイナリに懐疑的なのはまったく正しいことです。この記事では、包括的な C++ の再実装によって OCaml の DDC 検証がどのように実現されるかを探りながら、コンパイル時間の意味のある改善についても解説します。 🚀
+
+---
+
+待ってください！まだ離れないでください！ここから先はすべて人間が一文字ずつ打ち込んだものです。
+
+最近、無関係なプロジェクト（[[https://discuss.ocaml.org/t/a-line-by-line-translation-of-the-ocaml-runtime-from-c-to-rust][OCaml ランタイムを Rust に移植したもの]]）についておもしろい会話をしていたところ、Nathanaëlle Courant、Julien Lepiller、Gabriel Scherer による論文 [[https://arxiv.org/pdf/2202.09231][Debootstrapping without Archeology]] が浮上するという興味深い脇道の議論が生まれました。私はこれを以前に見たことがなかったのです！
+
+trusting trust の背景について簡単に：かつて UNIX の神様 Ken Thompson は受賞スピーチの場で世界を騒がせました。「コンパイラ作者が何年（何十年）も前にバックドアを仕込み、それが今でも潜んでいたとしたら面白くないか？」と（意訳）。核心は、C で実装された C コンパイラをコンパイルするには既存の C コンパイラバイナリが必要であり、それがターゲットプログラム（~login~ など）のコンパイルを認識したときに起動するマルウェアを仕込む機会になる、ということです。
+
+それ以来、infosec コミュニティは trusting trust について......気にし続けており、[[https://dwheeler.com/trusting-trust/][David A. Wheeler が多様二重コンパイル（DDC）]]を緩和策として提案したときに大きな安堵の息をつきました。では、私たちのお気に入りの言語についてこれを行った人はいるのでしょうか？
+
+はい！Debootstrapping OCaml という論文では、著者たちが DDC を行うために MiniML（OCaml のサブセット）で OCaml インタープリタを書き、Scheme で MiniML のコンパイラを書いたことが説明されており、OCaml 4.07.1 がそれ自身をコンパイルする際に trusting trust バックドアがないことが証明されました。しかし彼らの論文のこの部分に注目してください：
+
+#+begin_quote
+無制限の作業リソースを仮定すると、カスタマイズされた debootstrapping は単純な問題です：プログラミング言語の実装を、既に debootstrapped されている別の言語（例えば C）に移植するだけです。しかしこれは膨大な作業であり、実際には決して行われないかもしれません――特に、言語実装者に異なるプログラミング言語で作業するよう最初に説得しなければならないためです。
+#+end_quote
+
+くすっ。
+
+[[https://github.com/mbacarella/cxx-ocaml][この C++ で実装された独立した OCaml コンパイラ]]をご紹介します。MiniML/Scheme の debootstrapper より OOM 速く、OCaml 5.5.1 リリース（および 5.6+trunk）の DDC を解決し、OCaml コンパイラと*まったく同一の*バイト出力を生成します。そして公式の OCaml コンパイラよりも速く動作します(!)
+
+**さっと読む方への注意**：このプロジェクトは OCaml プログラムを速くするものでは*ありません*。OCaml プログラムのコンパイルを速くできるだけです。
+
+バイト同一の出力について。関心があれば解消できる、文書化された軽微な差異がいくつかあります。これらの差異は DDC を妨げるものではなく、バイト同一と主張するには十分に軽微です。
+
+最も重要なこと：DDC を行ったことで、OCaml 5.5.1（および 5.6+trunk）のブートストラップにはコンパイラのコンパイル時にバックドアがないと結論できます。さらに、アップストリームとバイト同一の出力を*実際に*生成しているため、バックドアはソース公開されたビューの外には潜んでいないと言えます[1]。
+
+残念ながら、OCaml コンパイラにはバックドアがないだけでなく、イースターエッグすらありません。悲しい！私なら少なくとも ~mb4c4rell4_waz_here~ のようなものをこっそり入れたでしょうが、それがおそらく OCaml の背後にいる優秀な方々がコミット権を持ち、私が持っていない理由でしょう。
+
+*** DDC を自分で実行する方法
+
+リポジトリをクローンし `git clone https://github.com/mbacarella/cxx-ocaml`、~cxx/DDC.md~ の指示に従ってください。
+
+C++ ベースの OCaml コンパイラを使う opam スイッチをインストールする
+
+~ocamlc~ と ~ocamlopt~ が C++ バージョンになるスイッチを取得するには次のようにします。
+
+#+begin_example
+opam switch create cxx-5.5 --empty
+opam pin add -n ocaml-variants.5.5.1 'git+https://github.com/mbacarella/cxx-ocaml#cxx-5.5'
+opam pin add -n ocaml-option-cxx.1   'git+https://github.com/mbacarella/cxx-ocaml#cxx-5.5'
+opam install ocaml-option-cxx ocaml-variants
+opam switch set-invariant --packages=ocaml-variants,ocaml-option-cxx
+#+end_example
+
+実際に C++ バージョンを実行していることを確認するには ~ocamlc -cxx-version~ を実行してください。オリジナルのコンパイラはスイッチ内で ~ocaml*.stock~ として引き続き使用可能です。
+
+要件：clang++ 18 以降、cmake、ninja、libzstd の開発ファイル。
+
+依存関係がいくつか不足しているからといって、これが大きなデタラメだと言わないでください。[[https://github.com/anthropics/claudes-c-compiler/issues/1][どうなるかはみんな見てきましたよね]]。
+
+*** 次のステップ
+
+上記で必要な追加依存関係を最小化すること（例えば OCaml アップストリームに合わせて clang を gcc に変えるなど）。
+
+x86-64 Linux でのみテストしているため、ARM64 が明らかな次の追加対象です。また、flambda のサポートも追加すべきでしょう。
+
+あまり変なこと[2]をしなくても取れる、まだ残っているパフォーマンス改善のチャンスを追いかけます。
+
+フィードバックをお待ちしています！ここか OCaml Discord の ~#ai~ チャンネルでお話しましょう。
+
+ご要望をお聞かせください！
+
+*** ベンチマーク
+
+少し割り引いて受け取ってください。ベンチマークで恥をかくのは簡単です。とはいえ。
+
+ベンチマークホストは 128GB RAM 搭載の Desktop Ryzen 9 7950X で Linux を実行しています。
+
+各コンパイラを用いた opam スイッチとすべてのプロジェクト依存関係を事前に準備しました。
+
+ベンチマーク自体は awso（300 以上の全 AWS サービスをカバーする AWS ライブラリ）のフルビルドです。これには ppx を使った非常に巨大な自動生成モジュールが含まれています。
+
+バイトコード、ネイティブをビルドし、すべての aws ライブラリをリンクする巨大な awso-cli を組み立てます。~dune build~ の時間を計測し、3回中の最良値を取りました。
+
+約 100,000 のビルド成果物を含むため、これは良い実世界テストだと思います。何かをいじるたびにフルリビルドを行うのはかなりの品質問題でした。opam-ci もそのサイズに悩まされていました。
+
+私のホストでは dune が最大 32 コアを使用しました。
+
+**結果**
+
+- ocaml 5.5.1: 4998.41s user 1016.62s system 1904% cpu 5:15.91 total
+- c++ocaml 5.5.1: 3281.87s user 990.02s system 1984% cpu 3:35.30 total
+
+ご覧のとおり、CPU 時間とウォールクロック時間の両方で C++ バージョンが低くなっています。ウォールタイムでは 1.47 倍速いです。
+
+すべてのビルド成果物はアップストリームとビット単位で同一です：.cmi、.cmo、.cmx、.o、.cma、.cmxa。同じスイッチでビルドされた実行ファイルも同様です（C++ スイッチではオリジナルのコンパイラは ~ocamlopt.stock~ として、C++ バージョンは ~ocamlopt~ に名前変更されています）。唯一の違いは、エディタツールが使用する .cmt/.cmti ファイルです。デコードすると同じデータになりますが、オリジナルの OCaml のマーシャリングには、私たちが完全には再現しなかった構造的共有の形式があります[3]。
+
+ビルドには OCaml コンパイラ自体以外にも多くのものが動いています（~as~ などの gcc ツールチェーン）。個々の成果物での改善はウォールクロック時間が示すよりも大きいですが、説明するのもずっと大変です。興味のある方がいれば後で掘り下げます。
+
+*** AI 開示
+
+私が OCaml コンパイラを C++ で実装したわけではありません。Claude Code を使いました。Claude にとっても簡単ではありませんでした：このプロジェクトに4ヶ月取り組んでいますが、Opus 4.8、5.0、5.5 のリリース間に進捗が加速し、Fable にも時々登場してもらいました。
+
+*** エイプリルフールではありません
+
+これを Stephen Dolan のトロールと混同しないでください。彼は [[https://github.com/ocaml/ocaml/pull/14701][OCaml を C++ テンプレートメタプログラムにコンパイルした]]ものです。リスペクト。
+
+*** 脚注
+
+1. このプロジェクトの手法は、C/C++ ツールチェーン、その他の OS ツール、またはファームウェアがバックドアフリーであることを証明するものではありません。バックドアが存在する場合でも、このプロジェクトのコードには起源がないことのみを認定します。
+
+2. さらなるパフォーマンスのために変なことをするのに*反対*しているわけではありません！特に変なことは別ブランチに入れてオプトインにします。
+
+3. 主にトークンを節約するためです。これでベンチマークを不正操作したわけではありません。実際には .cmt ファイルの書き込みでオリジナル OCaml より*遅く*、そのコストはベンチマークに表れています。
+      
+
+
+
+* conf.funcp.org は詐欺の OCaml カンファレンスです
+:PROPERTIES:
+:CUSTOM_ID: 8
+:END:
+Archive: https://discuss.ocaml.org/t/conf-funcp-org-is-a-scam-ocaml-conference/18577/1
+
+** Cuihtlauac Alvarado が発表しました
+
+
+このサイト：
+  
+https://conf.funcp.org/
+
+OCaml/Haskell/FP カンファレンスとして紹介されています。しかし：
+
+- イベントは会場の公式スケジュールに掲載されていません: https://www.javitscenter.com/calendar
+- funcp.org ドメインは2週間前に登録されたばかりですが、最も古いブログ記事は4月付けです: https://rdap.org/domain/funcp.org
+- ドメインにメールルーティングがありません――連絡先アドレスはメールを受信できません:
+  https://mxtoolbox.com/emailhealth/funcp.org/
+- 登録はサードパーティプラットフォーム（gomry.com）へのオフサイト決済にルーティングされており、チケットは $149 以上です。
+- 登録されているスピーカーや主催者はコミュニティでの実績がないようです。
+- トークのトピックがまともに見えません。
+- 第2回と主張していますが、第1回を見つけることができません。
+
+登録した方は、キャンセルして返金を受けることをお勧めします。
+
+これは OCaml と Haskell のセキュリティチーム、Javits Center、Google Safe Browsing、Cloudflare、dev.events（カンファレンスを掲載しているサイト）、Gomry（決済プラットフォーム）に報告されました。
+
+開示にご協力いただいた @adrien、@mtelvers、@edwin に感謝します。
+      
+
+
+
+* Vaast 0.0.0 + 設計についての議論
+:PROPERTIES:
+:CUSTOM_ID: 9
+:END:
+Archive: https://discuss.ocaml.org/t/ann-vaast-0-0-0-design-discussion/18583/1
+
+** fantazio が発表しました
+
+
+皆さんこんにちは、
+
+これはやや複合的な投稿です。
+
+[[https://github.com/fantazio/vaast][Vaast]] の最初のプロトタイプを発表できることを嬉しく思います！
+Vaast は Typedtree の複数バージョンを同時に扱うためのライブラリです。プリプロセッシングや分岐といった現在のコンパイラバージョン依存のテクニックの代替を目的としています。
+
+Parsetree に対する ppxlib と同様に、Typedtree の単一の表現を提供します。ppxlib とは異なり、特定のコンパイラバージョンの表現を選択するのではなく、OCaml 4.14 から 5.5 までの Typedtree をすべて一度に埋め込む「超表現」とでも呼ぶべき形式を提供します。これは、バージョン間の差異を明示的かつ正確に識別する専用の型エンコーディングによって実現されています。Vaast の Typedtree 表現は OCaml の Typedtree の浅い代替であり、使用コストが低く、既存のコードに段階的に統合しやすくなっています。
+
+設計の詳細についてはブログで公開しています：
+https://fantazio.eu/articles/designing_vaast.html
+
+これにより、この投稿の第2部として設計についての議論につながります。
+プロトタイプはコンパイラの Typedtree の代替として使用可能であり（[[https://github.com/LexiFi/dead_code_analyzer/compare/master...fantazio:dead_code_analyzer:vaast][dead_code_analyzer での実験もしました]]）、全体的な設計は Typedtree に近いですが、より新しい OCaml バージョンへのアップデート時にユーザーコードの破壊的変更を抑えます。
+
+こちらは [[https://github.com/ocaml/odoc/blob/6dc58262b276af7e24b92ac5343b9f26d621122b/src/loader/typedtree_traverse.ml#L43][odoc]] のコード例で、~cppo~ を使って Typedtree の異なるバージョンを処理しています：
+#+begin_src ocaml
+#if defined OXCAML
+          | Tpat_alias (_, id, loc, _uid, _, _, _) -> (
+#elif OCAML_VERSION >= (5, 4, 0)
+          | Tpat_alias (_, id, loc, _uid, _ty) -> (
+#elif OCAML_VERSION >= (5, 2, 0)
+          | Tpat_alias (_, id, loc, _uid) -> (
+#else
+          | Tpat_alias (_, id, loc) -> (
+#endif
+              match maybe_localvalue id loc.loc with
+              | Some x -> poses := x :: !poses
+              | None -> ())
+#+end_src
+
+そして Vaast を使った同等のコード（OxCaml の場合は除く）：
+#+begin_src ocaml
+          | Tpat_alias {id; name; _} -> (
+              match maybe_localvalue id name.loc with
+              | Some x -> poses := x :: !poses
+              | None -> ())
+#+end_src
+ 
+いくつかの粗削りな部分（~Texp_function~、フラット化可能なバージョン付き型）があり、ライブラリをさらに深く構築する前に、その開発と使用に関心のある方々からのフィードバックや参加をいただければ幸いです。
+そのために[[https://github.com/fantazio/vaast/issues][専用の issue]]を開設しました。
+
+中期的な目標は、一般的な操作のためのユーティリティ関数を追加し、compiler-libs のいくつかの主要モジュール（~Parsetree~、~Types~）をサポートし、Vaast を静的解析ツールの基本的な構成要素にすることです。
+長期的な目標は compiler-libs の大部分へのインターフェースを提供することです。
+
+ありがとうございます！
+      
+
+
+
+* OCaml の a2a SDK
+:PROPERTIES:
+:CUSTOM_ID: 10
+:END:
+Archive: https://discuss.ocaml.org/t/ann-a2a-sdk-in-ocaml/18584/1
+
+** prudencio が発表しました
+
+
+A2A プロトコルの SDK
+WIP
+
+https://github.com/GildedHonour/a2a
+      
+
+
+
+* 過去の CWN
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+CWN を見逃した場合は、[[mailto:alan.schmitt@polytechnique.org][メッセージを送っていただければ]]メールでお送りします。また、[[https://ocaml.jp/cwn-ja/][アーカイブ]]や[[https://ocaml.jp/cwn-ja/cwn.rss][RSS フィード]]もご覧いただけます。
+
+毎週メールで受け取りたい場合は、[[https://sympa.inria.fr/sympa/info/caml-list][caml-list]] を購読してください。
+
+#+BEGIN_authorname
+[[https://alan.petitepomme.net/][Alan Schmitt]]
+#+END_authorname

@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OCaml Weekly News</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<style type="text/css">#table-of-contents h2 { display: none } .title { display: none } .authorname { text-align: right }</style>
+<style type="text/css">.outline-2 {border-top: 1px solid black;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">OCaml Weekly News</h1>
+<p>
+<a href="2026.09.15.html">先週号</a> <a href="index.html">上へ</a> <a href="2026.09.29.html">次週号</a>
+</p>
+
+<p>
+こんにちは
+</p>
+
+<p>
+2026年9月15日から22日までの週の OCaml Weekly News をお届けします。
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#1">ortac-0.8 Domains を使った仕様駆動テスト</a></li>
+<li><a href="#2">静的リンクに関するブログ記事</a></li>
+<li><a href="#3">opam 2.6.0 がリリースされました！</a></li>
+<li><a href="#4">Uucd、Uucp、Uunf、Uuseg の Unicode 18.0.0 対応アップデート</a></li>
+<li><a href="#5">ozstd 0.1</a></li>
+<li><a href="#6">rtree 0.3.0</a></li>
+<li><a href="#7">opam-monore 0.5.0</a></li>
+<li><a href="#8">boulodrome：証明アシスタントとしての LLM</a></li>
+<li><a href="#9">リロケータブル OCaml を使った Dk ビルド</a></li>
+<li><a href="#10">VS Code から直接 OCaml ファイルを実行する</a></li>
+<li><a href="#11">melange-json が jsonkit になりました</a></li>
+<li><a href="#org5844e52">過去の CWN</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="1">ortac-0.8 Domains を使った仕様駆動テスト</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ortac-0-8-specification-driven-testing-with-domains/17927/2">https://discuss.ocaml.org/t/ann-ortac-0-8-specification-driven-testing-with-domains/17927/2</a>
+</p>
+</div>
+
+<div id="outline-container-org0ccf6ed" class="outline-3">
+<h3 id="org0ccf6ed">このスレッドを引き継いで、Nicolas Osborne が発表しました</h3>
+<div class="outline-text-3" id="text-org0ccf6ed">
+<p>
+設計上の選択とメソドロジーについてより詳しく説明した拡張版の投稿を<a href="https://tarides.com/blog/2026-09-16-ortac-0-8-0-testing-with-domains/">こちら</a>に公開しました。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="2">静的リンクに関するブログ記事</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/blog-post-on-static-linking/18535/1">https://discuss.ocaml.org/t/blog-post-on-static-linking/18535/1</a>
+</p>
+</div>
+
+<div id="outline-container-org1057dc6" class="outline-3">
+<h3 id="org1057dc6">Matt Teichman が発表しました</h3>
+<div class="outline-text-3" id="text-org1057dc6">
+<p>
+OCaml の皆さん、こんにちは。
+</p>
+
+<p>
+静的リンクに関する新しいブログ記事に興味を持っていただける方がいるかもしれないと思い、共有します：
+<a href="https://elucidations.vercel.app/posts/static-linking">https://elucidations.vercel.app/posts/static-linking</a>
+</p>
+
+<p>
+ご自愛ください！
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="3">opam 2.6.0 がリリースされました！</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-opam-2-6-0-is-out/18536/1">https://discuss.ocaml.org/t/ann-opam-2-6-0-is-out/18536/1</a>
+</p>
+</div>
+
+<div id="outline-container-org82a3551" class="outline-3">
+<h3 id="org82a3551">Kate が発表しました</h3>
+<div class="outline-text-3" id="text-org82a3551">
+<p>
+皆さん、こんにちは。
+</p>
+
+<p>
+opam 2.6.0 のリリースを発表できることを嬉しく思います。すべてのユーザーにアップグレードをお勧めします。
+</p>
+
+<p>
+<b>注意</b>：以下のセクションでは、以前のプレリリースのアナウンスをまだ読んでいない方のために、opam <code>2.6.0</code> における主な変更点をまとめます。すでに読んでいる方への補足として、<code>2.6.0~rc1</code> と最終版 <code>2.6.0</code> の間に特筆すべき変更はありません。
+</p>
+</div>
+
+
+<div id="outline-container-org1925932" class="outline-4">
+<h4 id="org1925932">新機能のハイライト：</h4>
+<div class="outline-text-4" id="text-org1925932">
+<ul class="org-ul">
+<li>:money_bag: シェルフックを使用しているユーザーへ：今回のリリースでは、<code>PATH</code> を最新の状態に保つ方法が変更されました。従来は opam が <code>PATH</code> の先頭を常に占有していましたが、opam が管理するディレクトリをその場で置き換えることで、ユーザーが指定した順序を維持するようになりました。この機能を利用するには、このバージョンにアップグレードした後に一度 <code>opam init --reinit -ni</code> を実行してください（既存の opam インストールが検出された場合、インストールスクリプトが自動的に実行します）。<b><a href="https://github.com/gridbugs">@gridbugs</a> の貢献に感謝します。</b></li>
+
+<li>:wastebasket: <code>build</code> ディレクトリをできるだけ早く削除し、重複したアーカイブキャッシュを削除することで、opam のディスク使用量を削減しました。パッケージを再インストールするだけで時間をかけてディスク使用量を減らすこともできますが、<code>opam clean --all-switches</code> を使えば一度に数 GB を解放できます。</li>
+
+<li>:high_speed_train: HTTP リポジトリ（例：opam.ocaml.org）の内部保存形式を変更することで、特定のファイルシステム（Windows の NTFS や IO に制約のあるマシンなど）でのパフォーマンスを大幅に改善しました。</li>
+
+<li>:envelope_with_arrow: ルートプレフィックスからファイルをインストールするための <code>root</code> および <code>rootexec</code> セクションを <code>.install</code> ファイルに追加しました。<b><a href="https://github.com/WardBrian">@WardBrian</a> の貢献に感謝します。</b></li>
+
+<li>:woman_technologist: 特定のパッケージの <code>available:</code> フィールドを無視できる新しい引数 <code>--ignore-available-on</code> を追加しました。<b>再び <a href="https://github.com/WardBrian">@WardBrian</a> の貢献に感謝します。</b></li>
+
+<li>:shuffle_tracks_button: opam が管理するリポジトリで git の gc/メンテナンスを無効化するようになりました。git がバックグラウンドでメンテナンスタスクを起動し、ファイルを作成・削除・変更するため、そのような git リポジトリを操作する際に opam プロセスが競合状態で壊れることがあるためです。</li>
+
+<li>:houses: <code>--safe</code> が指定されている場合、以前は opam がデバッグレベルを 0 にリセットしていましたが、この動作は変更されました。スクリプトを適宜更新してください。</li>
+
+<li>:ocean: UI の追加・改善、バグ修正など多数あります。</li>
+</ul>
+
+<p>
+:open_book: これらの変更点やその他の詳細については<a href="https://opam.ocaml.org/blog/opam-2-6-0/">ブログ記事</a>をご覧ください。さらに詳しい内容は<a href="https://github.com/ocaml/opam/releases/tag/2.6.0">リリースノート</a>や<a href="https://github.com/ocaml/opam/blob/2.6.0/CHANGES">変更履歴</a>もご参照ください。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orge184bee" class="outline-4">
+<h4 id="orge184bee">試してみましょう！</h4>
+<div class="outline-text-4" id="text-orge184bee">
+<p>
+アップグレードの手順は変わっていません：
+</p>
+
+<p>
+Unix システムの場合
+</p>
+<pre class="example" id="org929f474">
+bash -c "sh &lt;(curl -fsSL https://opam.ocaml.org/install.sh) --version 2.6.0"
+</pre>
+<p>
+Windows システムの PowerShell から実行する場合
+</p>
+<pre class="example" id="org411e243">
+Invoke-Expression "&amp; { $(Invoke-RestMethod https://opam.ocaml.org/install.ps1) } -Version 2.6.0"
+</pre>
+<p>
+問題が発生した場合は<a href="https://github.com/ocaml/opam/issues">バグトラッカー</a>に報告してください。
+</p>
+
+<p>
+Happy hacking,
+&lt;&gt; &lt;&gt; opam チーム &lt;&gt; &lt;&gt; :camel:
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="4">Uucd、Uucp、Uunf、Uuseg の Unicode 18.0.0 対応アップデート</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-unicode-18-0-0-update-for-uucd-uucp-uunf-and-uuseg/18537/1">https://discuss.ocaml.org/t/ann-unicode-18-0-0-update-for-uucd-uucp-uunf-and-uuseg/18537/1</a>
+</p>
+</div>
+
+<div id="outline-container-org1a26558" class="outline-3">
+<h3 id="org1a26558">Daniel Bünzli が発表しました</h3>
+<div class="outline-text-3" id="text-org1a26558">
+<p>
+こんにちは、
+</p>
+
+<p>
+Unicode 18.0.0 が9月16日にリリースされました。13,007 の新文字が追加され、合計 172,808 文字になりました。
+</p>
+
+<p>
+数字のお話！今回のリリースでは原楔形文字スクリプトのサポートが特に注目されています。興味のある方は<a href="https://www.unicode.org/L2/L2025/25211-proto-cuneiform.pdf">エンコーディング提案</a>の §3 をご覧ください。
+</p>
+
+<p>
+その他の追加内容については<a href="https://blog.unicode.org/2026/09/announcing-unicode-standard-version-180.html">こちらのページ</a>をご覧ください。
+</p>
+
+<p>
+これに伴い、以下のライブラリを更新しました（まとめたリリースノートは<a href="https://github.com/ocaml/opam-repository/pull/30764">こちら</a>）：
+</p>
+
+<ul class="org-ul">
+<li><a href="http://erratique.ch/software/uucd">Uucd</a> 18.0.0 OCaml 用 Unicode 文字データベースデコーダー、<a href="http://erratique.ch/software/uucd/doc">ドキュメント</a></li>
+<li><a href="http://erratique.ch/software/uucp">Uucp</a> 18.0.0 OCaml 用 Unicode 文字プロパティ、<a href="http://erratique.ch/software/uucp/doc">ドキュメント</a></li>
+<li><a href="http://erratique.ch/software/uunf">Uunf</a> 18.0.0 OCaml 用 Unicode テキスト正規化、<a href="http://erratique.ch/software/uunf/doc">ドキュメント</a></li>
+<li><a href="http://erratique.ch/software/uuseg">Uuseg</a> 18.0.0 OCaml 用 Unicode テキスト分割、<a href="http://erratique.ch/software/uuseg/doc">ドキュメント</a></li>
+</ul>
+
+<p>
+<code>Uucd</code> と <code>Uucp</code> はどちらも非互換リリースです。新しいブロックとスクリプトの列挙子が追加されたためです。
+</p>
+
+<p>
+それ以外については、<a href="https://erratique.ch/software/uucp/doc/unicode.html">Unicode の最小限の入門と Unicode OCaml のヒント</a>が引き続き利用できます。また、俗説にもかかわらず OCaml :heart: Unicode であることを忘れないでください（この毎年恒例のリマインダーも古くなってきました。主に、これらの軽信的な LLM が OCaml の Unicode サポートについて正確で熱意ある文章を生成するようになることを期待して書いています）。
+</p>
+
+<p>
+<a href="http://ocaml-sf.org/">OCaml Software Foundation</a> および私の<a href="https://github.com/sponsors/dbuenzli">寄付者の皆さん</a>からの資金援助に深く感謝します。
+</p>
+
+<p>
+Daniel
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="5">ozstd 0.1</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-ozstd-0-1/18538/1">https://discuss.ocaml.org/t/ann-ozstd-0-1/18538/1</a>
+</p>
+</div>
+
+<div id="outline-container-org82134d2" class="outline-3">
+<h3 id="org82134d2">Mikhail が発表しました</h3>
+<div class="outline-text-3" id="text-org82134d2">
+<p>
+やあ！
+</p>
+
+<p>
+<a href="https://github.com/dx3mod/ozstd"><b>ozstd</b></a> ライブラリの最初のリリースを発表できて嬉しいです！これは <a href="https://github.com/facebook/zstd">Zstandard</a> への小さくモダンな OCaml バインディングです。一般的なワンショットおよびストリーミング C API をシンプルで慣用的なインターフェースでラップしています。
+</p>
+
+
+<div id="orgc80f778" class="figure">
+<p><img src="https://i.ibb.co/LXfsM8S3/logos-001-2.png" alt="logos-001-2.png" width="200" />
+</p>
+</div>
+
+<p>
+<b>機能</b>
+</p>
+
+<ul class="org-ul">
+<li>文字列とビッグストリングのワンショットおよびストリーミング圧縮/展開。</li>
+<li>再利用可能な圧縮・展開コンテキスト。</li>
+<li>手動バッファ用の低レベル <code>Stream</code> API と、スライス処理用の高レベル <code>State</code> API。</li>
+</ul>
+
+<p>
+これはメンテナンスが停止している <a href="https://github.com/ygrek/ocaml-zstd">zstd</a> OCaml バインディングの<b><b>ハードフォーク</b></b>です。<b><b>完全に書き直され</b></b>、元のメンテナーがプルリクエストをマージしないため、別途リリースしています。
+</p>
+
+<p>
+このライブラリを作成した主な目的は、私の <a href="https://github.com/dx3mod/bytream">Bytream</a> ライブラリに対してインクリメンタルな圧縮・展開機能を提供するためでした。Bytream は私の別のライブラリ <a href="https://github.com/dx3mod/rpmfile">Rpmfile</a> で使用されており、パッケージのペイロードを圧縮された cpio アーカイブとしてデコードします。
+</p>
+
+<p>
+通常の用途では、ワンショット API を使用できます。
+</p>
+<div class="org-src-container">
+<pre class="src src-ocaml">let source = 
+  "Contrary to popular belief, Lorem Ipsum is not simply random text."
+
+let compressed = 
+  Ozstd.Compressor.compress_string ~level:3 source
+
+let decompressed =
+  Ozstd.Decompressor.decompress_string compressed
+</pre>
+</div>
+
+<p>
+または、ストリーミング API も利用できます（<code>State</code> モジュールは高レベル API で、入力スライスを受け取り出力スライスを生成します）。
+</p>
+<div class="org-src-container">
+<pre class="src src-ocaml">let compress_sequence_into_channel seq oc =
+  let state = Ozstd.Compressor.State.create () in
+
+  let output Slice.{ buf; off; len } = 
+    Out_channel.output_bigarray oc buf off len 
+  in
+
+  let aux slice =
+    Ozstd.Compressor.State.feed state slice `Continue |&gt; output
+  in
+
+  Seq.iter aux seq;
+  Ozstd.Compressor.State.finish state |&gt; output
+</pre>
+</div>
+
+<p>
+Bytream コンテキストでの使用例はこちらです。
+</p>
+<div class="org-src-container">
+<pre class="src src-ocaml">let uncompressed_payload =
+  Rpmfile.Payload.to_incoming_bytes compressed_payload 
+  |&gt; Bytream_zstd.In.of_stream
+in
+</pre>
+</div>
+
+<p>
+詳細は <a href="https://github.com/dx3mod/ozstd">README</a> およびその他のドキュメントをご覧ください。
+</p>
+
+<p>
+<b>制限事項</b>：このバインディングは Zstandard の C API の多くをカバーしていますが、すべてではありません！プルリクエストは歓迎します。
+</p>
+
+<p>
+このリリースで問題が発生した場合は、<a href="https://github.com/dx3mod/ozstd/issues">GitHub リポジトリで報告</a>してください。フィードバックと貢献を歓迎します。
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org10526a6" class="outline-3">
+<h3 id="org10526a6">Louis Roché が返信しました（全文はリンク先をご覧ください）</h3>
+<div class="outline-text-3" id="text-org10526a6">
+<blockquote>
+<p>
+これはメンテナンスが停止している <a href="https://github.com/ygrek/ocaml-zstd">zstd</a> OCaml バインディングの<b><b>ハードフォーク</b></b>です。
+</p>
+</blockquote>
+<p>
+それらは非常に活発にメンテナンスされており、本番環境で広く使われています。
+</p>
+
+<blockquote>
+<p>
+元のメンテナーがプルリクエストをマージしないため
+</p>
+</blockquote>
+
+<p>
+これも事実ではありません。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="6">rtree 0.3.0</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-rtree-0-3-0/18545/1">https://discuss.ocaml.org/t/ann-rtree-0-3-0/18545/1</a>
+</p>
+</div>
+
+<div id="outline-container-org048f175" class="outline-3">
+<h3 id="org048f175">Patrick Ferris が発表しました</h3>
+<div class="outline-text-3" id="text-org048f175">
+<p>
+geocaml プログラマーを代表して、<code>rtree.0.3.0</code> のリリースを発表できることを嬉しく思います。このリリースでは、<a href="https://discuss.ocaml.org/t/ann-rtree-0-1-0/12785/6">コミュニティ</a>からの<a href="https://github.com/geocaml/ocaml-rtree/issues/41">フィードバック</a>を受けて、<code>repr</code> への依存を削除しました。デバッグや高コストな <code>Stdlib.( = )</code> 比較を避けるために、<code>rtree</code> に格納するものに対してユーザー自身が <code>pp</code> および <code>equal</code> 関数を提供する必要があります。
+</p>
+
+<p>
+<code>rtree.0.2.0</code> のアナウンスを追加していなかったことに気づきました。そのリリースでは削除関数が追加されていました。
+</p>
+</div>
+
+<div id="outline-container-orgab855aa" class="outline-4">
+<h4 id="orgab855aa">移行ガイド</h4>
+<div class="outline-text-4" id="text-orgab855aa">
+<p>
+関数を手書きしなくても済むように、すでに <code>rtree</code> に依存しているユーザーは、既存のランタイム型表現を再利用して <code>pp</code> と <code>equal</code> 関数を定義できます。以下のようにします：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">module Line = struct
+  type t = { p0 : float * float; p1 : float * float }
+
+  let t =
+    let open Repr in
+    record "line" (fun p0 p1 -&gt; { p0; p1 })
+    |+ field "p0" (pair float float) (fun t -&gt; t.p0)
+    |+ field "p1" (pair float float) (fun t -&gt; t.p1)
+    |&gt; sealr
+
+  (* 追加: 既存のランタイム型表現を使って [equal] と [pp] 関数を定義する新しい行 *)
+  let equal = Repr.equal t |&gt; Repr.unstage
+  let pp = Repr.pp t
+
+  type envelope = Rtree.Rectangle.t
+
+  let envelope { p0 = (x1, y1); p1 = (x2, y2) } =
+    let x0 = Float.min x1 x2 in
+    let x1 = Float.max x1 x2 in
+    let y0 = Float.min y1 y2 in
+    let y1 = Float.max y1 y2 in
+    Rtree.Rectangle.v ~x0 ~y0 ~x1 ~y1
+end
+
+module R = Rtree.Make(Rtree.Rectangle)(Line)
+</pre>
+</div>
+
+<p>
+ただし、依存を完全に削除してこれらの関数を手書きで定義することをお勧めします。
+</p>
+
+<p>
+空間的なグルーピングをお楽しみください！ :two_hump_camel:
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="7">opam-monore 0.5.0</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-opam-monore-0-5-0/18546/1">https://discuss.ocaml.org/t/ann-opam-monore-0-5-0/18546/1</a>
+</p>
+</div>
+
+<div id="outline-container-org70b6c97" class="outline-3">
+<h3 id="org70b6c97">Virgile Robles が発表しました</h3>
+<div class="outline-text-3" id="text-org70b6c97">
+<p>
+皆さん、こんにちは。
+</p>
+
+<p>
+<a href="https://github.com/tarides/opam-monorepo">opam-monorepo</a> の新バージョンのリリースを発表できることを嬉しく思います。opam-monorepo は、プロジェクトの依存関係の monorepo を組み立て、<code>dune</code> で一括コンパイルするためのツールで、主に Mirage でクロスコンパイルを容易にするために使用されています。
+</p>
+
+<p>
+いくつかの軽微な使い勝手の改善に加え、<code>opam-monorepo</code> は <code>opam 2.6.0</code> に対応しました（古いバージョンとの互換性も維持しています）。また、アップストリームのすべての改善の恩恵を受けられます。
+</p>
+
+<p>
+<code>opam &gt;= 2.6.0</code> と古いバージョンの <code>opam-monorepo</code> を組み合わせて使用すると、特にパッケージが再ビルドされていない場合に、依存関係のロック時に <code>"No known implementations at all"</code> のようなエラーが発生することがあります。その場合は <code>opam-monorepo</code> をアップグレードしてください！
+</p>
+
+<p>
+Happy hacking
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="8">boulodrome：証明アシスタントとしての LLM</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-boulodrome-llm-as-proof-assistant/18547/1">https://discuss.ocaml.org/t/ann-boulodrome-llm-as-proof-assistant/18547/1</a>
+</p>
+</div>
+
+<div id="outline-container-org541670b" class="outline-3">
+<h3 id="org541670b">vbergeron が発表しました</h3>
+<div class="outline-text-3" id="text-org541670b">
+<p>
+皆さん、こんにちは。
+</p>
+
+<p>
+<code>boulodrome</code> の<a href="https://opam.ocaml.org/packages/boulodrome/">最初の公開リリース</a>がついに利用可能になりました！
+</p>
+
+<p>
+これは Pétanque プロトコルを介した Rocq/Coq 証明支援のための MCP サーバーです。
+Boulodrome は LLM に Rocq 証明アシスタントへの対話的なアクセスを提供します。
+</p>
+
+<p>
+証明セッションの開始、タクティクの実行、ゴールの検査、ライブラリの検索、ステップの取り消しのためのツールを公開することで、定理証明をツール呼び出しのループとして機能させます。OCaml から Rocq をライブラリとして使用しているため、レイテンシは非常に低いです。
+</p>
+
+<p>
+現時点では、dune で管理されているプロジェクトの Rocq 9.1 でのみ動作します。
+</p>
+
+<p>
+ご意見をお聞かせください！
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="9">リロケータブル OCaml を使った Dk ビルド</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/dk-builds-with-relocatable-ocaml/18548/1">https://discuss.ocaml.org/t/dk-builds-with-relocatable-ocaml/18548/1</a>
+</p>
+</div>
+
+<div id="outline-container-org5a3cf5f" class="outline-3">
+<h3 id="org5a3cf5f">jbeckford が発表しました</h3>
+<div class="outline-text-3" id="text-org5a3cf5f">
+<p>
+他の方にも共有する価値があると思ったので投稿します。私のビルドシステム（"dk"）の Windows ビルドが、実行に2時間かかる（パブリック GitLab CI の制限時間が2時間）ため失敗していました。ビルドは通常の opam と dune を使ったものです。キャッシュを準備する別のジョブを設けることで、ギリギリ2時間以内に収めることができました。しかし、その解決策はもろくてハック的で気に入りませんでした。そこで、dk の分散キャッシュ機能を使って dk のビルドをブートストラップすることにしました。そして、opam / dune / ocamlbuild / リロケータブル OCaml の機能を dk のビルドルール（<i>package: CommonsLang_OCaml</i>）に十分スクリプト化したので、opam パッケージのメンテナーにとって有用かもしれないと考えています。
+</p>
+
+<p>
+<code>ocamlearlybird</code> を代表的なパッケージとして選びました。以前使ったことがあり、「通常の」OCaml プロジェクトのサイズを代表しているように思えたためです。GitHub 上にあるので setup-ocaml が利用できます。
+</p>
+
+<ul class="org-ul">
+<li>GitHub の windows-latest（2 vCPU・8 GB RAM）で初回 <code>ocamlearlybird.exe</code> をビルドするのに 13 分 56 秒かかりましたが、setup-ocaml がキャッシュを初期化した後は 10 分 50 秒に短縮されました。<b><b>CI では 10 分 50 秒が関連する数値であり、デスクトップでは 13 分 56 秒が関連します。</b></b></li>
+<li>私の採用ビルドルール（<b><b>モジュール：<code>CommonsLang_OCaml.Dk.OpamLock.Adopt@1.1.14</code></b></b>）を実行した後、スクラッチからビルドするのに 8 分 48 秒かかりました。バイナリキャッシュとしてはあまり印象的なパフォーマンスではありませんが、これは Dune やリロケータブル OCaml コンパイラーなどの特別なパッケージのみをキャッシュしていたためです。<b><b>これは下記 Web サイトの quick-setup ブランチです。</b></b></li>
+<li>中間ビルド成果物を格納する GitHub リリースジョブも作成した後、スクラッチからビルドするのに 2 分 18 秒になりました。dk は1つ以上の GitHub リリースから「リストア」してキャッシュとして使用できます。各リリースには zip ファイルがあり、dk は HTTP Range リクエストを使って中間ビルド成果物（バイナリ opam パッケージ、リロケータブル OCaml コンパイラーなど）をある程度効率的に取得する方法を知っています。<b><b>これは下記 Web サイトの high-performance ブランチです。</b></b></li>
+</ul>
+
+<p>
+まとめ：OCaml パッケージのメンテナーがこれらの dk ベースの GitHub リリースを採用・作成すれば、通常の OCaml ユーザーがデスクトップや CI で疎結合なバイナリキャッシュのフェデレーションにアクセスできるようになります。
+</p>
+
+<p>
+さらに：dk が AI のコストを削減する一助になれればと思っています。今日の AI は現在の opam によく似ています。ソースが入力として、成果物が出力として存在しますが、成果物の共有はありません。しかし成果物を共有できれば、コスト・無駄・時間・複雑さが削減されます。
+</p>
+
+<p>
+AI の出所：dk のパッケージ（例：CommonsLang_OCaml）は 2026 年 6 月から 100% AI によって生成・維持されており、"dk" 自体は 2026 年 6 月から手作りですが AI アシスト付きです。
+</p>
+
+<p>
+注意事項：macOS と Linux は長い間テストしていませんが、CI には入っています。実際、自分自身の安全のため、Windows でのテストのほとんどは Windows CI で行い、AI の問題を避けるようにしています。また、<code>ocamlearlybird</code> が OCaml 5.5（最初の正式なリロケータブルバージョン）で利用できないことに後から気づいたため、リロケータブルパッチを当てた OCaml 4.14 でのテストが主になっています。さらに、Windows での MSVC パッケージと MinGW をまだ分けていません。Windows では Visual Studio が必要になるかもしれません。<b><b>バグが出ることを想定してください！</b></b>
+</p>
+
+<p>
+謝辞：リロケータブル OCaml の実現のために長年取り組んでくださった @dra27 に感謝します！
+</p>
+
+<p>
+事前のお詫び：これは dune pkg と多少重複があると思います。ただし私は Windows を使っておりまだ試していません。
+</p>
+
+<p>
+リンク：
+</p>
+<ul class="org-ul">
+<li><a href="https://jonahbeckford.github.io/ocamlearlybird/">https://jonahbeckford.github.io/ocamlearlybird/</a>（パフォーマンス計測と採用方法のミニ Web サイト）</li>
+<li><a href="https://diskuv.com/dk/">https://diskuv.com/dk/</a>（ビルドシステムの詳細；このディスカッション投稿には必須ではありません）</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="10">VS Code から直接 OCaml ファイルを実行する</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/running-ocaml-files-straight-from-vs-code/18549/1">https://discuss.ocaml.org/t/running-ocaml-files-straight-from-vs-code/18549/1</a>
+</p>
+</div>
+
+<div id="outline-container-orgace99e0" class="outline-3">
+<h3 id="orgace99e0">Tim ats が発表しました</h3>
+<div class="outline-text-3" id="text-orgace99e0">
+<p>
+皆さん、こんにちは。VSCode OCaml Platform のリリース <a href="https://github.com/ocamllabs/vscode-ocaml-platform/releases/tag/2.4.0">2.4.0</a> に追加された新機能を紹介できることをとても嬉しく思います。この作業は <a href="https://tarides.com/">Tarides</a> によって実装され、<a href="https://ocaml-sf.org/">OCaml Software Foundation</a> の資金援助を受けています。
+</p>
+
+<p>
+エディターのツールバーに「Run」ボタンが追加されました。このボタンをクリックすると、現在のワークスペースで検出された実行可能ファイルの一覧がドロップダウンで表示されます。この機能はもともと大学教授と学生を対象としていましたが、素早いデバッグのために誰にでも役立ちます。
+</p>
+
+
+<div id="org89201ad" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/optimized/2X/8/84b8051fe4a1db5d9f2c5a263ea8d18294b48d01_2_1034x408.jpeg" alt="84b8051fe4a1db5d9f2c5a263ea8d18294b48d01_2_1034x408.jpeg" width="80%" />
+</p>
+</div>
+
+<p>
+実行可能ファイルの検出方法はワークスペースの設定によって異なります。ユーザーが Dune を使用していてワークスペースのルートに <code>dune-project</code> ファイルがある場合、Dune API を活用して定義済みの実行可能ファイルの一覧を取得し、基本的な <code>dune exec ./file</code> コマンドで選択した実行可能ファイルを起動します。それ以外の場合（Dune がプロジェクトビルダーとして検出されない場合）、表示される一覧にはワークスペース内で検出されたすべての <code>.ml</code> ファイルが含まれ、OCaml バイトコードインタープリタで実行されます。
+</p>
+
+<p>
+実行可能ファイルが実行されるたびに、その出力が専用の VS Code ターミナルに表示されます。
+</p>
+
+
+<div id="orgda47f24" class="figure">
+<p><img src="https://us1.discourse-cdn.com/flex020/uploads/ocaml/optimized/2X/3/38b71e76fa06b49d5f4c52e2938f08134d4f493d_2_1380x544.png" alt="38b71e76fa06b49d5f4c52e2938f08134d4f493d_2_1380x544.png" width="80%" />
+</p>
+</div>
+
+<p>
+フィードバックやバグ報告を大歓迎します！
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="11">melange-json が jsonkit になりました</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Archive: <a href="https://discuss.ocaml.org/t/ann-melange-json-is-now-jsonkit/18550/1">https://discuss.ocaml.org/t/ann-melange-json-is-now-jsonkit/18550/1</a>
+</p>
+</div>
+
+<div id="outline-container-org01ce69e" class="outline-3">
+<h3 id="org01ce69e">Pedro Braga が発表しました</h3>
+<div class="outline-text-3" id="text-org01ce69e">
+<p>
+こんにちは！
+</p>
+
+<p>
+少し前に、<a href="https://github.com/ahrefs/ppx_deriving_jsonschema">ppx_deriving_jsonschema</a> を <code>melange-json</code> プロジェクトに移行しました。これにより、1つの PPX で JSON デコーディング/エンコーディングと jsonschema ツールの両方が提供されるようになりました。その時点で <code>melange-json</code> という名前はもはや適切ではなくなったため、OCaml の JSON ツールを提供するプロジェクトとして <code>melange-json</code> を <b><b><a href="https://github.com/melange-community/jsonkit"><code>jsonkit</code></a></b></b> に改名しました。動作は以前の <code>melange-json</code> とまったく同じですが、同じ PPX で jsonschema も扱えるようになっています：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ocaml">open Jsonkit.Primitives
+
+type user = { name : string; age : int } [@@deriving json, jsonschema]
+
+let schema = Jsonkit.Jsonschema.make user_jsonschema
+</pre>
+</div>
+<p>
+新しいパッケージ名：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">変更前</th>
+<th scope="col" class="org-left">変更後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>melange-json</code> / <code>melange-json.ppx</code></td>
+<td class="org-left"><code>jsonkit-melange</code> / <code>jsonkit-melange.ppx</code></td>
+</tr>
+
+<tr>
+<td class="org-left"><code>melange-json-native</code> / <code>melange-json-native.ppx</code></td>
+<td class="org-left"><code>jsonkit</code> / <code>jsonkit.ppx</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+移行後の変更点については<a href="https://github.com/melange-community/jsonkit/blob/main/CHANGES.md#jsonkit100-2026-07-30">変更履歴</a>をご覧ください。
+</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-org5844e52" class="outline-2">
+<h2 id="org5844e52">過去の CWN</h2>
+<div class="outline-text-2" id="text-org5844e52">
+<p>
+CWN を見逃した場合は、<a href="mailto:alan.schmitt@polytechnique.org">メッセージを送っていただければ</a>メールでお送りします。また、<a href="https://ocaml.jp/cwn-ja/">アーカイブ</a>や<a href="https://ocaml.jp/cwn-ja/cwn.rss">RSS フィード</a>もご覧いただけます。
+</p>
+
+<p>
+毎週メールで受け取りたい場合は、<a href="https://sympa.inria.fr/sympa/info/caml-list">caml-list</a> を購読してください。
+</p>
+
+<div class="authorname" id="org316a142">
+<p>
+<a href="https://alan.petitepomme.net/">Alan Schmitt</a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

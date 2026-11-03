@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <title>OCaml Weekly News (2026年9月1日版）</title>
+  <pubDate>Tue, 01 Sep 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.09.01.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.09.01.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#1"&gt;Unhandled: OCaml 5 における未処理エフェクトの静的チェッカーと、ある否定的な結果について&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#2"&gt;mirage-crypto* リリースシリーズについて&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#3"&gt;Rpmfile 1.0.0 と Bytream 0.2&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#4"&gt;oxbow: Wayland コンポジター River 向けの動的タイリングウィンドウマネージャー&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#5"&gt;cdp 0.1.0 - OCaml 向けの型付き Chrome DevTools Protocol ライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#6"&gt;Hardcaml ネットワーキングライブラリ - おもちゃプロジェクト&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#7"&gt;FUN OCaml 2027 バンガロール開催（1月25〜26日）- トークとワークショップの提案を9月30日まで受付中&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#8"&gt;ease-caml - OCaml 向けのイージングライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.09.01.html#9"&gt;opam 2.6.0~alpha1&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
