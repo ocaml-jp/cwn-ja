@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <title>OCaml Weekly News (2026年7月28日版）</title>
+  <pubDate>Tue, 28 Jul 2026 12:00:00 GMT</pubDate>
+  <link>https://ocaml.jp/cwn-ja/2026.07.28.html</link>
+  <guid>https://ocaml.jp/cwn-ja/2026.07.28.html</guid>
+  <description>&lt;ol&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#1"&gt;Theo 0.1.0: 理論サポート付き BDD ライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#2"&gt;qiskit 2.0.1&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#3"&gt;Wax 0.1.0: WebAssembly の Rust 風構文&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#4"&gt;Cascade: OCaml による型付き CSS ツールキット&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#5"&gt;Dune 3.24&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#6"&gt;ocaml-wire: EverParse 3D 出力対応バイナリワイヤーフォーマット DSL&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#7"&gt;Eio 1.4（エフェクトベース並行処理ライブラリ）&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#8"&gt;ocaml-sbom 0.1.0&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#9"&gt;Union-find-lattice ライブラリ&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#10"&gt;IFS フラクタルと OCaml で Claude の創造性に挑む&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ocaml.jp/cwn-ja/2026.07.28.html#11"&gt;Simple_http 1.1 リリース&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</description>
+</item>
