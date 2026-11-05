@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>OCaml Weekly News</title>
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -236,8 +236,6 @@
 </ul>
 </div>
 </div>
-
-
 <div id="outline-container-1" class="outline-2">
 <h2 id="1">uniker.nl - OCaml によるユニカーネル</h2>
 <div class="outline-text-2" id="text-1">
@@ -245,19 +243,17 @@
 Archive: <a href="https://discuss.ocaml.org/t/ann-uniker-nl-unikernels-in-ocaml/18625/1">https://discuss.ocaml.org/t/ann-uniker-nl-unikernels-in-ocaml/18625/1</a>
 </p>
 </div>
-
 <div id="outline-container-org0ccf6ed" class="outline-3">
 <h3 id="org0ccf6ed">Calascibetta Romain が発表しました</h3>
 <div class="outline-text-3" id="text-org0ccf6ed">
 <p>
-新しいウェブサイト <a href="https://uniker.nl/">uniker.nl</a> の公開をお知らせできることを嬉しく思います。このウェブサイトは、OCaml 5 を用いたユニカーネル開発への新しいアプローチを体現しています。ユニカーネルの開発に新しい方法を提供するとともに、ユニカーネルのデプロイと利用にも同等の重点を置いています。このサイトには包括的な<a href="https://uniker.nl/introduction/">チュートリアル</a>とリソースが掲載されており、OCaml におけるユニカーネルに興味を持つ方への_最初の入口_として、新しいエコシステムを理解するための手助けをします。
+新しいウェブサイト <a href="https://uniker.nl/">uniker.nl</a> の公開をお知らせできることを嬉しく思います。このウェブサイトは、OCaml 5 を用いたユニカーネル開発への新しいアプローチを体現しています。ユニカーネルの開発に新しい方法を提供するとともに、ユニカーネルのデプロイと利用にも同等の重点を置いています。このサイトには包括的な<a href="https://uniker.nl/introduction/">チュートリアル</a>とリソースが掲載されており、OCaml におけるユニカーネルに興味を持つ方への<span class="underline">最初の入口</span>として、新しいエコシステムを理解するための手助けをします。
 </p>
 
 <p>
 このサイトのコンテンツは<a href="https://github.com/robur-coop/uniker.nl">こちら</a>で公開されており、優れた <a href="https://yocaml.github.io/tutorial/index.html">YOCaml</a> プロジェクトによって動作し、私たちの <a href="https://github.com/dinosaure/immuable">immuable</a> ユニカーネルを用いてデプロイされています。
 </p>
 </div>
-
 <div id="outline-container-org1057dc6" class="outline-4">
 <h4 id="org1057dc6">新しいエコシステム</h4>
 <div class="outline-text-4" id="text-org1057dc6">
@@ -269,7 +265,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-uniker-nl-unikernels-in-ocaml/
 <li>ユニカーネルのデプロイとその利用</li>
 </ul>
 </div>
-
 <ul class="org-ul">
 <li><a id="org82a3551"></a>ユニカーネルを開発するために<br />
 <div class="outline-text-5" id="text-org82a3551">
@@ -282,12 +277,11 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-uniker-nl-unikernels-in-ocaml/
 </p>
 
 <p>
-一方で、特に MirageOS が現在提供しているものに関して、達成できることの限界も見えてきました。これを念頭に置き、ユニカーネル開発における制約（特にクロスコンパイルに関して）をさらに検討した結果、2つのツールを用いてユニカーネルの開発を構造化することにしました：[~unic~](依存関係を推論して_vendor_する方法)と[~mfetch~](依存関係を vendor する方法)です。
+一方で、特に MirageOS が現在提供しているものに関して、達成できることの限界も見えてきました。これを念頭に置き、ユニカーネル開発における制約（特にクロスコンパイルに関して）をさらに検討した結果、2つのツールを用いてユニカーネルの開発を構造化することにしました：[~unic~](依存関係を推論して<span class="underline">vendor</span>する方法)と[~mfetch~](依存関係を vendor する方法)です。
 </p>
 </div>
 </li>
-
-<li><a id="org1925932"></a><a href="https://github.com/robur-coop/unic"><code>unic</code></a>: 依存関係を推論して_vendor_する方法<br />
+<li><a id="org1925932"></a><a href="https://github.com/robur-coop/unic"><code>unic</code></a>: 依存関係を推論して<span class="underline">vendor</span>する方法<br />
 <div class="outline-text-5" id="text-org1925932">
 <p>
 ユニカーネルにおける制約の一つは、Cファイルをホストシステムに既存のものに依存しないよう特定のオプションで再コンパイルする必要があることです。MirageOS 3 が取ったアプローチは、このような特定のコンパイル結果をCスタブを含むライブラリ（<a href="https://github.com/mirage/digestif"><code>digestif</code></a>や<a href="https://github.com/mirage/mirage-crypto"><code>mirage-crypto</code></a>など）の中に配布することでした。問題は、ユニカーネルの中核コンポーネントである <a href="https://github.com/solo5/solo5">Solo5</a> 向けのCファイル固有のコンパイル環境を得るために、これらのライブラリのユーザーに <a href="https://github.com/mirage/ocaml-solo5"><code>ocaml-solo5</code></a> のインストールを強いていたことです。
@@ -341,7 +335,6 @@ $ solo5-hvt -- _build/solo5/main.exe --solo5:quiet
 </p>
 </div>
 </li>
-
 <li><a id="org929f474"></a><a href="https://github.com/robur-coop/mfetch"><code>mfetch</code></a>: 依存関係を vendor する方法<br />
 <div class="outline-text-5" id="text-org929f474">
 <p>
@@ -383,7 +376,6 @@ $ mfetch lock
 </div>
 </div>
 </li>
-
 <li><a id="org411e243"></a>OCaml 5 向けライブラリ<br />
 <div class="outline-text-5" id="text-org411e243">
 <p>
@@ -397,7 +389,7 @@ $ mfetch lock
 </ul>
 
 <p>
-現在デプロイ済みのいくつかのユニカーネルで使用されているこれらのライブラリにより、開発者に対してユニカーネルを実装するための_ダイレクトスタイル_アプローチを提供できます。
+現在デプロイ済みのいくつかのユニカーネルで使用されているこれらのライブラリにより、開発者に対してユニカーネルを実装するための<span class="underline">ダイレクトスタイル</span>アプローチを提供できます。
 </p>
 
 <p>
@@ -409,7 +401,6 @@ $ mfetch lock
 </p>
 </div>
 </li>
-
 <li><a id="orge184bee"></a>ユニカーネルをデプロイするために<br />
 <div class="outline-text-5" id="text-orge184bee">
 <p>
@@ -457,7 +448,6 @@ Albatross は主に、ユニカーネルの再現性を検証するインフラ 
 </li>
 </ul>
 </div>
-
 <div id="outline-container-org1a26558" class="outline-4">
 <h4 id="org1a26558">私たちについて</h4>
 <div class="outline-text-4" id="text-org1a26558">
@@ -470,7 +460,6 @@ Albatross は主に、ユニカーネルの再現性を検証するインフラ 
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgc80f778" class="outline-4">
 <h4 id="orgc80f778">ユニカーネルと MirageOS</h4>
 <div class="outline-text-4" id="text-orgc80f778">
@@ -478,7 +467,7 @@ Albatross は主に、ユニカーネルの再現性を検証するインフラ 
 熱心な方々は、私たちのアプローチが私たちのメンテナンス作業によって現役を保つ MirageOS と比べてどのような利点があるのか疑問に思うかもしれません。私たちのアプローチは、ユニカーネルの普及を妨げるガラスの天井として特定した5つの点によって特徴づけられています：
 </p>
 <ul class="org-ul">
-<li>最初の点は <a href="https://github.com/mirage/ocaml-cstruct"><code>ocaml-cstruct</code></a> の使用に関するものです。根本的な問題は、_バッファ_として <code>bytes~/~string</code> の代わりに <code>bigarray</code> を使用していることです。<a href="https://github.com/robur-coop/miragevpn">MirageVPN</a> の開発経験から、エコシステム全体で <span class="underline">バッファ</span> の概念として <code>cstruct</code> を系統的に使用することが、ユニカーネルのスループットにおける最大の<b>ペナルティ</b>であることがわかりました。そこで、<a href="https://github.com/robur-coop/bstr"><code>bstr</code></a>と<a href="https://github.com/robur-coop/bstr"><code>slice</code></a>を開発するだけでなく、<code>cstruct</code> を <code>bytes~/~string</code> に置き換えてほとんどのライブラリを書き直すことにしました（<a href="https://github.com/mirleft/ocaml-tls/pull/497"><code>ocaml-tls</code></a>、<a href="https://github.com/mirage/mirage-crypto/pull/214"><code>mirage-crypto</code></a>、<a href="https://github.com/mirage/ocaml-dns/pull/351"><code>ocaml-dns</code></a>、最近では <a href="https://github.com/mirage/awa-ssh/pull/85"><code>awa-ssh</code></a> と <a href="https://github.com/robur-coop/utcp/pull/55"><code>utcp</code></a> がその例です）。結論は単純です：bigarray の使用をやめるのではなく、APIでその使用を系統的にしないことです。</li>
+<li>最初の点は <a href="https://github.com/mirage/ocaml-cstruct"><code>ocaml-cstruct</code></a> の使用に関するものです。根本的な問題は、<span class="underline">バッファ</span>として <code>bytes~/~string</code> の代わりに <code>bigarray</code> を使用していることです。<a href="https://github.com/robur-coop/miragevpn">MirageVPN</a> の開発経験から、エコシステム全体で <span class="underline">バッファ</span> の概念として <code>cstruct</code> を系統的に使用することが、ユニカーネルのスループットにおける最大の<b>ペナルティ</b>であることがわかりました。そこで、<a href="https://github.com/robur-coop/bstr"><code>bstr</code></a>と<a href="https://github.com/robur-coop/bstr"><code>slice</code></a>を開発するだけでなく、<code>cstruct</code> を <code>bytes~/~string</code> に置き換えてほとんどのライブラリを書き直すことにしました（<a href="https://github.com/mirleft/ocaml-tls/pull/497"><code>ocaml-tls</code></a>、<a href="https://github.com/mirage/mirage-crypto/pull/214"><code>mirage-crypto</code></a>、<a href="https://github.com/mirage/ocaml-dns/pull/351"><code>ocaml-dns</code></a>、最近では <a href="https://github.com/mirage/awa-ssh/pull/85"><code>awa-ssh</code></a> と <a href="https://github.com/robur-coop/utcp/pull/55"><code>utcp</code></a> がその例です）。結論は単純です：bigarray の使用をやめるのではなく、APIでその使用を系統的にしないことです。</li>
 <li>2点目は、ユニカーネルが必要とするデバイスを表現するためのfunctorの使用に関するものです。これらのデバイスを具体化する特定の実装をfunctorを通じてインターフェースを再利用して注入するアプローチは魅力的に見えますが、最新の概念に対応していないインターフェースによって制約されたエコシステムのメンテナンスコストが、より特定のユニカーネルを開発する必要があるたびに<a href="https://github.com/robur-coop/dnsvizor/blob/83b32596c4a08c080067e1cd36fe5788b90cdd78/unikernel.ml#L610-L631">不合理な状況</a>を招きました。再び言いますが、functorの使用をやめるのではなく、系統的にしないことがルールです。</li>
 <li><p>
 3点目はユニカーネルのコンパイルに関するものです。MirageOS は今日でも <code>dune</code> とうまく統合されていない回避策に依存しています。これは「マルチステージコンパイル」として定義でき、望むターゲットに応じてコード生成フェーズが必要になります。このようにツールによって指定される依存関係のセットでワークフローを構造化する方法は、開発者が何を、どのようにしたいかを明示的に制限します。ユニカーネルのコンパイルには制約（<code>Unix</code> モジュールを使用しないことなど）がありますが、私たちの協同組合は、ユニカーネルの設計においてユーザーを支援する（しかし強制しない）<b><b>情報提供的</b></b>（規範的でない）ツールを提供することにしました（さらに、<a href="https://github.com/robur-coop/unic"><code>unic</code></a>と<a href="https://github.com/robur-coop/mfetch"><code>mfetch</code></a>を紹介できることも嬉しく思います）。新しいアプローチのポイントは、ユニカーネルの開発においてツール（<code>mirage</code>）ではなくユーザーが最終決定権を持つことを確保することです。
@@ -502,10 +491,6 @@ MirageOS プロジェクトに関連するプロジェクトについては、�
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-2" class="outline-2">
 <h2 id="2">segmap の発表：リネーミングのための高速データ構造</h2>
 <div class="outline-text-2" id="text-2">
@@ -513,7 +498,6 @@ MirageOS プロジェクトに関連するプロジェクトについては、�
 Archive: <a href="https://discuss.ocaml.org/t/ann-announcing-segmap-a-fast-data-structure-for-renamings/18626/1">https://discuss.ocaml.org/t/ann-announcing-segmap-a-fast-data-structure-for-renamings/18626/1</a>
 </p>
 </div>
-
 <div id="outline-container-org10526a6" class="outline-3">
 <h3 id="org10526a6">François Pottier が発表しました</h3>
 <div class="outline-text-3" id="text-org10526a6">
@@ -537,10 +521,6 @@ FP.
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-3" class="outline-2">
 <h2 id="3">hexen.0.1</h2>
 <div class="outline-text-2" id="text-3">
@@ -548,7 +528,6 @@ FP.
 Archive: <a href="https://discuss.ocaml.org/t/ann-hexen-0-1/18627/1">https://discuss.ocaml.org/t/ann-hexen-0-1/18627/1</a>
 </p>
 </div>
-
 <div id="outline-container-org048f175" class="outline-3">
 <h3 id="org048f175">Mikhail が発表しました</h3>
 <div class="outline-text-3" id="text-org048f175">
@@ -564,7 +543,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-hexen-0-1/18627/1">https://dis
 このライブラリの主な目標は、任意の出力先（bytes またはバッファ）への部分文字列のエンコードとデコードのための柔軟なAPIを提供することです。
 </p>
 </div>
-
 <div id="outline-container-orgab855aa" class="outline-4">
 <h4 id="orgab855aa">使い方</h4>
 <div class="outline-text-4" id="text-orgab855aa">
@@ -612,10 +590,6 @@ bytes
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-4" class="outline-2">
 <h2 id="4">intel_hex.1.0</h2>
 <div class="outline-text-2" id="text-4">
@@ -623,7 +597,6 @@ bytes
 Archive: <a href="https://discuss.ocaml.org/t/ann-intel-hex-1-0/18628/1">https://discuss.ocaml.org/t/ann-intel-hex-1-0/18628/1</a>
 </p>
 </div>
-
 <div id="outline-container-org70b6c97" class="outline-3">
 <h3 id="org70b6c97">Mikhail が発表しました</h3>
 <div class="outline-text-3" id="text-org70b6c97">
@@ -643,7 +616,6 @@ Intel HEX フォーマットは、組み込みシステムプログラミング�
 これで、純粋な OCaml でそれを扱えるようになりました！
 </p>
 </div>
-
 <div id="outline-container-org541670b" class="outline-4">
 <h4 id="org541670b">変更点</h4>
 <div class="outline-text-4" id="text-org541670b">
@@ -654,7 +626,6 @@ Intel HEX フォーマットは、組み込みシステムプログラミング�
 </ul>
 </div>
 </div>
-
 <div id="outline-container-org89201ad" class="outline-4">
 <h4 id="org89201ad">使用例</h4>
 <div class="outline-text-4" id="text-org89201ad">
@@ -712,10 +683,6 @@ Intel HEXファイルを含む文字列を解析するには：
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-5" class="outline-2">
 <h2 id="5">Js_of_ocaml / Wasm_of_ocaml 6.5</h2>
 <div class="outline-text-2" id="text-5">
@@ -723,7 +690,6 @@ Intel HEXファイルを含む文字列を解析するには：
 Archive: <a href="https://discuss.ocaml.org/t/ann-js-of-ocaml-wasm-of-ocaml-6-5/18632/1">https://discuss.ocaml.org/t/ann-js-of-ocaml-wasm-of-ocaml-6-5/18632/1</a>
 </p>
 </div>
-
 <div id="outline-container-orgda47f24" class="outline-3">
 <h3 id="orgda47f24">Hhugo が発表しました</h3>
 <div class="outline-text-3" id="text-orgda47f24">
@@ -765,10 +731,6 @@ OCaml バイトコードから JavaScript および WebAssembly へのコンパ�
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-6" class="outline-2">
 <h2 id="6">TIFF Inspector: ocaml-tiff ベースのインスペクタ（ブラウザ内 OCaml プレイグラウンド付き）</h2>
 <div class="outline-text-2" id="text-6">
@@ -776,7 +738,6 @@ OCaml バイトコードから JavaScript および WebAssembly へのコンパ�
 Archive: <a href="https://discuss.ocaml.org/t/tiff-inspector-an-ocaml-tiff-based-inspector-with-an-in-browser-ocaml-playground/18634/1">https://discuss.ocaml.org/t/tiff-inspector-an-ocaml-tiff-based-inspector-with-an-in-browser-ocaml-playground/18634/1</a>
 </p>
 </div>
-
 <div id="outline-container-orgace99e0" class="outline-3">
 <h3 id="orgace99e0">Ridwan Adebosin が発表しました</h3>
 <div class="outline-text-3" id="text-orgace99e0">
@@ -797,7 +758,6 @@ Archive: <a href="https://discuss.ocaml.org/t/tiff-inspector-an-ocaml-tiff-based
 CLI、HTTP API、ウェブUIとして提供されます。報告された各値はその出所（ファイルから読み取られたもの、仕様のデフォルト値、または不在）を明示します。推測は一切行いません。
 </p>
 </div>
-
 <div id="outline-container-org01ce69e" class="outline-4">
 <h4 id="org01ce69e">OCaml の方々に興味深い点</h4>
 <div class="outline-text-4" id="text-org01ce69e">
@@ -829,7 +789,6 @@ CLI、HTTP API、ウェブUIとして提供されます。報告された各値�
 </p>
 </div>
 </div>
-
 <div id="outline-container-org316a142" class="outline-4">
 <h4 id="org316a142">フィードバック歓迎</h4>
 <div class="outline-text-4" id="text-org316a142">
@@ -846,10 +805,6 @@ CLI、HTTP API、ウェブUIとして提供されます。報告された各値�
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-7" class="outline-2">
 <h2 id="7">OCaml 5.5.2 リリース</h2>
 <div class="outline-text-2" id="text-7">
@@ -857,7 +812,6 @@ CLI、HTTP API、ウェブUIとして提供されます。報告された各値�
 Archive: <a href="https://discuss.ocaml.org/t/ocaml-5-5-2-released/18638/1">https://discuss.ocaml.org/t/ocaml-5-5-2-released/18638/1</a>
 </p>
 </div>
-
 <div id="outline-container-orgc6dd4b3" class="outline-3">
 <h3 id="orgc6dd4b3">octachron が発表しました</h3>
 <div class="outline-text-3" id="text-orgc6dd4b3">
@@ -882,7 +836,6 @@ Happy hacking,
 &#x2013; Florian Angeletti（OCaml チームを代表して）。
 </p>
 </div>
-
 <div id="outline-container-org71629a3" class="outline-4">
 <h4 id="org71629a3">インストール手順</h4>
 <div class="outline-text-4" id="text-org71629a3">
@@ -905,7 +858,6 @@ opam switch create 5.5.2
 </ul>
 </div>
 </div>
-
 <div id="outline-container-orgf3d16e2" class="outline-4">
 <h4 id="orgf3d16e2">バグ修正</h4>
 <div class="outline-text-4" id="text-orgf3d16e2">
@@ -953,10 +905,6 @@ Edwin Török によるレビュー)</li>
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-8" class="outline-2">
 <h2 id="8">bytream.0.4</h2>
 <div class="outline-text-2" id="text-8">
@@ -964,7 +912,6 @@ Edwin Török によるレビュー)</li>
 Archive: <a href="https://discuss.ocaml.org/t/ann-bytream-0-4/18639/1">https://discuss.ocaml.org/t/ann-bytream-0-4/18639/1</a>
 </p>
 </div>
-
 <div id="outline-container-org3e97405" class="outline-3">
 <h3 id="org3e97405">Mikhail が発表しました</h3>
 <div class="outline-text-3" id="text-org3e97405">
@@ -976,7 +923,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-bytream-0-4/18639/1">https://d
 低メモリアロケーションでバイトをストリーミングして処理できる <a href="https://github.com/dx3mod/bytream">Bytream</a> ライブラリの次バージョンをお知らせできることを嬉しく思います。このリリースには多くの重要な更新が含まれています。
 </p>
 </div>
-
 <div id="outline-container-orgb687987" class="outline-4">
 <h4 id="orgb687987">変更点</h4>
 <div class="outline-text-4" id="text-orgb687987">
@@ -1038,7 +984,6 @@ let _ =
 </ul>
 </div>
 </div>
-
 <div id="outline-container-org02e5bde" class="outline-4">
 <h4 id="org02e5bde">クレジット</h4>
 <div class="outline-text-4" id="text-org02e5bde">
@@ -1049,10 +994,6 @@ let _ =
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-9" class="outline-2">
 <h2 id="9">spvec の最初のリリース</h2>
 <div class="outline-text-2" id="text-9">
@@ -1060,7 +1001,6 @@ let _ =
 Archive: <a href="https://discuss.ocaml.org/t/ann-first-release-of-spvec/18641/1">https://discuss.ocaml.org/t/ann-first-release-of-spvec/18641/1</a>
 </p>
 </div>
-
 <div id="outline-container-org3363a06" class="outline-3">
 <h3 id="org3363a06">François Pottier が発表しました</h3>
 <div class="outline-text-3" id="text-org3363a06">
@@ -1088,10 +1028,6 @@ FP.
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-10" class="outline-2">
 <h2 id="10">ocaml-emcc: OCaml プログラムと C スタブを WebAssembly にコンパイルする</h2>
 <div class="outline-text-2" id="text-10">
@@ -1099,7 +1035,6 @@ FP.
 Archive: <a href="https://discuss.ocaml.org/t/ann-ocaml-emcc-compile-ocaml-programs-with-their-c-stubs-to-webassembly/18649/1">https://discuss.ocaml.org/t/ann-ocaml-emcc-compile-ocaml-programs-with-their-c-stubs-to-webassembly/18649/1</a>
 </p>
 </div>
-
 <div id="outline-container-orgfd3edc9" class="outline-3">
 <h3 id="orgfd3edc9">rboud が発表しました</h3>
 <div class="outline-text-3" id="text-orgfd3edc9">
@@ -1155,10 +1090,6 @@ C依存関係のためにブラウザに持ち込めなかったOCamlプロジ�
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-11" class="outline-2">
 <h2 id="11">snkv-ocaml 0.3.0 新リリース — HNSW ベクタ検索付き SNKV の OCaml バインディング</h2>
 <div class="outline-text-2" id="text-11">
@@ -1166,7 +1097,6 @@ C依存関係のためにブラウザに持ち込めなかったOCamlプロジ�
 Archive: <a href="https://discuss.ocaml.org/t/ann-new-release-of-snkv-ocaml-0-3-0-ocaml-bindings-for-snkv-with-hnsw-vector-search/18650/1">https://discuss.ocaml.org/t/ann-new-release-of-snkv-ocaml-0-3-0-ocaml-bindings-for-snkv-with-hnsw-vector-search/18650/1</a>
 </p>
 </div>
-
 <div id="outline-container-org5a6e8ff" class="outline-3">
 <h3 id="org5a6e8ff">Tomasz Barański が発表しました</h3>
 <div class="outline-text-3" id="text-org5a6e8ff">
@@ -1195,10 +1125,6 @@ snkv-ocaml 0.3.0 は opam で利用可能です。このリリースはアップ
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-12" class="outline-2">
 <h2 id="12">TIFF Inspector の構築：OCaml、TIFF 内部、ブラウザ内プレイグラウンドの探求</h2>
 <div class="outline-text-2" id="text-12">
@@ -1206,7 +1132,6 @@ snkv-ocaml 0.3.0 は opam で利用可能です。このリリースはアップ
 Archive: <a href="https://discuss.ocaml.org/t/building-tiff-inspector-exploring-ocaml-tiff-internals-and-an-in-browser-playground/18655/1">https://discuss.ocaml.org/t/building-tiff-inspector-exploring-ocaml-tiff-internals-and-an-in-browser-playground/18655/1</a>
 </p>
 </div>
-
 <div id="outline-container-orgf3530f5" class="outline-3">
 <h3 id="orgf3530f5">RidwanAdebsoin が発表しました</h3>
 <div class="outline-text-3" id="text-orgf3530f5">
@@ -1227,7 +1152,6 @@ Archive: <a href="https://discuss.ocaml.org/t/building-tiff-inspector-exploring-
 CLI、HTTP API、ウェブUIとして提供されます。報告された各値はその出所（ファイルから読み取られたもの、仕様のデフォルト値、または不在）を明示します。推測は一切行いません。
 </p>
 </div>
-
 <div id="outline-container-orgc347680" class="outline-4">
 <h4 id="orgc347680">OCaml の方々に興味深い点</h4>
 <div class="outline-text-4" id="text-orgc347680">
@@ -1259,7 +1183,6 @@ CLI、HTTP API、ウェブUIとして提供されます。報告された各値�
 </p>
 </div>
 </div>
-
 <div id="outline-container-org0061c5f" class="outline-4">
 <h4 id="org0061c5f">フィードバック歓迎</h4>
 <div class="outline-text-4" id="text-org0061c5f">
@@ -1276,10 +1199,6 @@ CLI、HTTP API、ウェブUIとして提供されます。報告された各値�
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-13" class="outline-2">
 <h2 id="13">stele 0.1.0: Menhir 文法の構文エラーメッセージ生成ツール</h2>
 <div class="outline-text-2" id="text-13">
@@ -1287,7 +1206,6 @@ CLI、HTTP API、ウェブUIとして提供されます。報告された各値�
 Archive: <a href="https://discuss.ocaml.org/t/ann-stele-0-1-0-syntax-error-messages-for-menhir-grammars/18657/1">https://discuss.ocaml.org/t/ann-stele-0-1-0-syntax-error-messages-for-menhir-grammars/18657/1</a>
 </p>
 </div>
-
 <div id="outline-container-org60ec34c" class="outline-3">
 <h3 id="org60ec34c">Jérôme Vouillon が発表しました</h3>
 <div class="outline-text-3" id="text-org60ec34c">
@@ -1340,10 +1258,6 @@ OCaml ≥ 4.14 と menhir ≥ 20260122 が必要です。<a href="https://github
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-14" class="outline-2">
 <h2 id="14">OSEC-2026-21: Str partial-match によるキャプチャレジスタの古い値によるアンダーフロー</h2>
 <div class="outline-text-2" id="text-14">
@@ -1427,7 +1341,6 @@ ANT の例は、<code>\(\(a\)b\)+</code> に対して <code>ab</code> を部分�
 グループ2は <code>beginning = 2</code>、<code>end = 1</code> となります。
 </p>
 </div>
-
 <div id="outline-container-org8c3b797" class="outline-4">
 <h4 id="org8c3b797">修正</h4>
 <div class="outline-text-4" id="text-org8c3b797">
@@ -1436,7 +1349,6 @@ ANT の例は、<code>\(\(a\)b\)+</code> に対して <code>ab</code> を部分�
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgd16fead" class="outline-4">
 <h4 id="orgd16fead">影響を受けるか？</h4>
 <div class="outline-text-4" id="text-orgd16fead">
@@ -1468,7 +1380,6 @@ ANT の例は、<code>\(\(a\)b\)+</code> に対して <code>ab</code> を部分�
 </p>
 </div>
 </div>
-
 <div id="outline-container-org6559a17" class="outline-4">
 <h4 id="org6559a17">タイムライン</h4>
 <div class="outline-text-4" id="text-org6559a17">
@@ -1481,10 +1392,6 @@ ANT の例は、<code>\(\(a\)b\)+</code> に対して <code>ab</code> を部分�
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-15" class="outline-2">
 <h2 id="15">OSEC-2026-22: Unix.map_file における整数オーバーフロー</h2>
 <div class="outline-text-2" id="text-15">
@@ -1550,7 +1457,6 @@ affected_bindings: ["Unix.map_file"]
 ANT-2026-6W9NPC2Q mmap の次元積における整数オーバーフロー
 </p>
 </div>
-
 <div id="outline-container-org7ea3919" class="outline-4">
 <h4 id="org7ea3919">修正</h4>
 <div class="outline-text-4" id="text-org7ea3919">
@@ -1561,7 +1467,6 @@ bigarray の次元を掛け合わせる際に <code>*</code> の代わりに <co
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgc968566" class="outline-4">
 <h4 id="orgc968566">影響を受けるか？</h4>
 <div class="outline-text-4" id="text-orgc968566">
@@ -1570,7 +1475,6 @@ bigarray の次元を掛け合わせる際に <code>*</code> の代わりに <co
 </p>
 </div>
 </div>
-
 <div id="outline-container-org6851760" class="outline-4">
 <h4 id="org6851760">スコアに関する注記</h4>
 <div class="outline-text-4" id="text-org6851760">
@@ -1582,7 +1486,6 @@ bigarray の次元を掛け合わせる際に <code>*</code> の代わりに <co
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgdd4e02d" class="outline-4">
 <h4 id="orgdd4e02d">タイムライン</h4>
 <div class="outline-text-4" id="text-orgdd4e02d">
@@ -1595,10 +1498,6 @@ bigarray の次元を掛け合わせる際に <code>*</code> の代わりに <co
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-16" class="outline-2">
 <h2 id="16">OSEC-2026-23: Marshal における複数の問題</h2>
 <div class="outline-text-2" id="text-16">
@@ -1688,7 +1587,6 @@ ANT-2026-PJC00M7X アンマーシャラーが検証なしに偽造された Clos
 したがって、OCaml コードがクラッシュまたは誤動作する原因となる予期しない型の OCaml オブジェクトを生成する、適切に形成されたマーシャルデータは除外されます。
 </p>
 </div>
-
 <div id="outline-container-orgbae0c57" class="outline-4">
 <h4 id="orgbae0c57">影響を受けるか？</h4>
 <div class="outline-text-4" id="text-orgbae0c57">
@@ -1705,7 +1603,6 @@ Marshal は信頼できるプロセス間の通信にのみ使用することを
 </p>
 </div>
 </div>
-
 <div id="outline-container-org03ad7ca" class="outline-4">
 <h4 id="org03ad7ca">タイムライン</h4>
 <div class="outline-text-4" id="text-org03ad7ca">
@@ -1718,10 +1615,6 @@ Marshal は信頼できるプロセス間の通信にのみ使用することを
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-17" class="outline-2">
 <h2 id="17">OSEC-2026-24: Windows でのコマンドクォートにおける複数の問題</h2>
 <div class="outline-text-2" id="text-17">
@@ -1811,7 +1704,6 @@ ANT-2026-JPEWMPAB Win32 の引数クォートで埋め込まれた CR/LF がエ�
 安全にクォートできない特定の文字が受け入れられていました。
 </p>
 </div>
-
 <div id="outline-container-org043a331" class="outline-4">
 <h4 id="org043a331">修正</h4>
 <div class="outline-text-4" id="text-org043a331">
@@ -1830,7 +1722,6 @@ ANT-2026-JPEWMPAB Win32 の引数クォートで埋め込まれた CR/LF がエ�
 </blockquote>
 </div>
 </div>
-
 <div id="outline-container-org48a609b" class="outline-4">
 <h4 id="org48a609b">影響を受けるか？</h4>
 <div class="outline-text-4" id="text-org48a609b">
@@ -1840,7 +1731,6 @@ Windows で <code>.bat</code> または <code>.cmd</code> プログラムとユ�
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgd1bb1a5" class="outline-4">
 <h4 id="orgd1bb1a5">タイムライン</h4>
 <div class="outline-text-4" id="text-orgd1bb1a5">
@@ -1853,10 +1743,6 @@ Windows で <code>.bat</code> または <code>.cmd</code> プログラムとユ�
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-18" class="outline-2">
 <h2 id="18">OSEC-2026-25: OCaml <code>runtime_events</code> コンシューマにおけるサイズ超過カスタムユーザーイベント解析時のヒープバッファオーバーフロー</h2>
 <div class="outline-text-2" id="text-18">
@@ -1930,7 +1816,6 @@ ANT-2026-0JXJVEVY
 これは実際のプログラムでは遭遇しないはずですが、クラッシュにつながる可能性があります。
 </p>
 </div>
-
 <div id="outline-container-org251b3d1" class="outline-4">
 <h4 id="org251b3d1">修正</h4>
 <div class="outline-text-4" id="text-org251b3d1">
@@ -1939,7 +1824,6 @@ ANT-2026-0JXJVEVY
 </p>
 </div>
 </div>
-
 <div id="outline-container-org17941dc" class="outline-4">
 <h4 id="org17941dc">影響を受けるか？</h4>
 <div class="outline-text-4" id="text-org17941dc">
@@ -1948,7 +1832,6 @@ ANT-2026-0JXJVEVY
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgb4b6cc7" class="outline-4">
 <h4 id="orgb4b6cc7">タイムライン</h4>
 <div class="outline-text-4" id="text-orgb4b6cc7">
@@ -1961,10 +1844,6 @@ ANT-2026-0JXJVEVY
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-19" class="outline-2">
 <h2 id="19">OSEC-2026-26: runtime_events ユーザーイベントの名前ベースの型混乱</h2>
 <div class="outline-text-2" id="text-19">
@@ -2037,7 +1916,6 @@ ANT-2026-DTBY2HWS
 これは実際のプログラムでは遭遇しないはずですが、クラッシュにつながる可能性があります。
 </p>
 </div>
-
 <div id="outline-container-org2f1f8e2" class="outline-4">
 <h4 id="org2f1f8e2">修正</h4>
 <div class="outline-text-4" id="text-org2f1f8e2">
@@ -2046,7 +1924,6 @@ ANT-2026-DTBY2HWS
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgab77808" class="outline-4">
 <h4 id="orgab77808">影響を受けるか？</h4>
 <div class="outline-text-4" id="text-orgab77808">
@@ -2055,7 +1932,6 @@ ANT-2026-DTBY2HWS
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgc844fca" class="outline-4">
 <h4 id="orgc844fca">タイムライン</h4>
 <div class="outline-text-4" id="text-orgc844fca">
@@ -2068,10 +1944,6 @@ ANT-2026-DTBY2HWS
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-org5844e52" class="outline-2">
 <h2 id="org5844e52">過去の CWN</h2>
 <div class="outline-text-2" id="text-org5844e52">

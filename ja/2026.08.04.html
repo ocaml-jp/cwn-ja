@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>OCaml Weekly News</title>
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -223,8 +223,6 @@
 </ul>
 </div>
 </div>
-
-
 <div id="outline-container-1" class="outline-2">
 <h2 id="1">Mirage Unikernel で使用するために Claude Code で SQLite を Pure OCaml に書き直した</h2>
 <div class="outline-text-2" id="text-1">
@@ -232,7 +230,6 @@
 Archive: <a href="https://discuss.ocaml.org/t/sqlite-rewritten-in-pure-ocaml-with-claude-code-for-use-in-mirage-unikernels/18401/1">https://discuss.ocaml.org/t/sqlite-rewritten-in-pure-ocaml-with-claude-code-for-use-in-mirage-unikernels/18401/1</a>
 </p>
 </div>
-
 <div id="outline-container-org0ccf6ed" class="outline-3">
 <h3 id="org0ccf6ed">Tej Pochiraju が発表しました</h3>
 <div class="outline-text-3" id="text-org0ccf6ed">
@@ -262,10 +259,6 @@ Tej
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-2" class="outline-2">
 <h2 id="2">新しい opam パッケージ：CamlSurf と Gles3</h2>
 <div class="outline-text-2" id="text-2">
@@ -273,7 +266,6 @@ Tej
 Archive: <a href="https://discuss.ocaml.org/t/new-opam-packages-available-camlsurf-gles3/18404/1">https://discuss.ocaml.org/t/new-opam-packages-available-camlsurf-gles3/18404/1</a>
 </p>
 </div>
-
 <div id="outline-container-org1057dc6" class="outline-3">
 <h3 id="org1057dc6">Christophe Raffalli が発表しました</h3>
 <div class="outline-text-3" id="text-org1057dc6">
@@ -285,7 +277,6 @@ OCaml ユーザーの皆さん、
 <b>Gles3</b> の最新バージョンと新しいソフトウェア <b>CamlSurf</b> の公開をお知らせできることを嬉しく思います。
 </p>
 </div>
-
 <div id="outline-container-org82a3551" class="outline-4">
 <h4 id="org82a3551">CamlSurf.1.0</h4>
 <div class="outline-text-4" id="text-org82a3551">
@@ -306,7 +297,6 @@ CamlSurf は Gles3 を使って書かれたソフトウェアで、陰関数曲�
 </p>
 </div>
 </div>
-
 <div id="outline-container-org1925932" class="outline-4">
 <h4 id="org1925932">Gles3.20260725</h4>
 <div class="outline-text-4" id="text-org1925932">
@@ -331,10 +321,6 @@ opam-ci ではコンパイルできますが、サンプルの実行時にバグ
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-3" class="outline-2">
 <h2 id="3">bcfg：退屈なくらいシンプルな設定ファイルフォーマット</h2>
 <div class="outline-text-2" id="text-3">
@@ -342,7 +328,6 @@ opam-ci ではコンパイルできますが、サンプルの実行時にバグ
 Archive: <a href="https://discuss.ocaml.org/t/ann-bcfg-a-boringly-simple-configuration-format/18405/1">https://discuss.ocaml.org/t/ann-bcfg-a-boringly-simple-configuration-format/18405/1</a>
 </p>
 </div>
-
 <div id="outline-container-orge184bee" class="outline-3">
 <h3 id="orge184bee">Calascibetta Romain が発表しました</h3>
 <div class="outline-text-3" id="text-orge184bee">
@@ -350,7 +335,7 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-bcfg-a-boringly-simple-configu
 <a href="https://github.com/robur-coop/bcfg"><code>bcfg</code></a> の最初のリリースをお知らせします。これは <a href="https://git.sr.ht/~emersion/scfg">Simple ConFiGuration file format</a>（B は "boringly（退屈なくらい）" の意）で設定ファイルを操作・生成するためのツールとライブラリです。<code>bcfg</code> プロジェクトは Léo Andrès (@ancolie) の <a href="https://forge.kumikode.org/kumikode/scfg">scfg</a> プロジェクト（<a href="https://discuss.ocaml.org/t/ann-first-release-of-scfg/9249">https://discuss.ocaml.org/t/ann-first-release-of-scfg/9249</a> を参照）から派生していますが、さらに一歩進むことを目指しています：
 </p>
 <ul class="org-ul">
-<li>UTF-8 でない文字列を RFC822 で規定された形式（_folding-whitespace_ を含む）で受け付けるよう構文を拡張しています</li>
+<li>UTF-8 でない文字列を RFC822 で規定された形式（<span class="underline">folding-whitespace</span> を含む）で受け付けるよう構文を拡張しています</li>
 <li><code>sedlex</code> の代わりに <code>ocamllex</code> のみを使用するよう依存関係を削減しました。<code>ocamllex</code> は UTF-8 文字列を十分に処理できます</li>
 <li>このディストリビューションには @dbuenzli の <a href="https://github.com/dbuenzli/jsont">jsont</a> の設計と @swrup による <code>scfg</code> のドラフト実装に基づいた <code>bcfgt</code> ライブラリが含まれています</li>
 <li>リンター（設定ファイルの再フォーマットを可能にする）と、式と設定ファイルから情報を抽出する "<code>jq</code> スタイル" のクエリツールを追加しています</li>
@@ -380,10 +365,6 @@ $ sudo apt install bcfg
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-4" class="outline-2">
 <h2 id="4">Introcaml（アルファ版）：OCaml のための多相的な表示とイントロスペクション</h2>
 <div class="outline-text-2" id="text-4">
@@ -391,7 +372,6 @@ $ sudo apt install bcfg
 Archive: <a href="https://discuss.ocaml.org/t/ann-introcaml-alpha-polymorphic-printing-and-introspection-for-ocaml/18407/1">https://discuss.ocaml.org/t/ann-introcaml-alpha-polymorphic-printing-and-introspection-for-ocaml/18407/1</a>
 </p>
 </div>
-
 <div id="outline-container-org1a26558" class="outline-3">
 <h3 id="org1a26558">Frédéric Bour が発表しました</h3>
 <div class="outline-text-3" id="text-org1a26558">
@@ -399,7 +379,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-introcaml-alpha-polymorphic-pr
 OCaml 5.5.0 の拡張である <b>Introcaml</b> のアルファプレビューを共有できることを嬉しく思います。これは、トップレベルスタイルのイントロスペクションの力をユーザープログラムに直接もたらすものです。
 </p>
 </div>
-
 <div id="outline-container-orgc80f778" class="outline-4">
 <h4 id="orgc80f778">Introcaml とは？</h4>
 <div class="outline-text-4" id="text-orgc80f778">
@@ -412,7 +391,6 @@ OCaml のトップレベルは、明示的なプリンター関数を必要と�
 </p>
 </div>
 </div>
-
 <div id="outline-container-org10526a6" class="outline-4">
 <h4 id="org10526a6">🚀 試し方</h4>
 <div class="outline-text-4" id="text-org10526a6">
@@ -424,7 +402,6 @@ Introcaml は opam で利用できます。アルファ版をテストするに�
 opam switch create 5.5.0+introcaml
 </pre>
 </div>
-
 <ul class="org-ul">
 <li><a id="org048f175"></a>主な機能：<br />
 <div class="outline-text-5" id="text-org048f175">
@@ -434,7 +411,6 @@ opam switch create 5.5.0+introcaml
 </ul>
 </div>
 </li>
-
 <li><a id="orgab855aa"></a>コード例<br />
 <div class="outline-text-5" id="text-orgab855aa">
 <div class="org-src-container">
@@ -466,7 +442,6 @@ let () = println ["Welcome to "; month; " "; year; "!"]
 </li>
 </ul>
 </div>
-
 <div id="outline-container-org70b6c97" class="outline-4">
 <h4 id="org70b6c97">🛠 仕組み</h4>
 <div class="outline-text-4" id="text-org70b6c97">
@@ -480,7 +455,6 @@ Introcaml は高性能を実現するために確率的なメタデータ復元�
 <li><b>ゼロオーバーヘッド：</b> コンパイルスキームはバイトコードではオーバーヘッドが無視できるほど小さく、ネイティブモードでは実質的にゼロになるよう設計されています。</li>
 </ol>
 </div>
-
 <ul class="org-ul">
 <li><a id="org541670b"></a><a href="https://github.com/let-def/ocaml/blob/introcaml-550/stdlib/introspect.mli"><code>Introspect</code></a> API<br />
 <div class="outline-text-5" id="text-org541670b">
@@ -514,7 +488,6 @@ Introcaml は高性能を実現するために確率的なメタデータ復元�
 </li>
 </ul>
 </div>
-
 <div id="outline-container-org5a3cf5f" class="outline-4">
 <h4 id="org5a3cf5f">🔍 既存のプリンターとの統合</h4>
 <div class="outline-text-4" id="text-org5a3cf5f">
@@ -536,7 +509,6 @@ val h : ('_weak3, '_weak4) Hashtbl.t =
 </p>
 </div>
 </div>
-
 <div id="outline-container-org89201ad" class="outline-4">
 <h4 id="org89201ad">⚠️ 制限事項と現在の状況（アルファ版）</h4>
 <div class="outline-text-4" id="text-org89201ad">
@@ -589,10 +561,6 @@ println [roundtrip [Reserved_bits] (ref 1)];; (* 出力: {contents = 1} *)
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-5" class="outline-2">
 <h2 id="5">OxCaml フレーバーの SWAR memchr をベンチマークして学んだこと</h2>
 <div class="outline-text-2" id="text-5">
@@ -600,7 +568,6 @@ println [roundtrip [Reserved_bits] (ref 1)];; (* 出力: {contents = 1} *)
 Archive: <a href="https://discuss.ocaml.org/t/learnings-from-benchmarking-oxcaml-flavoured-swar-memchr/18411/1">https://discuss.ocaml.org/t/learnings-from-benchmarking-oxcaml-flavoured-swar-memchr/18411/1</a>
 </p>
 </div>
-
 <div id="outline-container-orgda47f24" class="outline-3">
 <h3 id="orgda47f24">Keith が議論しました</h3>
 <div class="outline-text-3" id="text-orgda47f24">
@@ -628,7 +595,6 @@ Archive: <a href="https://discuss.ocaml.org/t/learnings-from-benchmarking-oxcaml
 OxCaml でコーディングする際の良い点、悪い点、醜い点を見ていきましょう。これらのいくつかは私が OCaml 初心者であり、まだ言語について学んでいるためのものです。
 </p>
 </div>
-
 <div id="outline-container-orgace99e0" class="outline-4">
 <h4 id="orgace99e0">良い点</h4>
 <div class="outline-text-4" id="text-orgace99e0">
@@ -662,7 +628,6 @@ OxCaml でコーディングする際の良い点、悪い点、醜い点を見�
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgc6dd4b3" class="outline-4">
 <h4 id="orgc6dd4b3">悪い点</h4>
 <div class="outline-text-4" id="text-orgc6dd4b3">
@@ -707,7 +672,6 @@ Int64_u.(compare (i + #32L) (of_int n) &lt; 0)
 </p>
 </div>
 </div>
-
 <div id="outline-container-org71629a3" class="outline-4">
 <h4 id="org71629a3">醜い点</h4>
 <div class="outline-text-4" id="text-org71629a3">
@@ -759,7 +723,6 @@ in
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgf3d16e2" class="outline-4">
 <h4 id="orgf3d16e2">まとめ</h4>
 <div class="outline-text-4" id="text-orgf3d16e2">
@@ -780,7 +743,6 @@ OCaml はそうではなく、そう振る舞う必要もありません。OCaml
 </p>
 </div>
 </div>
-
 <div id="outline-container-org3e97405" class="outline-4">
 <h4 id="org3e97405">次のステップ</h4>
 <div class="outline-text-4" id="text-org3e97405">
@@ -791,10 +753,6 @@ OxCaml は <code>oxcaml_simd</code> を通じて SIMD サポートを持って�
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-6" class="outline-2">
 <h2 id="6">OCaml Runtime Meeting：月曜日 7月6日 @ 10:00 UTC（10:00 London/Cambridge、11:00 Paris、19:00 Sydney）</h2>
 <div class="outline-text-2" id="text-6">
@@ -802,7 +760,6 @@ OxCaml は <code>oxcaml_simd</code> を通じて SIMD サポートを持って�
 Archive: <a href="https://discuss.ocaml.org/t/ocaml-runtime-meeting-mon-july-6-10-00-utc-10-00-london-cambridge-11-00-paris-7pm-sydney/18312/6">https://discuss.ocaml.org/t/ocaml-runtime-meeting-mon-july-6-10-00-utc-10-00-london-cambridge-11-00-paris-7pm-sydney/18312/6</a>
 </p>
 </div>
-
 <div id="outline-container-orgb687987" class="outline-3">
 <h3 id="orgb687987">このスレッドを続けて、Tim McGilchrist が発表しました</h3>
 <div class="outline-text-3" id="text-orgb687987">
@@ -816,10 +773,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ocaml-runtime-meeting-mon-july-6-1
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-org5844e52" class="outline-2">
 <h2 id="org5844e52">過去の CWN</h2>
 <div class="outline-text-2" id="text-org5844e52">

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>OCaml Weekly News</title>
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -226,8 +226,6 @@
 </ul>
 </div>
 </div>
-
-
 <div id="outline-container-1" class="outline-2">
 <h2 id="1">ocamlgrep 0.1.1</h2>
 <div class="outline-text-2" id="text-1">
@@ -235,7 +233,6 @@
 Archive: <a href="https://discuss.ocaml.org/t/ann-ocamlgrep-0-1-1/18350/1">https://discuss.ocaml.org/t/ann-ocamlgrep-0-1-1/18350/1</a>
 </p>
 </div>
-
 <div id="outline-container-org411e243" class="outline-3">
 <h3 id="org411e243">Nicolas Ojeda Bar が発表しました</h3>
 <div class="outline-text-3" id="text-org411e243">
@@ -258,7 +255,7 @@ OCaml コードを構造的に grep するツール <code>ocamlgrep</code> の�
 $ opam install ocamlgrep
 </pre>
 <p>
-このツールのアイデアはシンプルです。Dune プロジェクト[^1] 内でクエリを指定して呼び出すと（あらかじめ <code>dune build @check</code> などで <code>.cmt~/</code>.cmti~ アーティファクトをビルドしておく必要があります）、ソースツリー内でヒットする箇所の一覧を返します。_クエリ_ は構文上は OCaml の式であり、_穴_ <code>__</code> を含むことができます。以下にいくつかの使用例を示します。
+このツールのアイデアはシンプルです。Dune プロジェクト[^1] 内でクエリを指定して呼び出すと（あらかじめ <code>dune build @check</code> などで <code>.cmt~/</code>.cmti~ アーティファクトをビルドしておく必要があります）、ソースツリー内でヒットする箇所の一覧を返します。<span class="underline">クエリ</span> は構文上は OCaml の式であり、<span class="underline">穴</span> <code>__</code> を含むことができます。以下にいくつかの使用例を示します。
 </p>
 
 <p>
@@ -308,10 +305,6 @@ Nicolas
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-2" class="outline-2">
 <h2 id="2">MirageOS on Unikraft</h2>
 <div class="outline-text-2" id="text-2">
@@ -319,7 +312,6 @@ Nicolas
 Archive: <a href="https://discuss.ocaml.org/t/mirageos-on-unikraft/16975/3">https://discuss.ocaml.org/t/mirageos-on-unikraft/16975/3</a>
 </p>
 </div>
-
 <div id="outline-container-orge184bee" class="outline-3">
 <h3 id="orge184bee">このスレッドを継続して、shym が発表しました</h3>
 <div class="outline-text-3" id="text-orge184bee">
@@ -338,10 +330,6 @@ happy unikerneling!
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-3" class="outline-2">
 <h2 id="3">ppx_deriving_melange 0.1.0 - Melange 向け eq、ord、show、map、iter deriver</h2>
 <div class="outline-text-2" id="text-3">
@@ -349,7 +337,6 @@ happy unikerneling!
 Archive: <a href="https://discuss.ocaml.org/t/ann-ppx-deriving-melange-0-1-0-eq-ord-show-map-iter-derivers-for-melange/18352/1">https://discuss.ocaml.org/t/ann-ppx-deriving-melange-0-1-0-eq-ord-show-map-iter-derivers-for-melange/18352/1</a>
 </p>
 </div>
-
 <div id="outline-container-org1a26558" class="outline-3">
 <h3 id="org1a26558">Atlas07 が発表しました</h3>
 <div class="outline-text-3" id="text-org1a26558">
@@ -361,7 +348,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-ppx-deriving-melange-0-1-0-eq-
 Melange 対応の <code>ppx_deriving</code> サブセットである <b>ppx_deriving_melange</b> の初リリースをお知らせします: <a href="https://github.com/ahrefs/ppx_deriving_melange">https://github.com/ahrefs/ppx_deriving_melange</a>
 </p>
 </div>
-
 <div id="outline-container-orgc80f778" class="outline-4">
 <h4 id="orgc80f778">なぜ作ったか</h4>
 <div class="outline-text-4" id="text-orgc80f778">
@@ -378,7 +364,6 @@ Melange 対応の <code>ppx_deriving</code> サブセットである <b>ppx_deri
 </p>
 </div>
 </div>
-
 <div id="outline-container-org82134d2" class="outline-4">
 <h4 id="org82134d2">提供機能</h4>
 <div class="outline-text-4" id="text-org82134d2">
@@ -421,7 +406,6 @@ Melange 対応の <code>ppx_deriving</code> サブセットである <b>ppx_deri
 </ul>
 </div>
 </div>
-
 <div id="outline-container-org10526a6" class="outline-4">
 <h4 id="org10526a6">未対応の部分（今後の予定）</h4>
 <div class="outline-text-4" id="text-org10526a6">
@@ -430,7 +414,6 @@ Melange 対応の <code>ppx_deriving</code> サブセットである <b>ppx_deri
 </p>
 </div>
 </div>
-
 <div id="outline-container-org70b6c97" class="outline-4">
 <h4 id="org70b6c97">使い方</h4>
 <div class="outline-text-4" id="text-org70b6c97">
@@ -461,10 +444,6 @@ opam install ppx_deriving_melange
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-4" class="outline-2">
 <h2 id="4">hegel 0.12.1</h2>
 <div class="outline-text-2" id="text-4">
@@ -472,7 +451,6 @@ opam install ppx_deriving_melange
 Archive: <a href="https://discuss.ocaml.org/t/ann-hegel-0-12-1/18358/1">https://discuss.ocaml.org/t/ann-hegel-0-12-1/18358/1</a>
 </p>
 </div>
-
 <div id="outline-container-org5a3cf5f" class="outline-3">
 <h3 id="org5a3cf5f">Ethan Chou が発表しました</h3>
 <div class="outline-text-3" id="text-org5a3cf5f">
@@ -534,10 +512,6 @@ happy testing!
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-5" class="outline-2">
 <h2 id="5">Bigarray.Genarray に iteration、mapping、folding を追加する小さな拡張</h2>
 <div class="outline-text-2" id="text-5">
@@ -545,7 +519,6 @@ happy testing!
 Archive: <a href="https://discuss.ocaml.org/t/ann-a-small-extension-of-bigarray-genarray-adding-iteration-mapping-and-folding/15005/7">https://discuss.ocaml.org/t/ann-a-small-extension-of-bigarray-genarray-adding-iteration-mapping-and-folding/15005/7</a>
 </p>
 </div>
-
 <div id="outline-container-org89201ad" class="outline-3">
 <h3 id="org89201ad">このスレッドを継続して、NAlec が発表しました</h3>
 <div class="outline-text-3" id="text-org89201ad">
@@ -556,10 +529,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-a-small-extension-of-bigarray-
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-6" class="outline-2">
 <h2 id="6">OCaml Security Team、2026年前半のレポート</h2>
 <div class="outline-text-2" id="text-6">
@@ -567,7 +536,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-a-small-extension-of-bigarray-
 Archive: <a href="https://discuss.ocaml.org/t/ocaml-security-team-report-for-first-half-of-2026/18366/1">https://discuss.ocaml.org/t/ocaml-security-team-report-for-first-half-of-2026/18366/1</a>
 </p>
 </div>
-
 <div id="outline-container-orgda47f24" class="outline-3">
 <h3 id="orgda47f24">Hannes Mehnert が発表しました</h3>
 <div class="outline-text-3" id="text-orgda47f24">
@@ -589,7 +557,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ocaml-security-team-report-for-fir
 <li>Boning Dong - @bn-d - Bloomberg</li>
 </ul>
 </div>
-
 <div id="outline-container-orgace99e0" class="outline-4">
 <h4 id="orgace99e0">脆弱性データベース</h4>
 <div class="outline-text-4" id="text-orgace99e0">
@@ -602,7 +569,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ocaml-security-team-report-for-fir
 </p>
 </div>
 </div>
-
 <div id="outline-container-org01ce69e" class="outline-4">
 <h4 id="org01ce69e">監査ツール</h4>
 <div class="outline-text-4" id="text-org01ce69e">
@@ -611,7 +577,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ocaml-security-team-report-for-fir
 </p>
 </div>
 </div>
-
 <div id="outline-container-org316a142" class="outline-4">
 <h4 id="org316a142">公開ミーティング</h4>
 <div class="outline-text-4" id="text-org316a142">
@@ -620,7 +585,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ocaml-security-team-report-for-fir
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgc6dd4b3" class="outline-4">
 <h4 id="orgc6dd4b3">opam-repository の変更ポリシー</h4>
 <div class="outline-text-4" id="text-orgc6dd4b3">
@@ -629,7 +593,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ocaml-security-team-report-for-fir
 </p>
 </div>
 </div>
-
 <div id="outline-container-org882f23c" class="outline-4">
 <h4 id="org882f23c">グラント提案</h4>
 <div class="outline-text-4" id="text-org882f23c">
@@ -638,7 +601,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ocaml-security-team-report-for-fir
 </p>
 </div>
 </div>
-
 <div id="outline-container-org71629a3" class="outline-4">
 <h4 id="org71629a3">アドバイザリ</h4>
 <div class="outline-text-4" id="text-org71629a3">
@@ -655,7 +617,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ocaml-security-team-report-for-fir
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgf3d16e2" class="outline-4">
 <h4 id="orgf3d16e2">今後の計画</h4>
 <div class="outline-text-4" id="text-orgf3d16e2">
@@ -664,7 +625,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ocaml-security-team-report-for-fir
 </p>
 </div>
 </div>
-
 <div id="outline-container-org3e97405" class="outline-4">
 <h4 id="org3e97405">謝辞</h4>
 <div class="outline-text-4" id="text-org3e97405">
@@ -675,10 +635,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ocaml-security-team-report-for-fir
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-7" class="outline-2">
 <h2 id="7">Dune パッケージ管理のアップデート</h2>
 <div class="outline-text-2" id="text-7">
@@ -686,7 +642,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ocaml-security-team-report-for-fir
 Archive: <a href="https://discuss.ocaml.org/t/dune-package-management-updates/18023/2">https://discuss.ocaml.org/t/dune-package-management-updates/18023/2</a>
 </p>
 </div>
-
 <div id="outline-container-orgb687987" class="outline-3">
 <h3 id="orgb687987">このスレッドを継続して、Shon が発表しました</h3>
 <div class="outline-text-3" id="text-orgb687987">
@@ -694,7 +649,6 @@ Archive: <a href="https://discuss.ocaml.org/t/dune-package-management-updates/18
 こんにちは！dune パッケージ管理のロードマップを dune の wiki に公開しました: <a href="https://github.com/ocaml/dune/wiki/Dune-Pkg-Roadmap">https://github.com/ocaml/dune/wiki/Dune-Pkg-Roadmap</a>
 </p>
 </div>
-
 <div id="outline-container-org02e5bde" class="outline-4">
 <h4 id="org02e5bde">ロードマップについて</h4>
 <div class="outline-text-4" id="text-org02e5bde">
@@ -707,7 +661,6 @@ Archive: <a href="https://discuss.ocaml.org/t/dune-package-management-updates/18
 </p>
 </div>
 </div>
-
 <div id="outline-container-org53df4f4" class="outline-4">
 <h4 id="org53df4f4">dune 3.24 で dune パッケージ管理に relocatable コンパイラのサポートが利用可能になりました</h4>
 <div class="outline-text-4" id="text-org53df4f4">
@@ -724,7 +677,6 @@ Archive: <a href="https://discuss.ocaml.org/t/dune-package-management-updates/18
 </p>
 </div>
 </div>
-
 <div id="outline-container-org3363a06" class="outline-4">
 <h4 id="org3363a06">フィードバックとコントリビュート</h4>
 <div class="outline-text-4" id="text-org3363a06">
@@ -735,10 +687,6 @@ Archive: <a href="https://discuss.ocaml.org/t/dune-package-management-updates/18
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-8" class="outline-2">
 <h2 id="8">opam 2.6.0~alpha1</h2>
 <div class="outline-text-2" id="text-8">
@@ -746,7 +694,6 @@ Archive: <a href="https://discuss.ocaml.org/t/dune-package-management-updates/18
 Archive: <a href="https://discuss.ocaml.org/t/ann-opam-2-6-0-alpha1/18372/1">https://discuss.ocaml.org/t/ann-opam-2-6-0-alpha1/18372/1</a>
 </p>
 </div>
-
 <div id="outline-container-orgbd3c39b" class="outline-3">
 <h3 id="orgbd3c39b">Kate が発表しました</h3>
 <div class="outline-text-3" id="text-orgbd3c39b">
@@ -762,7 +709,6 @@ opam 2.6.0 の最初のアルファリリースをお知らせします。これ
 このバージョンはアルファ版です。安定版リリースに向けて、これまで気づかれなかったバグを発見するため、ユーザーの皆さんにテストをお願いします。
 </p>
 </div>
-
 <div id="outline-container-orgfd3edc9" class="outline-4">
 <h4 id="orgfd3edc9">新機能のハイライト:</h4>
 <div class="outline-text-4" id="text-orgfd3edc9">
@@ -785,7 +731,6 @@ opam 2.6.0 の最初のアルファリリースをお知らせします。これ
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgc347680" class="outline-4">
 <h4 id="orgc347680">試してみましょう！</h4>
 <div class="outline-text-4" id="text-orgc347680">
@@ -822,10 +767,6 @@ Happy hacking,
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-9" class="outline-2">
 <h2 id="9">使いすぎた小さな型</h2>
 <div class="outline-text-2" id="text-9">
@@ -833,7 +774,6 @@ Happy hacking,
 Archive: <a href="https://discuss.ocaml.org/t/blog-the-little-type-that-could-too-much/18375/1">https://discuss.ocaml.org/t/blog-the-little-type-that-could-too-much/18375/1</a>
 </p>
 </div>
-
 <div id="outline-container-org0061c5f" class="outline-3">
 <h3 id="org0061c5f">Raphaël Proust が発表しました</h3>
 <div class="outline-text-3" id="text-org0061c5f">
@@ -851,10 +791,6 @@ Archive: <a href="https://discuss.ocaml.org/t/blog-the-little-type-that-could-to
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-org5844e52" class="outline-2">
 <h2 id="org5844e52">過去の CWN</h2>
 <div class="outline-text-2" id="text-org5844e52">

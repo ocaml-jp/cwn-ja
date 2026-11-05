@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>OCaml Weekly News</title>
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -222,8 +222,6 @@
 </ul>
 </div>
 </div>
-
-
 <div id="outline-container-1" class="outline-2">
 <h2 id="1">OCaml ランタイムを C から Rust へ一行ずつ翻訳する</h2>
 <div class="outline-text-2" id="text-1">
@@ -231,7 +229,6 @@
 Archive: <a href="https://discuss.ocaml.org/t/a-line-by-line-translation-of-the-ocaml-runtime-from-c-to-rust/18247/1">https://discuss.ocaml.org/t/a-line-by-line-translation-of-the-ocaml-runtime-from-c-to-rust/18247/1</a>
 </p>
 </div>
-
 <div id="outline-container-org0ccf6ed" class="outline-3">
 <h3 id="org0ccf6ed">Michael Bacarella が発表しました</h3>
 <div class="outline-text-3" id="text-org0ccf6ed">
@@ -249,10 +246,6 @@ Marks Shinwell は傷つけられていません[1]
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-2" class="outline-2">
 <h2 id="2">OCaml 5.5.0 の最初のリリース候補</h2>
 <div class="outline-text-2" id="text-2">
@@ -260,7 +253,6 @@ Marks Shinwell は傷つけられていません[1]
 Archive: <a href="https://discuss.ocaml.org/t/first-release-candidate-for-ocaml-5-5-0/18253/1">https://discuss.ocaml.org/t/first-release-candidate-for-ocaml-5-5-0/18253/1</a>
 </p>
 </div>
-
 <div id="outline-container-org1057dc6" class="outline-3">
 <h3 id="org1057dc6">octachron が発表しました</h3>
 <div class="outline-text-3" id="text-org1057dc6">
@@ -289,7 +281,6 @@ Happy hacking,
 OCaml チームを代表して Florian Angeletti。
 </p>
 </div>
-
 <div id="outline-container-org1925932" class="outline-4">
 <h4 id="org1925932">インストール手順</h4>
 <div class="outline-text-4" id="text-org1925932">
@@ -312,7 +303,6 @@ opam switch create 5.5.0~rc1
 </ul>
 </div>
 </div>
-
 <div id="outline-container-orge184bee" class="outline-4">
 <h4 id="orge184bee">コンパイラ設定の細かい調整</h4>
 <div class="outline-text-4" id="text-orge184bee">
@@ -339,7 +329,6 @@ opam switch create 5.5.0~rc1+flambda+nffa ocaml-variants.5.5.0~rc1+options ocaml
 </p>
 </div>
 </div>
-
 <div id="outline-container-org541670b" class="outline-4">
 <h4 id="org541670b">最初のベータリリースからの変更点</h4>
 <div class="outline-text-4" id="text-org541670b">
@@ -358,7 +347,6 @@ data=NULL の CAML_BA_SUBARRAY（5.2 で導入）は、Gc が割り当てを 0 �
 </ul>
 </div>
 </li>
-
 <li><a id="orgc80f778"></a>標準ライブラリ修正<br />
 <div class="outline-text-5" id="text-orgc80f778">
 <ul class="org-ul">
@@ -374,7 +362,6 @@ getpwnam_r、getpwuid_r、gmtime_r、localtime_r、getlogin_r を使用し、mkt
 </ul>
 </div>
 </li>
-
 <li><a id="org82134d2"></a>コンパイラユーザーインターフェース修正<br />
 <div class="outline-text-5" id="text-org82134d2">
 <ul class="org-ul">
@@ -384,7 +371,6 @@ getpwnam_r、getpwuid_r、gmtime_r、localtime_r、getlogin_r を使用し、mkt
 </ul>
 </div>
 </li>
-
 <li><a id="org10526a6"></a>Compilerlibs 修正<br />
 <div class="outline-text-5" id="text-org10526a6">
 <ul class="org-ul">
@@ -394,7 +380,6 @@ getpwnam_r、getpwuid_r、gmtime_r、localtime_r、getlogin_r を使用し、mkt
 </ul>
 </div>
 </li>
-
 <li><a id="org048f175"></a>設定修正<br />
 <div class="outline-text-5" id="text-org048f175">
 <ul class="org-ul">
@@ -408,7 +393,6 @@ site-config パッケージがインストールされた OpenSUSE 上で opam �
 </ul>
 </div>
 </li>
-
 <li><a id="orgab855aa"></a>ドキュメント修正<br />
 <div class="outline-text-5" id="text-orgab855aa">
 <ul class="org-ul">
@@ -419,7 +403,6 @@ Nicolás Ojeda Bär によるレビュー)</li>
 </ul>
 </div>
 </li>
-
 <li><a id="org70b6c97"></a>内部修正<br />
 <div class="outline-text-5" id="text-org70b6c97">
 <ul class="org-ul">
@@ -434,10 +417,6 @@ Nicolás Ojeda Bär によるレビュー)</li>
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-3" class="outline-2">
 <h2 id="3">Plan 9 向け OCaml 4.14.3</h2>
 <div class="outline-text-2" id="text-3">
@@ -445,7 +424,6 @@ Nicolás Ojeda Bär によるレビュー)</li>
 Archive: <a href="https://discuss.ocaml.org/t/ocaml-4-14-3-for-plan-9/18223/2">https://discuss.ocaml.org/t/ocaml-4-14-3-for-plan-9/18223/2</a>
 </p>
 </div>
-
 <div id="outline-container-org5a3cf5f" class="outline-3">
 <h3 id="org5a3cf5f">このスレッドを続けて、Eduardo Cavazos が発表しました</h3>
 <div class="outline-text-3" id="text-org5a3cf5f">
@@ -467,10 +445,6 @@ plan9 の acme エディタでの ocaml repl のデモと、いくつかの統�
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-4" class="outline-2">
 <h2 id="4">Miou、OCaml 5 向けシンプルなスケジューラ</h2>
 <div class="outline-text-2" id="text-4">
@@ -478,7 +452,6 @@ plan9 の acme エディタでの ocaml repl のデモと、いくつかの統�
 Archive: <a href="https://discuss.ocaml.org/t/ann-miou-a-simple-scheduler-for-ocaml-5/12963/19">https://discuss.ocaml.org/t/ann-miou-a-simple-scheduler-for-ocaml-5/12963/19</a>
 </p>
 </div>
-
 <div id="outline-container-orgda47f24" class="outline-3">
 <h3 id="orgda47f24">Calascibetta Romain が発表しました</h3>
 <div class="outline-text-3" id="text-orgda47f24">
@@ -515,10 +488,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-miou-a-simple-scheduler-for-oc
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-5" class="outline-2">
 <h2 id="5">OCaml 4.14.4 リリース</h2>
 <div class="outline-text-2" id="text-5">
@@ -526,7 +495,6 @@ Archive: <a href="https://discuss.ocaml.org/t/ann-miou-a-simple-scheduler-for-oc
 Archive: <a href="https://discuss.ocaml.org/t/ocaml-4-14-4-released/18258/1">https://discuss.ocaml.org/t/ocaml-4-14-4-released/18258/1</a>
 </p>
 </div>
-
 <div id="outline-container-orgace99e0" class="outline-3">
 <h3 id="orgace99e0">octachron が発表しました</h3>
 <div class="outline-text-3" id="text-orgace99e0">
@@ -564,7 +532,6 @@ OCaml チームを代表して Florian Angeletti。
 &#x2014;
 </p>
 </div>
-
 <div id="outline-container-org316a142" class="outline-4">
 <h4 id="org316a142">インストール手順</h4>
 <div class="outline-text-4" id="text-org316a142">
@@ -588,7 +555,6 @@ opam switch create 4.14.4
 </p>
 </div>
 </div>
-
 <div id="outline-container-org71629a3" class="outline-4">
 <h4 id="org71629a3">OCaml 4.14.4 の変更点（2026年6月15日）</h4>
 <div class="outline-text-4" id="text-org71629a3">
@@ -606,7 +572,6 @@ Sébastien Hinderer によるレビュー)</li>
 </ul>
 </div>
 </li>
-
 <li><a id="org882f23c"></a>バグ修正:<br />
 <div class="outline-text-5" id="text-org882f23c">
 <ul class="org-ul">
@@ -639,10 +604,6 @@ Filename.quote_command に渡されるファイル名のクォート処理を修
 </div>
 </div>
 </div>
-
-
-
-
 <div id="outline-container-org5844e52" class="outline-2">
 <h2 id="org5844e52">過去の CWN</h2>
 <div class="outline-text-2" id="text-org5844e52">
